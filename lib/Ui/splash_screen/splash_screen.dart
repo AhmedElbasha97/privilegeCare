@@ -1,0 +1,48 @@
+// ignore_for_file: must_be_immutable
+import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:privilegecare/Ui/welcomeScreen/welcome_screen.dart';
+import 'package:privilegecare/Utils/colors.dart';
+
+class SplashScreen extends StatefulWidget {
+  const SplashScreen({Key? key}) : super(key: key);
+
+  @override
+  State<SplashScreen> createState() => _SplashScreenState();
+}
+
+class _SplashScreenState extends State<SplashScreen> {
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    Future.delayed(Duration(milliseconds: 100), () {
+      Get.to(WelcomeScreen());
+    });
+  }
+  Widget build(BuildContext context) {
+    return Scaffold(
+
+      body: Container(
+       height: Get.height,
+        width: Get.width,
+        decoration:  const BoxDecoration(
+          gradient: LinearGradient(
+            begin: Alignment.topCenter,
+            end: Alignment.bottomCenter,
+            colors: [kGreenColor, kLightBlueColor, kBlueColor],
+            stops: [0.1, 0.5, 0.9],
+          ),
+        ),
+        child: Center(
+          child: SizedBox(
+            height: Get.height*0.25,
+            width: Get.width*0.5,
+            child: Image.asset("assets/images/logo.png",fit: BoxFit.fitHeight,),
+          ),
+        ),
+      ),
+    );
+  }
+}
