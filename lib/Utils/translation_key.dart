@@ -11,3 +11,4 @@ const location = 'LOCATION';
 const locationRequired = 'LOCATION_REQUIRED';
 const error = 'ERROR';
 const phoneNumberError = "Phone_Number_Error";
+const enterPasswordFirst = "Enter_Password_First";

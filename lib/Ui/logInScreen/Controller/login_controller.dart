@@ -1,6 +1,10 @@
+import 'package:cool_alert/cool_alert.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:in_app_update/in_app_update.dart';
+import 'package:privilegecare/Models/auth_model.dart';
+import 'package:privilegecare/Services/auth_services.dart';
+import 'package:privilegecare/Ui/homeScreen/home_screen.dart';
 import 'package:privilegecare/Utils/memory.dart';
 import 'package:privilegecare/Utils/validator.dart';
 const wrongCode = 'assets/images/wrong_code.png';
@@ -8,24 +12,14 @@ const wrongCode = 'assets/images/wrong_code.png';
 class LoginController extends GetxController {
   final _validatorHelber = ValidatorHelper.instance;
   bool isLoading = false;
-  int loggedInStatus = 0;
-
   RxBool _visiblePsd = false.obs;
-  var groupValue = 3;
-  var emailType = "";
-
-
   RxBool _isEnableLogin = false.obs;
-
   bool get isEnableLogin => _isEnableLogin.value;
-
   bool get visiblePsd => _visiblePsd.value;
-
   void toggleVisiblePsd() {
     _visiblePsd.value = !_visiblePsd.value;
     update();
   }
-
   set isEnableLogin(bool value) {
     _isEnableLogin.value = value;
     print('LoginController.isEnableSignup value= $value');
@@ -40,7 +34,9 @@ class LoginController extends GetxController {
   bool formValidated = false;
   bool passState = false;
   bool emailState = false;
-
+  bool passHasAnErrorViewed = false;
+  bool emailHasAnErrorViewed = false;
+  bool signingIn =false;
   @override
   void onInit() {
     super.onInit();
@@ -84,19 +80,6 @@ class LoginController extends GetxController {
     });
   }
 
-  onChooseCompanyType(int value) {
-    loggedInStatus = 0;
-    update();
-    if (value == 0) {
-      groupValue = value;
-      emailType = "COMP";
-      update();
-    } else {
-      groupValue = value;
-      emailType = "EMP";
-      update();
-    }
-  }
 
   void onEmailUpdate(String? value) {
     if (value == "") {
@@ -110,14 +93,17 @@ class LoginController extends GetxController {
     if (email == "") {
       emailState = false;
       emailValidated = false;
+
     } else if (validateEmail == null) {
       emailState = true;
       emailValidated = true;
-      updateYourButton();
+
+
     } else {
       emailValidated = true;
       emailState = false;
     }
+
     return validateEmail;
   }
 
@@ -125,29 +111,21 @@ class LoginController extends GetxController {
     final validatePassword = _validatorHelber.validatePassword(password);
     if (validatePassword == null) {
       passState = true;
-      updateYourButton();
+
+    }else{
+
     }
     passValidated = true;
+
     return validatePassword;
   }
 
-  //for returning the button to its original state
-  updateYourButton() {
-    if (emailState && passState) {
-      if (loggedInStatus != 0) {
-        loggedInStatus = 0;
-      }
-    }
-  }
 
   Future<void> sendPressed(context) async {
     formValidated = formKey.currentState!.validate();
     FocusScope.of(context).unfocus();
     if (formValidated) {
       await sinningIn(context);
-    } else {
-      loggedInStatus = 3;
-      update();
     }
   }
 
@@ -161,8 +139,26 @@ class LoginController extends GetxController {
 
 
   sinningIn(context) async {
-
-
+    signingIn = true;
+    update();
+    CoolAlert.show(
+      context: context,
+      type: CoolAlertType.loading,
+    );
+if(passState&&emailState){
+  AuthModel? data = await AuthServices.logIn(emailController.text, passwordController.text);
+if(data?.status == "succeeded"){
+  await Get.find<StorageService>().saveAccountId("${data?.info?.id??0}");
+  Get.to(HomeScreen());
+}else{
+  CoolAlert.show(
+    context: context,
+    type: CoolAlertType.error,
+    title: "حدث خطأ",
+    text: data?.msg
+  );
+}
+}
   }
 
   @override

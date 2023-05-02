@@ -1,165 +1,194 @@
+import 'package:cool_alert/cool_alert.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:privilegecare/Ui/homeScreen/home_screen.dart';
+import 'package:privilegecare/Ui/logInScreen/Controller/login_controller.dart';
 import 'package:privilegecare/Utils/colors.dart';
 import 'package:privilegecare/widgets/text_field_widget.dart';
 
 class LoginScreen extends StatelessWidget {
-   LoginScreen({Key? key}) : super(key: key);
-  final TextEditingController email = TextEditingController();
-  final TextEditingController password = TextEditingController();
+   const LoginScreen({Key? key}) : super(key: key);
+
 
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: kWhiteColor,
-      appBar: AppBar(
-        backgroundColor: kGreenColor,
-        leading: IconButton(icon: const Icon(Icons.arrow_circle_left_outlined,color: kWhiteColor,size: 40,),onPressed: (){
-          Get.back();
-        },),
-        centerTitle: true,
-        title:  const Text(
-          "Sign In",
-          style: TextStyle(
-              fontFamily: "Inter",
-              color: kWhiteColor,
-              fontWeight: FontWeight.w800,
-              fontSize: 18),
+    return GetBuilder<LoginController>(
+      init: LoginController(),
+      builder: (controller) =>  Scaffold(
+        backgroundColor: kWhiteColor,
+        appBar: AppBar(
+          backgroundColor: kGreenColor,
+          actions:  [IconButton(icon: const Icon(Icons.arrow_circle_left_outlined,color: kWhiteColor,size: 40,),onPressed: (){
+            Get.back();
+          },),],
+          leading: IconButton(icon: const Icon(Icons.arrow_circle_left_outlined,color: kGreenColor,size: 40,),onPressed: (){
+            Get.back();
+          },),
+          centerTitle: true,
+          title:  const Text(
+            "Sign In",
+            style: TextStyle(
+                fontFamily: "Inter",
+                color: kWhiteColor,
+                fontWeight: FontWeight.w800,
+                fontSize: 18),
+          ),
+
         ),
+        body: SingleChildScrollView(
+          child: Container(
+            height: Get.height*0.8,
+            width: Get.width,
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
+              children: [
 
-      ),
-      body: SingleChildScrollView(
-        child: Container(
-          height: Get.height*0.8,
-          width: Get.width,
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.center,
-            mainAxisAlignment: MainAxisAlignment.spaceAround,
-            children: [
-
-              SizedBox(
-                height: Get.height*0.13,
-                width: Get.width*0.5,
-                child: Image.asset("assets/images/logo.png",fit: BoxFit.fitHeight,),
-              ),
-              Container(
-                height: Get.height*0.6,
-                width: Get.width*0.8,
-                decoration: BoxDecoration(
-                  color: kLightGrayColor,
-                  borderRadius: BorderRadius.circular(25),
-                  boxShadow: const [
-                    BoxShadow(
-                      offset: Offset(0, 2),
-                      blurRadius: 6,
-                      color: Colors.black12,
-                    ),
-                  ],
+                SizedBox(
+                  height: Get.height*0.13,
+                  width: Get.width*0.5,
+                  child: Image.asset("assets/images/logo.png",fit: BoxFit.fitHeight,),
                 ),
-                child:Column(
-                  mainAxisAlignment: MainAxisAlignment.spaceAround,
-                  children:  [
-                    const Text("Hello",
-                      style: TextStyle(
-                          fontFamily: "Inter",
-                          color: kBlackColor,
-                          fontWeight: FontWeight.w700,
-                          fontSize: 18),),
-                    const Text("Sign into your account",
-                      style: TextStyle(
-                          fontFamily: "Inter",
-                          color: kGrayColor,
-                          fontWeight: FontWeight.w700,
-                          fontSize: 18),),
-                    Padding(
-                      padding: const EdgeInsets.all(10.0),
-                      child: SizedBox(
-                        height: 50,
-                        child: CustomInputField(
-
-                          textInputAction: TextInputAction.next,
-                          keyboardType: TextInputType.name,
-                          onchange: (text){
-
-                          },
-                          labelText: "Email",
-                          controller:email,
-                          validator:(text){},
-                           hasGreenBorder: true,
-                        ),
+                Container(
+                  height: Get.height*0.6,
+                  width: Get.width*0.8,
+                  decoration: BoxDecoration(
+                    color: kLightGrayColor,
+                    borderRadius: BorderRadius.circular(25),
+                    boxShadow: const [
+                      BoxShadow(
+                        offset: Offset(0, 2),
+                        blurRadius: 6,
+                        color: Colors.black12,
                       ),
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.all(10.0),
-                      child: SizedBox(
-                        height: 50,
-                        child: CustomInputField(
+                    ],
+                  ),
+                  child:Form(
+                    key: controller.formKey,
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.spaceAround,
+                      children:  [
+                        const Text("Hello",
+                          style: TextStyle(
+                              fontFamily: "Inter",
+                              color: kBlackColor,
+                              fontWeight: FontWeight.w700,
+                              fontSize: 18),),
+                        const Text("Sign into your account",
+                          style: TextStyle(
+                              fontFamily: "Inter",
+                              color: kGrayColor,
+                              fontWeight: FontWeight.w700,
+                              fontSize: 18),),
+                        Padding(
+                          padding: const EdgeInsets.all(10.0),
+                          child: SizedBox(
+                            height: 80,
+                            child: CustomInputField(
+                              textInputAction: TextInputAction.next,
+                              keyboardType: TextInputType.emailAddress,
+                              controller: controller.emailController,
+                              onchange: controller.onEmailUpdate,
+                              validator: controller.validateEmail,
+                              icon: (controller.emailValidated)
+                                  ? (controller.emailState)
+                                  ? const Icon(Icons.check_rounded,
+                                  color: kSuccessColor)
+                                  : const Icon(
+                                Icons.close_outlined,
+                                color: kErrorColor,
+                              )
+                                  : null,
+                              labelText: "Email",
 
-                          textInputAction: TextInputAction.next,
-                          keyboardType: TextInputType.name,
-                          onchange: (text){
-
-                          },
-                          labelText: "Password",
-                          controller:password,
-                          validator:(text){},
-                           hasGreenBorder: true,
-                          icon: const Icon(
-                                 Icons.visibility_outlined,
-                            color: kGrayColor,
+                               hasGreenBorder: true,
+                            ),
                           ),
                         ),
-                      ),
-                    ),
-                    const Text("Forget Your Password",
-                      style: TextStyle(
-                          fontFamily: "Inter",
-                          color: kBlackColor,
-                          fontWeight: FontWeight.w700,
-                          fontSize: 15),),
-                    InkWell(
-                      onTap: (){
-                        Get.to(HomeScreen());
-                      },
-                      child: Container(
-                        height: 60,
-                        width: Get.width*0.6,
-                        decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(20),
-                            color: kBlueColor
-                        ),
-                        child: const Center(
-                          child:  Text("Login",
-                            textAlign: TextAlign.center,
-                            style: TextStyle(
-                                fontFamily: "Inter",
-                                color: kWhiteColor,
-                                fontWeight: FontWeight.w600,
-                                fontSize: 22),),
-                        ),
-                      ),
-                    ),
-                    const Text("Or Login using social media",
-                      style: TextStyle(
-                          fontFamily: "Inter",
-                          color: kBlueColor,
-                          fontWeight: FontWeight.w700,
-                          fontSize: 18),),
-                    SizedBox(
-                      height: 30,
-                      child: Image.asset("assets/images/socialMedia.png",fit: BoxFit.fitHeight,),
-                    ),
+                        Padding(
+                          padding: const EdgeInsets.all(10.0),
+                          child: SizedBox(
+                            height:  80,
+                            child: CustomInputField(
+                            hasGreenBorder: true,
+                              labelText: "Password",
+                              controller: controller.passwordController,
+                              validator: controller.validatePassword,
+                              isAutoValidate: true,
+                              obsecure: !controller.visiblePsd,
+                              keyboardType: TextInputType.visiblePassword,
+                              icon: IconButton(
+                              // Based on passwordVisible state choose the icon
+                              icon: Icon(
+                              controller.visiblePsd
+                              ? Icons.visibility
+                                  : Icons.visibility_off,
+                              color: kGrayColor,
+                              ),
+                              onPressed: () {
+                              controller.toggleVisiblePsd();
+                              },
+                              )
 
-                  ],
-                ),
-              )
-            ],
+                        ),
+                          ),
+                        ),
+                        const Text("Forget Your Password",
+                          style: TextStyle(
+                              fontFamily: "Inter",
+                              color: kBlackColor,
+                              fontWeight: FontWeight.w700,
+                              fontSize: 15),),
+                        InkWell(
+                          onTap: (){
+                            if(!controller.signingIn) {
+                              controller.sendPressed(context);
+                            }else{
+                              CoolAlert.show(
+                                context: context,
+                                type: CoolAlertType.loading,
+                              );
+                            }
+                          },
+                          child: Container(
+                            height: 60,
+                            width: Get.width*0.6,
+                            decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(20),
+                                color: controller.signingIn?kGrayColor:kBlueColor
+                            ),
+                            child: const Center(
+                              child:  Text("Login",
+                                textAlign: TextAlign.center,
+                                style: TextStyle(
+                                    fontFamily: "Inter",
+                                    color: kWhiteColor,
+                                    fontWeight: FontWeight.w600,
+                                    fontSize: 22),),
+                            ),
+                          ),
+                        ),
+                        const Text("Or Login using social media",
+                          style: TextStyle(
+                              fontFamily: "Inter",
+                              color: kBlueColor,
+                              fontWeight: FontWeight.w700,
+                              fontSize: 18),),
+                        SizedBox(
+                          height: 30,
+                          child: Image.asset("assets/images/socialMedia.png",fit: BoxFit.fitHeight,),
+                        ),
+
+                      ],
+                    ),
+                  ),
+                )
+              ],
+            ),
           ),
         ),
-      ),
 
+      ),
     );
   }
 }

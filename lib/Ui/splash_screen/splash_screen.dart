@@ -1,8 +1,10 @@
 // ignore_for_file: must_be_immutable
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:privilegecare/Ui/homeScreen/home_screen.dart';
 import 'package:privilegecare/Ui/welcomeScreen/welcome_screen.dart';
 import 'package:privilegecare/Utils/colors.dart';
+import 'package:privilegecare/Utils/memory.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({Key? key}) : super(key: key);
@@ -17,8 +19,12 @@ class _SplashScreenState extends State<SplashScreen> {
   void initState() {
     // TODO: implement initState
     super.initState();
-    Future.delayed(Duration(milliseconds: 100), () {
-      Get.to(WelcomeScreen());
+    Future.delayed(const Duration(milliseconds: 100), () {
+      if(Get.find<StorageService>().checkUserIsSignedIn){
+        Get.to(HomeScreen());
+      }else{
+        Get.to(const WelcomeScreen());
+      }
     });
   }
   Widget build(BuildContext context) {

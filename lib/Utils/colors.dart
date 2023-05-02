@@ -8,3 +8,5 @@ const Color kBlackColor = Color(0xFF000000);
 const Color kGrayColor = Color(0xFF9E9C9C);
 const  Color kLightGrayColor =  Color(0xFFE8E9EB);
  const Color kWhiteColor = Color(0xFFEEF0F2);
+const Color kSuccessColor = Color(0xFF2AA952);
+const Color kErrorColor = Color(0xFFF01F0E);

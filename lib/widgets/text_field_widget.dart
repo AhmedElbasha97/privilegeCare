@@ -47,7 +47,7 @@ class CustomInputField extends StatelessWidget {
       cursorColor: hasGreenBorder?kGreenColor:kBlueColor,
       obscureText: obsecure,
       decoration: InputDecoration(
-
+        helperText: "",
         fillColor: kLightGrayColor,
         filled: true,
         labelText: labelText,
@@ -71,6 +71,7 @@ class CustomInputField extends StatelessWidget {
       controller: controller,
       validator: validator,
       textInputAction: textInputAction,
+
       autovalidateMode: isAutoValidate
           ? AutovalidateMode.onUserInteraction
           : AutovalidateMode.disabled,

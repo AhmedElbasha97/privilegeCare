@@ -16,6 +16,8 @@ class AppTranslations extends Translations {
       locationRequired:"The location is required so you can continue",
       error:"There's error happen please try again later",
       phoneNumberError:"This phone number is not valid",
+      invalidReTypePassword:"passwords does not match",
+      enterPasswordFirst:"You must enter the password first",
 
     },
     "ar": {
@@ -30,6 +32,8 @@ class AppTranslations extends Translations {
       locationRequired:"الموقع مطلوب حتى تتمكن من المتابعة",
       error:"حدث خطأ ، يرجى المحاولة مرة أخرى لاحقًا",
       phoneNumberError:"رقم التلفون هذا غير صالح",
+      invalidReTypePassword:"كلمه السر غير متطابقة",
+      enterPasswordFirst:"يجب إدخال كلمه السر اولآ"
 
 }
   };
