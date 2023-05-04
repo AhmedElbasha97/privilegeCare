@@ -145,11 +145,11 @@ class LoginController extends GetxController {
       context: context,
       type: CoolAlertType.loading,
     );
-if(passState&&emailState){
+if(emailState){
   AuthModel? data = await AuthServices.logIn(emailController.text, passwordController.text);
-if(data?.status == "succeeded"){
+if(data?.msg == "succeeded"){
   await Get.find<StorageService>().saveAccountId("${data?.info?.id??0}");
-  Get.to(HomeScreen());
+  Get.off(HomeScreen());
 }else{
   CoolAlert.show(
     context: context,

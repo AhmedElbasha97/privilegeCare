@@ -61,12 +61,18 @@ bool signingUp = false ;
   void onInit() {
     super.onInit();
     passwordController = TextEditingController();
+
     emailController = TextEditingController();
+
     reTypePasswordController = TextEditingController();
+
     firstNameController = TextEditingController();
     secondNameController = TextEditingController();
     lastNameController = TextEditingController();
     phoneController =TextEditingController();
+
+
+
   }
 
   @override
@@ -91,6 +97,9 @@ bool signingUp = false ;
     phoneController.clear();
   }
   void onEmailUpdate(String? value) {
+    if(value == "omar.khaled20@yahoo.com"){
+      phoneController.clear();
+    }
     if (value == "") {
       emailValidated = false;
     }
@@ -245,9 +254,9 @@ bool signingUp = false ;
         passwordController.text,
         reTypePasswordController.text
       );
-      if(data?.status == "succeeded"){
+      if(data?.msg == "succeeded"){
         await Get.find<StorageService>().saveAccountId("${data?.info?.id??0}");
-        Get.to(HomeScreen());
+        Get.off(HomeScreen());
       }else{
         CoolAlert.show(
             context: context,

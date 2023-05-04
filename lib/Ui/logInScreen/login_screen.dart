@@ -85,6 +85,7 @@ class LoginScreen extends StatelessWidget {
                           child: SizedBox(
                             height: 80,
                             child: CustomInputField(
+                             hasIntialValue: false,
                               textInputAction: TextInputAction.next,
                               keyboardType: TextInputType.emailAddress,
                               controller: controller.emailController,
@@ -93,7 +94,7 @@ class LoginScreen extends StatelessWidget {
                               icon: (controller.emailValidated)
                                   ? (controller.emailState)
                                   ? const Icon(Icons.check_rounded,
-                                  color: kSuccessColor)
+                                  color: kGreenColor)
                                   : const Icon(
                                 Icons.close_outlined,
                                 color: kErrorColor,
@@ -110,6 +111,8 @@ class LoginScreen extends StatelessWidget {
                           child: SizedBox(
                             height:  80,
                             child: CustomInputField(
+                              hasIntialValue: false,
+
                             hasGreenBorder: true,
                               labelText: "Password",
                               controller: controller.passwordController,
@@ -142,7 +145,7 @@ class LoginScreen extends StatelessWidget {
                         InkWell(
                           onTap: (){
                             if(!controller.signingIn) {
-                              controller.sendPressed(context);
+                              controller.sinningIn(context);
                             }else{
                               CoolAlert.show(
                                 context: context,

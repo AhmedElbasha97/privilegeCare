@@ -16,7 +16,10 @@ class SignUpScreen extends StatelessWidget {
         backgroundColor: kWhiteColor,
         appBar: AppBar(
           backgroundColor: kGreenColor,
-          leading: IconButton(icon: const Icon(Icons.arrow_circle_left_outlined,color: kWhiteColor,size: 40,),onPressed: (){
+          actions:  [IconButton(icon: const Icon(Icons.arrow_circle_left_outlined,color: kWhiteColor,size: 40,),onPressed: (){
+            Get.back();
+          },),],
+          leading: IconButton(icon: const Icon(Icons.arrow_circle_left_outlined,color: kGreenColor,size: 40,),onPressed: (){
             Get.back();
           },),
           centerTitle: true,
@@ -72,16 +75,18 @@ class SignUpScreen extends StatelessWidget {
                             height: Get.height*0.09,
                             width: Get.width*0.28,
                             child: CustomInputField(
+                              hasIntialValue: false,
+                              labelText: "First",
                               textInputAction: TextInputAction.next,
                               keyboardType: TextInputType.name,
-                              labelText: "First",
+
                               controller:controller.firstNameController,
                               onchange: controller.onFirstNameUpdate,
                               validator: controller.validateFirstName,
                               icon: (controller.firstNameValidated)
                                   ? (controller.firstNameState)
                                   ? const Icon(Icons.check_rounded,
-                                  color: kSuccessColor)
+                                  color: kBlueColor)
                                   : const Icon(
                                 Icons.close_outlined,
                                 color: kErrorColor,
@@ -97,15 +102,17 @@ class SignUpScreen extends StatelessWidget {
                             height: Get.height*0.09,
                             width: Get.width*0.28,
                             child: CustomInputField(
-                              textInputAction: TextInputAction.next,
+                              hasIntialValue: false,
                               labelText: "Middle",
+                              textInputAction: TextInputAction.next,
+
                               controller:controller.secondNameController,
                               onchange: controller.onSecondNameUpdate,
                               validator: controller.validateSecondName,
                               icon: (controller.secondNameValidated)
                                   ? (controller.secondNameState)
                                   ? const Icon(Icons.check_rounded,
-                                  color: kSuccessColor)
+                                  color: kBlueColor)
                                   : const Icon(
                                 Icons.close_outlined,
                                 color: kErrorColor,
@@ -121,16 +128,18 @@ class SignUpScreen extends StatelessWidget {
                             height: Get.height*0.09,
                             width: Get.width*0.28,
                             child: CustomInputField(
+                              hasIntialValue: false,
+                              labelText: "Last",
                               textInputAction: TextInputAction.next,
                               keyboardType: TextInputType.name,
-                              labelText: "Last",
+
                               controller:controller.lastNameController,
                               onchange: controller.onLastNameUpdate,
                               validator: controller.validateLastName,
                               icon: (controller.lastNameValidated)
                                   ? (controller.lastNameState)
                                   ? const Icon(Icons.check_rounded,
-                                  color: kSuccessColor)
+                                  color: kBlueColor)
                                   : const Icon(
                                 Icons.close_outlined,
                                 color: kErrorColor,
@@ -159,16 +168,19 @@ class SignUpScreen extends StatelessWidget {
                       height: Get.height*0.09,
                       width: Get.width*0.95,
                       child: CustomInputField(
+                        hasIntialValue: false,
+                        labelText: "omar.khaled20@yahoo.com",
+
                         textInputAction: TextInputAction.next,
                         keyboardType: TextInputType.emailAddress,
-                        labelText: "omar.khaled20@yahoo.com",
+
                         controller:controller.emailController,
                         onchange: controller.onEmailUpdate,
                         validator: controller.validateEmail,
                         icon: (controller.emailValidated)
                             ? (controller.emailState)
                             ? const Icon(Icons.check_rounded,
-                            color: kSuccessColor)
+                            color: kBlueColor)
                             : const Icon(
                           Icons.close_outlined,
                           color: kErrorColor,
@@ -194,16 +206,18 @@ class SignUpScreen extends StatelessWidget {
                       height: Get.height*0.09,
                       width: Get.width*0.95,
                       child: CustomInputField(
+                        hasIntialValue: false,
+                        labelText: "20",
                         textInputAction: TextInputAction.next,
                         keyboardType: TextInputType.number,
-                        labelText: "20",
+
                         controller:controller.phoneController,
                         onchange: controller.onPhoneNumberUpdate,
                         validator: controller.validatePhoneNumber,
                         icon: (controller.phoneValidated)
                             ? (controller.phoneState)
                             ? const Icon(Icons.check_rounded,
-                            color: kSuccessColor)
+                            color: kBlueColor)
                             : const Icon(
                           Icons.close_outlined,
                           color: kErrorColor,
@@ -230,10 +244,11 @@ class SignUpScreen extends StatelessWidget {
                       height: Get.height*0.09,
                       width: Get.width*0.95,
                       child: CustomInputField(
+                          hasIntialValue: false,
+                        labelText:  "**********************",
                         textInputAction: TextInputAction.next,
                         keyboardType: TextInputType.visiblePassword,
-                          hasGreenBorder: true,
-                          labelText: "**********************",
+                          hasGreenBorder: false,
                           controller: controller.passwordController,
                           validator: controller.validatePassword,
                           isAutoValidate: true,
@@ -269,10 +284,13 @@ class SignUpScreen extends StatelessWidget {
                       height: Get.height*0.09,
                       width: Get.width*0.95,
                       child: CustomInputField(
+                          hasIntialValue: false,
+                          labelText:  "**********************",
+
                           textInputAction: TextInputAction.done,
                           keyboardType: TextInputType.visiblePassword,
-                          hasGreenBorder: true,
-                          labelText: "**********************",
+                          hasGreenBorder: false,
+
                           controller: controller.reTypePasswordController,
                           validator: controller.validateReTypePassword,
                           isAutoValidate: true,

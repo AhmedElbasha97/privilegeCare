@@ -14,7 +14,7 @@ class CustomInputField extends StatelessWidget {
         this.onFieldSubmitted,
         this.onSaved,
         this.validated,
-        this.obsecure = false, this.focusNode, this.textInputAction, required this.hasGreenBorder})
+        this.obsecure = false, this.focusNode, this.textInputAction, required this.hasGreenBorder,  required this.hasIntialValue})
       : super(key: key);
   final labelText;
   final icon;
@@ -30,15 +30,17 @@ class CustomInputField extends StatelessWidget {
   final FocusNode? focusNode;
   final TextInputAction? textInputAction;
   final bool hasGreenBorder;
+  final bool hasIntialValue;
+
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
-    return TextFormField(
+    return hasIntialValue?TextFormField(
 
       enableSuggestions: false,
       autocorrect: false,
       style:  TextStyle(
-          fontSize: 20.0,
+          fontSize: 15.0,
           fontFamily: 'elmessiri',
           color: hasGreenBorder?kGreenColor:kBlueColor,
       ),
@@ -47,9 +49,55 @@ class CustomInputField extends StatelessWidget {
       cursorColor: hasGreenBorder?kGreenColor:kBlueColor,
       obscureText: obsecure,
       decoration: InputDecoration(
+        contentPadding: EdgeInsets.only(right: 10),
         helperText: "",
         fillColor: kLightGrayColor,
-        filled: true,
+        filled: false,
+
+        labelStyle: theme.textTheme.caption!.apply(color: theme.hintColor),
+        suffixIcon: icon,
+        floatingLabelBehavior: FloatingLabelBehavior.auto,
+        errorBorder: OutlineInputBorder(
+            borderSide: const BorderSide(color: Colors.red),
+            borderRadius: BorderRadius.circular(4)),
+        focusedErrorBorder: OutlineInputBorder(
+            borderSide: const BorderSide(color: Colors.red),
+            borderRadius: BorderRadius.circular(4)),
+        enabledBorder:  OutlineInputBorder(
+          borderSide: BorderSide(width: 3, color: hasGreenBorder?kGreenColor:kBlueColor,),
+        ),
+        focusedBorder: OutlineInputBorder(
+            borderSide:   BorderSide(color: hasGreenBorder?kGreenColor:kBlueColor,width: 3.0),
+            borderRadius: BorderRadius.circular(4)),
+      ),
+      onChanged: onchange,
+      controller: controller,
+      validator: validator,
+      textInputAction: textInputAction,
+
+      autovalidateMode: isAutoValidate
+          ? AutovalidateMode.onUserInteraction
+          : AutovalidateMode.disabled,
+      onSaved: onSaved,
+      onFieldSubmitted: onFieldSubmitted,
+    ):TextFormField(
+
+      enableSuggestions: false,
+      autocorrect: false,
+      style:  TextStyle(
+        fontSize: 15.0,
+        fontFamily: 'elmessiri',
+        color: hasGreenBorder?kGreenColor:kBlueColor,
+      ),
+      focusNode: focusNode,
+      keyboardType: keyboardType,
+      cursorColor: hasGreenBorder?kGreenColor:kBlueColor,
+      obscureText: obsecure,
+      decoration: InputDecoration(
+        contentPadding: EdgeInsets.only(right: 10),
+        helperText: "",
+        fillColor: kLightGrayColor,
+        filled: false,
         labelText: labelText,
         labelStyle: theme.textTheme.caption!.apply(color: theme.hintColor),
         suffixIcon: icon,

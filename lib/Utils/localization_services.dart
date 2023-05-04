@@ -24,7 +24,7 @@ class LocalizationService extends GetxService {
 
   void toggleLocale() {
     final Locale newLocale =
-    Get.find<StorageService>().activeLocale == SupportedLocales.arabic
+    Get.find<StorageService>().activeLocale == SupportedLocales.english
         ? SupportedLocales.english
         : SupportedLocales.arabic;
     //in storage
