@@ -18,6 +18,8 @@ class AppTranslations extends Translations {
       phoneNumberError:"This phone number is not valid",
       invalidReTypePassword:"passwords does not match",
       enterPasswordFirst:"You must enter the password first",
+      refreshKey:"Refresh",
+
 
     },
     "ar": {
@@ -33,7 +35,8 @@ class AppTranslations extends Translations {
       error:"حدث خطأ ، يرجى المحاولة مرة أخرى لاحقًا",
       phoneNumberError:"رقم التلفون هذا غير صالح",
       invalidReTypePassword:"كلمه السر غير متطابقة",
-      enterPasswordFirst:"يجب إدخال كلمه السر اولآ"
+      enterPasswordFirst:"يجب إدخال كلمه السر اولآ",
+      refreshKey:"المحاوله مره اخرى",
 
 }
   };

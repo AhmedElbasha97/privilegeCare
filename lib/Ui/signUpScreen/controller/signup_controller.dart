@@ -1,9 +1,11 @@
+// ignore_for_file: prefer_final_fields
+
 import 'package:cool_alert/cool_alert.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:privilegecare/Models/auth_model.dart';
 import 'package:privilegecare/Services/auth_services.dart';
-import 'package:privilegecare/Ui/homeScreen/home_screen.dart';
+import 'package:privilegecare/Ui/SpecialtyScreen/specialty_screen.dart';
 import 'package:privilegecare/Utils/memory.dart';
 import 'package:privilegecare/Utils/translation_key.dart';
 import 'package:privilegecare/Utils/validator.dart';
@@ -29,7 +31,7 @@ class SignUpController extends GetxController{
 
   set isEnableLogin(bool value) {
     _isEnableLogin.value = value;
-    print('LoginController.isEnableSignup value= $value');
+
     update();
   }
 
@@ -256,7 +258,7 @@ bool signingUp = false ;
       );
       if(data?.msg == "succeeded"){
         await Get.find<StorageService>().saveAccountId("${data?.info?.id??0}");
-        Get.off(HomeScreen());
+        Get.off(SpecialtyScreen());
       }else{
         CoolAlert.show(
             context: context,

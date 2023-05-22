@@ -15,5 +15,16 @@ class SpecialistServices{
     }
     return null;
   }
+  static Future<List<SpecialistModel>?> getMostChosenSpecialist() async {
+    List<SpecialistModel>? specialistList = [];
+    var data = await api.request(Services.specialistMostChosenEndPoint, "POST",);
+    if (data != null) {
+      for (var specialist in data){
+        specialistList.add(SpecialistModel.fromJson(specialist));
+      }
+      return specialistList;
+    }
+    return null;
+  }
 
 }

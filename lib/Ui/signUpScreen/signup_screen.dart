@@ -1,9 +1,11 @@
 import 'package:cool_alert/cool_alert.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:privilegecare/Ui/HomeScreen/home_screen.dart';
 import 'package:privilegecare/Ui/logInScreen/login_screen.dart';
 import 'package:privilegecare/Ui/signUpScreen/controller/signup_controller.dart';
 import 'package:privilegecare/Utils/colors.dart';
+import 'package:privilegecare/Utils/constant.dart';
 import 'package:privilegecare/widgets/text_field_widget.dart';
 
 class SignUpScreen extends StatelessWidget {
@@ -16,17 +18,24 @@ class SignUpScreen extends StatelessWidget {
         backgroundColor: kWhiteColor,
         appBar: AppBar(
           backgroundColor: kGreenColor,
-          actions:  [IconButton(icon: const Icon(Icons.arrow_circle_left_outlined,color: kWhiteColor,size: 40,),onPressed: (){
-            Get.back();
-          },),],
-          leading: IconButton(icon: const Icon(Icons.arrow_circle_left_outlined,color: kGreenColor,size: 40,),onPressed: (){
+          actions:  [ TextButton(onPressed: (){
+            Get.to(() => const HomeScreen());
+          }, child: const Text(
+            "skip to home >",
+            style: TextStyle(
+              fontSize: 18.0,
+              fontFamily: fontFamilyName,
+              color: kWhiteColor,
+            ),
+          )),],
+          leading: IconButton(icon: const Icon(Icons.arrow_circle_right_outlined,color: kWhiteColor,size: 40,),onPressed: (){
             Get.back();
           },),
           centerTitle: true,
           title:  const Text(
             "Sign Up",
             style: TextStyle(
-                fontFamily: "Inter",
+                fontFamily: fontFamilyName,
                 color: kWhiteColor,
                 fontWeight: FontWeight.w800,
                 fontSize: 18),
@@ -56,7 +65,7 @@ class SignUpScreen extends StatelessWidget {
                      padding: EdgeInsets.symmetric(horizontal: 10.0),
                      child: Text("Enter Your Full Name",
                       style: TextStyle(
-                          fontFamily: "Inter",
+                          fontFamily: fontFamilyName,
                           color: kGreenColor,
                           fontWeight: FontWeight.w700,
                           fontSize: 20),),
@@ -75,16 +84,17 @@ class SignUpScreen extends StatelessWidget {
                             height: Get.height*0.09,
                             width: Get.width*0.28,
                             child: CustomInputField(
-                              hasIntialValue: false,
-                              labelText: "First",
+                              textAligning: TextAlign.center,
+                              hasIntialValue: true,
+                              labelText: "Last",
                               textInputAction: TextInputAction.next,
                               keyboardType: TextInputType.name,
 
-                              controller:controller.firstNameController,
-                              onchange: controller.onFirstNameUpdate,
-                              validator: controller.validateFirstName,
-                              icon: (controller.firstNameValidated)
-                                  ? (controller.firstNameState)
+                              controller:controller.lastNameController,
+                              onchange: controller.onLastNameUpdate,
+                              validator: controller.validateLastName,
+                              icon: (controller.lastNameValidated)
+                                  ? (controller.lastNameState)
                                   ? const Icon(Icons.check_rounded,
                                   color: kBlueColor)
                                   : const Icon(
@@ -102,7 +112,8 @@ class SignUpScreen extends StatelessWidget {
                             height: Get.height*0.09,
                             width: Get.width*0.28,
                             child: CustomInputField(
-                              hasIntialValue: false,
+                              textAligning: TextAlign.center,
+                              hasIntialValue: true,
                               labelText: "Middle",
                               textInputAction: TextInputAction.next,
 
@@ -128,16 +139,17 @@ class SignUpScreen extends StatelessWidget {
                             height: Get.height*0.09,
                             width: Get.width*0.28,
                             child: CustomInputField(
-                              hasIntialValue: false,
-                              labelText: "Last",
+                              textAligning: TextAlign.center,
+                              hasIntialValue: true,
+                              labelText: "First",
                               textInputAction: TextInputAction.next,
                               keyboardType: TextInputType.name,
 
-                              controller:controller.lastNameController,
-                              onchange: controller.onLastNameUpdate,
-                              validator: controller.validateLastName,
-                              icon: (controller.lastNameValidated)
-                                  ? (controller.lastNameState)
+                              controller:controller.firstNameController,
+                              onchange: controller.onFirstNameUpdate,
+                              validator: controller.validateFirstName,
+                              icon: (controller.firstNameValidated)
+                                  ? (controller.firstNameState)
                                   ? const Icon(Icons.check_rounded,
                                   color: kBlueColor)
                                   : const Icon(
@@ -157,7 +169,7 @@ class SignUpScreen extends StatelessWidget {
                     padding: EdgeInsets.symmetric(horizontal: 10.0),
                     child: Text("Enter Your Email",
                       style: TextStyle(
-                          fontFamily: "Inter",
+                          fontFamily: fontFamilyName,
                           color: kGreenColor,
                           fontWeight: FontWeight.w700,
                           fontSize: 20),),
@@ -168,8 +180,8 @@ class SignUpScreen extends StatelessWidget {
                       height: Get.height*0.09,
                       width: Get.width*0.95,
                       child: CustomInputField(
-                        hasIntialValue: false,
-                        labelText: "omar.khaled20@yahoo.com",
+                        hasIntialValue: true,
+                        labelText: "example@example.com",
 
                         textInputAction: TextInputAction.next,
                         keyboardType: TextInputType.emailAddress,
@@ -195,7 +207,7 @@ class SignUpScreen extends StatelessWidget {
                     padding: EdgeInsets.symmetric(horizontal: 10.0),
                     child: Text("Enter Your Phone Number",
                       style: TextStyle(
-                          fontFamily: "Inter",
+                          fontFamily: fontFamilyName,
                           color: kGreenColor,
                           fontWeight: FontWeight.w700,
                           fontSize: 20),),
@@ -206,8 +218,8 @@ class SignUpScreen extends StatelessWidget {
                       height: Get.height*0.09,
                       width: Get.width*0.95,
                       child: CustomInputField(
-                        hasIntialValue: false,
-                        labelText: "20",
+                        hasIntialValue: true,
+                        labelText: "123-4567-8",
                         textInputAction: TextInputAction.next,
                         keyboardType: TextInputType.number,
 
@@ -216,13 +228,46 @@ class SignUpScreen extends StatelessWidget {
                         validator: controller.validatePhoneNumber,
                         icon: (controller.phoneValidated)
                             ? (controller.phoneState)
-                            ? const Icon(Icons.check_rounded,
-                            color: kBlueColor)
-                            : const Icon(
+                            ? const Row(
+                          mainAxisSize: MainAxisSize.min,
+                              children: [
+
+                                Text("   974+    ", style: TextStyle(
+                                  fontSize: 15.0,
+                                  fontFamily: fontFamilyName,
+                                  color: kGrayColor,
+                                ),),
+                                Icon(Icons.check_rounded,
+                                color: kBlueColor),
+                                SizedBox(width: 5,),
+                              ],
+                            )
+                            : const Row(
+                          mainAxisSize: MainAxisSize.min,
+                              children: [
+
+                                Text("   974+    ", style: TextStyle(
+                                  fontSize: 15.0,
+                                  fontFamily: fontFamilyName,
+                                  color: kGrayColor,
+                                ),),
+                                Icon(
                           Icons.close_outlined,
                           color: kErrorColor,
-                        )
-                            : null,
+                        ),SizedBox(width: 5,),
+                              ],
+                            )
+                            : const Row(
+                          mainAxisSize: MainAxisSize.min,
+                              children: [
+
+                                Text("   974+    ", style: TextStyle(
+                          fontSize: 15.0,
+                          fontFamily: fontFamilyName,
+                          color: kGrayColor,
+                        ),),
+                              ],
+                            ),
                         hasGreenBorder: false,
                       ),
                     ),
@@ -232,7 +277,7 @@ class SignUpScreen extends StatelessWidget {
                     padding: EdgeInsets.symmetric(horizontal: 10.0),
                     child: Text("Enter Your Password",
                       style: TextStyle(
-                          fontFamily: "Inter",
+                          fontFamily: fontFamilyName,
                           color: kGreenColor,
                           fontWeight: FontWeight.w700,
                           fontSize: 20),
@@ -244,7 +289,7 @@ class SignUpScreen extends StatelessWidget {
                       height: Get.height*0.09,
                       width: Get.width*0.95,
                       child: CustomInputField(
-                          hasIntialValue: false,
+                          hasIntialValue: true,
                         labelText:  "**********************",
                         textInputAction: TextInputAction.next,
                         keyboardType: TextInputType.visiblePassword,
@@ -273,7 +318,7 @@ class SignUpScreen extends StatelessWidget {
                     padding: EdgeInsets.symmetric(horizontal: 10.0),
                     child: Text("Confirm Your Password",
                       style: TextStyle(
-                          fontFamily: "Inter",
+                          fontFamily: fontFamilyName,
                           color: kGreenColor,
                           fontWeight: FontWeight.w700,
                           fontSize: 20),),
@@ -284,7 +329,7 @@ class SignUpScreen extends StatelessWidget {
                       height: Get.height*0.09,
                       width: Get.width*0.95,
                       child: CustomInputField(
-                          hasIntialValue: false,
+                          hasIntialValue: true,
                           labelText:  "**********************",
 
                           textInputAction: TextInputAction.done,
@@ -325,7 +370,7 @@ class SignUpScreen extends StatelessWidget {
                     },
                     child: Center(
                       child: Container(
-                        height: 70,
+                        height: 60,
                         width: Get.width*0.6,
                         decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(20),
@@ -335,10 +380,10 @@ class SignUpScreen extends StatelessWidget {
                           child:  Text("Sign Up",
                             textAlign: TextAlign.center,
                             style: TextStyle(
-                                fontFamily: "Inter",
+                                fontFamily: fontFamilyName,
                                 color: kWhiteColor,
                                 fontWeight: FontWeight.w600,
-                                fontSize: 20),),
+                                fontSize: 18),),
                         ),
                       ),
                     ),
@@ -349,26 +394,27 @@ class SignUpScreen extends StatelessWidget {
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children:   [
-                        const Text("Already have an account?",
+                        InkWell(
+                        onTap: (){
+                          Get.to(const LoginScreen());
+                        },
+                        child: const Text("Sign In",
                           textAlign: TextAlign.center,
                           style: TextStyle(
-                              fontFamily: "Inter",
+                              fontFamily: fontFamilyName,
+                              color: kBlueColor,
+                              fontWeight: FontWeight.w600,
+                              fontSize: 15),),
+                      ),
+                        const Text("?Already have an account",
+                          textAlign: TextAlign.center,
+                          style: TextStyle(
+                              fontFamily:fontFamilyName,
                               color: kGrayColor,
                               fontWeight: FontWeight.w600,
                               fontSize: 15),),
                         const SizedBox(width: 5,),
-                        InkWell(
-                          onTap: (){
-                            Get.to(const LoginScreen());
-                          },
-                          child: const Text("Sign In",
-                            textAlign: TextAlign.center,
-                            style: TextStyle(
-                                fontFamily: "Inter",
-                                color: kBlueColor,
-                                fontWeight: FontWeight.w600,
-                                fontSize: 15),),
-                        ),
+
 
                       ],
                     ),

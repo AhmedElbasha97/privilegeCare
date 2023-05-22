@@ -1,8 +1,12 @@
+// ignore_for_file: sized_box_for_whitespace
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:privilegecare/Ui/HomeScreen/home_screen.dart';
 import 'package:privilegecare/Ui/logInScreen/login_screen.dart';
 import 'package:privilegecare/Ui/signUpScreen/signup_screen.dart';
 import 'package:privilegecare/Utils/colors.dart';
+import 'package:privilegecare/Utils/constant.dart';
 
 class WelcomeScreen extends StatelessWidget {
   const WelcomeScreen({Key? key}) : super(key: key);
@@ -23,12 +27,12 @@ class WelcomeScreen extends StatelessWidget {
               width: Get.width*0.5,
               child: Image.asset("assets/images/logo.png",fit: BoxFit.fitHeight,),
             ),
-            Column(
-              children: const [
+             const Column(
+              children: [
                 Text("Welcome",
                   style: TextStyle(
 
-                      fontFamily: "Inter",
+                      fontFamily: fontFamilyName,
                       color: kBlueColor,
                       fontWeight: FontWeight.w700,
                       fontSize: 25),),
@@ -36,24 +40,25 @@ class WelcomeScreen extends StatelessWidget {
                   textAlign: TextAlign.center,
                   style: TextStyle(
 
-                      fontFamily: "Inter",
+                      fontFamily:fontFamilyName,
                       color: kBlackColor,
                       fontWeight: FontWeight.w700,
                       fontSize: 18),),
+
               ],
             ),
             Container(
               width: Get.width,
-                height: 120,
+                height: 70,
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
                 InkWell(
                   onTap:(){
-                    Get.to(LoginScreen());
+                    Get.to(const LoginScreen());
                   },
                   child: Container(
-                    height: 70,
+                    height: 60,
                     width: Get.width*0.4,
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(20),
@@ -72,10 +77,10 @@ class WelcomeScreen extends StatelessWidget {
                 ),
                 InkWell(
                   onTap: (){
-                    Get.to(SignUpScreen());
+                    Get.to(const SignUpScreen());
                   },
                   child: Container(
-                    height: 70,
+                    height: 60,
                     width: Get.width*0.4,
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(20),
@@ -93,7 +98,19 @@ class WelcomeScreen extends StatelessWidget {
                   ),
                 ),
               ],
-            ))
+            )),
+            InkWell(
+              onTap: (){
+                Get.to(()=>const HomeScreen());
+              },
+              child: const Text("< skip to home",
+                textAlign: TextAlign.center,
+                style: TextStyle(
+                    fontFamily: fontFamilyName,
+                    color: kBlueColor,
+                    fontWeight: FontWeight.w700,
+                    fontSize: 17),),
+            ),
           ],
         ),
       ),

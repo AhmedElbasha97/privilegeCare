@@ -1,8 +1,12 @@
+// ignore_for_file: sized_box_for_whitespace
+
 import 'package:cool_alert/cool_alert.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:privilegecare/Ui/HomeScreen/home_screen.dart';
 import 'package:privilegecare/Ui/logInScreen/Controller/login_controller.dart';
 import 'package:privilegecare/Utils/colors.dart';
+import 'package:privilegecare/Utils/constant.dart';
 import 'package:privilegecare/widgets/text_field_widget.dart';
 
 class LoginScreen extends StatelessWidget {
@@ -18,17 +22,26 @@ class LoginScreen extends StatelessWidget {
         backgroundColor: kWhiteColor,
         appBar: AppBar(
           backgroundColor: kGreenColor,
-          actions:  [IconButton(icon: const Icon(Icons.arrow_circle_left_outlined,color: kWhiteColor,size: 40,),onPressed: (){
-            Get.back();
-          },),],
-          leading: IconButton(icon: const Icon(Icons.arrow_circle_left_outlined,color: kGreenColor,size: 40,),onPressed: (){
+          actions:  [
+            TextButton(onPressed: (){
+              Get.to(() => const HomeScreen());
+            }, child: const Text(
+             "skip to home >",
+       style: TextStyle(
+        fontSize: 18.0,
+        fontFamily: fontFamilyName,
+        color: kWhiteColor,
+      ),
+            )),
+          ],
+          leading: IconButton(icon: const Icon(Icons.arrow_circle_right_outlined,color: kWhiteColor,size: 40,),onPressed: (){
             Get.back();
           },),
           centerTitle: true,
           title:  const Text(
             "Sign In",
             style: TextStyle(
-                fontFamily: "Inter",
+                fontFamily: fontFamilyName,
                 color: kWhiteColor,
                 fontWeight: FontWeight.w800,
                 fontSize: 18),
@@ -70,13 +83,13 @@ class LoginScreen extends StatelessWidget {
                       children:  [
                         const Text("Hello",
                           style: TextStyle(
-                              fontFamily: "Inter",
+                              fontFamily: fontFamilyName,
                               color: kBlackColor,
                               fontWeight: FontWeight.w700,
                               fontSize: 18),),
                         const Text("Sign into your account",
                           style: TextStyle(
-                              fontFamily: "Inter",
+                              fontFamily: fontFamilyName,
                               color: kGrayColor,
                               fontWeight: FontWeight.w700,
                               fontSize: 18),),
@@ -138,7 +151,7 @@ class LoginScreen extends StatelessWidget {
                         ),
                         const Text("Forget Your Password",
                           style: TextStyle(
-                              fontFamily: "Inter",
+                              fontFamily: fontFamilyName,
                               color: kBlackColor,
                               fontWeight: FontWeight.w700,
                               fontSize: 15),),
@@ -164,23 +177,14 @@ class LoginScreen extends StatelessWidget {
                               child:  Text("Login",
                                 textAlign: TextAlign.center,
                                 style: TextStyle(
-                                    fontFamily: "Inter",
+                                    fontFamily:fontFamilyName,
                                     color: kWhiteColor,
                                     fontWeight: FontWeight.w600,
                                     fontSize: 22),),
                             ),
                           ),
                         ),
-                        const Text("Or Login using social media",
-                          style: TextStyle(
-                              fontFamily: "Inter",
-                              color: kBlueColor,
-                              fontWeight: FontWeight.w700,
-                              fontSize: 18),),
-                        SizedBox(
-                          height: 30,
-                          child: Image.asset("assets/images/socialMedia.png",fit: BoxFit.fitHeight,),
-                        ),
+
 
                       ],
                     ),
