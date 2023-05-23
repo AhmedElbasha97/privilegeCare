@@ -1,6 +1,7 @@
 import 'package:privilegecare/Models/doctor_model.dart';
+import 'package:privilegecare/Models/doctor_reservation_model.dart';
 import 'package:privilegecare/Models/doctort_list_model.dart';
-import 'package:privilegecare/Models/response_model.dart';
+
 import 'package:privilegecare/Utils/api_service.dart';
 import 'package:privilegecare/Utils/services.dart';
 
@@ -45,21 +46,7 @@ class DoctorServices {
     }
     return null;
   }
-  static Future<ResponseModel?> saveAppointment(String scheduleId,String memberId, String phoneNumber, String time) async {
 
-    var data = await api.request(Services.saveAppointmentEndPoint, "POST",queryParamters: {
-      "schedule_id":scheduleId,
-      "member_id":memberId,
-      "phone":phoneNumber,
-      "time":time,
-    });
-    if (data != null) {
-
-
-      return ResponseModel.fromJson(data);
-    }
-    return null;
-  }
   static Future<DoctorProfile?> getDoctorProfiles(String doctorId) async {
     var data = await api.request(Services.getDoctorProfileEndPoint, "POST",queryParamters: {
       "doctor_id":doctorId
@@ -68,6 +55,17 @@ class DoctorServices {
 
 
       return DoctorProfile.fromJson(data[0]);
+    }
+    return null;
+  }
+  static Future<DoctorReservationData?> getDoctorReservationData(String doctorId) async {
+    var data = await api.request(Services.getDoctorReservationDataEndPoint, "POST",queryParamters: {
+      "doctor_id":doctorId
+    });
+    if (data != null) {
+
+
+      return DoctorReservationData.fromJson(data[0]);
     }
     return null;
   }

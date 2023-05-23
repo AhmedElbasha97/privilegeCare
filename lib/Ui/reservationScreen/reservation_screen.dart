@@ -2,25 +2,22 @@
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:privilegecare/Models/doctor_model.dart';
 import 'package:privilegecare/Ui/reservationScreen/controller/reservation_controller.dart';
 import 'package:privilegecare/Ui/reservationScreen/second_reservation_screen.dart';
 import 'package:privilegecare/Utils/colors.dart';
 import 'package:privilegecare/Utils/constant.dart';
 
-class ReservationScreen extends StatefulWidget {
-  const ReservationScreen({Key? key}) : super(key: key);
+class ReservationScreen extends StatelessWidget {
+  final String doctorId;
+  const ReservationScreen({Key? key, required this.doctorId}) : super(key: key);
 
-  @override
-  State<ReservationScreen> createState() => _ReservationScreenState();
-}
-
-class _ReservationScreenState extends State<ReservationScreen> {
   @override
   Widget build(BuildContext context) {
-    return SafeArea(child: 
+    return SafeArea(child:
     Scaffold(
       body: GetBuilder<ReservationController>(
-        init: ReservationController(),
+        init: ReservationController(doctorId),
         builder: (controller) => SingleChildScrollView(
           physics: const NeverScrollableScrollPhysics(),
           child: Container(
@@ -104,28 +101,42 @@ class _ReservationScreenState extends State<ReservationScreen> {
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
                       const SizedBox(height: 10,),
-                      InkWell(
-                        onTap: (){
-                          controller.displayDatePicker(context);
-                        },
-                        child: Container(
-                          width: Get.width*0.6,
-                          height: Get.height*0.05,
-                          child:  Column(
-                            children: [
-                              Row(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: [
-                                  const Text(
-                                    "اليوم",
-                                    style: TextStyle(
-                                        fontFamily: fontFamilyName,
-                                        color: kBlueColor,
-                                        fontWeight: FontWeight.w800,
-                                        fontSize: 20),
-                                  ),
-                                  const SizedBox(width: 10,),
-                                  Text(
+                      Container(
+                        width: Get.width*0.6,
+                        height: Get.height*0.05,
+                        child:  Column(
+                          children: [
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                const Text(
+                                  "اليوم",
+                                  style: TextStyle(
+                                      fontFamily: fontFamilyName,
+                                      color: kBlueColor,
+                                      fontWeight: FontWeight.w800,
+                                      fontSize: 20),
+                                ),
+                                const SizedBox(width: 10,),
+                                PopupMenuButton<String>(
+                                  itemBuilder: (context) =>
+                                      controller.doctorData!.schedule!.map((e){
+                                        return   PopupMenuItem(
+                                          value:"${e.id}",
+                                          onTap: (){
+                                            controller.choosingDate("${e.id??0}",e?.date??"" );
+                                          },
+                                          child: Text(
+                                            e.date??"",
+                                            style: const TextStyle(
+                                                color: kBlueColor,
+                                                fontFamily: fontFamilyName,
+                                                fontWeight: FontWeight.w700),
+                                          ),
+                                        );
+                                      }).toList(),
+
+                                  child:  Text(
                                     controller.dateText,
                                     style: const TextStyle(
                                         fontFamily: fontFamilyName,
@@ -133,20 +144,20 @@ class _ReservationScreenState extends State<ReservationScreen> {
                                         fontWeight: FontWeight.w800,
                                         fontSize: 20),
                                   ),
-                                  const SizedBox(width: 10,),
-                                  const Icon(Icons.calendar_month_outlined,color: kBlueColor,size: 30,)
-                                ],
-                              ),
-                              const SizedBox(height: 5,),
-                              const Divider(
-                                color: kGreenColor,
-                                height: 1,
-                                thickness: 2,
-                                endIndent: 0,
-                                indent: 0,
-                              ),
-                            ],
-                          ),
+                                ),
+                                const SizedBox(width: 10,),
+                                const Icon(Icons.calendar_month_outlined,color: kBlueColor,size: 30,)
+                              ],
+                            ),
+                            const SizedBox(height: 5,),
+                            const Divider(
+                              color: kGreenColor,
+                              height: 1,
+                              thickness: 2,
+                              endIndent: 0,
+                              indent: 0,
+                            ),
+                          ],
                         ),
                       ),
                       const SizedBox(height: 10,),
@@ -542,7 +553,7 @@ class _ReservationScreenState extends State<ReservationScreen> {
                 const SizedBox(height: 10,),
                 InkWell(
                   onTap: (){
-                    Get.to(() => const SecondReservationScreen());
+                    Get.to(() =>  SecondReservationScreen(doctorId: doctorId,));
                   },
                   child: Container(
                     width: Get.width*0.5,

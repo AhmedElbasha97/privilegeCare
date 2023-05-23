@@ -6,20 +6,16 @@ import 'package:privilegecare/Ui/reservationScreen/controller/reservation_contro
 import 'package:privilegecare/Utils/colors.dart';
 import 'package:privilegecare/Utils/constant.dart';
 
-class SecondReservationScreen extends StatefulWidget {
-  const SecondReservationScreen({Key? key}) : super(key: key);
+class SecondReservationScreen extends StatelessWidget {
+  final String doctorId;
+  const SecondReservationScreen({Key? key, required this.doctorId}) : super(key: key);
 
-  @override
-  State<SecondReservationScreen> createState() => _SecondReservationScreenState();
-}
-
-class _SecondReservationScreenState extends State<SecondReservationScreen> {
   @override
   Widget build(BuildContext context) {
     return SafeArea(child:
     Scaffold(
       body: GetBuilder<ReservationController>(
-        init: ReservationController(),
+        init: ReservationController(doctorId),
         builder: (controller) => Container(
           width: Get.width,
           height: Get.height,
@@ -472,7 +468,7 @@ class _SecondReservationScreenState extends State<SecondReservationScreen> {
                 const SizedBox(height: 10,),
                 InkWell(
                   onTap: (){
-                    Get.to(() => const SecondReservationScreen());
+
                   },
                   child: Container(
                     width: Get.width*0.5,

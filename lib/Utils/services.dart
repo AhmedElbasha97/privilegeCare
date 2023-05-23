@@ -10,5 +10,6 @@ class Services {
   static String saveAppointmentEndPoint = "appointment_save";//post
   static String getGovernmentsEndPoint = "area";//post
   static String getDoctorProfileEndPoint = "doctor";//post
+  static String getDoctorReservationDataEndPoint = "doctor_mini";//post
   static String searchForDoctorsEndPoint = "doctor_search";//post
 }

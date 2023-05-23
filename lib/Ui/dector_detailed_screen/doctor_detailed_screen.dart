@@ -1,4 +1,4 @@
-// ignore_for_file: sized_box_for_whitespace
+// ignore_for_file: sized_box_for_whitespace, prefer_is_empty
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -380,7 +380,7 @@ class DoctorDetailedScreen extends StatelessWidget {
                           child: Row(
                             children: [
                               Image.asset("assets/images/Time management-rafiki.png",height: Get.width*0.23,),
-                              Text("ليس هناك مواعيد متاح حاليا",style: const TextStyle(color: kGreenColor,fontWeight: FontWeight.bold,fontSize: 18),textAlign: TextAlign.center,),
+                              const Text("ليس هناك مواعيد متاح حاليا",style: TextStyle(color: kGreenColor,fontWeight: FontWeight.bold,fontSize: 18),textAlign: TextAlign.center,),
                             ],
                           ),
                         ),
@@ -399,7 +399,7 @@ class DoctorDetailedScreen extends StatelessWidget {
                           const SizedBox(height: 10,),
                           InkWell(
                             onTap: (){
-                              Get.to(const ReservationScreen());
+                              Get.to(  ReservationScreen(doctorId: "${controller.doctorData?.id??0}",));
                             },
                             child: Row(
                               mainAxisAlignment: MainAxisAlignment.center,

@@ -318,7 +318,7 @@ class DoctorCellWidget extends StatelessWidget {
                         padding: const EdgeInsets.all(5.0),
                         child: InkWell(
                           onTap: (){
-                            Get.to(()=>const ReservationScreen());
+                            Get.to(()=>  ReservationScreen(doctorId: "${doctorData?.id??0}",));
                           },
                           child: Container(
                             width: Get.width*0.27,
