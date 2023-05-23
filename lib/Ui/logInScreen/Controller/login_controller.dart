@@ -130,6 +130,13 @@ class LoginController extends GetxController {
       await sinningIn(context);
     }
   }
+  Future<void> sendPressedFromDialogue(context) async {
+    formValidated = formKey.currentState!.validate();
+    FocusScope.of(context).unfocus();
+    if (formValidated) {
+      await sinningInFromDialogue(context);
+    }
+  }
 
   // late String _optCode;
   Future errorDialog(String err) async {
@@ -152,6 +159,28 @@ if(emailState){
 if(data?.msg == "succeeded"){
   await Get.find<StorageService>().saveAccountId("${data?.info?.id??0}");
   Get.off(SpecialtyScreen());
+}else{
+  CoolAlert.show(
+    context: context,
+    type: CoolAlertType.error,
+    title: "حدث خطأ",
+    text: data?.msg
+  );
+}
+}
+  }
+  sinningInFromDialogue(context) async {
+    signingIn = true;
+    update();
+    CoolAlert.show(
+      context: context,
+      type: CoolAlertType.loading,
+    );
+if(emailState){
+  AuthModel? data = await AuthServices.logIn(emailController.text, passwordController.text);
+if(data?.msg == "succeeded"){
+  await Get.find<StorageService>().saveAccountId("${data?.info?.id??0}");
+  Get.back();
 }else{
   CoolAlert.show(
     context: context,

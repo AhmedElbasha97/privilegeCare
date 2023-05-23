@@ -5,17 +5,24 @@ import 'package:get/get.dart';
 import 'package:privilegecare/Ui/reservationScreen/controller/reservation_controller.dart';
 import 'package:privilegecare/Utils/colors.dart';
 import 'package:privilegecare/Utils/constant.dart';
+import 'package:privilegecare/Utils/localization_services.dart';
+import 'package:privilegecare/Utils/memory.dart';
 
-class SecondReservationScreen extends StatelessWidget {
+class SecondReservationScreen extends StatefulWidget {
   final String doctorId;
   const SecondReservationScreen({Key? key, required this.doctorId}) : super(key: key);
 
+  @override
+  State<SecondReservationScreen> createState() => _SecondReservationScreenState();
+}
+
+class _SecondReservationScreenState extends State<SecondReservationScreen> {
   @override
   Widget build(BuildContext context) {
     return SafeArea(child:
     Scaffold(
       body: GetBuilder<ReservationController>(
-        init: ReservationController(doctorId),
+        init: ReservationController(widget.doctorId),
         builder: (controller) => Container(
           width: Get.width,
           height: Get.height,
@@ -110,10 +117,10 @@ class SecondReservationScreen extends StatelessWidget {
                          width: Get.width*0.7,
                          child: Padding(
                            padding:  EdgeInsets.fromLTRB(0, Get.height*0.028, 0, 0),
-                           child: const Text(
-                             "دكتور عمر خالد أبوبكر أخصائي",
+                           child:  Text(
+                             Get.find<StorageService>().activeLocale == SupportedLocales.english?controller.doctorData?.name??"":controller.doctorData?.nameEn??"",
                              textAlign: TextAlign.center,
-                             style: TextStyle(
+                             style: const TextStyle(
                                  fontFamily: fontFamilyName,
                                  color: kBlueColor,
                                  fontWeight: FontWeight.w800,
@@ -233,7 +240,7 @@ class SecondReservationScreen extends StatelessWidget {
                                     ],
                                   ),
                                   controller.reservationFroAnotherPatient == 0?const SizedBox() :TextFormField(
-
+                                    controller: controller.nameController,
                                     decoration:  const InputDecoration(
                                         labelText: "الإسم كامل",
                                         labelStyle: TextStyle(
@@ -261,9 +268,10 @@ class SecondReservationScreen extends StatelessWidget {
                                       Container(
                                         width: Get.width*0.4,
                                         child: TextFormField(
-
+                                          controller: controller.phoneController,
                                           decoration:  const InputDecoration(
                                               labelText: "رقم المحمول",
+
                                               labelStyle: TextStyle(
                                                   fontFamily: fontFamilyName,
                                                   color: kBlueColor,
@@ -313,27 +321,27 @@ class SecondReservationScreen extends StatelessWidget {
                                 ),
                               ),
                             ),
-                            child: const Column(
+                            child:  Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 Text(
-                                  "4:15م",
-                                  style: TextStyle(
+                                  controller.timeText,
+                                  style: const TextStyle(
                                       fontFamily: fontFamilyName,
                                       color: kBlueColor,
                                       fontWeight: FontWeight.w800,
                                       fontSize: 15),
                                 ),
                                 Text(
-                                  "20/6/2023",
-                                  style: TextStyle(
+                                  controller.dateText,
+                                  style: const TextStyle(
                                       fontFamily: fontFamilyName,
                                       color: kBlueColor,
                                       fontWeight: FontWeight.w800,
                                       fontSize: 15),
                                 ),
-                                SizedBox(height: 10,),
-                                Divider(
+                                const SizedBox(height: 10,),
+                                const Divider(
                                   color: kGreenColor,
                                   height: 1,
                                   thickness: 2,
@@ -434,11 +442,11 @@ class SecondReservationScreen extends StatelessWidget {
                               ),
                             ),
                           ),
-                          child:  const Row(
+                          child:   Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             crossAxisAlignment: CrossAxisAlignment.center,
                             children: [
-                              Text(
+                              const Text(
                                 "سعر الكشف",
                                 textAlign: TextAlign.center,
                                 style: TextStyle(
@@ -449,9 +457,9 @@ class SecondReservationScreen extends StatelessWidget {
                               ),
 
                               Text(
-                                "150 ريال",
+                                "${controller.doctorData?.amount??0} ريال",
                                 textAlign: TextAlign.center,
-                                style: TextStyle(
+                                style: const TextStyle(
                                     fontFamily: fontFamilyName,
                                     color: kBlueColor,
                                     fontWeight: FontWeight.w800,
@@ -468,7 +476,7 @@ class SecondReservationScreen extends StatelessWidget {
                 const SizedBox(height: 10,),
                 InkWell(
                   onTap: (){
-
+                    controller.addReservation(context);
                   },
                   child: Container(
                     width: Get.width*0.5,

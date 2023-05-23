@@ -2,9 +2,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:privilegecare/Models/doctor_model.dart';
 import 'package:privilegecare/Ui/reservationScreen/controller/reservation_controller.dart';
-import 'package:privilegecare/Ui/reservationScreen/second_reservation_screen.dart';
 import 'package:privilegecare/Utils/colors.dart';
 import 'package:privilegecare/Utils/constant.dart';
 
@@ -124,7 +122,7 @@ class ReservationScreen extends StatelessWidget {
                                         return   PopupMenuItem(
                                           value:"${e.id}",
                                           onTap: (){
-                                            controller.choosingDate("${e.id??0}",e?.date??"" );
+                                            controller.choosingDate("${e.id??0}",e.date??"" );
                                           },
                                           child: Text(
                                             e.date??"",
@@ -161,7 +159,7 @@ class ReservationScreen extends StatelessWidget {
                         ),
                       ),
                       const SizedBox(height: 10,),
-                     controller.isLoading?const SizedBox():Container(
+                     controller.enableChooseTime?Container(
                         width: Get.width*0.6,
                         height: Get.height*0.05,
                         child:  Row(
@@ -230,7 +228,7 @@ class ReservationScreen extends StatelessWidget {
 
                           ],
                         ),
-                      ),
+                      ):const SizedBox(),
                     ],
                   ),
                 ),
@@ -553,7 +551,7 @@ class ReservationScreen extends StatelessWidget {
                 const SizedBox(height: 10,),
                 InkWell(
                   onTap: (){
-                    Get.to(() =>  SecondReservationScreen(doctorId: doctorId,));
+                   controller.gotoAnotherReservationScreen(context);
                   },
                   child: Container(
                     width: Get.width*0.5,
