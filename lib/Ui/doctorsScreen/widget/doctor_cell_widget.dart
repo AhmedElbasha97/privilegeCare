@@ -115,7 +115,7 @@ class DoctorCellWidget extends StatelessWidget {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: [
-                      Padding(
+                      doctorData?.listen==0?SizedBox(): Padding(
                         padding: const EdgeInsets.all(3.0),
                         child: Container(
                           width: Get.width*0.35,
@@ -151,7 +151,7 @@ class DoctorCellWidget extends StatelessWidget {
                           ),
                         ),
                       ),
-                      Padding(
+                      doctorData?.explain==0?SizedBox():Padding(
                         padding: const EdgeInsets.all(3.0),
                         child: Container(
                           width: Get.width*0.35,
@@ -312,7 +312,59 @@ class DoctorCellWidget extends StatelessWidget {
 
                     ],
                   ),
-                  Row(
+                  doctorData?.schedule?.length == 0?Row(
+                    children: [
+
+                      Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Container(
+                          width: Get.width*0.7,
+                          height: Get.height*0.04,
+                          decoration: BoxDecoration(
+                            color: kBlueColor,
+                            borderRadius: BorderRadius.circular(10),
+                            boxShadow: const [
+                              BoxShadow(
+                                offset: Offset(0, 2),
+                                blurRadius: 6,
+                                color: Colors.black12,
+                              ),
+                            ],
+                          ),
+                          child: const Center(
+                            child: Text("ليس هناك مواعيد متاح حتى الان",
+                              style: TextStyle(
+                                  fontFamily: fontFamilyName,
+                                  color: kWhiteColor,
+                                  fontWeight: FontWeight.w700,
+                                  fontSize: 14),),
+                          ),
+                        ),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.all(5.0),
+                        child: Container(
+                          width: Get.width*0.08,
+                          height: Get.height*0.04,
+                          decoration: BoxDecoration(
+                            color: kGreenColor,
+                            borderRadius: BorderRadius.circular(10),
+                            boxShadow: const [
+                              BoxShadow(
+                                offset: Offset(0, 2),
+                                blurRadius: 6,
+                                color: Colors.black12,
+                              ),
+                            ],
+                          ),
+                          child: const Center(
+                            child: Icon(Icons.favorite,color: kWhiteColor,),
+                          ),
+                        ),
+                      ),
+
+                    ],
+                  ):Row(
                     children: [
                       Padding(
                         padding: const EdgeInsets.all(5.0),

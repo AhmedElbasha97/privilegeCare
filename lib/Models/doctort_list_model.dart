@@ -15,6 +15,10 @@ class DoctorListModel {
   String? phone;
   String? locationLon;
   String? locationLat;
+  String? details;
+  int? listen;
+  int? explain;
+  int? point;
   String? level;
   String? levelEn;
   String? specialist;
@@ -33,6 +37,10 @@ class DoctorListModel {
     this.phone,
     this.locationLon,
     this.locationLat,
+    this.details,
+    this.listen,
+    this.explain,
+    this.point,
     this.level,
     this.levelEn,
     this.specialist,
@@ -52,6 +60,10 @@ class DoctorListModel {
     phone: json["phone"],
     locationLon: json["location_lon"],
     locationLat: json["location_lat"],
+    details: json["details"],
+    listen: json["listen"],
+    explain: json["explain"],
+    point: json["point"],
     level: json["level"],
     levelEn: json["level_en"],
     specialist: json["specialist"],
@@ -71,6 +83,10 @@ class DoctorListModel {
     "phone": phone,
     "location_lon": locationLon,
     "location_lat": locationLat,
+    "details": details,
+    "listen": listen,
+    "explain": explain,
+    "point": point,
     "level": level,
     "level_en": levelEn,
     "specialist": specialist,

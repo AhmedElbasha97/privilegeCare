@@ -43,7 +43,7 @@ class DoctorListController extends GetxController{
   }
 searchForDoctor(String doctorName) async {
     doctorsData =[];
-  doctorsData = await DoctorServices.searchForDoctors(doctorName);
+  doctorsData = await DoctorServices.searchForDoctors(doctorName,specialistId);
   if(
   doctorsData?.length==0||doctorsData==[]
   ){

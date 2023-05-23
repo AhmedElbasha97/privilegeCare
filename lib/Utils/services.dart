@@ -12,4 +12,6 @@ class Services {
   static String getDoctorProfileEndPoint = "doctor";//post
   static String getDoctorReservationDataEndPoint = "doctor_mini";//post
   static String searchForDoctorsEndPoint = "doctor_search";//post
+static String homeDoctorsEndPoint = "6doctors";//post
+ static String homeBannersEndPoint = "slider";//post
 }

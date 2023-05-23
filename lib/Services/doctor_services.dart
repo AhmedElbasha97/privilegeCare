@@ -1,3 +1,4 @@
+import 'package:privilegecare/Models/doctor_home_model.dart';
 import 'package:privilegecare/Models/doctor_model.dart';
 import 'package:privilegecare/Models/doctor_reservation_model.dart';
 import 'package:privilegecare/Models/doctort_list_model.dart';
@@ -20,10 +21,11 @@ class DoctorServices {
     }
     return null;
   }
-  static Future<List<DoctorListModel>?> searchForDoctors(String doctorName) async {
+  static Future<List<DoctorListModel>?> searchForDoctors(String doctorName,String specialtyId,) async {
     List<DoctorListModel>? doctorsList = [];
     var data = await api.request(Services.searchForDoctorsEndPoint, "POST",queryParamters: {
       "name":doctorName,
+      "spec":specialtyId,
     });
     if (data != null) {
       for (var doctor in data){
@@ -58,6 +60,19 @@ class DoctorServices {
     }
     return null;
   }
+
+  static Future<List<DoctorHomeModelData>?> getHomeDoctors() async {
+    List<DoctorHomeModelData>? homeDoctorList = [];
+    var data = await api.request(Services.homeDoctorsEndPoint, "POST");
+    if (data != null) {
+      for (var homeDoctor in data){
+        homeDoctorList.add(DoctorHomeModelData.fromJson(homeDoctor));
+      }
+      return homeDoctorList;
+    }
+    return null;
+  }
+
   static Future<DoctorReservationData?> getDoctorReservationData(String doctorId) async {
     var data = await api.request(Services.getDoctorReservationDataEndPoint, "POST",queryParamters: {
       "doctor_id":doctorId
