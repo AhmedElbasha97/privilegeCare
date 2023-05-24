@@ -11,7 +11,9 @@ import 'package:privilegecare/Utils/localization_services.dart';
 import 'package:privilegecare/Utils/memory.dart';
 
 class GovernmentScreen extends StatelessWidget {
-  const GovernmentScreen({Key? key}) : super(key: key);
+  final String specialistId;
+  final String searchName;
+  const GovernmentScreen({Key? key, required this.specialistId,  this.searchName ="0"}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -89,7 +91,7 @@ class GovernmentScreen extends StatelessWidget {
                         itemBuilder: (_,index){
                           return  Padding(
                             padding: const EdgeInsets.symmetric(vertical: 10.0),
-                            child: GovernmentCellWidget(government: Get.find<StorageService>().activeLocale == SupportedLocales.english?(controller.governmentData?[index].nameEn??""):(controller.governmentData?[index].name??""),),
+                            child: GovernmentCellWidget(government: controller.governmentData![index], specialistId: specialistId,searchName: searchName,),
                           );
                         },
                       ),

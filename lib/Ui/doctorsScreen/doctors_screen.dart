@@ -13,7 +13,10 @@ import 'package:privilegecare/widgets/no_data_widget.dart';
 
 class DoctorScreen extends StatelessWidget {
   final String specialistId;
-   const DoctorScreen({Key? key, required this.specialistId}) : super(key: key);
+  final String areaId;
+  final String searchName;
+
+   const DoctorScreen({Key? key, required this.specialistId,  this.areaId = "0",this.searchName = "0"}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -22,7 +25,7 @@ class DoctorScreen extends StatelessWidget {
 
         bottomNavigationBar: const BottomNavigationBarWidget(selectedTap: 1,),
         body: GetBuilder<DoctorListController>(
-          init: DoctorListController(specialistId),
+          init: DoctorListController(specialistId,areaId,searchName),
           builder: (controller) => RawScrollbar(
             thumbColor: kBlueColor,
             radius: const Radius.circular(20),
@@ -39,7 +42,7 @@ class DoctorScreen extends StatelessWidget {
                   ),
                   controller.hasNoData?const SizedBox():InkWell(
                     onTap: (){
-                      Get.to(const GovernmentScreen());
+                      Get.off(()=> GovernmentScreen(specialistId: specialistId,searchName: controller.searchController.text??"0",));
                     },
                     child: Container(
                       height: Get.height*0.045,
@@ -123,7 +126,7 @@ class DoctorScreen extends StatelessWidget {
                             borderSide:   const BorderSide(color: kBlueColor,width: 3.0),
                             borderRadius: BorderRadius.circular(15)),
 
-                          hintText: "ابحث بالتخصص،اسم الدكتور،أو المستشفي",
+                          hintText: "ابحث باسم الدكتور",
                           hintStyle: const TextStyle(
                               fontFamily: fontFamilyName,
                               color: kGrayColor,
@@ -138,120 +141,23 @@ class DoctorScreen extends StatelessWidget {
                     ),
 
                   ),
-                  controller.hasNoData?const SizedBox():Padding(
-                    padding: const EdgeInsets.all(3.0),
-                    child: Row(
-                      children: [
-                        Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: Container(
-                            width: Get.width*0.3,
-                            height: Get.height*0.05,
-                            decoration: BoxDecoration(
-                              color: kBlueColor,
-                              borderRadius: BorderRadius.circular(15),
-                              boxShadow: const [
-                                BoxShadow(
-                                  offset: Offset(0, 2),
-                                  blurRadius: 6,
-                                  color: Colors.black12,
-                                ),
-                              ],
-                            ),
-                            child: const Row(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                Icon(
-                                Icons.filter_alt,
-                                color: kWhiteColor,
-                                size: 25,),
-                                Text("التصفية ",
-                                  style: TextStyle(
-                                      fontFamily: fontFamilyName,
-                                      color: kWhiteColor,
-                                      fontWeight: FontWeight.w700,
-                                      fontSize: 18),),
 
-                              ],
-                            ),
-                          ),
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.all(3.0),
-                          child: Container(
-                            width: Get.width*0.3,
-                            height: Get.height*0.05,
-                            decoration: BoxDecoration(
-                              color: kBlueColor,
-                              borderRadius: BorderRadius.circular(15),
-                              boxShadow: const [
-                                BoxShadow(
-                                  offset: Offset(0, 2),
-                                  blurRadius: 6,
-                                  color: Colors.black12,
-                                ),
-                              ],
-                            ),
-                            child: const Row(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                Icon(
-                                Icons.map_outlined,
-                                color: kWhiteColor,
-                                size: 15,),
-                                Text("الخريطة ",
-                                  style: TextStyle(
-                                      fontFamily: fontFamilyName,
-                                      color: kWhiteColor,
-                                      fontWeight: FontWeight.w700,
-                                      fontSize: 18),),
-
-                              ],
-                            ),
-                          ),
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.all(3.0),
-                          child: Container(
-                            width: Get.width*0.3,
-                            height: Get.height*0.05,
-                            decoration: BoxDecoration(
-                              color: kBlueColor,
-                              borderRadius: BorderRadius.circular(15),
-                              boxShadow: const [
-                                BoxShadow(
-                                  offset: Offset(0, 2),
-                                  blurRadius: 6,
-                                  color: Colors.black12,
-                                ),
-                              ],
-                            ),
-                            child: const Row(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                Icon(
-                                Icons.mobiledata_off_rounded,
-                                color: kWhiteColor,
-                                size: 25,),
-                                Text("الترتيب ",
-                                  style: TextStyle(
-                                      fontFamily: fontFamilyName,
-                                      color: kWhiteColor,
-                                      fontWeight: FontWeight.w700,
-                                      fontSize: 18),),
-
-                              ],
-                            ),
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                  controller.isLoading?Loader(height: Get.height*0.55,width: Get.width,):controller.hasNoData?NoDataWidget(refreshedFunc: (){
+                  controller.isLoading?Loader(height: Get.height*0.55,width: Get.width,):
+                  controller.hasNoData?NoDataWidget(refreshedFunc: (){
                     controller.getData();
-                  }, text: "ليس هناك أطباء متخصصين مسجلين فى هذا التخصص حتى الآن", imgPath: "assets/images/No data-rafiki.png", hasRefreshButtonOrNot: true,height: Get.height*0.7,):controller.searchHasNoResult?NoDataWidget(refreshedFunc: (){
+                  }, text: "ليس هناك أطباء متخصصين مسجلين فى هذا التخصص حتى الآن", imgPath: "assets/images/No data-rafiki.png", hasRefreshButtonOrNot: true,height: Get.height*0.7,):
+                  controller.searchHasNoResult?NoDataWidget(refreshedFunc: (){
                     controller.getData();
-                  }, text: "ليس هناك طبيب بهذا الاسم", imgPath: "assets/images/Search-rafiki.png", hasRefreshButtonOrNot: false,height: Get.height*0.7,):Container(
+                  }, text: "ليس هناك طبيب بهذا الاسم", imgPath: "assets/images/Search-rafiki.png", hasRefreshButtonOrNot: false,height: Get.height*0.7,)
+                      :controller.areaHasNoResult?
+                  NoDataWidget(refreshedFunc: (){
+                    controller.getData();
+                  }, text: "ليس هناك اطباء فى هذه المنطقه", imgPath: "assets/images/No data-rafiki.png", hasRefreshButtonOrNot: true,height: Get.height*0.7,)
+                  :controller.noSearchForThisArea?
+                  NoDataWidget(refreshedFunc: (){
+                    controller.getData();
+                  }, text: "ليس هناك اطباء بهذا الاسم فى هذه المنطقه", imgPath: "assets/images/Search-rafiki.png", hasRefreshButtonOrNot: false,height: Get.height*0.7,)
+                      :Container(
 
                     width: Get.width,
                     height: Get.height*0.55,

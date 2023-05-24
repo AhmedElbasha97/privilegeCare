@@ -34,11 +34,27 @@ class DoctorServices {
     }
     return null;
   }
-  static Future<List<DoctorListModel>?> searchForDoctors(String doctorName,String specialtyId,) async {
+  static Future<List<DoctorListModel>?> searchForDoctors(String doctorName,String specialtyId) async {
     List<DoctorListModel>? doctorsList = [];
     var data = await api.request(Services.searchForDoctorsEndPoint, "POST",queryParamters: {
       "name":doctorName,
       "spec":specialtyId,
+
+    });
+    if (data != null) {
+      for (var doctor in data){
+        doctorsList.add(DoctorListModel.fromJson(doctor));
+      }
+      return doctorsList;
+    }
+    return null;
+  }
+  static Future<List<DoctorListModel>?> searchForDoctorsWithArea(String doctorName,String specialtyId,String areaId) async {
+    List<DoctorListModel>? doctorsList = [];
+    var data = await api.request(Services.searchForDoctorsEndPoint, "POST",queryParamters: {
+      "name":doctorName,
+      "spec":specialtyId,
+      "area":areaId,
     });
     if (data != null) {
       for (var doctor in data){

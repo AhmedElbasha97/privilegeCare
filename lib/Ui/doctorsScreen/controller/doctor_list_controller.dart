@@ -9,12 +9,17 @@ class DoctorListController extends GetxController{
   bool isLoading = true;
   bool hasNoData = false;
   bool searchHasNoResult = false;
+  bool noDoctorsInThisLocation = false;
+  bool areaHasNoResult = false;
+  bool noSearchForThisArea = false;
   late TextEditingController searchController;
   final ScrollController sController = ScrollController();
   List<DoctorListModel>? doctorsData =[];
   final String specialistId;
+  final  String locationId;
 
-  DoctorListController(this.specialistId);
+  final  String searchName ;
+  DoctorListController(this.specialistId, this.locationId,  this.searchName);
   @override
   void onInit() {
     // TODO: implement onInit
@@ -37,6 +42,23 @@ class DoctorListController extends GetxController{
   doctorsData = await DoctorServices.getDoctorsInThisSpecialist(specialistId);
   if(doctorsData?.length == 0 || doctorsData == null){
     hasNoData = true;
+  }else{
+    if(
+    locationId != "0"
+    ){
+      if(searchName != "0"&&searchName!=""){
+        doctorsData = await DoctorServices.searchForDoctorsWithArea(searchName,specialistId,locationId);
+        searchController.text = searchName;
+        if(doctorsData?.length == 0 || doctorsData == null){
+          noSearchForThisArea = true;
+        }
+      }else{
+        doctorsData = await DoctorServices.searchForDoctorsWithArea("",specialistId,locationId);
+        if(doctorsData?.length == 0 || doctorsData == null){
+          areaHasNoResult = true;
+        }
+      }
+    }
   }
   isLoading = false;
   update();

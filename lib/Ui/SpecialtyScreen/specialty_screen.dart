@@ -41,7 +41,7 @@ class SpecialtyScreen extends StatelessWidget {
                   ),
                   InkWell(
                     onTap: (){
-                      Get.to(()=>const DoctorScreen(specialistId: "5"));
+                      Get.to(()=>const DoctorScreen(specialistId: "0"));
                     },
                     child: Container(
                       height: Get.height*0.06,
@@ -79,40 +79,45 @@ class SpecialtyScreen extends StatelessWidget {
                     ),
                   ),
                   const SizedBox(height: 10,),
-                  Container(
-                    height: Get.height*0.06,
-                    width: Get.width*0.95,
-                    decoration: BoxDecoration(
-                      color: kWhiteColor,
-                      border: Border.all(color: kBlueColor,width: 1),
-                      borderRadius: BorderRadius.circular(15),
-                      boxShadow: const [
-                        BoxShadow(
-                          offset: Offset(0, 2),
-                          blurRadius: 6,
-                          color: Colors.black12,
-                        ),
-                      ],
-                    ),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      children: const [  SizedBox(width: 5,),
-                        Icon(
-                          Icons.search_outlined,
-                          color: kGrayColor,
-                          size: 30,),
-                        SizedBox(width: 15,),
-                        Text("ابحث بالتخصص،اسم الدكتور،أو المستشفي",
-                        style: TextStyle(
-                            fontFamily: fontFamilyName,
-
+                  InkWell(
+                    onTap: (){
+                      Get.to(()=>const DoctorScreen(specialistId: "0"));
+                    },
+                    child: Container(
+                      height: Get.height*0.06,
+                      width: Get.width*0.95,
+                      decoration: BoxDecoration(
+                        color: kWhiteColor,
+                        border: Border.all(color: kBlueColor,width: 1),
+                        borderRadius: BorderRadius.circular(15),
+                        boxShadow: const [
+                          BoxShadow(
+                            offset: Offset(0, 2),
+                            blurRadius: 6,
+                            color: Colors.black12,
+                          ),
+                        ],
+                      ),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        children: const [  SizedBox(width: 5,),
+                          Icon(
+                            Icons.search_outlined,
                             color: kGrayColor,
-                            fontWeight: FontWeight.w700,
-                            fontSize: 15),),
+                            size: 30,),
+                          SizedBox(width: 15,),
+                          Text("ابحث باسم الدكتور",
+                          style: TextStyle(
+                              fontFamily: fontFamilyName,
+
+                              color: kGrayColor,
+                              fontWeight: FontWeight.w700,
+                              fontSize: 15),),
 
 
 
-                      ],
+                        ],
+                      ),
                     ),
                   ),
                   SizedBox(height: 10,),
