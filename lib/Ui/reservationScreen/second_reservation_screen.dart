@@ -1,5 +1,6 @@
 // ignore_for_file: sized_box_for_whitespace
 
+import 'package:cool_alert/cool_alert.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:privilegecare/Ui/reservationScreen/controller/reservation_controller.dart';
@@ -476,7 +477,15 @@ class _SecondReservationScreenState extends State<SecondReservationScreen> {
                 const SizedBox(height: 10,),
                 InkWell(
                   onTap: (){
-                    controller.addReservation(context);
+                    if(!controller.reservationIsRunning) {
+                     controller.addReservation(context);
+                    }else{
+                      CoolAlert.show(
+                        context: context,
+                        type: CoolAlertType.loading,
+                      );
+                    }
+
                   },
                   child: Container(
                     width: Get.width*0.5,

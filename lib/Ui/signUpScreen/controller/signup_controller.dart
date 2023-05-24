@@ -125,7 +125,8 @@ bool signingUp = false ;
       firstNameState = false;
     }
     return validateName;
-  } void onSecondNameUpdate(String? value) {
+  }
+  void onSecondNameUpdate(String? value) {
     if (value == "") {
       secondNameState = false;
     }

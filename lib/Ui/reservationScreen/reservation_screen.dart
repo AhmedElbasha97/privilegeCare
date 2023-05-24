@@ -526,24 +526,7 @@ class ReservationScreen extends StatelessWidget {
                           ),
                         ),
                       ),
-                      Container(
-                        width: Get.width*0.5,
-                        height: Get.height*0.07,
-                        decoration: BoxDecoration(
-                          color: kGreenColor,
-                          borderRadius: BorderRadius.circular(15),
-                        ),
-                        child: const Center(
-                          child:  Text(
-                            "أرسال للدكتور",
-                            style: TextStyle(
-                                fontFamily: fontFamilyName,
-                                color: Colors.white,
-                                fontWeight: FontWeight.w800,
-                                fontSize: 18),
-                          ),
-                        ),
-                      )
+
 
                     ],
                   ),

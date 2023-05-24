@@ -1,21 +1,21 @@
 import 'package:cool_alert/cool_alert.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:privilegecare/Ui/logInScreen/Controller/login_controller.dart';
+import 'package:privilegecare/Ui/reservationScreen/controller/reservation_controller.dart';
 import 'package:privilegecare/Utils/colors.dart';
 import 'package:privilegecare/Utils/constant.dart';
 import 'package:privilegecare/widgets/text_field_widget.dart';
 
-
-class LoginDialogue extends StatelessWidget {
-  const LoginDialogue({Key? key}) : super(key: key);
+class ReservationToNonRegestierUserWidget extends StatelessWidget {
+  final String doctorId;
+  const ReservationToNonRegestierUserWidget({Key? key, required this.doctorId}) : super(key: key);
   @override
   Widget build(BuildContext context) {
     return Dialog(
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
       elevation: 3,
-      child: GetBuilder(
-        init:  LoginController(),
+      child: GetBuilder<ReservationController>(
+        init:  ReservationController(doctorId),
         builder: ( controller) => SingleChildScrollView(
           child: Container(
             width: MediaQuery.of(context).size.width * 0.9,
@@ -26,18 +26,6 @@ class LoginDialogue extends StatelessWidget {
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children:  [
-                  const Text("Hello",
-                    style: TextStyle(
-                        fontFamily: fontFamilyName,
-                        color: kBlackColor,
-                        fontWeight: FontWeight.w700,
-                        fontSize: 18),),
-                  const Text("Sign into your account",
-                    style: TextStyle(
-                        fontFamily: fontFamilyName,
-                        color: kGrayColor,
-                        fontWeight: FontWeight.w700,
-                        fontSize: 18),),
                   Padding(
                     padding: const EdgeInsets.all(10.0),
                     child: SizedBox(
@@ -45,12 +33,12 @@ class LoginDialogue extends StatelessWidget {
                       child: CustomInputField(
                         hasIntialValue: false,
                         textInputAction: TextInputAction.next,
-                        keyboardType: TextInputType.emailAddress,
-                        controller: controller.emailController,
-                        onchange: controller.onEmailUpdate,
-                        validator: controller.validateEmail,
-                        icon: (controller.emailValidated)
-                            ? (controller.emailState)
+                        keyboardType: TextInputType.name,
+                        controller: controller.nameWidgetController,
+                        onchange: controller.onNameUpdate,
+                        validator: controller.validateName,
+                        icon: (controller.nameValidated)
+                            ? (controller.nameState)
                             ? const Icon(Icons.check_rounded,
                             color: kGreenColor)
                             : const Icon(
@@ -58,7 +46,7 @@ class LoginDialogue extends StatelessWidget {
                           color: kErrorColor,
                         )
                             : null,
-                        labelText: "Email",
+                        labelText: "الاسم",
 
                         hasGreenBorder: true,
                       ),
@@ -67,43 +55,33 @@ class LoginDialogue extends StatelessWidget {
                   Padding(
                     padding: const EdgeInsets.all(10.0),
                     child: SizedBox(
-                      height:  80,
+                      height: 80,
                       child: CustomInputField(
-                          hasIntialValue: false,
+                        hasIntialValue: false,
+                        textInputAction: TextInputAction.done,
+                        keyboardType: TextInputType.phone,
+                        controller: controller.phoneWidgetController,
+                        onchange: controller.onPhoneNumberUpdate,
+                        validator: controller.validatePhoneNumber,
+                        icon: (controller.phoneValidated)
+                            ? (controller.phoneState)
+                            ? const Icon(Icons.check_rounded,
+                            color: kGreenColor)
+                            : const Icon(
+                          Icons.close_outlined,
+                          color: kErrorColor,
+                        )
+                            : null,
+                        labelText: "رقم الجوال",
 
-                          hasGreenBorder: true,
-                          labelText: "Password",
-                          controller: controller.passwordController,
-                          validator: controller.validatePassword,
-                          isAutoValidate: true,
-                          obsecure: !controller.visiblePsd,
-                          keyboardType: TextInputType.visiblePassword,
-                          icon: IconButton(
-                            // Based on passwordVisible state choose the icon
-                            icon: Icon(
-                              controller.visiblePsd
-                                  ? Icons.visibility
-                                  : Icons.visibility_off,
-                              color: kGrayColor,
-                            ),
-                            onPressed: () {
-                              controller.toggleVisiblePsd();
-                            },
-                          )
-
+                        hasGreenBorder: true,
                       ),
                     ),
                   ),
-                  const Text("Forget Your Password",
-                    style: TextStyle(
-                        fontFamily: fontFamilyName,
-                        color: kBlackColor,
-                        fontWeight: FontWeight.w700,
-                        fontSize: 15),),
                   InkWell(
                     onTap: (){
-                      if(!controller.signingIn) {
-                        controller.sinningInFromDialogue(context);
+                      if(!controller.reservationIsRunning) {
+                        controller.sendPressedFromDialogue(context);
                       }else{
                         CoolAlert.show(
                           context: context,
@@ -116,10 +94,10 @@ class LoginDialogue extends StatelessWidget {
                       width: Get.width*0.6,
                       decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(20),
-                          color: controller.signingIn?kGrayColor:kBlueColor
+                          color: controller.reservationIsRunning?kGrayColor:kBlueColor
                       ),
                       child: const Center(
-                        child:  Text("Login",
+                        child:  Text("تأكيد الحجز",
                           textAlign: TextAlign.center,
                           style: TextStyle(
                               fontFamily:fontFamilyName,

@@ -10,18 +10,21 @@ import 'package:privilegecare/Services/doctor_services.dart';
 import 'package:privilegecare/Services/reservation_services.dart';
 import 'package:privilegecare/Ui/SpecialtyScreen/specialty_screen.dart';
 import 'package:privilegecare/Ui/reservationScreen/second_reservation_screen.dart';
+import 'package:privilegecare/Ui/reservationScreen/widget/reservation_to_non_regestier_user_wiget.dart';
 import 'package:privilegecare/Ui/reservationScreen/widget/sign_up_dialogue.dart';
 import 'package:privilegecare/Utils/colors.dart';
 import 'package:privilegecare/Utils/constant.dart';
 import 'package:privilegecare/Utils/memory.dart';
+import 'package:privilegecare/Utils/validator.dart';
 
 class ReservationController extends GetxController{
-
+  final formKey = GlobalKey<FormState>();
+  final _validatorHelber = ValidatorHelper.instance;
  late DoctorReservationData? doctorData;
   bool decideToSignIn = false;
   String dateText = "xx/xx/xxxx";
   String timeText = "--:-";
-  String periodText = "--";
+  String selectedTime = "";
   int choosenGender = 3;
   String scheduleId = "";
   FilePickerResult? pickedFile;
@@ -30,10 +33,19 @@ class ReservationController extends GetxController{
   int reservationFroAnotherPatient = 0;
   bool isLoading = true;
   bool enableChooseTime = false;
+  bool nameValidated = false;
+  bool nameState = false;
+  bool phoneValidated = false;
+  bool phoneState = false;
+  bool formValidated = false;
+  bool reservationIsRunning = false;
   final String doctorId;
   late TextEditingController nameController;
-  bool continueWithoutAccount = false;
   late TextEditingController phoneController;
+  late TextEditingController nameWidgetController;
+  late TextEditingController phoneWidgetController;
+  bool continueWithoutAccount = false;
+
   ReservationController(this.doctorId);
   @override
   void onInit() {
@@ -41,6 +53,8 @@ class ReservationController extends GetxController{
     super.onInit();
     nameController = TextEditingController();
     phoneController = TextEditingController();
+    nameWidgetController = TextEditingController();
+    phoneWidgetController = TextEditingController();
     getData();
   }
   getData() async {
@@ -61,6 +75,43 @@ class ReservationController extends GetxController{
       reservationFroAnotherPatient = 0;
       update();
     }
+  }
+  void onPhoneNumberUpdate(String? value) {
+    if (value == "") {
+      phoneState = false;
+    }
+    update();
+  }
+
+  String? validatePhoneNumber(String? phoneNumber) {
+    var validateName = _validatorHelber.validatePhoneNumberField(phoneNumber);
+    if (validateName == null && phoneNumber != "") {
+      phoneState = true;
+      phoneValidated = true;
+
+    } else {
+      phoneValidated = true;
+      phoneState = false;
+    }
+    return validateName;
+  }
+  void onNameUpdate(String? value) {
+    if (value == "") {
+      nameState = false;
+    }
+    update();
+  }
+  String? validateName(String? name) {
+    var validateName = _validatorHelber.validateName(name);
+    if (validateName == null && name != "") {
+      nameState = true;
+      nameValidated = true;
+
+    } else {
+      nameValidated = true;
+      nameState = false;
+    }
+    return validateName;
   }
   gotoAnotherReservationScreen(context){
     if(dateText == "xx/xx/xxxx"){
@@ -83,6 +134,8 @@ class ReservationController extends GetxController{
   }
 selectingTime(String time,context){
   timeText = changeTimeToAmPmFormat(time,context);
+  selectedTime = time;
+
   update();
 }
 choosingDate(String scheduleId,String date) async {
@@ -112,6 +165,14 @@ print("hiiiii from showing dialogue");
     );
 
   }
+  continuingWithoutAccount(context){
+
+    showDialog(context: context,
+      builder: (context) =>
+        ReservationToNonRegestierUserWidget(doctorId: doctorId,),
+    );
+
+  }
   void pickFile() async {
     final result = await  FilePicker.platform.pickFiles(allowMultiple: false,
       type: FileType.custom,
@@ -122,23 +183,71 @@ print("hiiiii from showing dialogue");
     choosenFileIndex = "1";
     update();
   }
-
+  Future<void> sendPressedFromDialogue(context) async {
+    formValidated = formKey.currentState!.validate();
+    FocusScope.of(context).unfocus();
+    if (formValidated) {
+      addWidgetReservation(context);
+    }
+  }
   addReservation(context) async {
     if(Get.find<StorageService>().checkUserIsSignedIn || reservationFroAnotherPatient == 1){
-      ResponseModel? data = await ReservationServices.saveAppointment(scheduleId, "${Get.find<StorageService>().getId}", phoneController.text, timeText, nameController.text, "", "$reservationFroAnotherPatient", "");
-      if(data?.msg == "succeeded"){
+     if(nameController.text == ""){
+       if(phoneController.text == ""){
+         reservationIsRunning = true;
+         update();
+         ResponseModel? data = await ReservationServices.saveAppointment(scheduleId, "${Get.find<StorageService>().getId}", phoneController.text, selectedTime, nameController.text, " ", "$reservationFroAnotherPatient");
+         if(data?.msg == "succeeded"){
 
-        Get.off(SpecialtyScreen());
-      }else {
-        CoolAlert.show(
-            context: context,
-            type: CoolAlertType.error,
-            title: "حدث خطأ",
-            text: data?.msg
-        );
-      }
+           Get.off(SpecialtyScreen());
+         }else {
+           CoolAlert.show(
+               context: context,
+               type: CoolAlertType.error,
+               title: "حدث خطأ",
+               text: data?.msg
+           );
+         }
+       }else{
+         CoolAlert.show(
+           context: context,
+           type: CoolAlertType.warning,
+           title: "تحذير",
+           titleTextStyle: const TextStyle(
+               fontFamily: fontFamilyName,
+               color: kBlueColor,
+               fontWeight: FontWeight.w800,
+               fontSize: 15),
+           text: 'يجب كتابه رقم جوال المريض',
+           textTextStyle: const TextStyle(
+               fontFamily: fontFamilyName,
+               color: kBlueColor,
+               fontWeight: FontWeight.w800,
+               fontSize: 15),
+         );
+       }
+     }else{
+       CoolAlert.show(
+           context: context,
+           type: CoolAlertType.warning,
+           title: "تحذير",
+           titleTextStyle: const TextStyle(
+           fontFamily: fontFamilyName,
+           color: kBlueColor,
+           fontWeight: FontWeight.w800,
+           fontSize: 15),
+           text: 'يجب كتابه اسم المريض',
+           textTextStyle: const TextStyle(
+           fontFamily: fontFamilyName,
+           color: kBlueColor,
+           fontWeight: FontWeight.w800,
+           fontSize: 15),
+       );
+     }
+
     }else{
       decideToSignIn = false;
+      continueWithoutAccount = false;
       CoolAlert.show(
         context: context,
         type: CoolAlertType.confirm,
@@ -154,8 +263,6 @@ print("hiiiii from showing dialogue");
         },
         onCancelBtnTap:(){
           continueWithoutAccount = true;
-          addReservation(context);
-          update();
         },
         confirmBtnText: 'الذهاب لتسجيل ',
         cancelBtnText: ' الأستكمال دون حساب ',
@@ -176,10 +283,32 @@ print("hiiiii from showing dialogue");
         if(decideToSignIn){
           signingUp(context);
         }
+        if(continueWithoutAccount){
+          continuingWithoutAccount(context);
+        }
+
       });
 
 
     }
+  }
+  addWidgetReservation(context) async {
+
+      reservationIsRunning = true;
+      update();
+      ResponseModel? data = await ReservationServices.saveAppointment(scheduleId, "0", phoneWidgetController.text, selectedTime, nameWidgetController.text, "aliiiii", "$reservationFroAnotherPatient");
+      if(data?.msg == "succeeded"){
+        Get.off(SpecialtyScreen());
+      }else {
+        reservationIsRunning = false;
+        CoolAlert.show(
+            context: context,
+            type: CoolAlertType.error,
+            title: "حدث خطأ",
+            text: data?.msg
+        );
+      }
+
   }
 
 }
