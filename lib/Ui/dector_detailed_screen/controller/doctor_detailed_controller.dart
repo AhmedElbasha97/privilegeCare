@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:privilegecare/Models/doctor_model.dart';
 import 'package:privilegecare/Services/doctor_services.dart';
+import 'package:share_plus/share_plus.dart';
 
 class DoctorDetailedController extends GetxController{
   late DoctorProfile? doctorData;
@@ -20,5 +21,8 @@ class DoctorDetailedController extends GetxController{
     doctorData = await DoctorServices.getDoctorProfiles(doctorId);
     isLoading = false;
     update();
+  }
+  shareDoctorLink(){
+    Share.share(doctorData?.profile??"");
   }
 }

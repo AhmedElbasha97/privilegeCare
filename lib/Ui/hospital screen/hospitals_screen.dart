@@ -1,14 +1,18 @@
 // ignore_for_file: sized_box_for_whitespace
 
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:privilegecare/Models/hospital_list_model.dart';
 import 'package:privilegecare/Ui/hospital%20screen/controller/hospitall_controller.dart';
 import 'package:privilegecare/Ui/hospital%20screen/widget/hospital_cell_widget.dart';
 import 'package:privilegecare/Utils/colors.dart';
 import 'package:privilegecare/Utils/constant.dart';
 import 'package:privilegecare/widgets/bottom_navigation_bar.dart';
+import 'package:privilegecare/widgets/loader.dart';
 
 class HospitalScreens extends StatefulWidget {
+
   const HospitalScreens({Key? key}) : super(key: key);
 
   @override
@@ -54,7 +58,8 @@ class _HospitalScreensState extends State<HospitalScreens> {
                 ),
 
                 const SizedBox(height: 10,),
-                Container(
+                controller.isLoading?Loader(width: Get.width*0.9,
+                  height: Get.height*0.65,):Container(
                   width: Get.width*0.9,
                   height: Get.height*0.65,
                   child: RawScrollbar(
@@ -62,12 +67,12 @@ class _HospitalScreensState extends State<HospitalScreens> {
                     radius: const Radius.circular(20),
                     thickness: 5,
                     child: ListView.builder(
-                      itemCount:10,
+                      itemCount:controller.hospitalListData?.length,
 
                       itemBuilder: (_,index){
-                        return  const Padding(
-                          padding: EdgeInsets.symmetric(vertical: 10.0),
-                          child: HospitalCellWidget(),
+                        return   Padding(
+                          padding: const EdgeInsets.symmetric(vertical: 10.0),
+                          child: HospitalCellWidget(hospitalData: controller.hospitalListData?[index],),
                         );
                       },
                     ),
@@ -82,6 +87,7 @@ class _HospitalScreensState extends State<HospitalScreens> {
     );
   }
 }
+
 Widget _buildChip(String label, bool isSelected,Function onPressed,String imageUrl) {
   return Padding(
     padding: const EdgeInsets.symmetric(horizontal: 5.0),

@@ -5,7 +5,6 @@ import 'package:privilegecare/Utils/services.dart';
 class ReservationServices {
   static ApiService api = ApiService();
   static Future<ResponseModel?> saveAppointment(String scheduleId,String memberId, String phoneNumber, String time,String name,String insuranceName,String reservationOtherPatient,String email) async {
-
     var data = await api.request(Services.saveAppointmentEndPoint, "POST",queryParamters: {
       "schedule_id":scheduleId,
       "member_id":memberId,
@@ -14,7 +13,7 @@ class ReservationServices {
       "name": name,
       "insurance":insuranceName,
       "other_patient":reservationOtherPatient,
-      "email":email
+
     });
     if (data != null) {
       return ResponseModel.fromJson(data);

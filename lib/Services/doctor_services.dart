@@ -21,6 +21,19 @@ class DoctorServices {
     }
     return null;
   }
+  static Future<List<DoctorListModel>?> getDoctorsInThisFavoriteList(String memberId) async {
+    List<DoctorListModel>? doctorsList = [];
+    var data = await api.request(Services.doctorsFavoriteListEndPoint, "POST",queryParamters: {
+      "member_id":memberId,
+    });
+    if (data != null) {
+      for (var doctor in data){
+        doctorsList.add(DoctorListModel.fromJson(doctor));
+      }
+      return doctorsList;
+    }
+    return null;
+  }
   static Future<List<DoctorListModel>?> searchForDoctors(String doctorName,String specialtyId,) async {
     List<DoctorListModel>? doctorsList = [];
     var data = await api.request(Services.searchForDoctorsEndPoint, "POST",queryParamters: {

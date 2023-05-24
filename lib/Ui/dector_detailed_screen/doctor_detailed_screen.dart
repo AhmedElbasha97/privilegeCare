@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:privilegecare/Ui/dector_detailed_screen/controller/doctor_detailed_controller.dart';
 import 'package:privilegecare/Ui/dector_detailed_screen/widget/schedules_widget.dart';
+import 'package:privilegecare/Ui/dector_detailed_screen/widget/video_player_widget.dart';
 import 'package:privilegecare/Ui/reservationScreen/reservation_screen.dart';
 import 'package:privilegecare/Utils/colors.dart';
 import 'package:privilegecare/Utils/constant.dart';
@@ -56,17 +57,22 @@ class DoctorDetailedScreen extends StatelessWidget {
                   ),
                 ),
                 const SizedBox(width: 10,),
-                Container(
-                  height: 30,
-                  width: 30,
-                  decoration: BoxDecoration(
-                    color: kWhiteColor,
-                    borderRadius: BorderRadius.circular(10),
-                  ),
-                  child: const Center(
-                    child: Icon(
-                      Icons.share,
-                      color: kBlueColor,
+                InkWell(
+                  onTap: (){
+                    controller.shareDoctorLink();
+                  },
+                  child: Container(
+                    height: 30,
+                    width: 30,
+                    decoration: BoxDecoration(
+                      color: kWhiteColor,
+                      borderRadius: BorderRadius.circular(10),
+                    ),
+                    child: const Center(
+                      child: Icon(
+                        Icons.share,
+                        color: kBlueColor,
+                      ),
                     ),
                   ),
                 )
@@ -358,6 +364,33 @@ class DoctorDetailedScreen extends StatelessWidget {
                     ),
                   ),
                 ),
+                controller.doctorData?.video =="0"?Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 8.0,vertical: 7.0),
+                    child: SizedBox(
+                    child: DecoratedBox(
+                    decoration: const BoxDecoration(
+                    color: Colors.white,
+                    borderRadius: BorderRadius.all(Radius.circular(20)),
+                    boxShadow: [
+                    BoxShadow(
+                    offset: Offset(0, 2),
+                    blurRadius: 6,
+                    color: Colors.black12,
+                    ),
+                    ],
+                    ),
+                    child: Center(
+                    child: Container(
+                    height: 130,
+                    width: Get.width*0.75,
+                    child: Row(
+                    children: [
+                    Image.asset("assets/images/Time management-rafiki.png",height: Get.width*0.23,),
+                    const Text("ليس هناك فيديو متاح الان",style: TextStyle(color: kGreenColor,fontWeight: FontWeight.bold,fontSize: 18),textAlign: TextAlign.center,),
+                    ],
+                    ),
+                    ),
+                    )))): VideoPlayerWidget(videoPlayer: 'https://privilegecare.net/${controller.doctorData?.video??""}',),
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 8.0,vertical: 7.0),
                   child: SizedBox(
@@ -563,69 +596,7 @@ class DoctorDetailedScreen extends StatelessWidget {
                     ),
                   ),
                 ),
-                Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 8.0,vertical: 7.0),
-                  child: SizedBox(
-                    child: DecoratedBox(
-                      decoration: const BoxDecoration(
-                        color: Colors.white,
-                        borderRadius: BorderRadius.all(Radius.circular(20)),
-                        boxShadow: [
-                          BoxShadow(
-                            offset: Offset(0, 2),
-                            blurRadius: 6,
-                            color: Colors.black12,
-                          ),
-                        ],
-                      ),
-                      child: Padding(
-                        padding: const EdgeInsets.all(15.0),
-                        child: Column(
-                          children: [
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.start,
-                              children: [
-                                Row(
-                                  children: [
-                                    SizedBox(
-                                      height: 25,
-                                      width: 27,
-                                      child: Image.asset("assets/images/waitingStatuss.png",fit: BoxFit.fitHeight,),
-                                    ),
-                                    const SizedBox(width: 10,),
-                                    const Column(
-                                      mainAxisAlignment: MainAxisAlignment.start,
-                                      crossAxisAlignment: CrossAxisAlignment.start,
-                                      mainAxisSize: MainAxisSize.min,
-                                      children: [
-                                        Text("العيادة",
-                                          style: TextStyle(
-                                              fontFamily: fontFamilyName,
-                                              color: kBlueColor,
-                                              fontWeight: FontWeight.w700,
-                                              fontSize: 15),),
-                                        Text("صالة انتظار مريحة",
-                                          style: TextStyle(
-                                              fontFamily: fontFamilyName,
-                                              color: kBlueColor,
-                                              fontWeight: FontWeight.w700,
-                                              fontSize: 15),),
 
-                                      ],
-                                    ),
-
-
-                                  ],
-                                ),
-                              ],
-                            ),
-
-                          ],
-                        ),
-                      ),
-                    ),
-                  ),
-                ),
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 8.0,vertical: 7.0),
                   child: SizedBox(
@@ -669,9 +640,9 @@ class DoctorDetailedScreen extends StatelessWidget {
                                               fontSize: 15),),
                                         Container(
                                           width: Get.width*0.7,
-                                          child: const Text("أخصائي طب و جراحة الفم و الاسنان كلية طب أسنان  جامعة أكتوبر",
+                                          child:  Text(controller.doctorData?.details??"",
                                             textAlign: TextAlign.start,
-                                            style: TextStyle(
+                                            style: const TextStyle(
                                                 fontFamily: fontFamilyName,
                                                 color: kGreenColor,
                                                 fontWeight: FontWeight.w700,
@@ -691,129 +662,8 @@ class DoctorDetailedScreen extends StatelessWidget {
                     ),
                   ),
                 ),
-                Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 8.0,vertical: 7.0),
-                  child: SizedBox(
-                    child: DecoratedBox(
-                      decoration: const BoxDecoration(
-                        color: Colors.white,
-                        borderRadius: BorderRadius.all(Radius.circular(20)),
-                        boxShadow: [
-                          BoxShadow(
-                            offset: Offset(0, 2),
-                            blurRadius: 6,
-                            color: Colors.black12,
-                          ),
-                        ],
-                      ),
-                      child: Padding(
-                        padding: const EdgeInsets.all(15.0),
-                        child: Column(
-                          children: [
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.start,
-                              children: [
-                                Row(
-                                  children: [
-                                    const SizedBox(
-                                    height: 25,
-                                    width: 27,
-
-                                  ),
-                                    const SizedBox(width: 10,),
-                                    Column(
-                                      mainAxisAlignment: MainAxisAlignment.start,
-                                      crossAxisAlignment: CrossAxisAlignment.start,
-                                      mainAxisSize: MainAxisSize.min,
-                                      children:  [
-                                        const Text("التخصصات الفرعية",
-                                          style: TextStyle(
-                                              fontFamily: fontFamilyName,
-                                              color: kBlueColor,
-                                              fontWeight: FontWeight.w700,
-                                              fontSize: 15),),
-                                        Container(
-                                          width: Get.width*0.7,
-                                          child: const Text("أخصائي طب و جراحة الفم و الاسنان كلية طب أسنان - جامعة أكتوبر",
-                                            textAlign: TextAlign.start,
-                                            style: TextStyle(
-                                                fontFamily: fontFamilyName,
-                                                color: kGreenColor,
-                                                fontWeight: FontWeight.w700,
-                                                fontSize: 15),),
-                                        ),
-
-                                      ],
-                                    ),
 
 
-                                  ],
-                                ),
-                              ],
-                            ),
-
-                          ],
-                        ),
-                      ),
-                    ),
-                  ),
-                ),
-                const Padding(
-                  padding: EdgeInsets.symmetric(horizontal: 8.0,vertical: 7.0),
-                  child: SizedBox(
-                    child: DecoratedBox(
-                      decoration: BoxDecoration(
-                        color: Colors.white,
-                        borderRadius: BorderRadius.all(Radius.circular(20)),
-                        boxShadow: [
-                          BoxShadow(
-                            offset: Offset(0, 2),
-                            blurRadius: 6,
-                            color: Colors.black12,
-                          ),
-                        ],
-                      ),
-                      child: Padding(
-                        padding: EdgeInsets.all(15.0),
-                        child: Column(
-                          children: [
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.start,
-                              children: [
-                                Row(
-                                  children: [
-                                    SizedBox(
-                                      height: 25,
-                                      width: 27,
-                                    ),
-                                    SizedBox(width: 10,),
-                                    Column(
-                                      mainAxisAlignment: MainAxisAlignment.start,
-                                      crossAxisAlignment: CrossAxisAlignment.end,
-                                      mainAxisSize: MainAxisSize.min,
-                                      children: [
-                                        Text("أسئلة وإجابات الدكتور",
-                                          style: TextStyle(
-                                              fontFamily: fontFamilyName,
-                                              color: kBlueColor,
-                                              fontWeight: FontWeight.w700,
-                                              fontSize: 15),),
-
-                                      ],
-                                    ),
-
-
-                                  ],
-                                ),
-                              ],
-                            ),
-
-                          ],
-                        ),
-                      ),
-                    ),
-                  ),
-                ),
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 8.0,vertical: 7.0),
                   child: SizedBox(

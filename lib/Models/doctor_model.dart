@@ -11,6 +11,7 @@ class DoctorProfile {
   int? waiting;
   int? amount;
   String? image;
+  String? video;
   String? hosp;
   String? phone;
   String? locationLon;
@@ -34,6 +35,7 @@ class DoctorProfile {
     this.waiting,
     this.amount,
     this.image,
+    this.video,
     this.hosp,
     this.phone,
     this.locationLon,
@@ -58,6 +60,7 @@ class DoctorProfile {
     waiting: json["waiting"],
     amount: json["amount"],
     image: json["image"],
+    video: json["video"].toString(),
     hosp: json["hosp"],
     phone: json["phone"],
     locationLon: json["location_lon"],
@@ -82,6 +85,7 @@ class DoctorProfile {
     "waiting": waiting,
     "amount": amount,
     "image": image,
+    "video": video,
     "hosp": hosp,
     "phone": phone,
     "location_lon": locationLon,

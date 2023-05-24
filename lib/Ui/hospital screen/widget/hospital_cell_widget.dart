@@ -1,18 +1,17 @@
 // ignore_for_file: sized_box_for_whitespace
 
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:privilegecare/Models/hospital_list_model.dart';
 import 'package:privilegecare/Utils/colors.dart';
 import 'package:privilegecare/Utils/constant.dart';
+import 'package:privilegecare/widgets/loader.dart';
 
-class HospitalCellWidget extends StatefulWidget {
-  const HospitalCellWidget({Key? key}) : super(key: key);
+class HospitalCellWidget extends StatelessWidget {
+  final HospitalListModel? hospitalData;
+  const HospitalCellWidget({Key? key, required this.hospitalData}) : super(key: key);
 
-  @override
-  State<HospitalCellWidget> createState() => _HospitalCellWidgetState();
-}
-
-class _HospitalCellWidgetState extends State<HospitalCellWidget> {
   @override
   Widget build(BuildContext context) {
     return    Container(
@@ -20,32 +19,59 @@ class _HospitalCellWidgetState extends State<HospitalCellWidget> {
       child: Column(
 
         children: [
-          Container(
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(25),
-              boxShadow: const [
-                BoxShadow(
-                  offset: Offset(0, 2),
-                  blurRadius: 6,
-                  color: Colors.black12,
-                ),
-              ],
-            ),
+          CachedNetworkImage(
+            fit: BoxFit.cover,
+            imageUrl: "https://privilegecare.net${hospitalData?.image??""}",
+            imageBuilder: ((context, image){
+              return  Container(
+                  height: Get.height*0.12,
+                  width: Get.width*0.5,
+                  margin: const EdgeInsets.symmetric(horizontal: 5.0),
+                  decoration: BoxDecoration(
+                      image: DecorationImage(
+                        image: image,
+                        fit: BoxFit.cover,
+                      ),
+                      borderRadius:
+                      const BorderRadius.all(Radius.circular(15))
 
-            height: Get.height*0.2,
-            width: Get.width*0.9,
-            child: ClipRRect(
-                borderRadius: BorderRadius.circular(20),
-                child: Image.asset("assets/images/hospitalImage.jpg",fit: BoxFit.fitHeight,)),
+                  )
+              );
+            }),
+            placeholder: (context, image){
+              return  Padding(
+                padding:  const EdgeInsets.all(5),
+                child: Container(
+                    decoration: const BoxDecoration(
+                        borderRadius:
+                        BorderRadius.all(Radius.circular(15))
+                    ),
+                    child: Loader(width: MediaQuery.of(context).size.width,height: 150.0)),
+              );
+            },
+            errorWidget: (context, url, error){
+              return Container(
+                  width: MediaQuery.of(context).size.width,
+                  margin: const EdgeInsets.symmetric(horizontal: 5.0),
+                  decoration: const BoxDecoration(
+                      image: DecorationImage(
+                        image: AssetImage("assets/images/no_data_slideShow.png"),
+                        fit: BoxFit.fill,
+                      ),
+                      borderRadius:
+                      BorderRadius.all(Radius.circular(15))
+
+                  )
+              );
+            },
           ),
           const SizedBox(height: 10,),
           Container(
             width: Get.width,
-            child: const Padding(
-              padding: EdgeInsets.symmetric(horizontal: 10.0),
-              child: Text("عن المستشفي",
-
-                style: TextStyle(
+            child:  Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 10.0),
+              child: Text(hospitalData?.name??"",
+                style: const TextStyle(
                     fontFamily: fontFamilyName,
 
                     color: kBlueColor,
@@ -56,11 +82,11 @@ class _HospitalCellWidgetState extends State<HospitalCellWidget> {
           const SizedBox(height: 10,),
           Container(
             width: Get.width,
-            child: const Padding(
-              padding: EdgeInsets.symmetric(horizontal: 10.0),
-              child: Text("احدى المستشفيات التي تتميز بوجود صفوة الاطباء و الاستشار يين في مختلف التخصصات الطبية ومتعاقده معکافه النقابات والعديد من شركات الرعاية وتضم عيادات في جميع التخصصات الطبية وأطباء على أعلى مستوى من الجاهزية والخبرة.",
+            child:  Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 10.0),
+              child: Text(hospitalData?.area??"",
 
-                style: TextStyle(
+                style: const TextStyle(
                     fontFamily: fontFamilyName,
 
                     color: kGreenColor,
@@ -81,8 +107,8 @@ class _HospitalCellWidgetState extends State<HospitalCellWidget> {
                 const SizedBox(width: 10,),
                 Container(
                   width: Get.width*0.6,
-                  child: const Text("المهندسين :شارع جزيرة العرب",
-                    style: TextStyle(
+                  child:  Text(hospitalData?.address??"",
+                    style: const TextStyle(
                         fontFamily:fontFamilyName,
                         color: kBlueColor,
                         fontWeight: FontWeight.w700,
@@ -110,9 +136,9 @@ class _HospitalCellWidgetState extends State<HospitalCellWidget> {
                 const SizedBox(width: 10,),
                 Container(
                   width: Get.width*0.18,
-                  child: const Text("16754 ",
+                  child: Text(hospitalData?.phone??"",
                     textAlign: TextAlign.start,
-                    style: TextStyle(
+                    style: const TextStyle(
                         fontFamily: fontFamilyName,
                         color: kBlueColor,
                         fontWeight: FontWeight.w700,
