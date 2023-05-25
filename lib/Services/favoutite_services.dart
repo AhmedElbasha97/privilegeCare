@@ -1,4 +1,5 @@
 import 'package:privilegecare/Models/added_or_not_favorite_model.dart';
+import 'package:privilegecare/Models/doctort_list_model.dart';
 import 'package:privilegecare/Models/response_model.dart';
 import 'package:privilegecare/Utils/api_service.dart';
 import 'package:privilegecare/Utils/services.dart';
@@ -26,5 +27,17 @@ class FavouriteServices{
     }
     return null;
   }
-
+  static Future<List<DoctorListModel>?> getDoctorsInThisFavoriteList(String memberId) async {
+    List<DoctorListModel>? doctorsList = [];
+    var data = await api.request(Services.doctorsFavoriteListEndPoint, "POST",queryParamters: {
+      "member_id":memberId,
+    });
+    if (data != null) {
+      for (var doctor in data){
+        doctorsList.add(DoctorListModel.fromJson(doctor));
+      }
+      return doctorsList;
+    }
+    return null;
+  }
 }

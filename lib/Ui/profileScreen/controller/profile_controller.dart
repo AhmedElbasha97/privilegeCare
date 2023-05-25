@@ -1,10 +1,10 @@
 import 'package:get/get.dart';
+import 'package:privilegecare/Utils/memory.dart';
 
 class ProfileController extends GetxController{
   List<String> icons = [
     "updateProfileIcon",
     "medicalInsuranceIcon",
-    "creditCardIcon",
     "helpIcon",
     "changePasswordIcon",
     "favoriteIcon",
@@ -17,7 +17,6 @@ class ProfileController extends GetxController{
   List<String> title =[
     "تحديث الملف الشخصي",
     "تأمين طبي",
-    "بطاقات الائتمان",
     "يساعد",
     "تغيير كلمة المرور",
     "مفضل",
@@ -27,12 +26,19 @@ class ProfileController extends GetxController{
     "تقييم التطبيق",
     "خروج",
   ];
+  bool userIsSigned = true;
   @override
   void onInit() {
-    // TODO: implement onInit
     super.onInit();
+    checkUserSignedOrNet();
   }
   checkUserSignedOrNet(){
-    
+    if(Get.find<StorageService>().getId == "0"){
+      userIsSigned = false;
+      update();
+    }else{
+      userIsSigned = true;
+      update();
+    }
   }
 }

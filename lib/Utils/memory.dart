@@ -25,8 +25,8 @@ class StorageService extends GetxService {
   Future<void> saveAccountId(String userId) async =>
       _prefs.setString(StorageKeys.userId, userId);
 
-  int get getId {
-    return _prefs.getInt(StorageKeys.userId)?? 0;
+  String get getId {
+    return _prefs.getString(StorageKeys.userId)?? "0";
   }
   //
   // to check if user record dismissal or not

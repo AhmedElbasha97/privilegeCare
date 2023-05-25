@@ -42,7 +42,7 @@ class DoctorDetailedScreen extends StatelessWidget {
           ),
           actions: [InkWell(
             onTap: (){
-      if("${Get.find<StorageService>().getId}" == "0") {
+      if(Get.find<StorageService>().getId == "0") {
       CoolAlert.show(
       context: context,
       type: CoolAlertType.confirm,

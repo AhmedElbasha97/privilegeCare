@@ -14,7 +14,7 @@ import 'package:privilegecare/Utils/memory.dart';
 class DoctorCellWidget extends StatefulWidget {
   final DoctorListModel? doctorData;
 
-  final Function addingToFavorite;
+  final VoidCallback  addingToFavorite;
   const DoctorCellWidget({Key? key, required this.doctorData, required this.addingToFavorite,}) : super(key: key);
 
   @override
@@ -29,7 +29,7 @@ class _DoctorCellWidgetState extends State<DoctorCellWidget> {
     checkDoctorAddedOrNot( "${widget.doctorData?.id??0}");
   }
     checkDoctorAddedOrNot(String doctorId) async {
-     var status = await FavouriteServices.getAddedOrNotToFavoritesDoctor(doctorId, "${Get.find<StorageService>().getId}");
+     var status = await FavouriteServices.getAddedOrNotToFavoritesDoctor(doctorId, Get.find<StorageService>().getId);
      if(status == 1){
        addedToFavoriteOrNot =  true;
        setState(() {
@@ -44,9 +44,6 @@ class _DoctorCellWidgetState extends State<DoctorCellWidget> {
 
      }
    }
-
-
-@override
 
   @override
   Widget build(BuildContext context) {
@@ -133,7 +130,7 @@ class _DoctorCellWidgetState extends State<DoctorCellWidget> {
                           ),
                           const SizedBox(height: 5,),
                            Text("التقييم العام من ${widget.doctorData?.visitors??0} زائر",
-                            style: TextStyle(
+                            style: const TextStyle(
                                 height: 1,
                                 fontFamily: fontFamilyName,
                                 color: kBlueColor,
@@ -376,12 +373,10 @@ class _DoctorCellWidgetState extends State<DoctorCellWidget> {
                         ),
                       ),
                       InkWell(
-                        onTap: (){
+                        onTap: () async {
                           widget.addingToFavorite();
-                          checkDoctorAddedOrNot("${widget.doctorData?.id??0}");
-                          setState(() {
+                          await checkDoctorAddedOrNot("${widget.doctorData?.id??0}");
 
-                          });
                         },
                         child: Padding(
                           padding: const EdgeInsets.all(5.0),
@@ -467,12 +462,10 @@ class _DoctorCellWidgetState extends State<DoctorCellWidget> {
                         ),
                       ),
                       InkWell(
-                        onTap: (){
+                        onTap: () async {
                           widget.addingToFavorite();
-                          checkDoctorAddedOrNot("${widget.doctorData?.id??0}");
-                          setState(() {
+                         await checkDoctorAddedOrNot("${widget.doctorData?.id??0}");
 
-                          });
                         },
                         child: Padding(
                           padding: const EdgeInsets.all(5.0),
@@ -491,7 +484,7 @@ class _DoctorCellWidgetState extends State<DoctorCellWidget> {
                               ],
                             ),
                             child:  Center(
-                              child: addedToFavoriteOrNot? Icon(Icons.favorite,color: kWhiteColor,):Icon(Icons.favorite_border_rounded,color: kWhiteColor,),
+                              child: addedToFavoriteOrNot? const Icon(Icons.favorite,color: kWhiteColor,):Icon(Icons.favorite_border_rounded,color: kWhiteColor,),
                             ),
                           ),
                         ),

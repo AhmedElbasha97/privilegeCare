@@ -175,7 +175,7 @@ class DoctorScreen extends StatelessWidget {
                         controller: controller.sController,
                         itemBuilder: (_,index){
                           return DoctorCellWidget(doctorData: controller.doctorsData?[index], addingToFavorite: (){
-                            if("${Get.find<StorageService>().getId}" == "0") {
+                            if(Get.find<StorageService>().getId == "0") {
                               CoolAlert.show(
                                 context: context,
                                 type: CoolAlertType.confirm,
@@ -213,6 +213,7 @@ class DoctorScreen extends StatelessWidget {
                                   "${controller.doctorsData?[index].id}",
                                   context,
                                   controller.doctorsData?[index].name ?? "");
+
                             }},);
                         },
                       ),

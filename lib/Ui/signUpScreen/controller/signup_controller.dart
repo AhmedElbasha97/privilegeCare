@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:privilegecare/Models/auth_model.dart';
 import 'package:privilegecare/Services/auth_services.dart';
+import 'package:privilegecare/Ui/HomeScreen/home_screen.dart';
 import 'package:privilegecare/Ui/SpecialtyScreen/specialty_screen.dart';
 import 'package:privilegecare/Utils/memory.dart';
 import 'package:privilegecare/Utils/translation_key.dart';
@@ -265,7 +266,7 @@ bool signingUp = false ;
       );
       if(data?.msg == "succeeded"){
         await Get.find<StorageService>().saveAccountId("${data?.info?.id??0}");
-        Get.off(SpecialtyScreen());
+        Get.off(const HomeScreen());
       }else{
         CoolAlert.show(
             context: context,
@@ -291,6 +292,7 @@ bool signingUp = false ;
       );
       if(data?.msg == "succeeded"){
         await Get.find<StorageService>().saveAccountId("${data?.info?.id??0}");
+        Get.back();
         Get.back();
       }else{
         CoolAlert.show(

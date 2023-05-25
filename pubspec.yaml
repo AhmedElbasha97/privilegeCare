@@ -50,6 +50,8 @@ dependencies:
   map_launcher: ^2.5.0+1
   url_launcher: ^6.1.11
   video_player: ^2.6.1
+  local_auth: ^2.1.6
+  flutter_phone_direct_caller: ^2.1.1
 
 
 dev_dependencies:

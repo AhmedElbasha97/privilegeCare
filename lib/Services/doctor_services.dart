@@ -1,9 +1,10 @@
+import 'package:get/get.dart';
 import 'package:privilegecare/Models/doctor_home_model.dart';
 import 'package:privilegecare/Models/doctor_model.dart';
 import 'package:privilegecare/Models/doctor_reservation_model.dart';
 import 'package:privilegecare/Models/doctort_list_model.dart';
-
 import 'package:privilegecare/Utils/api_service.dart';
+import 'package:privilegecare/Utils/memory.dart';
 import 'package:privilegecare/Utils/services.dart';
 
 class DoctorServices {
@@ -21,10 +22,12 @@ class DoctorServices {
     }
     return null;
   }
-  static Future<List<DoctorListModel>?> getDoctorsInThisFavoriteList(String memberId) async {
+  static Future<List<DoctorListModel>?> getDoctorsInThisFavoriteList() async {
     List<DoctorListModel>? doctorsList = [];
     var data = await api.request(Services.doctorsFavoriteListEndPoint, "POST",queryParamters: {
-      "member_id":memberId,
+      "member_id":Get
+          .find<StorageService>()
+          .getId,
     });
     if (data != null) {
       for (var doctor in data){

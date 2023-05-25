@@ -6,6 +6,7 @@ import 'package:get/get.dart';
 import 'package:in_app_update/in_app_update.dart';
 import 'package:privilegecare/Models/auth_model.dart';
 import 'package:privilegecare/Services/auth_services.dart';
+import 'package:privilegecare/Ui/HomeScreen/home_screen.dart';
 import 'package:privilegecare/Ui/SpecialtyScreen/specialty_screen.dart';
 import 'package:privilegecare/Utils/memory.dart';
 import 'package:privilegecare/Utils/validator.dart';
@@ -158,7 +159,7 @@ if(emailState){
   AuthModel? data = await AuthServices.logIn(emailController.text, passwordController.text);
 if(data?.msg == "succeeded"){
   await Get.find<StorageService>().saveAccountId("${data?.info?.id??0}");
-  Get.off(SpecialtyScreen());
+  Get.off(const HomeScreen());
 }else{
   CoolAlert.show(
     context: context,
@@ -180,7 +181,7 @@ if(emailState){
   AuthModel? data = await AuthServices.logIn(emailController.text, passwordController.text);
 if(data?.msg == "succeeded"){
   await Get.find<StorageService>().saveAccountId("${data?.info?.id??0}");
-  Get.back();
+  Get.back();Get.back();
 }else{
   CoolAlert.show(
     context: context,

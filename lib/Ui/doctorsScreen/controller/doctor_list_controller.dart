@@ -78,16 +78,18 @@ class DoctorListController extends GetxController {
     if (await checkDoctorAddedOrNot(doctorId)) {
       ResponseModel? status = await FavouriteServices
           .addOrRemoveDoctorFromFavorite(
-          doctorId, "${Get
+          doctorId, Get
           .find<StorageService>()
-          .getId}", "0");
+          .getId, "0");
+
       if (status?.msg == "succeeded") {
         final snackBar = SnackBar(
           content: Text(' تم حذف الطبيب ${doctorName} من قائمة المفضله  '),
 
         );
         ScaffoldMessenger.of(context).showSnackBar(snackBar);
-        update();
+        Future.delayed(const Duration(milliseconds: 7000), () {
+          update();});
       } else {
         var data;
         CoolAlert.show(
@@ -100,16 +102,18 @@ class DoctorListController extends GetxController {
     } else {
       ResponseModel? status = await FavouriteServices
           .addOrRemoveDoctorFromFavorite(
-          doctorId, "${Get
+          doctorId, Get
           .find<StorageService>()
-          .getId}", "1");
+          .getId, "1");
+
       if (status?.msg == "succeeded") {
         final snackBar = SnackBar(
           content: Text(' تم اضاف الطبيب ${doctorName} الى قائمة المفضلة '),
 
         );
         ScaffoldMessenger.of(context).showSnackBar(snackBar);
-
+        Future.delayed(const Duration(milliseconds: 7000), () {
+        update();});
       } else {
         var data;
         CoolAlert.show(

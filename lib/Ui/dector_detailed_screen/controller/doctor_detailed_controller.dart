@@ -31,9 +31,9 @@ class DoctorDetailedController extends GetxController{
     if (await checkDoctorAddedOrNot(doctorId)) {
       ResponseModel? status = await FavouriteServices
           .addOrRemoveDoctorFromFavorite(
-          doctorId, "${Get
+          doctorId, Get
           .find<StorageService>()
-          .getId}", "0");
+          .getId, "0");
       if (status?.msg == "succeeded") {
         final snackBar = SnackBar(
           content: Text(' تم حذف الطبيب ${doctorName} من قائمة المفضله  '),
