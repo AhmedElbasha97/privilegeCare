@@ -1,12 +1,16 @@
 // ignore_for_file: sized_box_for_whitespace
 
+import 'package:cool_alert/cool_alert.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:privilegecare/Ui/doctorsScreen/controller/doctor_list_controller.dart';
 import 'package:privilegecare/Ui/doctorsScreen/widget/doctor_cell_widget.dart';
 import 'package:privilegecare/Ui/governmentScreen/govrnment_screen.dart';
+import 'package:privilegecare/Ui/logInScreen/login_screen.dart';
+import 'package:privilegecare/Ui/signUpScreen/signup_screen.dart';
 import 'package:privilegecare/Utils/colors.dart';
 import 'package:privilegecare/Utils/constant.dart';
+import 'package:privilegecare/Utils/memory.dart';
 import 'package:privilegecare/widgets/bottom_navigation_bar.dart';
 import 'package:privilegecare/widgets/loader.dart';
 import 'package:privilegecare/widgets/no_data_widget.dart';
@@ -170,7 +174,46 @@ class DoctorScreen extends StatelessWidget {
                         itemCount: controller.doctorsData?.length,
                         controller: controller.sController,
                         itemBuilder: (_,index){
-                          return DoctorCellWidget(doctorData: controller.doctorsData?[index],);
+                          return DoctorCellWidget(doctorData: controller.doctorsData?[index], addingToFavorite: (){
+                            if("${Get.find<StorageService>().getId}" == "0") {
+                              CoolAlert.show(
+                                context: context,
+                                type: CoolAlertType.confirm,
+                                title: "",
+                                text: 'لا يمكن اضافه إلى قائمة المفضلة الا عند تسجيل الدخول او انشاء الحساب',
+                                textTextStyle: const TextStyle(
+                                    fontFamily: fontFamilyName,
+                                    color: kBlueColor,
+                                    fontWeight: FontWeight.w800,
+                                    fontSize: 15),
+                                onConfirmBtnTap: (){
+                                  Get.to(()=> const LoginScreen());
+                                },
+                                onCancelBtnTap:(){
+                                  Get.to(()=> const SignUpScreen());
+                                },
+                                confirmBtnText: 'تسجيل الدخول',
+                                cancelBtnText: 'إنشاء حساب',
+                                confirmBtnColor: Colors.white,
+                                cancelBtnTextStyle:   const TextStyle(
+                                    fontFamily: fontFamilyName,
+                                    color: kGreenColor,
+                                    fontWeight: FontWeight.w800,
+                                    fontSize: 15),
+                                confirmBtnTextStyle: const TextStyle(
+                                    fontFamily: fontFamilyName,
+                                    color: kGreenColor,
+                                    fontWeight: FontWeight.w800,
+                                    fontSize: 15),
+
+
+                              );
+                            }else{
+                              controller.addingOrRemovingFromFavorite(
+                                  "${controller.doctorsData?[index].id}",
+                                  context,
+                                  controller.doctorsData?[index].name ?? "");
+                            }},);
                         },
                       ),
                     ),

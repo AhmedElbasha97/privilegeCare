@@ -3,6 +3,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:privilegecare/Models/doctort_list_model.dart';
+import 'package:privilegecare/Services/favoutite_services.dart';
 import 'package:privilegecare/Ui/dector_detailed_screen/doctor_detailed_screen.dart';
 import 'package:privilegecare/Ui/reservationScreen/reservation_screen.dart';
 import 'package:privilegecare/Utils/colors.dart';
@@ -10,9 +11,42 @@ import 'package:privilegecare/Utils/constant.dart';
 import 'package:privilegecare/Utils/localization_services.dart';
 import 'package:privilegecare/Utils/memory.dart';
 
-class DoctorCellWidget extends StatelessWidget {
+class DoctorCellWidget extends StatefulWidget {
   final DoctorListModel? doctorData;
-  const DoctorCellWidget({Key? key, required this.doctorData}) : super(key: key);
+
+  final Function addingToFavorite;
+  const DoctorCellWidget({Key? key, required this.doctorData, required this.addingToFavorite,}) : super(key: key);
+
+  @override
+  State<DoctorCellWidget> createState() => _DoctorCellWidgetState();
+}
+
+class _DoctorCellWidgetState extends State<DoctorCellWidget> {
+   bool addedToFavoriteOrNot = true;
+@override
+  void initState() {
+    super.initState();
+    checkDoctorAddedOrNot( "${widget.doctorData?.id??0}");
+  }
+    checkDoctorAddedOrNot(String doctorId) async {
+     var status = await FavouriteServices.getAddedOrNotToFavoritesDoctor(doctorId, "${Get.find<StorageService>().getId}");
+     if(status == 1){
+       addedToFavoriteOrNot =  true;
+       setState(() {
+
+       });
+
+     }else{
+       addedToFavoriteOrNot =   false;
+       setState(() {
+
+       });
+
+     }
+   }
+
+
+@override
 
   @override
   Widget build(BuildContext context) {
@@ -20,7 +54,7 @@ class DoctorCellWidget extends StatelessWidget {
       padding: const EdgeInsets.all(15.0),
       child: InkWell(
         onTap: (){
-          Get.to( DoctorDetailedScreen(doctorId: "${doctorData?.id??0}",));
+          Get.to( DoctorDetailedScreen(doctorId: "${widget.doctorData?.id??0}",));
         },
         child: SizedBox(
 
@@ -54,7 +88,7 @@ class DoctorCellWidget extends StatelessWidget {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         mainAxisSize: MainAxisSize.max,
                         children: [
-                           Text(Get.find<StorageService>().activeLocale == SupportedLocales.english?doctorData?.nameEn??"":doctorData?.name??"",
+                           Text(Get.find<StorageService>().activeLocale == SupportedLocales.english?widget.doctorData?.nameEn??"":widget.doctorData?.name??"",
 
                             style: const TextStyle(
                                 height: 1,
@@ -63,7 +97,7 @@ class DoctorCellWidget extends StatelessWidget {
                                 fontWeight: FontWeight.w700,
                                 fontSize: 19),),
                            const SizedBox(height: 5,),
-                           Text(Get.find<StorageService>().activeLocale == SupportedLocales.english?doctorData?.specialistEn??"":doctorData?.specialist??"",
+                           Text(Get.find<StorageService>().activeLocale == SupportedLocales.english?widget.doctorData?.specialistEn??"":widget.doctorData?.specialist??"",
                             style: const TextStyle(
                                 height: 1,
                                 fontFamily: fontFamilyName,
@@ -98,7 +132,7 @@ class DoctorCellWidget extends StatelessWidget {
                             ],
                           ),
                           const SizedBox(height: 5,),
-                          const Text("التقييم العام من 1000 زائر",
+                           Text("التقييم العام من ${widget.doctorData?.visitors??0} زائر",
                             style: TextStyle(
                                 height: 1,
                                 fontFamily: fontFamilyName,
@@ -115,7 +149,7 @@ class DoctorCellWidget extends StatelessWidget {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: [
-                      doctorData?.listen==0?SizedBox(): Padding(
+                      widget.doctorData?.listen==0?SizedBox(): Padding(
                         padding: const EdgeInsets.all(3.0),
                         child: Container(
                           width: Get.width*0.35,
@@ -151,7 +185,7 @@ class DoctorCellWidget extends StatelessWidget {
                           ),
                         ),
                       ),
-                      doctorData?.explain==0?SizedBox():Padding(
+                      widget.doctorData?.explain==0?SizedBox():Padding(
                         padding: const EdgeInsets.all(3.0),
                         child: Container(
                           width: Get.width*0.35,
@@ -200,7 +234,7 @@ class DoctorCellWidget extends StatelessWidget {
                       const SizedBox(width: 10,),
                       Container(
                         width: Get.width*0.65,
-                        child:  Text(Get.find<StorageService>().activeLocale == SupportedLocales.english?doctorData?.levelEn??"":doctorData?.level??"",
+                        child:  Text(Get.find<StorageService>().activeLocale == SupportedLocales.english?widget.doctorData?.levelEn??"":widget.doctorData?.level??"",
                           style: const TextStyle(
                               fontFamily: fontFamilyName,
                               color: kBlueColor,
@@ -226,7 +260,7 @@ class DoctorCellWidget extends StatelessWidget {
                       const SizedBox(width: 10,),
                       Container(
                         width: Get.width*0.6,
-                        child:  Text(doctorData?.hosp??"",
+                        child:  Text(widget.doctorData?.hosp??"",
                           style: const TextStyle(
                               fontFamily: fontFamilyName,
                               color: kBlueColor,
@@ -250,7 +284,7 @@ class DoctorCellWidget extends StatelessWidget {
                         child: Image.asset("assets/images/cash.png",fit: BoxFit.fitHeight,),
                       ),
                       const SizedBox(width: 10,),
-                       Text("الكشف :${doctorData?.amount} جنيه",
+                       Text("الكشف :${widget.doctorData?.amount} جنيه",
                         style: const TextStyle(
                             fontFamily: fontFamilyName,
                             color: kBlueColor,
@@ -271,7 +305,7 @@ class DoctorCellWidget extends StatelessWidget {
                       const SizedBox(width: 10,),
                       Container(
                         width: Get.width*0.45,
-                        child:  Text("مدة الأنتظار:${doctorData?.waiting} دقيقة",
+                        child:  Text("مدة الأنتظار:${widget.doctorData?.waiting} دقيقة",
                           textAlign: TextAlign.start,
                           style: const TextStyle(
                               fontFamily: fontFamilyName,
@@ -297,10 +331,10 @@ class DoctorCellWidget extends StatelessWidget {
                       const SizedBox(width: 10,),
                       Container(
                         width: Get.width*0.18,
-                        child: const Text("16754 ",
+                        child:  Text(widget.doctorData?.phone??"",
                           textAlign: TextAlign.start,
-                          style: TextStyle(
-                              fontFamily: "Inter",
+                          style: const TextStyle(
+                              fontFamily: fontFamilyName,
                               color: kBlueColor,
                               fontWeight: FontWeight.w700,
                               fontSize: 14),),
@@ -312,7 +346,7 @@ class DoctorCellWidget extends StatelessWidget {
 
                     ],
                   ),
-                  doctorData?.schedule?.length == 0?Row(
+                  widget.doctorData?.schedule?.length == 0?Row(
                     children: [
 
                       Padding(
@@ -341,24 +375,33 @@ class DoctorCellWidget extends StatelessWidget {
                           ),
                         ),
                       ),
-                      Padding(
-                        padding: const EdgeInsets.all(5.0),
-                        child: Container(
-                          width: Get.width*0.08,
-                          height: Get.height*0.04,
-                          decoration: BoxDecoration(
-                            color: kGreenColor,
-                            borderRadius: BorderRadius.circular(10),
-                            boxShadow: const [
-                              BoxShadow(
-                                offset: Offset(0, 2),
-                                blurRadius: 6,
-                                color: Colors.black12,
-                              ),
-                            ],
-                          ),
-                          child: const Center(
-                            child: Icon(Icons.favorite,color: kWhiteColor,),
+                      InkWell(
+                        onTap: (){
+                          widget.addingToFavorite();
+                          checkDoctorAddedOrNot("${widget.doctorData?.id??0}");
+                          setState(() {
+
+                          });
+                        },
+                        child: Padding(
+                          padding: const EdgeInsets.all(5.0),
+                          child: Container(
+                            width: Get.width*0.08,
+                            height: Get.height*0.04,
+                            decoration: BoxDecoration(
+                              color: kGreenColor,
+                              borderRadius: BorderRadius.circular(10),
+                              boxShadow: const [
+                                BoxShadow(
+                                  offset: Offset(0, 2),
+                                  blurRadius: 6,
+                                  color: Colors.black12,
+                                ),
+                              ],
+                            ),
+                            child:  Center(
+                              child: addedToFavoriteOrNot?Icon(Icons.favorite,color: kWhiteColor,):Icon(Icons.favorite_border_rounded,color: kWhiteColor,),
+                            ),
                           ),
                         ),
                       ),
@@ -370,7 +413,7 @@ class DoctorCellWidget extends StatelessWidget {
                         padding: const EdgeInsets.all(5.0),
                         child: InkWell(
                           onTap: (){
-                            Get.to(()=>  ReservationScreen(doctorId: "${doctorData?.id??0}",));
+                            Get.to(()=>  ReservationScreen(doctorId: "${widget.doctorData?.id??0}",));
                           },
                           child: Container(
                             width: Get.width*0.27,
@@ -413,9 +456,9 @@ class DoctorCellWidget extends StatelessWidget {
                               ),
                             ],
                           ),
-                          child: const Center(
-                            child: Text("متاح اليوم من 4 م ",
-                              style: TextStyle(
+                          child:  Center(
+                            child: Text("متاح اليوم من ${widget.doctorData!.schedule?[0].timeFrom} ",
+                              style: const TextStyle(
                                   fontFamily: fontFamilyName,
                                   color: kWhiteColor,
                                   fontWeight: FontWeight.w700,
@@ -423,24 +466,33 @@ class DoctorCellWidget extends StatelessWidget {
                           ),
                         ),
                       ),
-                      Padding(
-                        padding: const EdgeInsets.all(5.0),
-                        child: Container(
-                          width: Get.width*0.08,
-                          height: Get.height*0.04,
-                          decoration: BoxDecoration(
-                            color: kGreenColor,
-                            borderRadius: BorderRadius.circular(10),
-                            boxShadow: const [
-                              BoxShadow(
-                                offset: Offset(0, 2),
-                                blurRadius: 6,
-                                color: Colors.black12,
-                              ),
-                            ],
-                          ),
-                          child: const Center(
-                            child: Icon(Icons.favorite,color: kWhiteColor,),
+                      InkWell(
+                        onTap: (){
+                          widget.addingToFavorite();
+                          checkDoctorAddedOrNot("${widget.doctorData?.id??0}");
+                          setState(() {
+
+                          });
+                        },
+                        child: Padding(
+                          padding: const EdgeInsets.all(5.0),
+                          child: Container(
+                            width: Get.width*0.08,
+                            height: Get.height*0.04,
+                            decoration: BoxDecoration(
+                              color: kGreenColor,
+                              borderRadius: BorderRadius.circular(10),
+                              boxShadow: const [
+                                BoxShadow(
+                                  offset: Offset(0, 2),
+                                  blurRadius: 6,
+                                  color: Colors.black12,
+                                ),
+                              ],
+                            ),
+                            child:  Center(
+                              child: addedToFavoriteOrNot? Icon(Icons.favorite,color: kWhiteColor,):Icon(Icons.favorite_border_rounded,color: kWhiteColor,),
+                            ),
                           ),
                         ),
                       ),

@@ -1,11 +1,14 @@
 // ignore_for_file: sized_box_for_whitespace, prefer_is_empty
 
+import 'package:cool_alert/cool_alert.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:privilegecare/Ui/dector_detailed_screen/controller/doctor_detailed_controller.dart';
 import 'package:privilegecare/Ui/dector_detailed_screen/widget/schedules_widget.dart';
 import 'package:privilegecare/Ui/dector_detailed_screen/widget/video_player_widget.dart';
+import 'package:privilegecare/Ui/logInScreen/login_screen.dart';
 import 'package:privilegecare/Ui/reservationScreen/reservation_screen.dart';
+import 'package:privilegecare/Ui/signUpScreen/signup_screen.dart';
 import 'package:privilegecare/Utils/colors.dart';
 import 'package:privilegecare/Utils/constant.dart';
 import 'package:privilegecare/Utils/localization_services.dart';
@@ -37,46 +40,92 @@ class DoctorDetailedScreen extends StatelessWidget {
                 fontWeight: FontWeight.w800,
                 fontSize: 18),
           ),
-          actions: [Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: Row(
-              children: [
-                Container(
-                  height: 30,
-                  width: 30,
-                  decoration: BoxDecoration(
-                    color: kWhiteColor,
-                    borderRadius: BorderRadius.circular(10),
+          actions: [InkWell(
+            onTap: (){
+      if("${Get.find<StorageService>().getId}" == "0") {
+      CoolAlert.show(
+      context: context,
+      type: CoolAlertType.confirm,
+      title: "",
+      text: 'لا يمكن اضافه إلى قائمة المفضلة الا عند تسجيل الدخول او انشاء الحساب',
+      textTextStyle: const TextStyle(
+      fontFamily: fontFamilyName,
+      color: kBlueColor,
+      fontWeight: FontWeight.w800,
+      fontSize: 15),
+      onConfirmBtnTap: (){
+      Get.to(()=> const LoginScreen());
+      },
+      onCancelBtnTap:(){
+      Get.to(()=> const SignUpScreen());
+      },
+      confirmBtnText: 'تسجيل الدخول',
+      cancelBtnText: 'إنشاء حساب',
+      confirmBtnColor: Colors.white,
+      cancelBtnTextStyle:   const TextStyle(
+      fontFamily: fontFamilyName,
+      color: kGreenColor,
+      fontWeight: FontWeight.w800,
+      fontSize: 15),
+      confirmBtnTextStyle: const TextStyle(
+      fontFamily: fontFamilyName,
+      color: kGreenColor,
+      fontWeight: FontWeight.w800,
+      fontSize: 15),
 
-                  ),
-                  child: const Center(
-                    child: Icon(
-                      Icons.favorite_border_rounded,
-                      color: kBlueColor,
-                    ),
-                  ),
-                ),
-                const SizedBox(width: 10,),
-                InkWell(
-                  onTap: (){
-                    controller.shareDoctorLink();
-                  },
-                  child: Container(
+
+      );
+      }else{
+      controller.addingOrRemovingFromFavorite(
+      "${controller.doctorData?.id}",
+      context,
+      controller.doctorData?.name ?? "");
+      }},
+
+            child: Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Row(
+                children: [
+                  Container(
                     height: 30,
                     width: 30,
                     decoration: BoxDecoration(
                       color: kWhiteColor,
                       borderRadius: BorderRadius.circular(10),
+
                     ),
-                    child: const Center(
-                      child: Icon(
-                        Icons.share,
+                    child:  Center(
+                      child: controller.doctorAddedOrNot?const Icon(
+                        Icons.favorite,
+                        color: kBlueColor,
+                      ):const Icon(
+                        Icons.favorite_border_rounded,
                         color: kBlueColor,
                       ),
                     ),
                   ),
-                )
-              ],
+                  const SizedBox(width: 10,),
+                  InkWell(
+                    onTap: (){
+                      controller.shareDoctorLink();
+                    },
+                    child: Container(
+                      height: 30,
+                      width: 30,
+                      decoration: BoxDecoration(
+                        color: kWhiteColor,
+                        borderRadius: BorderRadius.circular(10),
+                      ),
+                      child: const Center(
+                        child: Icon(
+                          Icons.share,
+                          color: kBlueColor,
+                        ),
+                      ),
+                    ),
+                  )
+                ],
+              ),
             ),
           ),
 
