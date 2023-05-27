@@ -34,7 +34,12 @@ class FavoriteDoctorsController extends GetxController{
           doctorId, Get
           .find<StorageService>()
           .getId, "0");
+
           doctorsData?.remove(index);
+          if(doctorsData?.length == 0){
+            hasNoData = true;
+            update();
+          }
           update();
       if (status?.msg == "succeeded") {
         final snackBar = SnackBar(

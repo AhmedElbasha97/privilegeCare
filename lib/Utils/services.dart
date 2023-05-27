@@ -18,6 +18,7 @@ class Services {
   static String hospitalListEndPoint = "hospital";//post
   static String commentsDoctorsProfileEndPoint = "review";//post
   static String addOrRemoveDoctorsFromFavourite = "favorite/new";//post
-  static String addReviewToDoctor = "review/new";
-  static String checkAddedToFavoriteOrNotEndPoint = "https://privilegecare.net/api/favorite/check_doctor?member_id=1&doctor_id=4";
+  static String addReviewToDoctor = "review/new";//post
+  static String changePasswordEndPoint = "member/change_password";//post
+  static String checkAddedToFavoriteOrNotEndPoint = "favorite/check_doctor";
 }

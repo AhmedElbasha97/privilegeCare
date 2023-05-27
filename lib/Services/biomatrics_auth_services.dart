@@ -5,7 +5,7 @@ import 'dart:io';
 import 'package:flutter/services.dart';
 import 'package:local_auth/local_auth.dart';
 
-class AuthService {
+class BiomatricsAuthService {
   static Future<bool> authenticateUser() async {
     //initialize Local Authentication plugin.
     final LocalAuthentication _localAuthentication = LocalAuthentication();

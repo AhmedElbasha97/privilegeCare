@@ -2,6 +2,9 @@
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:privilegecare/Services/auth_services.dart';
+import 'package:privilegecare/Services/biomatrics_auth_services.dart';
+import 'package:privilegecare/Ui/changePassword/change_password_screen.dart';
 import 'package:privilegecare/Ui/favorite/favorite_screen.dart';
 import 'package:privilegecare/Ui/logInScreen/login_screen.dart';
 import 'package:privilegecare/Ui/profileScreen/controller/profile_controller.dart';
@@ -20,7 +23,7 @@ class ProfileScreen extends StatefulWidget {
 }
 
 class _ProfileScreenState extends State<ProfileScreen> {
-  decideWhichScreenToOpen(int index){
+  decideWhichScreenToOpen(int index) async {
     switch(index) {
       case 0:{
 
@@ -35,7 +38,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
       }
         break;
       case 3:{
-
+        goToChangePass();
       }
         break;
       case 4:{
@@ -55,9 +58,13 @@ class _ProfileScreenState extends State<ProfileScreen> {
       }
         break;
 
-        break;
     }
 
+  }
+  goToChangePass() async {
+    if(await BiomatricsAuthService.authenticateUser()) {
+    Get.to(() => const ChangePasswordScreen());
+    }
   }
 
   @override

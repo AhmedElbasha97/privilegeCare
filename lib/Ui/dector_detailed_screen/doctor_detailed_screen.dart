@@ -391,12 +391,17 @@ class DoctorDetailedScreen extends StatelessWidget {
                                               fontWeight: FontWeight.w700,
                                               fontSize: 15),),
                                       ),
-                                      const Text("احجز وسيصلك تفاصيل العنوان",
-                                        style: TextStyle(
-                                            fontFamily: "Inter",
-                                            color: kBlueColor,
-                                            fontWeight: FontWeight.w700,
-                                            fontSize: 15),),
+                                      InkWell(
+                                        onTap: (){
+                                          controller.showDoctorLocation();
+                                        },
+                                        child: const Text("فتح موقع المكان على جوجل ماب",
+                                          style: TextStyle(
+                                              fontFamily: fontFamilyName,
+                                              color: kBlueColor,
+                                              fontWeight: FontWeight.w700,
+                                              fontSize: 15),),
+                                      ),
 
                                     ],
                                   ),
@@ -408,6 +413,58 @@ class DoctorDetailedScreen extends StatelessWidget {
                             ),
 
                           ],
+                        ),
+                      ),
+                    ),
+                  ),
+                ),
+                InkWell(
+                  onTap: (){
+                    controller.callNumber(controller.doctorData?.phone??"");
+                  },
+                  child: Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 8.0,vertical: 7.0),
+                    child: SizedBox(
+                      child: DecoratedBox(
+                        decoration: const BoxDecoration(
+                          color: Colors.white,
+                          borderRadius: BorderRadius.all(Radius.circular(20)),
+                          boxShadow: [
+                            BoxShadow(
+                              offset: Offset(0, 2),
+                              blurRadius: 6,
+                              color: Colors.black12,
+                            ),
+                          ],
+                        ),
+                        child: Padding(
+                          padding: const EdgeInsets.all(15.0),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            children: [
+                              SizedBox(
+                                height: 10,
+                                width: 27,
+                                child: Image.asset("assets/images/call.png",fit: BoxFit.fitHeight,),
+                              ),
+                              const SizedBox(width: 10,),
+                              Container(
+                                width: Get.width*0.18,
+                                child:  Text(controller.doctorData?.phone??"",
+                                  textAlign: TextAlign.start,
+                                  style: const TextStyle(
+                                      fontFamily: fontFamilyName,
+                                      color: kBlueColor,
+                                      fontWeight: FontWeight.w700,
+                                      fontSize: 14),),
+
+                              ),
+
+
+
+
+                            ],
+                          ),
                         ),
                       ),
                     ),

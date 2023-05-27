@@ -61,6 +61,9 @@ class _HomeScreenState extends State<HomeScreen> {
 
                 actions: [
                   IconButton(icon: const Icon(Icons.search_outlined,color: kBlueColor,size: 35,),onPressed: (){
+                    
+                      Get.to(()=>const DoctorScreen(specialistId: "0"));
+
                   },),
                   IconButton(icon: const Icon(Icons.notifications_none,color: kBlueColor,size: 35,),onPressed: (){
                   },),],

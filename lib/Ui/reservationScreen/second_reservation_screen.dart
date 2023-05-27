@@ -271,7 +271,7 @@ class _SecondReservationScreenState extends State<SecondReservationScreen> {
                                         child: TextFormField(
                                           controller: controller.phoneController,
                                           decoration:  const InputDecoration(
-                                              labelText: "رقم المحمول",
+                                              labelText:"رقم الجوال",
 
                                               labelStyle: TextStyle(
                                                   fontFamily: fontFamilyName,
