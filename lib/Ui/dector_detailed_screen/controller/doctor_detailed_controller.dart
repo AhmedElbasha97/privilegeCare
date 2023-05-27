@@ -20,6 +20,7 @@ class DoctorDetailedController extends GetxController{
   final ScrollController sController = ScrollController();
   bool isLoading = true;
   final String doctorId;
+  bool commentHasNodData = false;
   bool doctorAddedOrNot = false;
   DoctorDetailedController(this.doctorId);
   @override
@@ -32,6 +33,9 @@ class DoctorDetailedController extends GetxController{
     doctorData = await DoctorServices.getDoctorProfiles(doctorId);
     doctorAddedOrNot = await checkDoctorAddedOrNot(doctorId);
     comments = await ReviewingServices.getDoctorsInThisSpecialist(doctorId);
+    if(comments?.length==0||comments==[]){
+      commentHasNodData = true;
+    }
     isLoading = false;
     update();
   }
@@ -43,7 +47,7 @@ class DoctorDetailedController extends GetxController{
     await MapLauncher.showMarker(
       mapType: Platform.isAndroid
           ?MapType.google:MapType.apple,
-      coords: Coords(double.parse(doctorData?.locationLon??"0.0"), double.parse(doctorData?.locationLat??"0.0")),
+      coords: Coords(double.parse(doctorData?.locationLat??"0.0"), double.parse(doctorData?.locationLon??"0.0")),
       title: " موقع الدكتور ${doctorData?.name}",
       description: " موقع الدكتور ${doctorData?.name}",
     );
@@ -75,9 +79,9 @@ class DoctorDetailedController extends GetxController{
     } else {
       ResponseModel? status = await FavouriteServices
           .addOrRemoveDoctorFromFavorite(
-          doctorId, "${Get
+          doctorId, Get
           .find<StorageService>()
-          .getId}", "1");
+          .getId, "1");
       if (status?.msg == "succeeded") {
         final snackBar = SnackBar(
           content: Text(' تم اضاف الطبيب ${doctorName} الى قائمة المفضلة '),

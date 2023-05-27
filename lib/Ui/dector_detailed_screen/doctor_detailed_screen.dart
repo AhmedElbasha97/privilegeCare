@@ -4,6 +4,7 @@ import 'package:cool_alert/cool_alert.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:privilegecare/Ui/dector_detailed_screen/controller/doctor_detailed_controller.dart';
+import 'package:privilegecare/Ui/dector_detailed_screen/widget/comment_widget.dart';
 import 'package:privilegecare/Ui/dector_detailed_screen/widget/schedules_widget.dart';
 import 'package:privilegecare/Ui/dector_detailed_screen/widget/video_player_widget.dart';
 import 'package:privilegecare/Ui/logInScreen/login_screen.dart';
@@ -15,6 +16,7 @@ import 'package:privilegecare/Utils/localization_services.dart';
 import 'package:privilegecare/Utils/memory.dart';
 import 'package:privilegecare/widgets/bottom_navigation_bar.dart';
 import 'package:privilegecare/widgets/loader.dart';
+import 'package:star_rating/star_rating.dart';
 
 class DoctorDetailedScreen extends StatelessWidget {
   final String doctorId;
@@ -191,33 +193,26 @@ class DoctorDetailedScreen extends StatelessWidget {
                                           fontWeight: FontWeight.w700,
                                           fontSize: 14),),
                                     const SizedBox(height: 5,),
-                                    Row(
-                                      mainAxisAlignment: MainAxisAlignment.end,
-                                      children: [
-                                        SizedBox(
-                                          height: 15,
-                                          width: 15,
-                                          child: Image.asset("assets/images/Star.png",fit: BoxFit.fitWidth,),
-                                        ),SizedBox(
-                                          height: 15,
-                                          width: 15,
-                                          child: Image.asset("assets/images/Star.png",fit: BoxFit.fitWidth,),
-                                        ),SizedBox(
-                                          height: 15,
-                                          width: 15,
-                                          child: Image.asset("assets/images/Star.png",fit: BoxFit.fitWidth,),
-                                        ),SizedBox(
-                                          height: 15,
-                                          width: 15,
-                                          child: Image.asset("assets/images/Star.png",fit: BoxFit.fitWidth,),
-                                        ),SizedBox(
-                                          height: 15,
-                                          width: 15,
-                                          child: Image.asset("assets/images/Star.png",fit: BoxFit.fitWidth,),
-                                        ),
-                                      ],
+                                    StarRating(
+                                      color: kGreenColor,
+                                      mainAxisAlignment: MainAxisAlignment.center,
+                                      length: 5,
+                                      rating: 0.0,
+                                      between: 0,
+                                      starSize: 20,
+                                      onRaitingTap: (rating) {
+
+                                      },
                                     ),
                                     const SizedBox(height: 5,),
+                                    controller.doctorData?.visitors == 0?
+                                    const Text("ليس هناك تقيم عن هذا الطبيب حتى الان",
+                                      style: TextStyle(
+                                          height: 1,
+                                          fontFamily: fontFamilyName,
+                                          color: kBlueColor,
+                                          fontWeight: FontWeight.w700,
+                                          fontSize: 14),) :
                                      Text("التقييم العام من ${controller.doctorData?.visitors??0} زائر",
                                       style: const TextStyle(
                                           height: 1,
@@ -491,7 +486,7 @@ class DoctorDetailedScreen extends StatelessWidget {
                     width: Get.width*0.75,
                     child: Row(
                     children: [
-                    Image.asset("assets/images/Time management-rafiki.png",height: Get.width*0.23,),
+                    Image.asset("assets/images/noVideo.png",height: Get.width*0.23,),
                     const Text("ليس هناك فيديو متاح الان",style: TextStyle(color: kGreenColor,fontWeight: FontWeight.bold,fontSize: 18),textAlign: TextAlign.center,),
                     ],
                     ),
@@ -807,7 +802,14 @@ class DoctorDetailedScreen extends StatelessWidget {
                           const SizedBox(height: 10,),
                           Container(
                             width: Get.width,
-                            child: const Text("التقييمات من 185 زائر",
+                            child:   controller.doctorData?.visitors == 0?
+                            const Text("ليس هناك تقيم عن هذا الطبيب حتى الان",
+                              textAlign: TextAlign.center,
+                              style: TextStyle(
+                                  fontFamily: fontFamilyName,
+                                  color: kGreenColor,
+                                  fontWeight: FontWeight.w700,
+                                  fontSize: 15),) :Text("التقييمات من ${controller.doctorData?.visitors??0} زائر",
                               textAlign: TextAlign.center,
                               style: TextStyle(
                                   fontFamily: fontFamilyName,
@@ -838,31 +840,16 @@ class DoctorDetailedScreen extends StatelessWidget {
 
                                     children:  [
 
-                                      Row(
+                                      StarRating(
+                                        color: kGreenColor,
                                         mainAxisAlignment: MainAxisAlignment.center,
-                                        children: [
-                                          SizedBox(
-                                            height: 15,
-                                            width: 15,
-                                            child: Image.asset("assets/images/Star.png",fit: BoxFit.fitWidth,),
-                                          ),SizedBox(
-                                            height: 15,
-                                            width: 15,
-                                            child: Image.asset("assets/images/Star.png",fit: BoxFit.fitWidth,),
-                                          ),SizedBox(
-                                            height: 15,
-                                            width: 15,
-                                            child: Image.asset("assets/images/Star.png",fit: BoxFit.fitWidth,),
-                                          ),SizedBox(
-                                            height: 15,
-                                            width: 15,
-                                            child: Image.asset("assets/images/Star.png",fit: BoxFit.fitWidth,),
-                                          ),SizedBox(
-                                            height: 15,
-                                            width: 15,
-                                            child: Image.asset("assets/images/Star.png",fit: BoxFit.fitWidth,),
-                                          ),
-                                        ],
+                                        length: 5,
+                                        rating: 0.0,
+                                        between: 0,
+                                        starSize: 20,
+                                        onRaitingTap: (rating) {
+
+                                        },
                                       ),
                                       const SizedBox(height: 10,),
                                       const Text("تقييم الدكتور",
@@ -892,31 +879,16 @@ class DoctorDetailedScreen extends StatelessWidget {
 
                                     children:  [
 
-                                      Row(
+                                      StarRating(
+                                        color: kGreenColor,
                                         mainAxisAlignment: MainAxisAlignment.center,
-                                        children: [
-                                          SizedBox(
-                                            height: 15,
-                                            width: 15,
-                                            child: Image.asset("assets/images/Star.png",fit: BoxFit.fitWidth,),
-                                          ),SizedBox(
-                                            height: 15,
-                                            width: 15,
-                                            child: Image.asset("assets/images/Star.png",fit: BoxFit.fitWidth,),
-                                          ),SizedBox(
-                                            height: 15,
-                                            width: 15,
-                                            child: Image.asset("assets/images/Star.png",fit: BoxFit.fitWidth,),
-                                          ),SizedBox(
-                                            height: 15,
-                                            width: 15,
-                                            child: Image.asset("assets/images/Star.png",fit: BoxFit.fitWidth,),
-                                          ),SizedBox(
-                                            height: 15,
-                                            width: 15,
-                                            child: Image.asset("assets/images/Star.png",fit: BoxFit.fitWidth,),
-                                          ),
-                                        ],
+                                        length: 5,
+                                        rating: 0.0,
+                                        between: 0,
+                                        starSize: 20,
+                                        onRaitingTap: (rating) {
+
+                                        },
                                       ),
                                       const SizedBox(height: 10,),
                                       const Text("التقييم العام",
@@ -935,152 +907,17 @@ class DoctorDetailedScreen extends StatelessWidget {
                             ),
                           ),
                           const SizedBox(height: 10,),
-                          Container(
-                            width: Get.width,
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.end,
-                              children: [
-                              Row(
-                                mainAxisAlignment: MainAxisAlignment.start,
-                                children: [
+                        controller.commentHasNodData?Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
 
-                                  const SizedBox(width: 20,),
-                                  const Text("التقييم العام",
-                                    style: TextStyle(
-                                        fontFamily: fontFamilyName,
-                                        color: kBlueColor,
-                                        fontWeight: FontWeight.w700,
-                                        fontSize: 15),),
-                                  const SizedBox(width: 10,),
-                                  Row(
-                                    mainAxisAlignment: MainAxisAlignment.center,
-                                    children: [
-                                      SizedBox(
-                                        height: 15,
-                                        width: 15,
-                                        child: Image.asset("assets/images/Star.png",fit: BoxFit.fitWidth,),
-                                      ),SizedBox(
-                                        height: 15,
-                                        width: 15,
-                                        child: Image.asset("assets/images/Star.png",fit: BoxFit.fitWidth,),
-                                      ),SizedBox(
-                                        height: 15,
-                                        width: 15,
-                                        child: Image.asset("assets/images/Star.png",fit: BoxFit.fitWidth,),
-                                      ),SizedBox(
-                                        height: 15,
-                                        width: 15,
-                                        child: Image.asset("assets/images/Star.png",fit: BoxFit.fitWidth,),
-                                      ),SizedBox(
-                                        height: 15,
-                                        width: 15,
-                                        child: Image.asset("assets/images/Star.png",fit: BoxFit.fitWidth,),
-                                      ),
-                                    ],
-                                  ),
-
-
-                                ],
-                              ),
-                                Padding(
-                                  padding: const EdgeInsets.symmetric(horizontal: 20),
-                                  child: Container(
-                                    width: Get.width*0.9,
-                                    child: const Text("دكتور قمة فى التواضع والأخلاق وسامعني للاخر ورد علي كل أسئلتي وطمني \nهالة  15 مارس 2023",
-                                      textAlign: TextAlign.start,
-                                      style: TextStyle(
-                                          fontFamily: fontFamilyName,
-                                          color: kBlueColor,
-                                          fontWeight: FontWeight.w700,
-                                          fontSize: 15),),
-                                  ),
-                                ),
-                                const SizedBox(height: 10,),
-                                const Divider(
-                                  color: kBlueColor,
-                                  height: 1,
-                                  thickness: 1,
-                                  endIndent: 30,
-                                  indent: 10,
-                                ),
-                                const SizedBox(height: 30,),
-
-                              ],
-                            ),
-                          ),
-                          Container(
-                            width: Get.width,
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.end,
-                              children: [
-                              Row(
-                                mainAxisAlignment: MainAxisAlignment.start,
-                                children: [
-                                  const SizedBox(width: 20,),
-                                  const Text("التقييم العام",
-                                  style: TextStyle(
-                                      fontFamily: fontFamilyName,
-                                      color: kBlueColor,
-                                      fontWeight: FontWeight.w700,
-                                      fontSize: 15),),
-
-                                  const SizedBox(width: 10,),
-                                  Row(
-                                    mainAxisAlignment: MainAxisAlignment.center,
-                                    children: [
-                                      SizedBox(
-                                        height: 15,
-                                        width: 15,
-                                        child: Image.asset("assets/images/Star.png",fit: BoxFit.fitWidth,),
-                                      ),SizedBox(
-                                        height: 15,
-                                        width: 15,
-                                        child: Image.asset("assets/images/Star.png",fit: BoxFit.fitWidth,),
-                                      ),SizedBox(
-                                        height: 15,
-                                        width: 15,
-                                        child: Image.asset("assets/images/Star.png",fit: BoxFit.fitWidth,),
-                                      ),SizedBox(
-                                        height: 15,
-                                        width: 15,
-                                        child: Image.asset("assets/images/Star.png",fit: BoxFit.fitWidth,),
-                                      ),SizedBox(
-                                        height: 15,
-                                        width: 15,
-                                        child: Image.asset("assets/images/Star.png",fit: BoxFit.fitWidth,),
-                                      ),
-                                    ],
-                                  ),
-
-
-                                ],
-                              ),
-                                Padding(
-                                  padding: const EdgeInsets.symmetric(horizontal: 20),
-                                  child: Container(
-                                    width: Get.width*0.9,
-                                    child: const Text("دكتور قمة فى التواضع والأخلاق وسامعني للاخر ورد علي كل أسئلتي وطمني \nهالة  15 مارس 2023",
-                                      textAlign: TextAlign.start,
-                                      style: TextStyle(
-                                          fontFamily: fontFamilyName,
-                                          color: kBlueColor,
-                                          fontWeight: FontWeight.w700,
-                                          fontSize: 15),),
-                                  ),
-                                ),
-                                const SizedBox(height: 10,),
-                                const Divider(
-                                  color: kBlueColor,
-                                  height: 1,
-                                  thickness: 1,
-                                  endIndent: 30,
-                                  indent: 10,
-                                ),
-                                const SizedBox(height: 30,),
-
-                              ],
-                            ),
-                          ),
+                          Image.asset("assets/images/noReviews.png",height: Get.width*0.23,),
+                          const Text("لا توجد تعليقات",style: TextStyle(color: kGreenColor,fontWeight: FontWeight.bold,fontSize: 18),textAlign: TextAlign.center,),
+                        ],):Column(
+                          children: controller.comments!.map((e){
+                            return CommentWidget(data: e);
+                          }).toList(),
+                        )
                         ],
                       ),
                     ),

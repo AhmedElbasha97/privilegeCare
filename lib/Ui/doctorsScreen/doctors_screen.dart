@@ -146,7 +146,7 @@ class DoctorScreen extends StatelessWidget {
 
                   ),
 
-                  controller.isLoading?Loader(height: Get.height*0.55,width: Get.width,):
+                  controller.isLoading?Loader(height: Get.height*0.65,width: Get.width,):
                   controller.hasNoData?NoDataWidget(refreshedFunc: (){
                     controller.getData();
                   }, text: "ليس هناك أطباء متخصصين مسجلين فى هذا التخصص حتى الآن", imgPath: "assets/images/No data-rafiki.png", hasRefreshButtonOrNot: true,height: Get.height*0.7,):
@@ -164,7 +164,7 @@ class DoctorScreen extends StatelessWidget {
                       :Container(
 
                     width: Get.width,
-                    height: Get.height*0.55,
+                    height: Get.height*0.65,
                     color: kLightGrayColor,
                     child: RawScrollbar(
                       thumbColor: kBlueColor,

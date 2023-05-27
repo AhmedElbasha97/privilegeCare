@@ -10,6 +10,7 @@ import 'package:privilegecare/Utils/colors.dart';
 import 'package:privilegecare/Utils/constant.dart';
 import 'package:privilegecare/Utils/localization_services.dart';
 import 'package:privilegecare/Utils/memory.dart';
+import 'package:star_rating/star_rating.dart';
 
 class DoctorCellWidget extends StatefulWidget {
   final DoctorListModel? doctorData;
@@ -102,34 +103,26 @@ class _DoctorCellWidgetState extends State<DoctorCellWidget> {
                                 fontWeight: FontWeight.w700,
                                 fontSize: 14),),
                           const SizedBox(height: 5,),
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.end,
-                            children: [
-                              SizedBox(
-                                height: 20,
-                                width: 20,
-                                child: Image.asset("assets/images/Star.png",fit: BoxFit.fitWidth,),
-                              ),SizedBox(
-                                height: 20,
-                                width: 20,
-                                child: Image.asset("assets/images/Star.png",fit: BoxFit.fitWidth,),
-                              ),SizedBox(
-                                height: 20,
-                                width: 20,
-                                child: Image.asset("assets/images/Star.png",fit: BoxFit.fitWidth,),
-                              ),SizedBox(
-                                height: 20,
-                                width: 20,
-                                child: Image.asset("assets/images/Star.png",fit: BoxFit.fitWidth,),
-                              ),SizedBox(
-                                height: 20,
-                                width: 20,
-                                child: Image.asset("assets/images/Star.png",fit: BoxFit.fitWidth,),
-                              ),
-                            ],
+                          StarRating(
+                            color: kGreenColor,
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            length: 5,
+                            rating: 0.0,
+                            between: 0,
+                            starSize: 20,
+                            onRaitingTap: (rating) {
+
+                            },
                           ),
                           const SizedBox(height: 5,),
-                           Text("التقييم العام من ${widget.doctorData?.visitors??0} زائر",
+                          widget.doctorData?.visitors == 0?
+                          const Text("ليس هناك تقيم عن هذا الطبيب حتى الان",
+                            style: TextStyle(
+                                height: 1,
+                                fontFamily: fontFamilyName,
+                                color: kBlueColor,
+                                fontWeight: FontWeight.w700,
+                                fontSize: 13),) :Text("التقييم العام من ${widget.doctorData?.visitors??0} زائر",
                             style: const TextStyle(
                                 height: 1,
                                 fontFamily: fontFamilyName,
