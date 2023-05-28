@@ -1,9 +1,7 @@
 // ignore_for_file: sized_box_for_whitespace
 
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:privilegecare/Models/hospital_list_model.dart';
 import 'package:privilegecare/Ui/hospital%20screen/controller/hospitall_controller.dart';
 import 'package:privilegecare/Ui/hospital%20screen/widget/hospital_cell_widget.dart';
 import 'package:privilegecare/Utils/colors.dart';

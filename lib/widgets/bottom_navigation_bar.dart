@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:privilegecare/Ui/HomeScreen/home_screen.dart';
 import 'package:privilegecare/Ui/SpecialtyScreen/specialty_screen.dart';
+import 'package:privilegecare/Ui/filter/filter_screen.dart';
 import 'package:privilegecare/Ui/hospital%20screen/hospitals_screen.dart';
 import 'package:privilegecare/Ui/profileScreen/profile_screeen.dart';
 import 'package:privilegecare/Ui/underConstruction/under_construction_screen.dart';
@@ -63,7 +64,7 @@ class _BottomNavigationBarWidgetState extends State<BottomNavigationBarWidget> {
           }
           break;
           case 4:{
-            Get.to(()=> const UnderConstructionScreen());
+            Get.to(()=> const FilterScreen());
             setState(() {
               _selectedIndex = index;
             });
@@ -135,11 +136,13 @@ class _BottomNavigationBarWidgetState extends State<BottomNavigationBarWidget> {
             "assets/icons/settingsIcons.png",
             width: 30,
           ),
-          title: const Text('الأعدادات',
+          title: const Text('البحث المتقدم',
+            textAlign: TextAlign.center,
             style: TextStyle(
                 fontFamily: fontFamilyName,
                 color: kGreenColor,
-                fontWeight: FontWeight.w700,
+                height: 1,
+                fontWeight: FontWeight.w600,
                 fontSize: 15),),
         ),
 

@@ -158,7 +158,6 @@ choosingDate(String scheduleId,String date) async {
   }
 
   signingUp(context){
-print("hiiiii from showing dialogue");
     showDialog(context: context,
       builder: (context) =>
        const SignUpDialogue(),
@@ -196,7 +195,7 @@ print("hiiiii from showing dialogue");
        if(phoneController.text == ""){
          reservationIsRunning = true;
          update();
-         ResponseModel? data = await ReservationServices.saveAppointment(scheduleId, "${Get.find<StorageService>().getId}", phoneController.text, selectedTime, nameController.text, " ", "$reservationFroAnotherPatient");
+         ResponseModel? data = await ReservationServices.saveAppointment(scheduleId, Get.find<StorageService>().getId, phoneController.text, selectedTime, nameController.text, " ", "$reservationFroAnotherPatient");
          if(data?.msg == "succeeded"){
 
            Get.off(SpecialtyScreen());

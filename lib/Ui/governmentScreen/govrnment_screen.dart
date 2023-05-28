@@ -7,8 +7,7 @@ import 'package:privilegecare/Ui/governmentScreen/widget/government_cell_widget.
 import 'package:privilegecare/Ui/governmentScreen/widget/loading_government_widget.dart';
 import 'package:privilegecare/Utils/colors.dart';
 import 'package:privilegecare/Utils/constant.dart';
-import 'package:privilegecare/Utils/localization_services.dart';
-import 'package:privilegecare/Utils/memory.dart';
+
 
 class GovernmentScreen extends StatelessWidget {
   final String specialistId;

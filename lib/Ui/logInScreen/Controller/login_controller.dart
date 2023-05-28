@@ -7,7 +7,6 @@ import 'package:in_app_update/in_app_update.dart';
 import 'package:privilegecare/Models/auth_model.dart';
 import 'package:privilegecare/Services/auth_services.dart';
 import 'package:privilegecare/Ui/HomeScreen/home_screen.dart';
-import 'package:privilegecare/Ui/SpecialtyScreen/specialty_screen.dart';
 import 'package:privilegecare/Utils/memory.dart';
 import 'package:privilegecare/Utils/validator.dart';
 const wrongCode = 'assets/images/wrong_code.png';

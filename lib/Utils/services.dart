@@ -21,4 +21,5 @@ class Services {
   static String addReviewToDoctor = "review/new";//post
   static String changePasswordEndPoint = "member/change_password";//post
   static String checkAddedToFavoriteOrNotEndPoint = "favorite/check_doctor";
+  static String getLevelEndPoint = "levels";//post
 }

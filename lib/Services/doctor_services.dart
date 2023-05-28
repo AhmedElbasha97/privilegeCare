@@ -3,6 +3,7 @@ import 'package:privilegecare/Models/doctor_home_model.dart';
 import 'package:privilegecare/Models/doctor_model.dart';
 import 'package:privilegecare/Models/doctor_reservation_model.dart';
 import 'package:privilegecare/Models/doctort_list_model.dart';
+import 'package:privilegecare/Models/levels_model.dart';
 import 'package:privilegecare/Utils/api_service.dart';
 import 'package:privilegecare/Utils/memory.dart';
 import 'package:privilegecare/Utils/services.dart';
@@ -116,5 +117,15 @@ class DoctorServices {
     }
     return null;
   }
-
+  static Future<List<LevelModel>?> getLevelsData() async {
+    List<LevelModel>? levelsList = [];
+    var data = await api.request(Services.getLevelEndPoint, "POST");
+    if (data != null) {
+      for (var level in data){
+        levelsList.add(LevelModel.fromJson(level));
+      }
+      return levelsList;
+    }
+    return null;
+  }
 }

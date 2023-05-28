@@ -46,7 +46,7 @@ class DoctorScreen extends StatelessWidget {
                   ),
                   controller.hasNoData?const SizedBox():InkWell(
                     onTap: (){
-                      Get.off(()=> GovernmentScreen(specialistId: specialistId,searchName: controller.searchController.text??"0",));
+                      Get.off(()=> GovernmentScreen(specialistId: specialistId,searchName: controller.searchController.text,));
                     },
                     child: Container(
                       height: Get.height*0.045,
