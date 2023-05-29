@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:privilegecare/Ui/dector_detailed_screen/widget/full_screen_widget.dart';
 import 'package:privilegecare/Utils/colors.dart';
 import 'package:privilegecare/widgets/loader.dart';
 import 'package:video_player/video_player.dart';
@@ -19,6 +20,7 @@ class _VideoPlayerWidgetState extends State<VideoPlayerWidget> {
   late VideoPlayerController _videoPlayerController;
   String timePlay = "0:0";
   Timer? timer;
+  bool showReplayIcon = false;
   bool showController = false;
   @override
   void initState() {
@@ -26,16 +28,29 @@ class _VideoPlayerWidgetState extends State<VideoPlayerWidget> {
     timer = Timer.periodic(const Duration(seconds: 1), (Timer t) => renewTimeText());
     _videoPlayerController =
     VideoPlayerController.network(widget.videoPlayer)
-      ..addListener(() {
 
+      ..addListener(() {
+        checkVideo();
       })
+
       ..initialize().then((_) {
         setState(() {});
         _videoPlayerController.play();
       });
+
   }
 
+  void checkVideo(){
+    if (!_videoPlayerController.value.isPlaying &&_videoPlayerController.value.isInitialized &&
+        (_videoPlayerController.value.duration ==_videoPlayerController.value.position)) { //checking the duration and position every time
 
+      showReplayIcon = true;
+      setState(() {
+
+      });
+    }
+
+  }
   @override
   void dispose() {
     _videoPlayerController.dispose();
@@ -106,7 +121,34 @@ class _VideoPlayerWidgetState extends State<VideoPlayerWidget> {
           ),
           child: Loader(width: MediaQuery.of(context).size.width,height: 150.0)),
     ),
-
+          showController?Positioned(
+            top: 10,
+              left: 10,
+              child: InkWell(
+                onTap: (){
+                  Get.to(()=>FullScreenVideoPlayerWidget(videoPlayer: widget.videoPlayer,));
+                },
+                child: Container(
+                  height: Get.height*0.07,
+                  width: Get.width*0.13,
+                  decoration:  BoxDecoration(
+                    color: Colors.black.withOpacity(0.50),
+                    borderRadius: const BorderRadius.all(Radius.circular(10)),
+                    boxShadow: const [
+                      BoxShadow(
+                        offset: Offset(0, 2),
+                        blurRadius: 6,
+                        color: Colors.black12,
+                      ),
+                    ],
+                  ),
+                  child: const Icon(
+                    Icons.fullscreen,
+                    color: Colors.white,
+                    size: 30,
+                  ),
+                ),
+              )):SizedBox(),
           showController?Positioned(
               bottom: 10,
               child: Padding(
@@ -205,6 +247,47 @@ class _VideoPlayerWidgetState extends State<VideoPlayerWidget> {
                   ),
                 ),
               )):const SizedBox(),
+          showReplayIcon?InkWell(
+            onTap: (){
+              showReplayIcon = false;
+            setState(() {
+
+            });
+              _videoPlayerController.seekTo(Duration.zero);
+              _videoPlayerController.play();
+
+            },
+            child: Center(
+              child: AspectRatio(
+                aspectRatio:  _videoPlayerController.value.aspectRatio,
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Container(
+                        height: Get.height*0.1,
+                        width: Get.width*0.2,
+                        decoration:  BoxDecoration(
+                          color: Colors.black.withOpacity(0.50),
+                          borderRadius: const BorderRadius.all(Radius.circular(25)),
+                          boxShadow: const [
+                            BoxShadow(
+                              offset: Offset(0, 2),
+                              blurRadius: 6,
+                              color: Colors.black12,
+                            ),
+                          ],
+                        ),
+                      child: const Icon(
+                        Icons.replay,
+                        color: Colors.white,
+                        size: 30,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ),
+          ):const SizedBox(),
         ],
       ),
     )

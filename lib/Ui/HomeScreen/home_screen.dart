@@ -101,11 +101,43 @@ class _HomeScreenState extends State<HomeScreen> {
                           },
                           child: Column(
                             children: [
-                              SizedBox(
-                                height: 80,
-                                width: 80,
-                                child: Image.asset("assets/images/doctor.png",fit: BoxFit.fitWidth,),
+                              CachedNetworkImage(
+                                fit: BoxFit.cover,
+                                imageUrl: "https://privilegecare.net${controller.doctorData?[0].image??""}",
+                                imageBuilder: ((context, image){
+                                  return  Container(
+                                      height: 80,
+                                      width: 80,
+                                      decoration: BoxDecoration(
+                                          image: DecorationImage(
+                                            image: image,
+                                            fit: BoxFit.cover,
+                                          ),
+
+
+                                      )
+                                  );
+                                }),
+                                placeholder: (context, image){
+                                  return  const Center(child: CircularProgressIndicator(color: kBlueColor,));
+                                },
+                                errorWidget: (context, url, error){
+                                  return Container(
+                                       height: 80,
+                                      width: 80,
+
+                                      decoration: const BoxDecoration(
+                                          image: DecorationImage(
+                                            image: AssetImage("assets/images/doctor.png"),
+                                            fit: BoxFit.fill,
+                                          ),
+
+
+                                      )
+                                  );
+                                },
                               ),
+
                                Text( controller.doctorData?[0].name??"",
 
                                 style: const TextStyle(
@@ -132,10 +164,41 @@ class _HomeScreenState extends State<HomeScreen> {
                           },
                           child: Column(
                             children: [
-                              SizedBox(
-                                height: 80,
-                                width: 80,
-                                child: Image.asset("assets/images/doctor.png",fit: BoxFit.fitWidth,),
+                              CachedNetworkImage(
+                                fit: BoxFit.cover,
+                                imageUrl: "https://privilegecare.net${controller.doctorData?[1].image??""}",
+                                imageBuilder: ((context, image){
+                                  return  Container(
+                                      height: 80,
+                                      width: 80,
+                                      decoration: BoxDecoration(
+                                        image: DecorationImage(
+                                          image: image,
+                                          fit: BoxFit.cover,
+                                        ),
+
+
+                                      )
+                                  );
+                                }),
+                                placeholder: (context, image){
+                                  return  Center(child: const CircularProgressIndicator(color: kBlueColor,));
+                                },
+                                errorWidget: (context, url, error){
+                                  return Container(
+                                      height: 80,
+                                      width: 80,
+
+                                      decoration: const BoxDecoration(
+                                        image: DecorationImage(
+                                          image: AssetImage("assets/images/doctor.png"),
+                                          fit: BoxFit.fill,
+                                        ),
+
+
+                                      )
+                                  );
+                                },
                               ),
                                Text( controller.doctorData?[1].name??"",
 
@@ -163,10 +226,41 @@ class _HomeScreenState extends State<HomeScreen> {
                           },
                           child: Column(
                             children: [
-                              SizedBox(
-                                height: 80,
-                                width: 80,
-                                child: Image.asset("assets/images/doctor.png",fit: BoxFit.fitWidth,),
+                              CachedNetworkImage(
+                                fit: BoxFit.cover,
+                                imageUrl: "https://privilegecare.net${controller.doctorData?[2].image??""}",
+                                imageBuilder: ((context, image){
+                                  return  Container(
+                                      height: 80,
+                                      width: 80,
+                                      decoration: BoxDecoration(
+                                        image: DecorationImage(
+                                          image: image,
+                                          fit: BoxFit.cover,
+                                        ),
+
+
+                                      )
+                                  );
+                                }),
+                                placeholder: (context, image){
+                                  return  const Center(child: CircularProgressIndicator(color: kBlueColor,));
+                                },
+                                errorWidget: (context, url, error){
+                                  return Container(
+                                      height: 80,
+                                      width: 80,
+
+                                      decoration: const BoxDecoration(
+                                        image: DecorationImage(
+                                          image: AssetImage("assets/images/doctor.png"),
+                                          fit: BoxFit.fill,
+                                        ),
+
+
+                                      )
+                                  );
+                                },
                               ),
                                Text( controller.doctorData?[2].name??"",
 
@@ -200,10 +294,41 @@ class _HomeScreenState extends State<HomeScreen> {
                           },
                           child: Column(
                             children: [
-                              SizedBox(
-                                height: 80,
-                                width: 80,
-                                child: Image.asset("assets/images/doctor.png",fit: BoxFit.fitWidth,),
+                              CachedNetworkImage(
+                                fit: BoxFit.cover,
+                                imageUrl: "https://privilegecare.net${controller.doctorData?[3].image??""}",
+                                imageBuilder: ((context, image){
+                                  return  Container(
+                                      height: 80,
+                                      width: 80,
+                                      decoration: BoxDecoration(
+                                        image: DecorationImage(
+                                          image: image,
+                                          fit: BoxFit.cover,
+                                        ),
+
+
+                                      )
+                                  );
+                                }),
+                                placeholder: (context, image){
+                                  return  const Center(child: CircularProgressIndicator(color: kBlueColor,));
+                                },
+                                errorWidget: (context, url, error){
+                                  return Container(
+                                      height: 80,
+                                      width: 80,
+
+                                      decoration: const BoxDecoration(
+                                        image: DecorationImage(
+                                          image: AssetImage("assets/images/doctor.png"),
+                                          fit: BoxFit.fill,
+                                        ),
+
+
+                                      )
+                                  );
+                                },
                               ),
                                Text( controller.doctorData?[3].name??"",
 
@@ -231,10 +356,42 @@ class _HomeScreenState extends State<HomeScreen> {
                           },
                           child: Column(
                             children: [
-                              SizedBox(
-                                height: 80,
-                                width: 80,
-                                child: Image.asset("assets/images/doctor.png",fit: BoxFit.fitWidth,),
+                              CachedNetworkImage(
+                                fit: BoxFit.cover,
+                                imageUrl: "https://privilegecare.net${controller.doctorData?[4].image??""}",
+                                imageBuilder: ((context, image){
+                                  return  Container(
+                                      height: 80,
+                                      width: 80,
+                                      decoration: BoxDecoration(
+                                        image: DecorationImage(
+                                          image: image,
+                                          fit: BoxFit.cover,
+                                        ),
+
+
+                                      )
+                                  );
+                                }),
+                                placeholder: (context, image){
+                                  return  const Center(child: CircularProgressIndicator(color: kBlueColor,));
+
+                                },
+                                errorWidget: (context, url, error){
+                                  return Container(
+                                      height: 80,
+                                      width: 80,
+
+                                      decoration: const BoxDecoration(
+                                        image: DecorationImage(
+                                          image: AssetImage("assets/images/doctor.png"),
+                                          fit: BoxFit.fill,
+                                        ),
+
+
+                                      )
+                                  );
+                                },
                               ),
                                Text( controller.doctorData?[4].name??"",
 
@@ -262,10 +419,42 @@ class _HomeScreenState extends State<HomeScreen> {
                           },
                           child: Column(
                             children: [
-                              SizedBox(
-                                height: 80,
-                                width: 80,
-                                child: Image.asset("assets/images/doctor.png",fit: BoxFit.fitWidth,),
+                              CachedNetworkImage(
+                                fit: BoxFit.cover,
+                                imageUrl: "https://privilegecare.net${controller.doctorData?[4].image??""}",
+                                imageBuilder: ((context, image){
+                                  return  Container(
+                                      height: 80,
+                                      width: 80,
+                                      decoration: BoxDecoration(
+                                        image: DecorationImage(
+                                          image: image,
+                                          fit: BoxFit.cover,
+                                        ),
+
+
+                                      )
+                                  );
+                                }),
+                                placeholder: (context, image){
+                                  return  const Center(child: CircularProgressIndicator(color: kBlueColor,));
+
+                                },
+                                errorWidget: (context, url, error){
+                                  return Container(
+                                      height: 80,
+                                      width: 80,
+
+                                      decoration: const BoxDecoration(
+                                        image: DecorationImage(
+                                          image: AssetImage("assets/images/doctor.png"),
+                                          fit: BoxFit.fill,
+                                        ),
+
+
+                                      )
+                                  );
+                                },
                               ),
                                Text( controller.doctorData?[5].name??"",
 

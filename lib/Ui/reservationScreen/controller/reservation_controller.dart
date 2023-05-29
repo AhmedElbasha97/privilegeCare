@@ -10,10 +10,12 @@ import 'package:privilegecare/Services/doctor_services.dart';
 import 'package:privilegecare/Services/reservation_services.dart';
 import 'package:privilegecare/Ui/SpecialtyScreen/specialty_screen.dart';
 import 'package:privilegecare/Ui/reservationScreen/second_reservation_screen.dart';
+import 'package:privilegecare/Ui/reservationScreen/widget/reservation_success_widget.dart';
 import 'package:privilegecare/Ui/reservationScreen/widget/reservation_to_non_regestier_user_wiget.dart';
 import 'package:privilegecare/Ui/reservationScreen/widget/sign_up_dialogue.dart';
 import 'package:privilegecare/Utils/colors.dart';
 import 'package:privilegecare/Utils/constant.dart';
+import 'package:privilegecare/Utils/localization_services.dart';
 import 'package:privilegecare/Utils/memory.dart';
 import 'package:privilegecare/Utils/validator.dart';
 
@@ -197,8 +199,13 @@ choosingDate(String scheduleId,String date) async {
          update();
          ResponseModel? data = await ReservationServices.saveAppointment(scheduleId, Get.find<StorageService>().getId, phoneController.text, selectedTime, nameController.text, " ", "$reservationFroAnotherPatient");
          if(data?.msg == "succeeded"){
+           showDialog(context: context,
+             builder: (context) =>
+                 ReservationSuccessWidget(doctorName: Get.find<StorageService>().activeLocale == SupportedLocales.english?doctorData?.name??"":doctorData?.nameEn??"",),
+           ).then((value){
+             Get.off(SpecialtyScreen());
+           });
 
-           Get.off(SpecialtyScreen());
          }else {
            CoolAlert.show(
                context: context,
@@ -297,7 +304,12 @@ choosingDate(String scheduleId,String date) async {
       update();
       ResponseModel? data = await ReservationServices.saveAppointment(scheduleId, "0", phoneWidgetController.text, selectedTime, nameWidgetController.text, "aliiiii", "$reservationFroAnotherPatient");
       if(data?.msg == "succeeded"){
-        Get.off(SpecialtyScreen());
+        showDialog(context: context,
+          builder: (context) =>
+              ReservationSuccessWidget(doctorName: Get.find<StorageService>().activeLocale == SupportedLocales.english?doctorData?.name??"":doctorData?.nameEn??"",),
+        ).then((value){
+          Get.off(SpecialtyScreen());
+        });
       }else {
         reservationIsRunning = false;
         CoolAlert.show(

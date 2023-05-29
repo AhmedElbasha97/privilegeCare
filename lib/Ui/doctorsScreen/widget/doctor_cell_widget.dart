@@ -1,5 +1,6 @@
 // ignore_for_file: sized_box_for_whitespace
 
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:privilegecare/Models/doctort_list_model.dart';
@@ -75,10 +76,42 @@ class _DoctorCellWidgetState extends State<DoctorCellWidget> {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.start,
                     children: [
-                      SizedBox(
-                        height: 100,
-                        width: 100,
-                        child: Image.asset("assets/images/doctor.png",fit: BoxFit.fitWidth,),
+                      CachedNetworkImage(
+                        fit: BoxFit.cover,
+                        imageUrl: "https://privilegecare.net${widget.doctorData?.image??""}",
+                        imageBuilder: ((context, image){
+                          return  Container(
+                              height: 80,
+                              width: 80,
+                              decoration: BoxDecoration(
+                                image: DecorationImage(
+                                  image: image,
+                                  fit: BoxFit.cover,
+                                ),
+
+
+                              )
+                          );
+                        }),
+                        placeholder: (context, image){
+                          return  const Center(child: CircularProgressIndicator(color: kBlueColor,));
+
+                        },
+                        errorWidget: (context, url, error){
+                          return Container(
+                              height: 80,
+                              width: 80,
+
+                              decoration: const BoxDecoration(
+                                image: DecorationImage(
+                                  image: AssetImage("assets/images/doctor.png"),
+                                  fit: BoxFit.fill,
+                                ),
+
+
+                              )
+                          );
+                        },
                       ),
                       const SizedBox(width: 10,),
                       Column(
