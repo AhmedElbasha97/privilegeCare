@@ -23,4 +23,5 @@ class Services {
   static String changePasswordEndPoint = "member/change_password";//post
   static String checkAddedToFavoriteOrNotEndPoint = "favorite/check_doctor";
   static String getLevelEndPoint = "levels";//post
+  static String getHospitalProfileEndPoint = "hospital_view";//post
 }

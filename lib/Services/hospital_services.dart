@@ -1,3 +1,4 @@
+import 'package:privilegecare/Models/hospital_detailed_model.dart';
 import 'package:privilegecare/Models/hospital_list_model.dart';
 import 'package:privilegecare/Utils/api_service.dart';
 import 'package:privilegecare/Utils/services.dart';
@@ -30,6 +31,17 @@ class HospitalServices{
         hospitalsList.add(HospitalListModel.fromJson(hospital));
       }
       return hospitalsList;
+    }
+    return null;
+  }
+  static Future<HospitalDetailedModel?> getHospitalProfile(String hospitalId) async {
+    var data = await api.request(Services.getHospitalProfileEndPoint, "POST",queryParamters: {
+      "hospital_id":hospitalId
+    });
+    if (data != null) {
+
+
+      return HospitalDetailedModel.fromJson(data[0]);
     }
     return null;
   }
