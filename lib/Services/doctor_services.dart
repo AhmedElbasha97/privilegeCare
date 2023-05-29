@@ -128,4 +128,23 @@ class DoctorServices {
     }
     return null;
   }
+  static Future<List<DoctorListModel>?> advancedSearchForDoctorsWithArea(String searchType,String? specialtyId,String? areaId,String? levelId,String? startPrice,String? endPrice,String homeVisit) async {
+    List<DoctorListModel>? doctorsList = [];
+    var data = await api.request(Services.advancedSearchEndPoint, "POST",queryParamters: {
+      "type":searchType,
+      "spec":specialtyId,
+      "area":areaId,
+      "level":levelId,
+      "price_from":startPrice,
+      "price_to":endPrice,
+      "home_visit":homeVisit,
+    });
+    if (data != null) {
+      for (var doctor in data){
+        doctorsList.add(DoctorListModel.fromJson(doctor));
+      }
+      return doctorsList;
+    }
+    return null;
+  }
 }

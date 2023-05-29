@@ -20,7 +20,9 @@ class FilterScreen extends StatelessWidget {
         bottomNavigationBar: const BottomNavigationBarWidget(selectedTap: 4,),
         appBar: AppBar(
           backgroundColor: kGreenColor,
-          leadingWidth: 60,
+          leading: IconButton(
+            icon:   const Icon(Icons.baby_changing_station,color: kGreenColor,), onPressed: () {  },
+          ),
 
           centerTitle: true,
           title:  const Text(
@@ -244,7 +246,7 @@ class FilterScreen extends StatelessWidget {
                                   const Divider(
                                     color: kGreenColor,
                                     height: 1,
-                                    thickness: 2,
+                                    thickness: 1,
                                     endIndent: 0,
                                     indent: 0,
                                   ),
@@ -308,7 +310,7 @@ class FilterScreen extends StatelessWidget {
                                     const Divider(
                                       color: kGreenColor,
                                       height: 1,
-                                      thickness: 2,
+                                      thickness: 1,
                                       endIndent: 0,
                                       indent: 0,
                                     ),
@@ -448,7 +450,7 @@ class FilterScreen extends StatelessWidget {
                                   const Divider(
                                     color: kGreenColor,
                                     height: 1,
-                                    thickness: 2,
+                                    thickness: 1,
                                     endIndent: 0,
                                     indent: 0,
                                   ),
@@ -523,7 +525,7 @@ class FilterScreen extends StatelessWidget {
                                     const Divider(
                                       color: kGreenColor,
                                       height: 1,
-                                      thickness: 2,
+                                      thickness: 1,
                                       endIndent: 0,
                                       indent: 0,
                                     ),
@@ -654,7 +656,7 @@ class FilterScreen extends StatelessWidget {
                                   const Divider(
                                     color: kGreenColor,
                                     height: 1,
-                                    thickness: 2,
+                                    thickness: 1,
                                     endIndent: 0,
                                     indent: 0,
                                   ),
@@ -1189,6 +1191,32 @@ class FilterScreen extends StatelessWidget {
                   controller.choosenSearchType != "D"?const SizedBox():const SizedBox(
                     height: 10,
                   ),
+                  InkWell(
+                    onTap: (){
+                      controller.startSearching();
+
+                    },
+                    child: Center(
+                      child: Container(
+                        width: Get.width*0.5,
+                        height: Get.height*0.07,
+                        decoration: BoxDecoration(
+                          color: kBlueColor,
+                          borderRadius: BorderRadius.circular(15),
+                        ),
+                        child: const Center(
+                          child:  Text(
+                            "ابداء البحث",
+                            style: TextStyle(
+                                fontFamily: fontFamilyName,
+                                color: Colors.white,
+                                fontWeight: FontWeight.w800,
+                                fontSize: 18),
+                          ),
+                        ),
+                      ),
+                    ),
+                  )
                 ],
       ),
             ),

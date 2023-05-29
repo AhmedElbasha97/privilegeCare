@@ -15,4 +15,22 @@ class HospitalServices{
     }
     return null;
   }
+  static Future<List<HospitalListModel>?> advancedSearchForDoctorsWithArea(String searchType,String specialtyId,String areaId,String levelId,String startPrice,String endPrice,String homeVisit) async {
+    List<HospitalListModel>? hospitalsList = [];
+    var data = await api.request(Services.advancedSearchEndPoint, "POST",queryParamters: {
+      "type":searchType,
+      "spec":specialtyId,
+      "area":areaId,
+      "price_from":startPrice,
+      "price_to":endPrice,
+
+    });
+    if (data != null) {
+      for (var hospital in data){
+        hospitalsList.add(HospitalListModel.fromJson(hospital));
+      }
+      return hospitalsList;
+    }
+    return null;
+  }
 }
