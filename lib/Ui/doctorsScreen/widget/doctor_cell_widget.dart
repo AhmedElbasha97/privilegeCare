@@ -1,4 +1,4 @@
-// ignore_for_file: sized_box_for_whitespace
+// ignore_for_file: sized_box_for_whitespace, prefer_is_empty
 
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
@@ -172,7 +172,7 @@ class _DoctorCellWidgetState extends State<DoctorCellWidget> {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: [
-                      widget.doctorData?.listen==0?SizedBox(): Padding(
+                      widget.doctorData?.listen==0?const SizedBox(): Padding(
                         padding: const EdgeInsets.all(3.0),
                         child: Container(
                           width: Get.width*0.35,
@@ -208,7 +208,7 @@ class _DoctorCellWidgetState extends State<DoctorCellWidget> {
                           ),
                         ),
                       ),
-                      widget.doctorData?.explain==0?SizedBox():Padding(
+                      widget.doctorData?.explain==0?const SizedBox():Padding(
                         padding: const EdgeInsets.all(3.0),
                         child: Container(
                           width: Get.width*0.35,
@@ -399,9 +399,9 @@ class _DoctorCellWidgetState extends State<DoctorCellWidget> {
                         ),
                       ),
                       InkWell(
-                        onTap: () async {
+                        onTap: ()  {
                           widget.addingToFavorite();
-                          await checkDoctorAddedOrNot("${widget.doctorData?.id??0}");
+                           checkDoctorAddedOrNot("${widget.doctorData?.id??0}");
 
                         },
                         child: Padding(
@@ -421,7 +421,7 @@ class _DoctorCellWidgetState extends State<DoctorCellWidget> {
                               ],
                             ),
                             child:  Center(
-                              child: addedToFavoriteOrNot?Icon(Icons.favorite,color: kWhiteColor,):Icon(Icons.favorite_border_rounded,color: kWhiteColor,),
+                              child: addedToFavoriteOrNot?const Icon(Icons.favorite,color: kWhiteColor,):const Icon(Icons.favorite_border_rounded,color: kWhiteColor,),
                             ),
                           ),
                         ),
@@ -510,7 +510,7 @@ class _DoctorCellWidgetState extends State<DoctorCellWidget> {
                               ],
                             ),
                             child:  Center(
-                              child: addedToFavoriteOrNot? const Icon(Icons.favorite,color: kWhiteColor,):Icon(Icons.favorite_border_rounded,color: kWhiteColor,),
+                              child: addedToFavoriteOrNot? const Icon(Icons.favorite,color: kWhiteColor,):const Icon(Icons.favorite_border_rounded,color: kWhiteColor,),
                             ),
                           ),
                         ),

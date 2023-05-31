@@ -1,4 +1,4 @@
-// ignore_for_file: prefer_is_empty
+// ignore_for_file: prefer_is_empty, prefer_typing_uninitialized_variables
 
 import 'package:cool_alert/cool_alert.dart';
 import 'package:flutter/material.dart';
@@ -7,6 +7,8 @@ import 'package:privilegecare/Models/doctort_list_model.dart';
 import 'package:privilegecare/Models/response_model.dart';
 import 'package:privilegecare/Services/doctor_services.dart';
 import 'package:privilegecare/Services/favoutite_services.dart';
+import 'package:privilegecare/Ui/logInScreen/login_screen.dart';
+import 'package:privilegecare/Ui/signUpScreen/signup_screen.dart';
 import 'package:privilegecare/Utils/memory.dart';
 
 class DoctorListController extends GetxController {
@@ -19,6 +21,7 @@ class DoctorListController extends GetxController {
   late TextEditingController searchController;
   final ScrollController sController = ScrollController();
   List<DoctorListModel>? doctorsData = [];
+  int screenIndex = 3;
   final String specialistId;
   final String locationId;
 
@@ -73,7 +76,12 @@ class DoctorListController extends GetxController {
     isLoading = false;
     update();
   }
-
+goToScreen(){
+    if(screenIndex == 1){
+  Get.to(()=> const LoginScreen());}else if(screenIndex == 2){
+      Get.to(()=> const SignUpScreen());
+    }
+}
   addingOrRemovingFromFavorite(String doctorId,context,String doctorName) async {
     if (await checkDoctorAddedOrNot(doctorId)) {
       ResponseModel? status = await FavouriteServices
@@ -84,7 +92,7 @@ class DoctorListController extends GetxController {
 
       if (status?.msg == "succeeded") {
         final snackBar = SnackBar(
-          content: Text(' تم حذف الطبيب ${doctorName} من قائمة المفضله  '),
+          content: Text(' تم حذف الطبيب $doctorName من قائمة المفضله  '),
 
         );
         ScaffoldMessenger.of(context).showSnackBar(snackBar);
@@ -108,7 +116,7 @@ class DoctorListController extends GetxController {
 
       if (status?.msg == "succeeded") {
         final snackBar = SnackBar(
-          content: Text(' تم اضاف الطبيب ${doctorName} الى قائمة المفضلة '),
+          content: Text(' تم اضاف الطبيب $doctorName الى قائمة المفضلة '),
 
         );
         ScaffoldMessenger.of(context).showSnackBar(snackBar);
@@ -127,7 +135,7 @@ class DoctorListController extends GetxController {
   }
 
   Future<bool> checkDoctorAddedOrNot(String doctorId) async {
-    var status = await FavouriteServices.getAddedOrNotToFavoritesDoctor(doctorId, "${Get.find<StorageService>().getId}");
+    var status = await FavouriteServices.getAddedOrNotToFavoritesDoctor(doctorId, Get.find<StorageService>().getId);
     if(status == 1){
       return true;
 

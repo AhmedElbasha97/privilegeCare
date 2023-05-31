@@ -1,9 +1,10 @@
+// ignore_for_file: sized_box_for_whitespace
+
 import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:privilegecare/Utils/colors.dart';
-import 'package:privilegecare/Utils/constant.dart';
 import 'package:privilegecare/widgets/loader.dart';
 import 'package:video_player/video_player.dart';
 
@@ -133,7 +134,7 @@ class _FullScreenVideoPlayerWidgetState extends State<FullScreenVideoPlayerWidge
                           size: 30,
                         ),
                       ),
-                    )):SizedBox(),
+                    )):const SizedBox(),
                 showController?Positioned(
                     bottom: 10,
                     child: Padding(

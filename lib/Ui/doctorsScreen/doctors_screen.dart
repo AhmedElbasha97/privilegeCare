@@ -6,8 +6,7 @@ import 'package:get/get.dart';
 import 'package:privilegecare/Ui/doctorsScreen/controller/doctor_list_controller.dart';
 import 'package:privilegecare/Ui/doctorsScreen/widget/doctor_cell_widget.dart';
 import 'package:privilegecare/Ui/governmentScreen/govrnment_screen.dart';
-import 'package:privilegecare/Ui/logInScreen/login_screen.dart';
-import 'package:privilegecare/Ui/signUpScreen/signup_screen.dart';
+
 import 'package:privilegecare/Utils/colors.dart';
 import 'package:privilegecare/Utils/constant.dart';
 import 'package:privilegecare/Utils/memory.dart';
@@ -175,6 +174,7 @@ class DoctorScreen extends StatelessWidget {
                         controller: controller.sController,
                         itemBuilder: (_,index){
                           return DoctorCellWidget(doctorData: controller.doctorsData?[index], addingToFavorite: (){
+                            controller.screenIndex = 3;
                             if(Get.find<StorageService>().getId == "0") {
                               CoolAlert.show(
                                 context: context,
@@ -187,10 +187,10 @@ class DoctorScreen extends StatelessWidget {
                                     fontWeight: FontWeight.w800,
                                     fontSize: 15),
                                 onConfirmBtnTap: (){
-                                  Get.to(()=> const LoginScreen());
+                                  controller.screenIndex = 1;
                                 },
                                 onCancelBtnTap:(){
-                                  Get.to(()=> const SignUpScreen());
+                                  controller.screenIndex = 2;
                                 },
                                 confirmBtnText: 'تسجيل الدخول',
                                 cancelBtnText: 'إنشاء حساب',
@@ -207,7 +207,9 @@ class DoctorScreen extends StatelessWidget {
                                     fontSize: 15),
 
 
-                              );
+                              ).then((value){
+                                controller.goToScreen();
+                              });
                             }else{
                               controller.addingOrRemovingFromFavorite(
                                   "${controller.doctorsData?[index].id}",

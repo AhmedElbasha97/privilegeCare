@@ -1,11 +1,13 @@
 // ignore_for_file: sized_box_for_whitespace
 
+import 'package:cool_alert/cool_alert.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:privilegecare/Ui/hospital%20screen/controller/hospitall_controller.dart';
 import 'package:privilegecare/Ui/hospital%20screen/widget/hospital_cell_widget.dart';
 import 'package:privilegecare/Utils/colors.dart';
 import 'package:privilegecare/Utils/constant.dart';
+import 'package:privilegecare/Utils/memory.dart';
 import 'package:privilegecare/widgets/bottom_navigation_bar.dart';
 import 'package:privilegecare/widgets/loader.dart';
 
@@ -70,7 +72,51 @@ class _HospitalScreensState extends State<HospitalScreens> {
                       itemBuilder: (_,index){
                         return   Padding(
                           padding: const EdgeInsets.symmetric(vertical: 10.0),
-                          child: HospitalCellWidget(hospitalData: controller.hospitalListData?[index],),
+                          child: HospitalCellWidget(hospitalData: controller.hospitalListData?[index], addOrRemoveFromFavorite: (){
+                                controller.screenIndex = 3;
+                                if(Get.find<StorageService>().getId == "0") {
+                                CoolAlert.show(
+                                context: context,
+                                type: CoolAlertType.confirm,
+                                title: "",
+                                text: 'لا يمكن اضافه إلى قائمة المفضلة الا عند تسجيل الدخول او انشاء الحساب',
+                                textTextStyle: const TextStyle(
+                                fontFamily: fontFamilyName,
+                                color: kBlueColor,
+                                fontWeight: FontWeight.w800,
+                                fontSize: 15),
+                                onConfirmBtnTap: (){
+                                controller.screenIndex = 1;
+                                },
+                                onCancelBtnTap:(){
+                                controller.screenIndex = 2;
+                                },
+                                confirmBtnText: 'تسجيل الدخول',
+                                cancelBtnText: 'إنشاء حساب',
+                                confirmBtnColor: Colors.white,
+                                cancelBtnTextStyle:   const TextStyle(
+                                fontFamily: fontFamilyName,
+                                color: kGreenColor,
+                                fontWeight: FontWeight.w800,
+                                fontSize: 15),
+                                confirmBtnTextStyle: const TextStyle(
+                                fontFamily: fontFamilyName,
+                                color: kGreenColor,
+                                fontWeight: FontWeight.w800,
+                                fontSize: 15),
+
+
+                                ).then((value){
+                                controller.goToScreen();
+                                });
+                                }else{
+                                controller.addingOrRemovingFromFavorite(
+                                "${controller.hospitalListData?[index].id}",
+                                context,
+                                controller.hospitalListData?[index].name ?? "");
+
+                          }
+                          }),
                         );
                       },
                     ),

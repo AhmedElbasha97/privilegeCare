@@ -1,3 +1,5 @@
+// ignore_for_file: sized_box_for_whitespace
+
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:get/get.dart';
@@ -270,7 +272,7 @@ class FilterScreen extends StatelessWidget {
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
                               Text(
-                                "أختار المنطقة التى سوف يتم فيها البحث",
+                                "أختر المنطقة التى سوف يتم فيها البحث",
                                 style: TextStyle(
                                     fontFamily: fontFamilyName,
                                     color: kBlueColor,
@@ -474,7 +476,7 @@ class FilterScreen extends StatelessWidget {
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
                               const Text(
-                                "اختار التخصص الذى سوف يتم بناء البحث عليه",
+                                "أختر التخصص الذى سوف يتم بناء البحث عليه",
                                 style: TextStyle(
                                     fontFamily: fontFamilyName,
                                     color: kBlueColor,
@@ -556,7 +558,7 @@ class FilterScreen extends StatelessWidget {
                     padding: const EdgeInsets.symmetric(horizontal: 10.0),
                     child: Container(
                       width: Get.width,
-                      child: const Text("أختار مستوى الطبيب :",
+                      child: const Text("أختر مستوى الطبيب :",
                         textAlign: TextAlign.start,
                         style: TextStyle(
                             fontFamily: fontFamilyName,
@@ -680,7 +682,7 @@ class FilterScreen extends StatelessWidget {
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
                               const Text(
-                                "اختيار مستوى الطبيب الذى تريد البحث عنه",
+                                "أختر مستوى الطبيب الذى تريد البحث عنه",
                                 style: TextStyle(
                                     fontFamily: fontFamilyName,
                                     color: kBlueColor,
@@ -753,7 +755,7 @@ class FilterScreen extends StatelessWidget {
                     padding: const EdgeInsets.symmetric(horizontal: 10.0),
                     child: Container(
                       width: Get.width,
-                      child: const Text("أختار مدي السعر للكشف :",
+                      child: const Text("أختر مدي السعر للكشف :",
                         textAlign: TextAlign.start,
                         style: TextStyle(
                             fontFamily: fontFamilyName,
@@ -786,7 +788,7 @@ class FilterScreen extends StatelessWidget {
                               ),
                               child: RangeSlider(
                                 min: 0,
-                                max: 100,
+                                max: 1000,
                                 activeColor:kGreenColor,
                                 inactiveColor: kBlueColor,
                                 labels: RangeLabels(
@@ -925,7 +927,7 @@ class FilterScreen extends StatelessWidget {
                     padding: const EdgeInsets.symmetric(horizontal: 10.0),
                     child: Container(
                       width: Get.width,
-                      child: const Text("اختيار مستوى التقيم :",
+                      child: const Text("أختر مستوى التقيم :",
                         textAlign: TextAlign.start,
                         style: TextStyle(
                             fontFamily: fontFamilyName,
@@ -1117,7 +1119,7 @@ class FilterScreen extends StatelessWidget {
                         InkWell(
 
                           onTap: (){
-                            controller.choosingSearchDisclose("1");;
+                            controller.choosingSearchDisclose("1");
                           },
                           child: Row(
                             children: [

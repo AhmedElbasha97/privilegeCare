@@ -4,21 +4,52 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:privilegecare/Models/hospital_list_model.dart';
+import 'package:privilegecare/Services/favoutite_services.dart';
 import 'package:privilegecare/Ui/hospitalDetailed/hospital_detailed_screen.dart';
 import 'package:privilegecare/Utils/colors.dart';
 import 'package:privilegecare/Utils/constant.dart';
+import 'package:privilegecare/Utils/localization_services.dart';
+import 'package:privilegecare/Utils/memory.dart';
 import 'package:privilegecare/widgets/loader.dart';
 
-class HospitalCellWidget extends StatelessWidget {
+class HospitalCellWidget extends StatefulWidget {
   final HospitalListModel? hospitalData;
-  const HospitalCellWidget({Key? key, required this.hospitalData}) : super(key: key);
+  final Function addOrRemoveFromFavorite;
+  const HospitalCellWidget({Key? key, required this.hospitalData, required this.addOrRemoveFromFavorite}) : super(key: key);
 
+  @override
+  State<HospitalCellWidget> createState() => _HospitalCellWidgetState();
+}
+
+class _HospitalCellWidgetState extends State<HospitalCellWidget> {
+  bool addedToFavoriteOrNot = true;
+  @override
+  void initState() {
+    super.initState();
+    checkHospitalAddedOrNot( "${widget.hospitalData?.id??0}");
+  }
+  checkHospitalAddedOrNot(String hospitalId) async {
+    var status = await FavouriteServices.getAddedOrNotToFavoritesHospital(hospitalId, Get.find<StorageService>().getId);
+    if(status == 1){
+      addedToFavoriteOrNot =  true;
+      setState(() {
+
+      });
+
+    }else{
+      addedToFavoriteOrNot =   false;
+      setState(() {
+
+      });
+
+    }
+  }
   @override
   Widget build(BuildContext context) {
     return    InkWell(
       onTap: (){
-        Get.to(()=>HospitalDetailedScreen(hospitalId: "${hospitalData?.id??0}"));
-        
+        Get.to(()=>HospitalDetailedScreen(hospitalId: "${widget.hospitalData?.id??0}"));
+
       },
       child: Container(
         width: Get.width,
@@ -27,7 +58,7 @@ class HospitalCellWidget extends StatelessWidget {
           children: [
             CachedNetworkImage(
               fit: BoxFit.cover,
-              imageUrl: "https://privilegecare.net${hospitalData?.image??""}",
+              imageUrl: "https://privilegecare.net${widget.hospitalData?.image?.length==0?"":widget.hospitalData?.image?[0]??""}",
               imageBuilder: ((context, image){
                 return  Container(
                     height: Get.height*0.12,
@@ -36,7 +67,7 @@ class HospitalCellWidget extends StatelessWidget {
                     decoration: BoxDecoration(
                         image: DecorationImage(
                           image: image,
-                          fit: BoxFit.cover,
+                          fit: BoxFit.contain,
                         ),
                         borderRadius:
                         const BorderRadius.all(Radius.circular(15))
@@ -58,7 +89,8 @@ class HospitalCellWidget extends StatelessWidget {
               },
               errorWidget: (context, url, error){
                 return Container(
-                    width: MediaQuery.of(context).size.width,
+                    height: Get.height*0.12,
+                    width: Get.width*0.8,
                     margin: const EdgeInsets.symmetric(horizontal: 5.0),
                     decoration: const BoxDecoration(
                         image: DecorationImage(
@@ -77,7 +109,7 @@ class HospitalCellWidget extends StatelessWidget {
               width: Get.width,
               child:  Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 10.0),
-                child: Text(hospitalData?.name??"",
+                child: Text(Get.find<StorageService>().activeLocale == SupportedLocales.english?widget.hospitalData?.name??"":widget.hospitalData?.name??"",
                   style: const TextStyle(
                       fontFamily: fontFamilyName,
 
@@ -91,7 +123,7 @@ class HospitalCellWidget extends StatelessWidget {
               width: Get.width,
               child:  Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 10.0),
-                child: Text(hospitalData?.area??"",
+                child: Text(widget.hospitalData?.details??"",
 
                   style: const TextStyle(
                       fontFamily: fontFamilyName,
@@ -114,7 +146,7 @@ class HospitalCellWidget extends StatelessWidget {
                   const SizedBox(width: 10,),
                   Container(
                     width: Get.width*0.6,
-                    child:  Text(hospitalData?.address??"",
+                    child:  Text(Get.find<StorageService>().activeLocale == SupportedLocales.english?widget.hospitalData?.areaEn??"":widget.hospitalData?.area??"",
                       style: const TextStyle(
                           fontFamily:fontFamilyName,
                           color: kBlueColor,
@@ -143,7 +175,7 @@ class HospitalCellWidget extends StatelessWidget {
                   const SizedBox(width: 10,),
                   Container(
                     width: Get.width*0.18,
-                    child: Text(hospitalData?.phone??"",
+                    child: Text(widget.hospitalData?.phone??"",
                       textAlign: TextAlign.start,
                       style: const TextStyle(
                           fontFamily: fontFamilyName,
@@ -155,32 +187,49 @@ class HospitalCellWidget extends StatelessWidget {
               ),
             ),
             const SizedBox(height: 10,),
-            Container(
-              width: Get.width*0.4,
-              height: Get.height*0.04,
-              decoration: BoxDecoration(
-                color: kBlueColor,
-                borderRadius: BorderRadius.circular(10),
-                boxShadow: const [
-                  BoxShadow(
-                    offset: Offset(0, 2),
-                    blurRadius: 6,
-                    color: Colors.black12,
-                  ),
-                ],
-              ),
-              child: const Center(
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  children: [
-                    Icon(Icons.favorite_border_rounded,color: kWhiteColor,),
-                    Text("أضف إلى المفضلة",
-                      style: TextStyle(
-                          fontFamily: fontFamilyName,
-                          color: kWhiteColor,
-                          fontWeight: FontWeight.w700,
-                          fontSize: 14),),
+            InkWell(
+              onTap: (){
+                widget.addOrRemoveFromFavorite();
+                checkHospitalAddedOrNot("${widget.hospitalData?.id??""}");
+              },
+              child: Container(
+                width: Get.width*0.4,
+                height: Get.height*0.04,
+                decoration: BoxDecoration(
+                  color: kBlueColor,
+                  borderRadius: BorderRadius.circular(10),
+                  boxShadow: const [
+                    BoxShadow(
+                      offset: Offset(0, 2),
+                      blurRadius: 6,
+                      color: Colors.black12,
+                    ),
                   ],
+                ),
+                child:  Center(
+                  child: addedToFavoriteOrNot?const Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: [
+                      Icon(Icons.favorite,color: kWhiteColor,),
+                      Text("مسح من المفضله",
+                        style: TextStyle(
+                            fontFamily: fontFamilyName,
+                            color: kWhiteColor,
+                            fontWeight: FontWeight.w700,
+                            fontSize: 14),),
+                    ],
+                  ):const Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      children: [
+                        Icon(Icons.favorite_border_rounded,color: kWhiteColor,),
+                        Text("أضف إلى المفضلة",
+                          style: TextStyle(
+                              fontFamily: fontFamilyName,
+                              color: kWhiteColor,
+                              fontWeight: FontWeight.w700,
+                              fontSize: 14),),
+                      ],
+                  ),
                 ),
               ),
             ),

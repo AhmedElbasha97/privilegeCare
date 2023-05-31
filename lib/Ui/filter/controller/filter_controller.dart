@@ -1,3 +1,5 @@
+// ignore_for_file: prefer_typing_uninitialized_variables, prefer_is_empty
+
 import 'package:cool_alert/cool_alert.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -43,7 +45,7 @@ class FilterController extends GetxController{
   List<RatingModel> ratingsListData = [RatingModel(title: "نجمة واحده واكثر",id: "1"),RatingModel(title: "نجمتين واحده واكثر",id: "2"),RatingModel(title:"ثلاث نجوم واكثر",id: "3"),RatingModel(title: "اربع نجوم واكثر",id: "4"),RatingModel(title: "خمس نجوم",id: "5")];
   int sVal =0;
   int sFal =0;
-  RangeValues currentRangeValues = const RangeValues(0,100);
+  RangeValues currentRangeValues = const RangeValues(0,1000);
   @override
   void onInit() {
     // TODO: implement onInit
@@ -51,7 +53,7 @@ class FilterController extends GetxController{
     startPriceRange = TextEditingController();
     endPriceRange = TextEditingController();
     startPriceRange.text = "0";
-    endPriceRange.text = "100";
+    endPriceRange.text = "1000";
     getData();
   }
   getData() async{
@@ -100,41 +102,18 @@ class FilterController extends GetxController{
       endPriceRange.text = "100";
     }
   }
-  addingOrRemovingFromFavorite(String doctorId,context,String doctorName) async {
-    if (await checkDoctorAddedOrNot(doctorId)) {
+  addingOrRemovingFromFavorite(String objectId,context,String objectName) async {
+    if(choosenSearchType == "D"){
+    if (await checkAddedOrNotToFavorite(objectId)) {
       ResponseModel? status = await FavouriteServices
           .addOrRemoveDoctorFromFavorite(
-          doctorId, Get
+          objectId, Get
           .find<StorageService>()
           .getId, "0");
 
       if (status?.msg == "succeeded") {
         final snackBar = SnackBar(
-          content: Text(' تم حذف الطبيب ${doctorName} من قائمة المفضله  '),
-
-        );
-        ScaffoldMessenger.of(context).showSnackBar(snackBar);
-        Future.delayed(const Duration(milliseconds: 7000), () {
-          update();});
-      } else {
-        var data;
-        CoolAlert.show(
-            context: context,
-            type: CoolAlertType.error,
-            title: "حدث خطأ",
-            text: data?.msg
-        );
-      }
-    } else {
-      ResponseModel? status = await FavouriteServices
-          .addOrRemoveDoctorFromFavorite(
-          doctorId, Get
-          .find<StorageService>()
-          .getId, "1");
-
-      if (status?.msg == "succeeded") {
-        final snackBar = SnackBar(
-          content: Text(' تم اضاف الطبيب ${doctorName} الى قائمة المفضلة '),
+          content: Text(' تم حذف الطبيب $objectName من قائمة المفضله  '),
 
         );
         ScaffoldMessenger.of(context).showSnackBar(snackBar);
@@ -150,10 +129,88 @@ class FilterController extends GetxController{
         );
       }
     }
+    else {
+      ResponseModel? status = await FavouriteServices
+          .addOrRemoveDoctorFromFavorite(
+          objectId, Get
+          .find<StorageService>()
+          .getId, "1");
+
+      if (status?.msg == "succeeded") {
+        final snackBar = SnackBar(
+          content: Text(' تم اضاف الطبيب $objectName الى قائمة المفضلة '),
+
+        );
+        ScaffoldMessenger.of(context).showSnackBar(snackBar);
+        Future.delayed(const Duration(milliseconds: 7000), () {
+          update();});
+      } else {
+        var data;
+        CoolAlert.show(
+            context: context,
+            type: CoolAlertType.error,
+            title: "حدث خطأ",
+            text: data?.msg
+        );
+      }}
+
+    }else{
+      if (await checkAddedOrNotToFavorite(objectId)) {
+        ResponseModel? status = await FavouriteServices
+            .addOrRemoveHospitalFromFavorite(
+            objectId, Get
+            .find<StorageService>()
+            .getId, "0");
+
+        if (status?.msg == "succeeded") {
+          final snackBar = SnackBar(
+            content: Text(' تم حذف المستشفى $objectName من قائمة المفضله  '),
+
+          );
+
+          ScaffoldMessenger.of(context).showSnackBar(snackBar);
+          Future.delayed(const Duration(milliseconds: 7000), () {
+            update();});
+        } else {
+          var data;
+          CoolAlert.show(
+              context: context,
+              type: CoolAlertType.error,
+              title: "حدث خطأ",
+              text: data?.msg
+          );
+        }
+      }
+      else {
+        ResponseModel? status = await FavouriteServices
+            .addOrRemoveHospitalFromFavorite(
+            objectId, Get
+            .find<StorageService>()
+            .getId, "1");
+
+        if (status?.msg == "succeeded") {
+          final snackBar = SnackBar(
+            content: Text(' تم اضاف المستشفى $objectName الى قائمة المفضلة '),
+
+          );
+          ScaffoldMessenger.of(context).showSnackBar(snackBar);
+          Future.delayed(const Duration(milliseconds: 7000), () {
+            update();});
+        } else {
+          var data;
+          CoolAlert.show(
+              context: context,
+              type: CoolAlertType.error,
+              title: "حدث خطأ",
+              text: data?.msg
+          );
+        }}
+    }
   }
 
-  Future<bool> checkDoctorAddedOrNot(String doctorId) async {
-    var status = await FavouriteServices.getAddedOrNotToFavoritesDoctor(doctorId, "${Get.find<StorageService>().getId}");
+  Future<bool> checkAddedOrNotToFavorite(String objectId) async {
+    var status = choosenSearchType == "D"?await FavouriteServices.getAddedOrNotToFavoritesDoctor(objectId, Get.find<StorageService>().getId):
+    FavouriteServices.getAddedOrNotToFavoritesHospital(objectId, Get.find<StorageService>().getId);
     if(status == 1){
       return true;
 
@@ -183,11 +240,17 @@ class FilterController extends GetxController{
     if(choosenSearchType == "D"){
       doctorsData = await DoctorServices.advancedSearchForDoctorsWithArea(choosenSearchType, specialtyId, placeId, levelId, "$sVal", "$sFal", choosenDiscloseType);
     searchIsLoading = false;
+    if(doctorsData?.length == 0||doctorsData == []){
+      hasNoData = true;
+    }
     update();
     Get.to(()=>const AdvancedSearchScreen());
     }else{
      hospitalListData = await HospitalServices.advancedSearchForDoctorsWithArea(choosenSearchType, specialtyId, placeId, levelId, "$sVal", "$sFal", choosenDiscloseType);
      searchIsLoading = false;
+     if(doctorsData?.length == 0||doctorsData == []){
+       hasNoData = true;
+     }
      update();
      Get.to(()=>const AdvancedSearchScreen());
     }

@@ -1,11 +1,20 @@
+// ignore_for_file: sized_box_for_whitespace
+
+import 'dart:ffi';
+
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:carousel_slider/carousel_slider.dart';
+import 'package:cool_alert/cool_alert.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:privilegecare/Ui/hospitalDetailed/controller/hospital_detailed_controller.dart';
 
 import 'package:privilegecare/Utils/colors.dart';
 import 'package:privilegecare/Utils/constant.dart';
+import 'package:privilegecare/Utils/localization_services.dart';
+import 'package:privilegecare/Utils/memory.dart';
 import 'package:privilegecare/widgets/bottom_navigation_bar.dart';
+import 'package:privilegecare/widgets/loader.dart';
 import 'package:star_rating/star_rating.dart';
 
 class HospitalDetailedScreen extends StatelessWidget {
@@ -15,7 +24,7 @@ class HospitalDetailedScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GetBuilder<HospitalDetailedController>(
-      init: HospitalDetailedController(),
+      init: HospitalDetailedController(hospitalId),
       builder: (controller) => Scaffold(
         appBar: AppBar(
           backgroundColor: kGreenColor,
@@ -40,20 +49,69 @@ class HospitalDetailedScreen extends StatelessWidget {
               padding: const EdgeInsets.all(8.0),
               child: Row(
                 children: [
-                  Container(
-                    height: 30,
-                    width: 30,
-                    decoration: BoxDecoration(
-                      color: kWhiteColor,
-                      borderRadius: BorderRadius.circular(10),
+                  InkWell(
+                    onTap: (){
 
-                    ),
-                    child:  const Center(
-                      child:Icon(
-                        Icons.favorite_border_rounded,
-                        color: kBlueColor,
-                      ),
-                    ),
+            controller.screenIndex = 3;
+            if(Get.find<StorageService>().getId == "0") {
+
+            CoolAlert.show(
+            context: context,
+            type: CoolAlertType.confirm,
+            title: "",
+            text: 'لا يمكن اضافه إلى قائمة المفضلة الا عند تسجيل الدخول او انشاء الحساب',
+            textTextStyle: const TextStyle(
+            fontFamily: fontFamilyName,
+            color: kBlueColor,
+            fontWeight: FontWeight.w800,
+            fontSize: 15),
+            onConfirmBtnTap: (){
+            controller.screenIndex = 1;
+            },
+            onCancelBtnTap:(){
+            controller.screenIndex = 2;
+            },
+            confirmBtnText: 'تسجيل الدخول',
+            cancelBtnText: 'إنشاء حساب',
+            confirmBtnColor: Colors.white,
+            cancelBtnTextStyle:   const TextStyle(
+            fontFamily: fontFamilyName,
+            color: kGreenColor,
+            fontWeight: FontWeight.w800,
+            fontSize: 15),
+            confirmBtnTextStyle: const TextStyle(
+            fontFamily: fontFamilyName,
+            color: kGreenColor,
+            fontWeight: FontWeight.w800,
+            fontSize: 15),
+            ).then((value){
+            controller.goToScreen();
+            });
+            }else{
+            controller.addingOrRemovingFromFavorite(
+            "${controller.hospitalData?.id}",
+            context,
+            controller.hospitalData?.name ?? "");
+            }},
+
+              child: Container(
+              height: 30,
+              width: 30,
+              decoration: BoxDecoration(
+                color: kWhiteColor,
+                borderRadius: BorderRadius.circular(10),
+
+              ),
+              child:  Center(
+                child: controller.hospitalAddedOrNot?const Icon(
+                  Icons.favorite,
+                  color: kBlueColor,
+                ):const Icon(
+                  Icons.favorite_border_rounded,
+                  color: kBlueColor,
+                ),
+                  ),
+                ),
                   ),
                   const SizedBox(width: 10,),
                   InkWell(
@@ -84,7 +142,7 @@ class HospitalDetailedScreen extends StatelessWidget {
         ),
         bottomNavigationBar: const BottomNavigationBarWidget(selectedTap: 3,),
         backgroundColor: kLightGrayColor,
-        body: RawScrollbar(
+        body: controller.isLoading?const Loader():RawScrollbar(
           thumbColor: kBlueColor,
           radius: const Radius.circular(20),
           thickness: 5,
@@ -95,61 +153,184 @@ class HospitalDetailedScreen extends StatelessWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
-                  SizedBox(height: 20,),
-                  Container(
-                    height: Get.height*0.11,
-                    width: Get.width*0.3,
-                    padding: const EdgeInsets.all(1),
-                    decoration: BoxDecoration(
-                      border: Border.all(color: kBlueColor,width: 2),
-                      borderRadius: BorderRadius.circular(15),
-                    ),
-                    child: Container(
-                      height: Get.height*0.12,
-                      width: Get.width*0.3,
-                      padding: const EdgeInsets.all(1),
-                      decoration: BoxDecoration(
-                        border: Border.all(color: kGreenColor,width: 2),
-                        borderRadius: BorderRadius.circular(15),
-                      ),
-                      child: Container(
-                        height: Get.height*0.12,
+                  const SizedBox(height: 20,),
+                  CachedNetworkImage(
+                    fit: BoxFit.cover,
+                    imageUrl: "https://privilegecare.net${controller.hospitalData?.image?[0]??""}",
+                    imageBuilder: ((context, image){
+                      return   Container(
+                        height: Get.height*0.11,
                         width: Get.width*0.3,
+                        padding: const EdgeInsets.all(1),
                         decoration: BoxDecoration(
-                          color: kBlueColor,
-
+                          border: Border.all(color: kBlueColor,width: 2),
                           borderRadius: BorderRadius.circular(15),
                         ),
-                        child: const Center(
-                          child: Icon(Icons.camera_alt_outlined,size: 40,color: Colors.white,),
+                        child: Container(
+                          height: Get.height*0.12,
+                          width: Get.width*0.3,
+                          padding: const EdgeInsets.all(1),
+                          decoration: BoxDecoration(
+                            border: Border.all(color: kGreenColor,width: 2),
+                            borderRadius: BorderRadius.circular(15),
+                          ),
+                          child: Container(
+                            height: Get.height*0.12,
+                            width: Get.width*0.3,
+                            decoration: BoxDecoration(
+                              color: kBlueColor,
+                              image: DecorationImage(
+                                image: image,
+                                fit: BoxFit.fill,
+                              ),
+                              borderRadius: BorderRadius.circular(15),
+                            ),
+
+                          ),
                         ),
-                      ),
-                    ),
+                      );
+                    }),
+                    placeholder: (context, image){
+                      return    Container(
+                        height: Get.height*0.11,
+                        width: Get.width*0.3,
+                        padding: const EdgeInsets.all(1),
+                        decoration: BoxDecoration(
+                          border: Border.all(color: kBlueColor,width: 2),
+                          borderRadius: BorderRadius.circular(15),
+                        ),
+                        child: Container(
+                          height: Get.height*0.12,
+                          width: Get.width*0.3,
+                          padding: const EdgeInsets.all(1),
+                          decoration: BoxDecoration(
+                            border: Border.all(color: kGreenColor,width: 2),
+                            borderRadius: BorderRadius.circular(15),
+                          ),
+                          child: Container(
+                            height: Get.height*0.12,
+                            width: Get.width*0.3,
+                            decoration: BoxDecoration(
+                              color: kBlueColor,
+
+                              borderRadius: BorderRadius.circular(15),
+                            ),
+                            child: const Center(
+                              child: CircularProgressIndicator(color: kGreenColor,),
+                            ),
+                          ),
+                        ),
+                      );
+                    },
+                    errorWidget: (context, url, error){
+                      return Container(
+                          height: 80,
+                          width: 80,
+
+                          decoration: const BoxDecoration(
+                            image: DecorationImage(
+                              image: AssetImage("assets/images/logo.png"),
+                              fit: BoxFit.fill,
+                            ),
+
+
+                          )
+                      );
+                    },
                   ),
+
                   const SizedBox(height: 20,),
-                  const Padding(
-                    padding: EdgeInsets.symmetric(horizontal: 10.0),
-                    child: Text("مستشفي الصفوة",
-                      style: TextStyle(
+                   Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 10.0),
+                    child: Text(Get.find<StorageService>().activeLocale == SupportedLocales.english?controller.hospitalData?.nameEn??"":controller.hospitalData?.name??"",
+                      style: const TextStyle(
                           fontFamily: fontFamilyName,
 
                           color: kBlueColor,
                           fontWeight: FontWeight.w800,
                           fontSize: 20),),
                   ),
-                  SizedBox(height: 10,),
+                  const SizedBox(height: 10,),
                   StarRating(
                     color: kGreenColor,
                     mainAxisAlignment: MainAxisAlignment.center,
                     length: 5,
-                    rating: 0.0,
+                    rating: (controller.hospitalData?.rate??0).toDouble(),
                     between: 0,
                     starSize: 20,
                     onRaitingTap: (rating) {
 
                     },
                   ),
+                  controller.hospitalData?.lab==0 && controller.hospitalData?.xray==0 ?
+                  Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 10.0),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      children: [
+                        Row(
+                          children: [
+                            SizedBox(
+                              height: 35,
+                              width: 27,
+                              child: Image.asset("assets/icons/specialty_icon.png",fit: BoxFit.fitHeight,),
+                            ),
+                            const SizedBox(width: 5,),
+                             Column(
+                              children: [
+                                const Text("التخصصات",
+                                  style: TextStyle(
+                                      fontFamily: fontFamilyName,
 
+                                      color: kBlueColor,
+                                      fontWeight: FontWeight.w800,
+                                      fontSize: 13),),
+                                const SizedBox(height: 5,),
+                                Text("${controller.hospitalData?.specCount??0} تخصص",
+                                  style: const TextStyle(
+                                      fontFamily: fontFamilyName,
+
+                                      color: kGreenColor,
+                                      fontWeight: FontWeight.w800,
+                                      fontSize: 13),),
+                              ],
+                            )
+                          ],
+                        ),
+                        Row(
+                          children: [
+                            SizedBox(
+                              height: 35,
+                              width: 38,
+                              child: Image.asset("assets/icons/doctor_icon.png",fit: BoxFit.fitHeight,),
+                            ),
+                            const SizedBox(width: 5,),
+                             Column(
+                              children: [
+                                const Text("الدكاترة",
+                                  style: TextStyle(
+                                      fontFamily: fontFamilyName,
+
+                                      color: kBlueColor,
+                                      fontWeight: FontWeight.w800,
+                                      fontSize: 13),),
+                                const SizedBox(height: 5,),
+                                Text("${controller.hospitalData?.doctors??0} دكتور",
+                                  style: const TextStyle(
+                                      fontFamily: fontFamilyName,
+
+                                      color: kGreenColor,
+                                      fontWeight: FontWeight.w800,
+                                      fontSize: 13),),
+                              ],
+                            )
+                          ],
+                        ),
+
+
+                      ],
+                    ),
+                  ):controller.hospitalData?.lab==1 && controller.hospitalData?.xray == 1?
                   Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 10.0),
                     child: Row(
@@ -162,19 +343,19 @@ class HospitalDetailedScreen extends StatelessWidget {
                               width: 27,
                               child: Image.asset("assets/icons/specialty_icon.png",fit: BoxFit.fitHeight,),
                             ),
-                            SizedBox(width: 5,),
-                            const Column(
+                            const SizedBox(width: 5,),
+                            Column(
                               children: [
-                                Text("التخصصات",
+                                const Text("التخصصات",
                                   style: TextStyle(
                                       fontFamily: fontFamilyName,
 
                                       color: kBlueColor,
                                       fontWeight: FontWeight.w800,
                                       fontSize: 13),),
-                                SizedBox(height: 5,),
-                                Text("20 تخصص",
-                                  style: TextStyle(
+                                const SizedBox(height: 5,),
+                                Text("${controller.hospitalData?.specCount??0} تخصص",
+                                  style: const TextStyle(
                                       fontFamily: fontFamilyName,
 
                                       color: kGreenColor,
@@ -192,19 +373,19 @@ class HospitalDetailedScreen extends StatelessWidget {
                               width: 38,
                               child: Image.asset("assets/icons/doctor_icon.png",fit: BoxFit.fitHeight,),
                             ),
-                            SizedBox(width: 5,),
-                            const Column(
+                            const SizedBox(width: 5,),
+                            Column(
                               children: [
-                                Text("الدكاترة",
+                                const Text("الدكاترة",
                                   style: TextStyle(
                                       fontFamily: fontFamilyName,
 
                                       color: kBlueColor,
                                       fontWeight: FontWeight.w800,
                                       fontSize: 13),),
-                                SizedBox(height: 5,),
-                                Text("20 دكتور",
-                                  style: TextStyle(
+                                const SizedBox(height: 5,),
+                                Text("${controller.hospitalData?.doctors??0} دكتور",
+                                  style: const TextStyle(
                                       fontFamily: fontFamilyName,
 
                                       color: kGreenColor,
@@ -222,8 +403,8 @@ class HospitalDetailedScreen extends StatelessWidget {
                               width: 27,
                               child: Image.asset("assets/icons/analysis_icon.png",fit: BoxFit.fitHeight,),
                             ),
-                            SizedBox(width: 5,),
-                             const Column(
+                            const SizedBox(width: 5,),
+                            const Column(
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: [
                                 Text("التحاليل",
@@ -246,8 +427,8 @@ class HospitalDetailedScreen extends StatelessWidget {
                               width: 27,
                               child: Image.asset("assets/icons/rays_icons.png",fit: BoxFit.fitHeight,),
                             ),
-                            SizedBox(width: 5,),
-                             const Column(
+                            const SizedBox(width: 5,),
+                            const Column(
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: [
                                 Text("الأشعة",
@@ -264,73 +445,285 @@ class HospitalDetailedScreen extends StatelessWidget {
                         ),
                       ],
                     ),
-                  ),
+                  ):controller.hospitalData?.lab==1?
+                  Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 10.0),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceAround,
+                      children: [
+                        Row(
+                          children: [
+                            SizedBox(
+                              height: 35,
+                              width: 27,
+                              child: Image.asset("assets/icons/specialty_icon.png",fit: BoxFit.fitHeight,),
+                            ),
+                            const SizedBox(width: 5,),
+                            Column(
+                              children: [
+                                const Text("التخصصات",
+                                  style: TextStyle(
+                                      fontFamily: fontFamilyName,
+
+                                      color: kBlueColor,
+                                      fontWeight: FontWeight.w800,
+                                      fontSize: 13),),
+                                const SizedBox(height: 5,),
+                                Text("${controller.hospitalData?.specCount??0} تخصص",
+                                  style: const TextStyle(
+                                      fontFamily: fontFamilyName,
+
+                                      color: kGreenColor,
+                                      fontWeight: FontWeight.w800,
+                                      fontSize: 13),),
+                              ],
+                            )
+                          ],
+                        ),
+                        Row(
+                          children: [
+                            SizedBox(
+                              height: 35,
+                              width: 38,
+                              child: Image.asset("assets/icons/doctor_icon.png",fit: BoxFit.fitHeight,),
+                            ),
+                            const SizedBox(width: 5,),
+                            Column(
+                              children: [
+                                const Text("الدكاترة",
+                                  style: TextStyle(
+                                      fontFamily: fontFamilyName,
+
+                                      color: kBlueColor,
+                                      fontWeight: FontWeight.w800,
+                                      fontSize: 13),),
+                                const SizedBox(height: 5,),
+                                Text("${controller.hospitalData?.doctors??0} دكتور",
+                                  style: const TextStyle(
+                                      fontFamily: fontFamilyName,
+
+                                      color: kGreenColor,
+                                      fontWeight: FontWeight.w800,
+                                      fontSize: 13),),
+                              ],
+                            )
+                          ],
+                        ),
+                        Row(
+                          children: [
+                            SizedBox(
+                              height: 35,
+                              width: 27,
+                              child: Image.asset("assets/icons/analysis_icon.png",fit: BoxFit.fitHeight,),
+                            ),
+                            const SizedBox(width: 5,),
+                            const Column(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Text("التحاليل",
+                                  style: TextStyle(
+                                      fontFamily: fontFamilyName,
+
+                                      color: kBlueColor,
+                                      fontWeight: FontWeight.w800,
+                                      fontSize: 13),),
+
+                              ],
+                            )
+                          ],
+                        ),
+
+                      ],
+                    ),
+                  ):controller.hospitalData?.xray==1?
+                  Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 10.0),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceAround,
+                      children: [
+                        Row(
+                          children: [
+                            SizedBox(
+                              height: 35,
+                              width: 27,
+                              child: Image.asset("assets/icons/specialty_icon.png",fit: BoxFit.fitHeight,),
+                            ),
+                            const SizedBox(width: 5,),
+                            Column(
+                              children: [
+                                const Text("التخصصات",
+                                  style: TextStyle(
+                                      fontFamily: fontFamilyName,
+
+                                      color: kBlueColor,
+                                      fontWeight: FontWeight.w800,
+                                      fontSize: 13),),
+                                const SizedBox(height: 5,),
+                                Text("${controller.hospitalData?.specCount??0} تخصص",
+                                  style: const TextStyle(
+                                      fontFamily: fontFamilyName,
+
+                                      color: kGreenColor,
+                                      fontWeight: FontWeight.w800,
+                                      fontSize: 13),),
+                              ],
+                            )
+                          ],
+                        ),
+                        Row(
+                          children: [
+                            SizedBox(
+                              height: 35,
+                              width: 38,
+                              child: Image.asset("assets/icons/doctor_icon.png",fit: BoxFit.fitHeight,),
+                            ),
+                            const SizedBox(width: 5,),
+                            Column(
+                              children: [
+                                const Text("الدكاترة",
+                                  style: TextStyle(
+                                      fontFamily: fontFamilyName,
+
+                                      color: kBlueColor,
+                                      fontWeight: FontWeight.w800,
+                                      fontSize: 13),),
+                                const SizedBox(height: 5,),
+                                Text("${controller.hospitalData?.doctors??0} دكتور",
+                                  style: const TextStyle(
+                                      fontFamily: fontFamilyName,
+
+                                      color: kGreenColor,
+                                      fontWeight: FontWeight.w800,
+                                      fontSize: 13),),
+                              ],
+                            )
+                          ],
+                        ),
+                        Row(
+                          children: [
+                            SizedBox(
+                              height: 35,
+                              width: 27,
+                              child: Image.asset("assets/icons/rays_icons.png",fit: BoxFit.fitHeight,),
+                            ),
+                            const SizedBox(width: 5,),
+                            const Column(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Text("الأشعة",
+                                  style: TextStyle(
+                                      fontFamily: fontFamilyName,
+
+                                      color: kBlueColor,
+                                      fontWeight: FontWeight.w800,
+                                      fontSize: 13),),
+
+                              ],
+                            )
+                          ],
+                        ),
+
+                      ],
+                    ),
+                  ):const SizedBox(),
                   const SizedBox(height: 20,),
                   CarouselSlider.builder(
                     carouselController: controller.cController,
-                    itemCount: 5,
+                    itemCount: controller.hospitalData?.image?.length,
                     itemBuilder: (context, index, realIdx){
-                      return Stack(
-                        children: [
-                          Padding(
-                            padding: const EdgeInsets.all(8.0),
-                            child: Container(
-                              width: Get.width*0.9,
-                              height: Get.height*0.2,
+                      return CachedNetworkImage(
+                        fit: BoxFit.cover,
+                        imageUrl: "https://privilegecare.net${controller.hospitalData?.image?[index]??""}",
+                        imageBuilder: ((context, image){
+                          return  Stack(
+                            children: [
+                              Padding(
+                                padding: const EdgeInsets.all(8.0),
+                                child: Container(
+                                  width: Get.width*0.9,
+                                  height: Get.height*0.2,
 
-                              margin: const EdgeInsets.symmetric(horizontal: 5.0),
-                              decoration:  const BoxDecoration(
-                                color: Colors.transparent,
-                                image: DecorationImage(
-                                    image: AssetImage('assets/images/doctor banner home.png'),
-                                    fit: BoxFit.cover),
-                                borderRadius: BorderRadius.all(Radius.circular(10)),
-                                boxShadow: [
-                                  BoxShadow(
-                                    offset: Offset(0, 2),
-                                    blurRadius: 6,
-                                    color: Colors.black12,
+                                  margin: const EdgeInsets.symmetric(horizontal: 5.0),
+                                  decoration:   BoxDecoration(
+                                    color: Colors.transparent,
+                                    image: DecorationImage(
+                                        image: image,
+                                        fit: BoxFit.fill),
+                                    borderRadius: const BorderRadius.all(Radius.circular(10)),
+                                    boxShadow: const [
+                                      BoxShadow(
+                                        offset: Offset(0, 2),
+                                        blurRadius: 6,
+                                        color: Colors.black12,
+                                      ),
+                                    ],
                                   ),
-                                ],
+
+                                ),
                               ),
+                              Positioned(
+                                top: 10,
+                                left: 10,
+                                child: Padding(
+                                  padding: const EdgeInsets.all(8.0),
+                                  child: Container(
+                                    height:30,
+                                    width:50,
+                                    decoration:  const BoxDecoration(
+                                      color: Color.fromRGBO(0, 0, 0, 0.3),
 
-                            ),
-                          ),
-                          Positioned(
-                            top: 10,
-                            left: 10,
-                            child: Padding(
-                              padding: const EdgeInsets.all(8.0),
-                              child: Container(
-                                height:30,
-                                width:50,
-                                decoration:  const BoxDecoration(
-                                  color: Color.fromRGBO(0, 0, 0, 0.3),
-
-                                  borderRadius: BorderRadius.all(Radius.circular(20)),
-                                  boxShadow: [
-                                    BoxShadow(
-                                      offset: Offset(0, 2),
-                                      blurRadius: 6,
-                                      color: Colors.black12,
+                                      borderRadius: BorderRadius.all(Radius.circular(20)),
+                                      boxShadow: [
+                                        BoxShadow(
+                                          offset: Offset(0, 2),
+                                          blurRadius: 6,
+                                          color: Colors.black12,
+                                        ),
+                                      ],
                                     ),
-                                  ],
-                                ),
-                                child: Center(
-                                  child: Text(
-                                    "${controller.currentIndex+1}/5",
-                                    style: const TextStyle(
-                                        fontFamily: fontFamilyName,
-                                        color: Colors.white,
-                                        fontWeight: FontWeight.w800,
-                                        fontSize: 18),
+                                    child: Center(
+                                      child: Text(
+                                        "${controller.currentIndex+1}/${controller.hospitalData?.image?.length??0}",
+                                        style: const TextStyle(
+                                            fontFamily: fontFamilyName,
+                                            color: Colors.white,
+                                            fontWeight: FontWeight.w800,
+                                            fontSize: 18),
+                                      ),
+                                    ),
+
                                   ),
                                 ),
-
                               ),
-                            ),
-                          ),
-                        ],
+                            ],
+                          );
+                        }),
+                        placeholder: (context, image){
+                          return  Padding(
+                            padding:  const EdgeInsets.all(5),
+                            child: Container(
+                                decoration: const BoxDecoration(
+                                    borderRadius:
+                                    BorderRadius.all(Radius.circular(15))
+                                ),
+                                child: Loader(width: MediaQuery.of(context).size.width,height: 150.0)),
+                          );
+                        },
+                        errorWidget: (context, url, error){
+                          return Container(
+                              width: MediaQuery.of(context).size.width,
+                              margin: const EdgeInsets.symmetric(horizontal: 5.0),
+                              decoration: const BoxDecoration(
+                                  image: DecorationImage(
+                                    image: AssetImage("assets/images/no_data_slideShow.png"),
+                                    fit: BoxFit.fill,
+                                  ),
+                                  borderRadius:
+                                  BorderRadius.all(Radius.circular(15))
+
+                              )
+                          );
+                        },
                       );
 
                     },
@@ -361,11 +754,11 @@ class HospitalDetailedScreen extends StatelessWidget {
                   const SizedBox(height: 10,),
                   Container(
                     width: Get.width,
-                    child:  const Padding(
-                      padding: EdgeInsets.symmetric(horizontal: 10.0),
-                      child: Text("احدى المستشفيات التي تتميز بوجود صفوة الاطباء و الاستشاريين في مختلف التخصصات الطبية ومتعاقده مع كافه النقابات والعديد من شركات الرعاية  وتضم عيادات في جميع التخصصات الطبية وأطباء على أعلى مستوى من الجاهزية والخبرة.",
+                    child:   Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 10.0),
+                      child: Text(controller.hospitalData?.details??"",
 
-                        style: TextStyle(
+                        style: const TextStyle(
                             fontFamily: fontFamilyName,
 
                             color: kGreenColor,
@@ -386,8 +779,8 @@ class HospitalDetailedScreen extends StatelessWidget {
                         const SizedBox(width: 10,),
                         Container(
                           width: Get.width*0.6,
-                          child:  const Text("المهندسين شارع شهاب",
-                            style: TextStyle(
+                          child:   Text(controller.hospitalData?.address??"",
+                            style: const TextStyle(
                                 fontFamily:fontFamilyName,
                                 color: kBlueColor,
                                 fontWeight: FontWeight.w700,
@@ -403,60 +796,104 @@ class HospitalDetailedScreen extends StatelessWidget {
                       ],
                     ),
                   ),
-                  Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 10.0),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      children: [SizedBox(
-                        height: 10,
-                        width: 27,
-                        child: Image.asset("assets/images/call.png",fit: BoxFit.fitHeight,),
+                  InkWell(
+                    onTap: (){
+                      controller.callNumber(controller.hospitalData?.phone??"");
+                    },
+                    child: Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 10.0),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        children: [SizedBox(
+                          height: 10,
+                          width: 27,
+                          child: Image.asset("assets/images/call.png",fit: BoxFit.fitHeight,),
+                        ),
+                          const SizedBox(width: 10,),
+                          Container(
+                            width: Get.width*0.18,
+                            child:  Text(controller.hospitalData?.phone??"",
+                              textAlign: TextAlign.start,
+                              style: const TextStyle(
+                                  fontFamily: fontFamilyName,
+                                  color: kBlueColor,
+                                  fontWeight: FontWeight.w700,
+                                  fontSize: 17),),
+                          ),
+                        ],
                       ),
-                        const SizedBox(width: 10,),
-                        Container(
-                          width: Get.width*0.18,
-                          child: const Text("16361",
-                            textAlign: TextAlign.start,
-                            style: TextStyle(
-                                fontFamily: fontFamilyName,
-                                color: kBlueColor,
-                                fontWeight: FontWeight.w700,
-                                fontSize: 17),),
-                        ),
-                      ],
                     ),
                   ),
                   const SizedBox(height: 10,),
-                  Container(
-                    width: Get.width*0.9,
-                    height: Get.height*0.2,
+                  CachedNetworkImage(
+                    fit: BoxFit.cover,
+                    imageUrl: "https://privilegecare.net${controller.hospitalData?.mapImage??""}",
+                    imageBuilder: ((context, image){
+                      return  Container(
+                        width: Get.width*0.9,
+                        height: Get.height*0.2,
 
-                    margin: const EdgeInsets.symmetric(horizontal: 5.0),
-                    decoration:  const BoxDecoration(
-                      color: Colors.transparent,
-                      image: DecorationImage(
-                          image: AssetImage('assets/images/map.png'),
-                          fit: BoxFit.cover),
-                      borderRadius: BorderRadius.all(Radius.circular(10)),
-                      boxShadow: [
-                        BoxShadow(
-                          offset: Offset(0, 2),
-                          blurRadius: 6,
-                          color: Colors.black12,
+                        margin: const EdgeInsets.symmetric(horizontal: 5.0),
+                        decoration:   BoxDecoration(
+                          color: Colors.transparent,
+                          image: DecorationImage(
+                              image: image,
+                              fit: BoxFit.cover),
+                          borderRadius: const BorderRadius.all(Radius.circular(10)),
+                          boxShadow: const [
+                            BoxShadow(
+                              offset: Offset(0, 2),
+                              blurRadius: 6,
+                              color: Colors.black12,
+                            ),
+                          ],
                         ),
-                      ],
-                    ),
 
+                      );
+                    }),
+                    placeholder: (context, image){
+                      return  Padding(
+                        padding:  const EdgeInsets.all(5),
+                        child: Container(
+                            decoration: const BoxDecoration(
+                                borderRadius:
+                                BorderRadius.all(Radius.circular(15))
+                            ),
+                            child: Loader(width: MediaQuery.of(context).size.width,height: 150.0)),
+                      );
+                    },
+                    errorWidget: (context, url, error){
+                      return Container(
+                          width: Get.width*0.9,
+                          height: Get.height*0.2,
+                          margin: const EdgeInsets.symmetric(horizontal: 5.0),
+                          decoration: const BoxDecoration(
+                              image: DecorationImage(
+                                image: AssetImage("assets/images/no_data_slideShow.png"),
+                                fit: BoxFit.fill,
+                              ),
+                              borderRadius:
+                              BorderRadius.all(Radius.circular(15))
+
+                          )
+                      );
+                    },
                   ),
+
                   const SizedBox(height: 10,),
-                  const Padding(
-                    padding: EdgeInsets.symmetric(horizontal: 10.0),
-                    child: Text("عرض المزيد من التفاصيل",
-                      style: TextStyle(
-                          fontFamily: fontFamilyName,
-                          color: kGreenColor,
-                          fontWeight: FontWeight.w800,
-                          fontSize: 15),),
+                  InkWell(
+                    onTap: (){
+                      controller.showHospitalLocation();
+                    },
+                    child: const Padding(
+                      padding: EdgeInsets.symmetric(horizontal: 10.0),
+                      child: Text("عرض المزيد من التفاصيل",
+                        style: TextStyle(
+                            fontFamily: fontFamilyName,
+                            color: kGreenColor,
+                            fontWeight: FontWeight.w800,
+                            fontSize: 15),),
+                    ),
                   ),
                   const SizedBox(height: 10,),
                    Row(
@@ -508,87 +945,105 @@ class HospitalDetailedScreen extends StatelessWidget {
                     ],
                   ),
                   const SizedBox(height: 20,),
-                  controller.currentActivePage==0?Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 10),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Column(
-                          children: [
-                            SizedBox(
-                              height: 80,
-                              width: 80,
-                              child: Image.asset("assets/images/doctor.png",fit: BoxFit.fitWidth,),
-                            ),
-                            const Text( "دكتور احمد حسن",
+                  controller.currentActivePage==0?
+                  controller.hospitalAddedOrNot?Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 8.0,vertical: 7.0),
+                      child: SizedBox(
+                          child: DecoratedBox(
+                              decoration: const BoxDecoration(
+                                color: Colors.white,
+                                borderRadius: BorderRadius.all(Radius.circular(20)),
+                                boxShadow: [
+                                  BoxShadow(
+                                    offset: Offset(0, 2),
+                                    blurRadius: 6,
+                                    color: Colors.black12,
+                                  ),
+                                ],
+                              ),
+                              child: Center(
+                                child: Container(
+                                  height: 130,
+                                  width: Get.width*0.75,
+                                  child: Row(
+                                    children: [
+                                      Image.asset("assets/images/Doctors-rafiki.png",height: Get.width*0.23,),
+                                      Container(
+                                        width: Get.width*0.5,
+                                          child: const Text("لم يتم تسجيل اطباء فى المستشفى حتى الان",style: TextStyle(color: kGreenColor,fontWeight: FontWeight.bold,fontSize: 18),textAlign: TextAlign.center,)),
+                                    ],
+                                  ),
+                                ),
+                              )))):
+                  Container(
+                    height: Get.height*0.15,
+                      child: ListView.builder(
+                        scrollDirection: Axis.horizontal,
+                      itemCount: controller.doctorsData?.length,
+                      controller: controller.sController,
+                      itemBuilder: (_,index){
+                        return   Padding(
+                          padding:  EdgeInsets.symmetric(horizontal: Get.width*0.03),
+                          child: Column(
+                            children: [
+                              CachedNetworkImage(
+                                fit: BoxFit.cover,
+                                imageUrl: "https://privilegecare.net${controller.doctorsData?[index].image??""}",
+                                imageBuilder: ((context, image){
+                                  return  Container(
+                                      height: 80,
+                                      width: 80,
+                                      decoration: BoxDecoration(
+                                        image: DecorationImage(
+                                          image: image,
+                                          fit: BoxFit.cover,
+                                        ),
 
-                              style: TextStyle(
-                                  height: 1,
-                                  fontFamily:fontFamilyName,
-                                  color: kBlueColor,
-                                  fontWeight: FontWeight.w700,
-                                  fontSize: 12),),
-                            const SizedBox(height: 5,),
-                            const Text("استشاري نساء وتوليد",
-                              style: TextStyle(
-                                  height: 1,
-                                  fontFamily: fontFamilyName,
-                                  color: kBlueColor,
-                                  fontWeight: FontWeight.w700,
-                                  fontSize: 12),),
-                          ],
-                        ),  Column(
-                          children: [
-                            SizedBox(
-                              height: 80,
-                              width: 80,
-                              child: Image.asset("assets/images/doctor.png",fit: BoxFit.fitWidth,),
-                            ),
-                            const Text( "دكتور احمد حسن",
 
-                              style: TextStyle(
-                                  height: 1,
-                                  fontFamily:fontFamilyName,
-                                  color: kBlueColor,
-                                  fontWeight: FontWeight.w700,
-                                  fontSize: 12),),
-                            const SizedBox(height: 5,),
-                            const Text("استشاري نساء وتوليد",
-                              style: TextStyle(
-                                  height: 1,
-                                  fontFamily: fontFamilyName,
-                                  color: kBlueColor,
-                                  fontWeight: FontWeight.w700,
-                                  fontSize: 12),),
-                          ],
-                        ),  Column(
-                          children: [
-                            SizedBox(
-                              height: 80,
-                              width: 80,
-                              child: Image.asset("assets/images/doctor.png",fit: BoxFit.fitWidth,),
-                            ),
-                            const Text( "دكتور احمد حسن",
+                                      )
+                                  );
+                                }),
+                                placeholder: (context, image){
+                                  return  const Center(child: CircularProgressIndicator(color: kBlueColor,));
+                                },
+                                errorWidget: (context, url, error){
+                                  return Container(
+                                      height: 80,
+                                      width: 80,
 
-                              style: TextStyle(
-                                  height: 1,
-                                  fontFamily:fontFamilyName,
-                                  color: kBlueColor,
-                                  fontWeight: FontWeight.w700,
-                                  fontSize: 12),),
-                            const SizedBox(height: 5,),
-                            const Text("دكتور احمد حسن",
-                              style: TextStyle(
-                                  height: 1,
-                                  fontFamily: fontFamilyName,
-                                  color: kBlueColor,
-                                  fontWeight: FontWeight.w700,
-                                  fontSize: 12),),
-                          ],
-                        ),
-                      ],
-                    ),
-                  ):controller.currentActivePage==1?Column(
+                                      decoration: const BoxDecoration(
+                                        image: DecorationImage(
+                                          image: AssetImage("assets/images/doctor.png"),
+                                          fit: BoxFit.fill,
+                                        ),
+
+
+                                      )
+                                  );
+                                },
+                              ),
+                              const SizedBox(height: 5),
+                              const Text( "دكتور احمد حسن",
+
+                                style: TextStyle(
+                                    height: 1,
+                                    fontFamily:fontFamilyName,
+                                    color: kBlueColor,
+                                    fontWeight: FontWeight.w700,
+                                    fontSize: 12),),
+                              const SizedBox(height: 5,),
+                              const Text("استشاري نساء وتوليد",
+                                style: TextStyle(
+                                    height: 1,
+                                    fontFamily: fontFamilyName,
+                                    color: kBlueColor,
+                                    fontWeight: FontWeight.w700,
+                                    fontSize: 12),),
+                            ],
+                          ),
+                        );
+                      }
+                      )):controller.currentActivePage==1?Column(
                     children: [
                       Padding(
                         padding: const EdgeInsets.all(8.0),

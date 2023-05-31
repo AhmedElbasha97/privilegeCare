@@ -1,3 +1,5 @@
+// ignore_for_file: depend_on_referenced_packages, sized_box_for_whitespace
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
@@ -81,7 +83,7 @@ class CommentWidget extends StatelessWidget {
                         color: kBlueColor,
                         fontWeight: FontWeight.w700,
                         fontSize: 15),),
-                  SizedBox(height: 10,),
+                  const SizedBox(height: 10,),
                   Text(returnDateAndTime(data.datetime??""),
                     textAlign: TextAlign.start,
                     style: const TextStyle(

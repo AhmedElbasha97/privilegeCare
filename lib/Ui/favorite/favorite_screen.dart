@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:privilegecare/Ui/favorite/widget/favorite_doctor_taps.dart';
+import 'package:privilegecare/Ui/favorite/widget/favourite_hospital_taps.dart';
 import 'package:privilegecare/Utils/colors.dart';
 import 'package:privilegecare/Utils/constant.dart';
 
@@ -48,7 +49,7 @@ class FavoriteScreen extends StatelessWidget {
             body: const TabBarView(
                 children: <Widget>[
                   FavouriteDoctorsTap(),
-                  Icon(Icons.directions_transit, size: 350),
+                  FavouriteHospitalTap(),
 
                 ],
               ),

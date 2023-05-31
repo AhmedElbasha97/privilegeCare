@@ -2,15 +2,15 @@
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:privilegecare/Services/auth_services.dart';
 import 'package:privilegecare/Services/biomatrics_auth_services.dart';
 import 'package:privilegecare/Ui/changePassword/change_password_screen.dart';
 import 'package:privilegecare/Ui/favorite/favorite_screen.dart';
 import 'package:privilegecare/Ui/logInScreen/login_screen.dart';
+import 'package:privilegecare/Ui/privacypolicy/privacyPolicyScreen.dart';
 import 'package:privilegecare/Ui/profileScreen/controller/profile_controller.dart';
 import 'package:privilegecare/Ui/profileScreen/widget/profile_cell_widget.dart';
 import 'package:privilegecare/Ui/signUpScreen/signup_screen.dart';
-import 'package:privilegecare/Ui/underConstruction/under_construction_screen.dart';
+import 'package:privilegecare/Ui/term&condition/terms_screen.dart';
 import 'package:privilegecare/Utils/colors.dart';
 import 'package:privilegecare/Utils/constant.dart';
 import 'package:privilegecare/widgets/bottom_navigation_bar.dart';
@@ -50,10 +50,14 @@ class _ProfileScreenState extends State<ProfileScreen> {
       }
         break;
       case 6:{
-
+        Get.to(()=>const PrivacyPolicyScreen());
       }
         break;
       case 7:{
+        Get.to(()=>const TermsScreen());
+      }
+        break;
+      case 8:{
 
       }
         break;
@@ -181,7 +185,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
 
                             ),
                             child:  Padding(
-                              padding: EdgeInsets.all(5.0),
+                              padding: const EdgeInsets.all(5.0),
                               child: Row(
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 children:  [const Text(

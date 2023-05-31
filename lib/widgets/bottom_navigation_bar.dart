@@ -8,7 +8,6 @@ import 'package:privilegecare/Ui/SpecialtyScreen/specialty_screen.dart';
 import 'package:privilegecare/Ui/filter/filter_screen.dart';
 import 'package:privilegecare/Ui/hospital%20screen/hospitals_screen.dart';
 import 'package:privilegecare/Ui/profileScreen/profile_screeen.dart';
-import 'package:privilegecare/Ui/underConstruction/under_construction_screen.dart';
 import 'package:privilegecare/Utils/colors.dart';
 import 'package:privilegecare/Utils/constant.dart';
 

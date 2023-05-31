@@ -10,6 +10,7 @@ class ProfileController extends GetxController{
     "favoriteIcon",
     "settingsIcon",
     "termsIcon",
+    "termsIcon",
     "privilegeIcon",
     "evaluationIcon",
     "signOutIcon"
@@ -21,6 +22,7 @@ class ProfileController extends GetxController{
     "تغيير كلمة المرور",
     "مفضل",
     "إعدادات",
+    "سياسة الخصوصية",
     "الأحكام والشروط",
     "نقاط رعاية الامتياز",
     "تقييم التطبيق",

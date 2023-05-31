@@ -1,7 +1,6 @@
 import 'package:cool_alert/cool_alert.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:get/get_state_manager/src/simple/get_state.dart';
 import 'package:privilegecare/Ui/doctorsScreen/widget/doctor_cell_widget.dart';
 import 'package:privilegecare/Ui/filter/controller/filter_controller.dart';
 import 'package:privilegecare/Ui/hospital%20screen/widget/hospital_cell_widget.dart';
@@ -100,7 +99,47 @@ class AdvancedSearchScreen extends StatelessWidget {
                                   context,
                                   controller.doctorsData?[index].name ?? "");
 
-                            }},): HospitalCellWidget(hospitalData: controller.hospitalListData?[index],);
+                            }},): HospitalCellWidget(hospitalData: controller.hospitalListData?[index], addOrRemoveFromFavorite: (){
+                            if(Get.find<StorageService>().getId == "0") {
+                            CoolAlert.show(
+                            context: context,
+                            type: CoolAlertType.confirm,
+                            title: "",
+                            text: 'لا يمكن اضافه إلى قائمة المفضلة الا عند تسجيل الدخول او انشاء الحساب',
+                            textTextStyle: const TextStyle(
+                            fontFamily: fontFamilyName,
+                            color: kBlueColor,
+                            fontWeight: FontWeight.w800,
+                            fontSize: 15),
+                            onConfirmBtnTap: (){
+                            Get.to(()=> const LoginScreen());
+                            },
+                            onCancelBtnTap:(){
+                            Get.to(()=> const SignUpScreen());
+                            },
+                            confirmBtnText: 'تسجيل الدخول',
+                            cancelBtnText: 'إنشاء حساب',
+                            confirmBtnColor: Colors.white,
+                            cancelBtnTextStyle:   const TextStyle(
+                            fontFamily: fontFamilyName,
+                            color: kGreenColor,
+                            fontWeight: FontWeight.w800,
+                            fontSize: 15),
+                            confirmBtnTextStyle: const TextStyle(
+                            fontFamily: fontFamilyName,
+                            color: kGreenColor,
+                            fontWeight: FontWeight.w800,
+                            fontSize: 15),
+
+
+                            );
+                            }else{
+                            controller.addingOrRemovingFromFavorite(
+                            "${controller.hospitalListData?[index].id}",
+                            context,
+                            controller.hospitalListData?[index].name ?? "");
+                          }
+                            });
                         },
                       ),
                     ),

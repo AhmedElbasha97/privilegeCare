@@ -1,4 +1,4 @@
-// ignore_for_file: unnecessary_import, sized_box_for_whitespace
+// ignore_for_file: unnecessary_import, sized_box_for_whitespace, prefer_is_empty
 
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:carousel_slider/carousel_options.dart';
@@ -137,7 +137,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                   );
                                 },
                               ),
-
+                              const SizedBox(height: 5),
                                Text( controller.doctorData?[0].name??"",
 
                                 style: const TextStyle(
@@ -182,7 +182,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                   );
                                 }),
                                 placeholder: (context, image){
-                                  return  Center(child: const CircularProgressIndicator(color: kBlueColor,));
+                                  return  const Center(child: CircularProgressIndicator(color: kBlueColor,));
                                 },
                                 errorWidget: (context, url, error){
                                   return Container(
@@ -200,6 +200,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                   );
                                 },
                               ),
+                              const SizedBox(height: 5),
                                Text( controller.doctorData?[1].name??"",
 
                                 style: const TextStyle(
@@ -262,6 +263,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                   );
                                 },
                               ),
+                              const SizedBox(height: 5),
                                Text( controller.doctorData?[2].name??"",
 
                                 style: const TextStyle(
@@ -330,6 +332,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                   );
                                 },
                               ),
+                              const SizedBox(height: 5),
                                Text( controller.doctorData?[3].name??"",
 
                                 style: const TextStyle(
@@ -393,6 +396,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                   );
                                 },
                               ),
+                              const SizedBox(height: 5),
                                Text( controller.doctorData?[4].name??"",
 
                                 style: const TextStyle(
@@ -456,6 +460,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                   );
                                 },
                               ),
+                              const SizedBox(height: 5),
                                Text( controller.doctorData?[5].name??"",
 
                                 style: const TextStyle(
@@ -516,7 +521,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                       decoration: BoxDecoration(
                                           image: DecorationImage(
                                             image: image,
-                                            fit: BoxFit.cover,
+                                            fit: BoxFit.fill,
                                           ),
                                           borderRadius:
                                           const BorderRadius.all(Radius.circular(15))
@@ -538,6 +543,8 @@ class _HomeScreenState extends State<HomeScreen> {
                                 errorWidget: (context, url, error){
                                   return Container(
                                       width: MediaQuery.of(context).size.width,
+
+                                      height: Get.height*0.2,
                                       margin: const EdgeInsets.symmetric(horizontal: 5.0),
                                       decoration: const BoxDecoration(
                                           image: DecorationImage(

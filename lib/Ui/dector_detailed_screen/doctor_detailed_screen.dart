@@ -8,9 +8,7 @@ import 'package:privilegecare/Ui/dector_detailed_screen/controller/doctor_detail
 import 'package:privilegecare/Ui/dector_detailed_screen/widget/comment_widget.dart';
 import 'package:privilegecare/Ui/dector_detailed_screen/widget/schedules_widget.dart';
 import 'package:privilegecare/Ui/dector_detailed_screen/widget/video_player_widget.dart';
-import 'package:privilegecare/Ui/logInScreen/login_screen.dart';
 import 'package:privilegecare/Ui/reservationScreen/reservation_screen.dart';
-import 'package:privilegecare/Ui/signUpScreen/signup_screen.dart';
 import 'package:privilegecare/Utils/colors.dart';
 import 'package:privilegecare/Utils/constant.dart';
 import 'package:privilegecare/Utils/localization_services.dart';
@@ -45,7 +43,9 @@ class DoctorDetailedScreen extends StatelessWidget {
           ),
           actions: [InkWell(
             onTap: (){
+              controller.screenIndex = 3;
       if(Get.find<StorageService>().getId == "0") {
+
       CoolAlert.show(
       context: context,
       type: CoolAlertType.confirm,
@@ -56,12 +56,12 @@ class DoctorDetailedScreen extends StatelessWidget {
       color: kBlueColor,
       fontWeight: FontWeight.w800,
       fontSize: 15),
-      onConfirmBtnTap: (){
-      Get.to(()=> const LoginScreen());
-      },
-      onCancelBtnTap:(){
-      Get.to(()=> const SignUpScreen());
-      },
+        onConfirmBtnTap: (){
+          controller.screenIndex = 1;
+        },
+        onCancelBtnTap:(){
+          controller.screenIndex = 2;
+        },
       confirmBtnText: 'تسجيل الدخول',
       cancelBtnText: 'إنشاء حساب',
       confirmBtnColor: Colors.white,
@@ -75,9 +75,9 @@ class DoctorDetailedScreen extends StatelessWidget {
       color: kGreenColor,
       fontWeight: FontWeight.w800,
       fontSize: 15),
-
-
-      );
+      ).then((value){
+        controller.goToScreen();
+      });
       }else{
       controller.addingOrRemovingFromFavorite(
       "${controller.doctorData?.id}",
@@ -844,7 +844,7 @@ class DoctorDetailedScreen extends StatelessWidget {
                                   fontWeight: FontWeight.w700,
                                   fontSize: 15),) :Text("التقييمات من ${controller.doctorData?.visitors??0} زائر",
                               textAlign: TextAlign.center,
-                              style: TextStyle(
+                              style: const TextStyle(
                                   fontFamily: fontFamilyName,
                                   color: kGreenColor,
                                   fontWeight: FontWeight.w700,

@@ -1,3 +1,5 @@
+// ignore_for_file: sized_box_for_whitespace
+
 import 'dart:async';
 
 import 'package:flutter/material.dart';
@@ -148,7 +150,7 @@ class _VideoPlayerWidgetState extends State<VideoPlayerWidget> {
                     size: 30,
                   ),
                 ),
-              )):SizedBox(),
+              )):const SizedBox(),
           showController?Positioned(
               bottom: 10,
               child: Padding(

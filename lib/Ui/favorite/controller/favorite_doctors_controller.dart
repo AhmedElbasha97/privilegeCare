@@ -1,3 +1,5 @@
+// ignore_for_file: prefer_is_empty, prefer_typing_uninitialized_variables
+
 import 'package:cool_alert/cool_alert.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -30,7 +32,7 @@ class FavoriteDoctorsController extends GetxController{
   addingOrRemovingFromFavorite(String doctorId,context,String doctorName,DoctorListModel index) async {
 
       ResponseModel? status = await FavouriteServices
-          .addOrRemoveDoctorFromFavorite(
+          .addOrRemoveHospitalFromFavorite(
           doctorId, Get
           .find<StorageService>()
           .getId, "0");

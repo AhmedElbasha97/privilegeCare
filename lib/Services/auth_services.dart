@@ -30,6 +30,15 @@ class AuthServices{
     }
     return null;
   }
+  static Future<AuthModel?> deleteAccount (String memberId) async {
+    var data = await api.request(Services.deleteAccountEndPoint, "POST",queryParamters: {
+      "member_id":memberId,
+    });
+    if (data != null) {
+      return AuthModel.fromJson(data);
+    }
+    return null;
+  }
    static Future<AuthModel?> signUp (String name,String email,String password,String password2) async {
     var data = await api.request(Services.signUpEndPoint, "POST",queryParamters: {
       "name":name,

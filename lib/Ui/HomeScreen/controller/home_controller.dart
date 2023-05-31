@@ -11,6 +11,7 @@ class HomeController extends GetxController{
   bool slideShowLoading = true;
   List<DoctorHomeModelData>? doctorData = [];
   List<BannerModel>? sliderData = [];
+  @override
   void onInit() {
     // TODO: implement onInit
 
