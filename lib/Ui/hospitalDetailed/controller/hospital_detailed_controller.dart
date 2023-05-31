@@ -1,3 +1,5 @@
+// ignore_for_file: prefer_typing_uninitialized_variables, prefer_is_empty
+
 import 'dart:io';
 
 import 'package:carousel_slider/carousel_controller.dart';
@@ -8,6 +10,7 @@ import 'package:get/get.dart';
 import 'package:map_launcher/map_launcher.dart';
 import 'package:privilegecare/Models/doctort_list_model.dart';
 import 'package:privilegecare/Models/hospital_detailed_model.dart';
+import 'package:privilegecare/Models/privacy_policy_model.dart';
 import 'package:privilegecare/Models/response_model.dart';
 import 'package:privilegecare/Services/favoutite_services.dart';
 import 'package:privilegecare/Services/hospital_services.dart';
@@ -21,6 +24,7 @@ bool isLoading = true;
 int currentIndex = 0;
 int currentActivePage = 0;
 bool doctorHasNoData = false;
+late PrivacyPolicy? xrayData;late PrivacyPolicy? lapData;
 final ScrollController sController = ScrollController();
 CarouselController cController = CarouselController();
 late HospitalDetailedModel? hospitalData;
@@ -39,8 +43,12 @@ void onInit() {
 getData() async {
   doctorsData =  await HospitalServices.getDoctorsInThisHospital(hospitalId);
   hospitalData = await HospitalServices.getHospitalProfile(hospitalId);
+  lapData = await HospitalServices.getLapData(hospitalId);
+  xrayData = await HospitalServices.getXRayData(hospitalId);
   hospitalAddedOrNot = await checkHospitalAddedOrNot(hospitalId);
+
   if(doctorsData == []||doctorsData?.length==0){
+    print("hiiiiiiiiiii");
     doctorHasNoData = true;
   }
   isLoading = false;
@@ -131,7 +139,7 @@ addingOrRemovingFromFavorite(String hospitalId,context,String hospitalName) asyn
 
 Future<bool> checkHospitalAddedOrNot(String hospitalId) async {
   var status = await FavouriteServices.getAddedOrNotToFavoritesHospital(hospitalId, Get.find<StorageService>().getId);
-  print(status);
+
   if(status == 1){
     return true;
 
@@ -142,6 +150,6 @@ Future<bool> checkHospitalAddedOrNot(String hospitalId) async {
   }
 }
 shareDoctorLink(){
-  Share.share("");
+  Share.share(hospitalData?.profile??"");
 }
 }

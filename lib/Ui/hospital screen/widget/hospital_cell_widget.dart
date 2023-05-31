@@ -1,4 +1,4 @@
-// ignore_for_file: sized_box_for_whitespace
+// ignore_for_file: sized_box_for_whitespace, prefer_is_empty
 
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
@@ -139,8 +139,8 @@ class _HospitalCellWidgetState extends State<HospitalCellWidget> {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: [ SizedBox(
-                  height: 25,
-                  width: 20,
+                  height: 20,
+                  width: 15,
                   child: Image.asset("assets/images/place.png",fit: BoxFit.fitHeight,),
                 ),
                   const SizedBox(width: 10,),
@@ -150,8 +150,8 @@ class _HospitalCellWidgetState extends State<HospitalCellWidget> {
                       style: const TextStyle(
                           fontFamily:fontFamilyName,
                           color: kBlueColor,
-                          fontWeight: FontWeight.w700,
-                          fontSize: 17),
+                          fontWeight: FontWeight.w600,
+                          fontSize: 15),
                       textAlign: TextAlign.start,
                     ),
 
@@ -168,8 +168,8 @@ class _HospitalCellWidgetState extends State<HospitalCellWidget> {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: [SizedBox(
-                  height: 10,
-                  width: 27,
+                  height: 7,
+                  width: 20,
                   child: Image.asset("assets/images/call.png",fit: BoxFit.fitHeight,),
                 ),
                   const SizedBox(width: 10,),
@@ -180,7 +180,7 @@ class _HospitalCellWidgetState extends State<HospitalCellWidget> {
                       style: const TextStyle(
                           fontFamily: fontFamilyName,
                           color: kBlueColor,
-                          fontWeight: FontWeight.w700,
+                          fontWeight: FontWeight.w600,
                           fontSize: 17),),
                   ),
                 ],

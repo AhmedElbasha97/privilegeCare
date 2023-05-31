@@ -1,6 +1,7 @@
 import 'package:privilegecare/Models/doctort_list_model.dart';
 import 'package:privilegecare/Models/hospital_detailed_model.dart';
 import 'package:privilegecare/Models/hospital_list_model.dart';
+import 'package:privilegecare/Models/privacy_policy_model.dart';
 import 'package:privilegecare/Utils/api_service.dart';
 import 'package:privilegecare/Utils/services.dart';
 
@@ -58,6 +59,24 @@ class HospitalServices{
         doctorsList.add(DoctorListModel.fromJson(doctor));
       }
       return doctorsList;
+    }
+    return null;
+  }
+  static Future<PrivacyPolicy?> getXRayData(String hospitalId) async {
+    var data = await api.request(Services.getXRayDataEndPoint, "POST",queryParamters: {
+      "hospital_id":hospitalId,
+    });
+    if (data != null) {
+      return PrivacyPolicy.fromJson(data[0]);
+    }
+    return null;
+  }
+  static Future<PrivacyPolicy?> getLapData(String hospitalId) async {
+    var data = await api.request(Services.getLapDataEndPoint, "POST",queryParamters: {
+      "hospital_id":hospitalId,
+    });
+    if (data != null) {
+      return PrivacyPolicy.fromJson(data[0]);
     }
     return null;
   }

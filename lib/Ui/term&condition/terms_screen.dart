@@ -23,7 +23,9 @@ class TermsScreen extends StatelessWidget {
         appBar: AppBar(
           iconTheme:  const IconThemeData(color: Colors.white),
           backgroundColor:kGreenColor ,
-
+          leading: IconButton(icon: const Icon(Icons.arrow_circle_right_outlined,color: kWhiteColor,size: 40,),onPressed: (){
+            Get.back();
+          },),
         ),
         body: controller.loading
             ? const Loader()

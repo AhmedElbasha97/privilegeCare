@@ -2,7 +2,7 @@
 
 class Services {
   static String logInEndPoint = "login"; //Post
-   static String deleteAccountEndPoint = "member_delete"; //Post
+  static String deleteAccountEndPoint = "member_delete"; //Post
   static String signUpEndPoint = "signup";//Post
   static String specialistEndPoint = "specialist";//post
   static String specialistMostChosenEndPoint = "specialist2";//post
@@ -22,7 +22,7 @@ class Services {
   static String hospitalListEndPoint = "specialist_hospital";//post
   static String commentsDoctorsProfileEndPoint = "review";//post
   static String addOrRemoveDoctorsFromFavourite = "favorite/new";// post
-   static String addOrRemoveHospitalFromFavourite = "hfavorite/new";//post
+  static String addOrRemoveHospitalFromFavourite = "hfavorite/new";//post
   static String addReviewToDoctor = "review/new";//post
   static String changePasswordEndPoint = "member/change_password";//post
   static String checkAddedToFavoriteOrNotDoctorEndPoint = "favorite/check_doctor";  //post
@@ -30,6 +30,10 @@ class Services {
   static String getLevelEndPoint = "levels";//post
   static String getHospitalProfileEndPoint = "hospital_view";//post
   static String getTermsAndConditionEndPoint = "terms";//post
-   static String getPrivacyPolicyEndPoint = "policy";//post
-   static String getChatLinkEndPoint = "chat_link";//post
+  static String getPrivacyPolicyEndPoint = "policy";//post
+  static String getChatLinkEndPoint = "chat_link";//post
+  static String editAccountDataEndPoint = "member/edit";//post
+  static String getUserDataEndPoint = "member";//post
+  static String getXRayDataEndPoint = "xray_topic";//post
+ static String getLapDataEndPoint = "laboratory_topic";//post
 }

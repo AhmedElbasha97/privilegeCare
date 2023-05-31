@@ -1,4 +1,4 @@
-// ignore_for_file: sized_box_for_whitespace, prefer_is_empty
+// ignore_for_file: sized_box_for_whitespace, prefer_is_empty, prefer_const_constructors
 
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
@@ -172,7 +172,7 @@ class _DoctorCellWidgetState extends State<DoctorCellWidget> {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: [
-                      widget.doctorData?.listen==0?const SizedBox(): Padding(
+                      widget.doctorData?.listen==0?const SizedBox(height: 15,): Padding(
                         padding: const EdgeInsets.all(3.0),
                         child: Container(
                           width: Get.width*0.35,
@@ -208,7 +208,7 @@ class _DoctorCellWidgetState extends State<DoctorCellWidget> {
                           ),
                         ),
                       ),
-                      widget.doctorData?.explain==0?const SizedBox():Padding(
+                      widget.doctorData?.explain==0?const SizedBox(height: 10,):Padding(
                         padding: const EdgeInsets.all(3.0),
                         child: Container(
                           width: Get.width*0.35,
@@ -236,7 +236,7 @@ class _DoctorCellWidgetState extends State<DoctorCellWidget> {
                                 style: TextStyle(
                                     fontFamily: fontFamilyName,
                                     color: kBlueColor,
-                                    fontWeight: FontWeight.w700,
+                                    fontWeight: FontWeight.w600,
                                     fontSize: 14),),
 
 
@@ -246,11 +246,12 @@ class _DoctorCellWidgetState extends State<DoctorCellWidget> {
                       ),
                     ],
                   ),
+
                   Row(
                     mainAxisAlignment: MainAxisAlignment.start,
                     children: [
                       SizedBox(
-                        height: 25,
+                        height: 15,
                         width: 20,
                         child: Image.asset("assets/images/specification.png",fit: BoxFit.fitHeight,),
                       ),
@@ -261,12 +262,11 @@ class _DoctorCellWidgetState extends State<DoctorCellWidget> {
                           style: const TextStyle(
                               fontFamily: fontFamilyName,
                               color: kBlueColor,
-                              fontWeight: FontWeight.w700,
+                              fontWeight: FontWeight.w600,
                               fontSize: 14),
                           textAlign: TextAlign.start,
                         ),
                       ),
-
 
 
 
@@ -276,7 +276,7 @@ class _DoctorCellWidgetState extends State<DoctorCellWidget> {
                     mainAxisAlignment: MainAxisAlignment.start,
                     children: [
                       SizedBox(
-                        height: 25,
+                        height: 15,
                         width: 20,
                         child: Image.asset("assets/images/place.png",fit: BoxFit.fitHeight,),
                       ),
@@ -287,8 +287,8 @@ class _DoctorCellWidgetState extends State<DoctorCellWidget> {
                           style: const TextStyle(
                               fontFamily: fontFamilyName,
                               color: kBlueColor,
-                              fontWeight: FontWeight.w700,
-                              fontSize: 17),
+                              fontWeight: FontWeight.w600,
+                              fontSize: 15),
                           textAlign: TextAlign.start,
                         ),
 
@@ -298,12 +298,14 @@ class _DoctorCellWidgetState extends State<DoctorCellWidget> {
 
 
                     ],
-                  ),Row(
+                  ),
+                  const SizedBox(height: 5,),
+                  Row(
                     mainAxisAlignment: MainAxisAlignment.start,
                     children: [
                       SizedBox(
-                        height: 25,
-                        width: 23,
+                        height: 15,
+                        width: 20,
                         child: Image.asset("assets/images/cash.png",fit: BoxFit.fitHeight,),
                       ),
                       const SizedBox(width: 10,),
@@ -311,18 +313,20 @@ class _DoctorCellWidgetState extends State<DoctorCellWidget> {
                         style: const TextStyle(
                             fontFamily: fontFamilyName,
                             color: kBlueColor,
-                            fontWeight: FontWeight.w700,
+                            fontWeight: FontWeight.w600,
                             fontSize: 14),),
 
 
 
                     ],
-                  ),Row(
+                  ),
+                  SizedBox(height: 5,),
+                  Row(
                     mainAxisAlignment: MainAxisAlignment.start,
                     children: [
                       SizedBox(
-                        height: 25,
-                        width: 27,
+                        height: 15,
+                        width: 25,
                         child: Image.asset("assets/images/waitingtime.png",fit: BoxFit.fitHeight,),
                       ),
                       const SizedBox(width: 10,),
@@ -333,7 +337,7 @@ class _DoctorCellWidgetState extends State<DoctorCellWidget> {
                           style: const TextStyle(
                               fontFamily: fontFamilyName,
                               color: kGreenColor,
-                              fontWeight: FontWeight.w700,
+                              fontWeight: FontWeight.w600,
                               fontSize: 14),),
 
                       ),
@@ -343,6 +347,7 @@ class _DoctorCellWidgetState extends State<DoctorCellWidget> {
 
                     ],
                   ),
+                  SizedBox(height: 5,),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.start,
                     children: [
@@ -359,7 +364,7 @@ class _DoctorCellWidgetState extends State<DoctorCellWidget> {
                           style: const TextStyle(
                               fontFamily: fontFamilyName,
                               color: kBlueColor,
-                              fontWeight: FontWeight.w700,
+                              fontWeight: FontWeight.w600,
                               fontSize: 14),),
 
                       ),

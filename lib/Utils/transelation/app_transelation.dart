@@ -19,6 +19,8 @@ class AppTranslations extends Translations {
       invalidReTypePassword:"passwords does not match",
       enterPasswordFirst:"You must enter the password first",
       refreshKey:"Refresh",
+      cameraSource1:"take a picture",
+      cameraSource2:"Choose a photo from the photo gallery",
 
 
     },
@@ -37,6 +39,8 @@ class AppTranslations extends Translations {
       invalidReTypePassword:"كلمه السر غير متطابقة",
       enterPasswordFirst:"يجب إدخال كلمه السر اولآ",
       refreshKey:"المحاوله مره اخرى",
+      cameraSource1:"التقط صوره",
+      cameraSource2:"اختيار صوره من معرض الصور",
 
 }
   };

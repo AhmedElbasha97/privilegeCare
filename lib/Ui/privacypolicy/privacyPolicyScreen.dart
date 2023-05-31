@@ -21,6 +21,9 @@ class PrivacyPolicyScreen extends StatelessWidget {
       builder: (PrivacyPolicyController controller) =>
           Scaffold(
             appBar: AppBar(
+              leading: IconButton(icon: const Icon(Icons.arrow_circle_right_outlined,color: kWhiteColor,size: 40,),onPressed: (){
+                Get.back();
+              },),
               iconTheme:  const IconThemeData(color: Colors.white),
               backgroundColor:kGreenColor ,
 

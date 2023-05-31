@@ -1,19 +1,16 @@
 // ignore_for_file: sized_box_for_whitespace
 
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:privilegecare/Services/biomatrics_auth_services.dart';
-import 'package:privilegecare/Ui/changePassword/change_password_screen.dart';
-import 'package:privilegecare/Ui/favorite/favorite_screen.dart';
 import 'package:privilegecare/Ui/logInScreen/login_screen.dart';
-import 'package:privilegecare/Ui/privacypolicy/privacyPolicyScreen.dart';
 import 'package:privilegecare/Ui/profileScreen/controller/profile_controller.dart';
 import 'package:privilegecare/Ui/profileScreen/widget/profile_cell_widget.dart';
 import 'package:privilegecare/Ui/signUpScreen/signup_screen.dart';
-import 'package:privilegecare/Ui/term&condition/terms_screen.dart';
 import 'package:privilegecare/Utils/colors.dart';
 import 'package:privilegecare/Utils/constant.dart';
 import 'package:privilegecare/widgets/bottom_navigation_bar.dart';
+import 'package:privilegecare/widgets/loader.dart';
 
 class ProfileScreen extends StatefulWidget {
   const ProfileScreen({Key? key}) : super(key: key);
@@ -23,53 +20,7 @@ class ProfileScreen extends StatefulWidget {
 }
 
 class _ProfileScreenState extends State<ProfileScreen> {
-  decideWhichScreenToOpen(int index) async {
-    switch(index) {
-      case 0:{
 
-      }
-        break;
-      case 1:{
-
-      }
-        break;
-      case 2:{
-
-      }
-        break;
-      case 3:{
-        goToChangePass();
-      }
-        break;
-      case 4:{
-        Get.to(()=>const FavoriteScreen());
-      }
-        break;
-      case 5:{
-
-      }
-        break;
-      case 6:{
-        Get.to(()=>const PrivacyPolicyScreen());
-      }
-        break;
-      case 7:{
-        Get.to(()=>const TermsScreen());
-      }
-        break;
-      case 8:{
-
-      }
-        break;
-
-    }
-
-  }
-  goToChangePass() async {
-    if(await BiomatricsAuthService.authenticateUser()) {
-    Get.to(() => const ChangePasswordScreen());
-    }
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -78,7 +29,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
         init: ProfileController(),
         builder: (controller) => Scaffold(
           bottomNavigationBar: const BottomNavigationBarWidget(selectedTap: 0,),
-          body:controller.userIsSigned? SizedBox(
+          body:controller.userIsSigned?controller.isLoading?const Loader(): SizedBox(
             height: Get.height,
             width: Get.width,
             child: Column(
@@ -92,44 +43,216 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   width: Get.width*0.5,
                   child: Image.asset("assets/images/horizontalLogo.png",fit: BoxFit.fitWidth,),
                 ),
-                Container(
-                  height: Get.height*0.12,
-                  width: Get.width*0.2,
-                  padding: const EdgeInsets.all(1),
-                  decoration: BoxDecoration(
-                    border: Border.all(color: kBlueColor,width: 2),
-                    borderRadius: BorderRadius.circular(15),
-                  ),
-                  child: Container(
-                    height: Get.height*0.12,
-                    width: Get.width*0.2,
-                    padding: const EdgeInsets.all(1),
-                    decoration: BoxDecoration(
-                      border: Border.all(color: kGreenColor,width: 2),
-                      borderRadius: BorderRadius.circular(15),
-                    ),
-                    child: Container(
+                Row(
+
+                  children: [
+                    SizedBox(width: Get.width*0.2,),
+                    controller.data?.image==""?InkWell(
+                      onTap: (){
+                        controller.choosePhotoSource(context);
+                      },
+                      child: Container(
                         height: Get.height*0.12,
                         width: Get.width*0.2,
+                        padding: const EdgeInsets.all(1),
                         decoration: BoxDecoration(
-                          color: kBlueColor,
-
+                          border: Border.all(color: kBlueColor,width: 2),
                           borderRadius: BorderRadius.circular(15),
                         ),
-                      child: const Center(
-                        child: Icon(Icons.camera_alt_outlined,size: 40,color: Colors.white,),
+                        child: Container(
+                          height: Get.height*0.12,
+                          width: Get.width*0.2,
+                          padding: const EdgeInsets.all(1),
+                          decoration: BoxDecoration(
+                            border: Border.all(color: kGreenColor,width: 2),
+                            borderRadius: BorderRadius.circular(15),
+                          ),
+                          child: Container(
+                              height: Get.height*0.12,
+                              width: Get.width*0.2,
+                              decoration: BoxDecoration(
+                                color: kBlueColor,
+
+                                borderRadius: BorderRadius.circular(15),
+                              ),
+                            child: const Center(
+                              child: Icon(Icons.camera_alt_outlined,size: 40,color: Colors.white,),
+                            ),
+                          ),
+                        ),
+                      ),
+                    ):InkWell(
+                      onTap: (){
+                        controller.choosePhotoSource(context);
+                      },
+                      child: CachedNetworkImage(
+                        fit: BoxFit.cover,
+                        imageUrl: "https://privilegecare.net${controller.data?.image??""}",
+                        imageBuilder: ((context, image){
+                          return  Container(
+                            height: Get.height*0.12,
+                            width: Get.width*0.2,
+                            padding: const EdgeInsets.all(1),
+                            decoration: BoxDecoration(
+                              border: Border.all(color: kBlueColor,width: 2),
+                              borderRadius: BorderRadius.circular(15),
+                            ),
+                            child: Container(
+                              height: Get.height*0.12,
+                              width: Get.width*0.2,
+                              padding: const EdgeInsets.all(1),
+                              decoration: BoxDecoration(
+                                border: Border.all(color: kGreenColor,width: 2),
+                                borderRadius: BorderRadius.circular(15),
+                              ),
+                              child: Container(
+                                height: Get.height*0.12,
+                                width: Get.width*0.2,
+                                decoration: BoxDecoration(
+                                  color: kBlueColor,
+                                  image: DecorationImage(
+                                  image: image,
+                                  fit: BoxFit.cover,
+                                ),
+
+                                  borderRadius: BorderRadius.circular(15),
+                                ),
+
+                                ),
+                              ),
+                            );
+
+                        }),
+                        placeholder: (context, image){
+                          return  Container(
+                            height: Get.height*0.12,
+                            width: Get.width*0.2,
+                            padding: const EdgeInsets.all(1),
+                            decoration: BoxDecoration(
+                              border: Border.all(color: kBlueColor,width: 2),
+                              borderRadius: BorderRadius.circular(15),
+                            ),
+                            child: Container(
+                              height: Get.height*0.12,
+                              width: Get.width*0.2,
+                              padding: const EdgeInsets.all(1),
+                              decoration: BoxDecoration(
+                                border: Border.all(color: kGreenColor,width: 2),
+                                borderRadius: BorderRadius.circular(15),
+                              ),
+                              child: Container(
+                                height: Get.height*0.12,
+                                width: Get.width*0.2,
+                                decoration: BoxDecoration(
+                                  color: kBlueColor,
+                                  borderRadius: BorderRadius.circular(15),
+                                ),
+                                  child:const Center(child: CircularProgressIndicator(color: kBlueColor,))
+                              ),
+                            ),
+                          );
+                        },
+                        errorWidget: (context, url, error){
+                          return Container(
+                            height: Get.height*0.12,
+                            width: Get.width*0.2,
+                            padding: const EdgeInsets.all(1),
+                            decoration: BoxDecoration(
+                              border: Border.all(color: kBlueColor,width: 2),
+                              borderRadius: BorderRadius.circular(15),
+                            ),
+                            child: Container(
+                              height: Get.height*0.12,
+                              width: Get.width*0.2,
+                              padding: const EdgeInsets.all(1),
+                              decoration: BoxDecoration(
+                                border: Border.all(color: kGreenColor,width: 2),
+                                borderRadius: BorderRadius.circular(15),
+                              ),
+                              child: Container(
+                                height: Get.height*0.12,
+                                width: Get.width*0.2,
+                                decoration: BoxDecoration(
+                                  color: kBlueColor,
+
+                                  borderRadius: BorderRadius.circular(15),
+                                ),
+                                child: const Center(
+                                  child: Icon(Icons.camera_alt_outlined,size: 40,color: Colors.white,),
+                                ),
+                              ),
+                            ),
+                          );
+                        },
                       ),
                     ),
-                  ),
+                    const SizedBox(width: 10),
+                     Column(
+                       crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Container(
+                          height: Get.height*0.02,
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.end,
+                            children: [
+                              const Icon(Icons.person,size: 18,color: kBlueColor,),
+                              Text(controller.data?.name??"",
+                                style: const TextStyle(
+
+                                    fontFamily: fontFamilyName,
+                                    color: kBlueColor,
+                                    fontWeight: FontWeight.w800,
+                                    fontSize: 15),),
+
+                            ],
+                          ),
+                        ),
+                        const SizedBox(height: 5,),
+                        Container(
+                          height: Get.height*0.02,
+
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.end,
+
+                            children: [
+                              const Icon(Icons.phone,size: 18,color: kBlueColor,),
+                              Text("${
+                                  controller.data?.phone??0
+                              }",
+                                style: const TextStyle(
+
+                                    fontFamily: fontFamilyName,
+                                    color: kBlueColor,
+                                    fontWeight: FontWeight.w800,
+                                    fontSize: 15),),
+
+                            ],
+                          ),
+                        ),
+                        const SizedBox(height: 5,),
+                        Container(
+                          height: Get.height*0.02,
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.end,
+                            children: [
+                              const Icon(Icons.email,size: 18,color: kBlueColor,),
+                              Text(controller.data?.email??"",
+                                style: const TextStyle(
+
+                                    fontFamily: fontFamilyName,
+                                    color: kBlueColor,
+                                    fontWeight: FontWeight.w800,
+                                    fontSize: 15),),
+
+                            ],
+                          ),
+                        ),
+
+                      ],
+                    ),
+                  ],
                 ),
-                const SizedBox(height: 10),
-                const Text("الاسم",
-                  style: TextStyle(
-                      height: 1,
-                      fontFamily: fontFamilyName,
-                      color: kBlueColor,
-                      fontWeight: FontWeight.w800,
-                      fontSize: 20),),
+
                 const SizedBox(height: 10),
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 10.0),
@@ -144,7 +267,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                           padding: const EdgeInsets.symmetric(vertical: 10.0),
                           child: InkWell(
                             onTap: (){
-                              decideWhichScreenToOpen( index);
+                              controller.decideWhichScreenToOpen(index,context);
                             },
                               child: ProfileCellWidget(profileTextTap: controller.title[index], profileIcon: "assets/icons/${controller.icons[index]}.png",)),
                         );

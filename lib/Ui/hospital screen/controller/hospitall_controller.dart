@@ -1,4 +1,4 @@
-// ignore_for_file: prefer_typing_uninitialized_variables
+// ignore_for_file: prefer_typing_uninitialized_variables, prefer_is_empty
 
 import 'package:cool_alert/cool_alert.dart';
 import 'package:flutter/material.dart';
@@ -19,6 +19,9 @@ class HospitalController extends GetxController{
   List<HospitalListModel>? hospitalListData = [];
   int screenIndex = 3;
  int selectedIndex = 0;
+ bool hasNoData = false;
+ bool hasNoDataSpecialty = false;
+
 
   @override
   void onInit() {
@@ -98,15 +101,28 @@ class HospitalController extends GetxController{
   getData() async{
     specialtyListData = await SpecialistServices.getAllSpecialist();
     hospitalListData = await HospitalServices.getHospitalList("$selectedIndex");
+    if(hospitalListData == []||hospitalListData?.length == 0){
+
+        hasNoData = true;
+
+    }
 
     isLoading = false;
     update();
   }
   selectingTag(int index) async {
+    hasNoDataSpecialty=false;
+    hasNoData=false;
     isLoading = true;
     update();
     hospitalListData = await HospitalServices.getHospitalList("$index");
-
+if(hospitalListData == []||hospitalListData?.length == 0){
+  if(index == 0){
+    hasNoData = true;
+  }else{
+    hasNoDataSpecialty = true;
+  }
+}
     isLoading = false;
 
     selectedIndex = index;

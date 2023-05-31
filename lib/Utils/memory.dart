@@ -28,6 +28,9 @@ class StorageService extends GetxService {
   String get getId {
     return _prefs.getString(StorageKeys.userId)?? "0";
   }
+  loggingOut(){
+    _prefs.remove(StorageKeys.userId);
+  }
   //
   // to check if user record dismissal or not
   bool get checkUserIsSignedIn  {

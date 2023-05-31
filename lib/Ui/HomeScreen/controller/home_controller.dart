@@ -29,8 +29,11 @@ class HomeController extends GetxController{
     slideShowLoading = false;
     update();
   }
+  loggingOut(){
+
+  }
   launchURL(context,link) async {
-    if ( !await launchUrl(Uri.parse(link??""))) {
+    if ( !await launchUrl(Uri.parse(link??""),mode: LaunchMode.externalApplication)) {
 
       CoolAlert.show(
           context: context,

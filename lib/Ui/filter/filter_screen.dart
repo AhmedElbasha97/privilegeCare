@@ -32,8 +32,8 @@ class FilterScreen extends StatelessWidget {
             style: TextStyle(
                 fontFamily: fontFamilyName,
                 color: kWhiteColor,
-                fontWeight: FontWeight.w800,
-                fontSize: 18),
+                fontWeight: FontWeight.w700,
+                fontSize: 15),
           ),
 
 
@@ -56,8 +56,8 @@ class FilterScreen extends StatelessWidget {
                         style: TextStyle(
                             fontFamily: fontFamilyName,
                             color: kGreenColor,
-                            fontWeight: FontWeight.w700,
-                            fontSize: 20),
+                            fontWeight: FontWeight.w800,
+                            fontSize: 17),
                       ),
                     ),
                   ),
@@ -91,8 +91,8 @@ class FilterScreen extends StatelessWidget {
                                 style: TextStyle(
                                     fontFamily: fontFamilyName,
                                     color: kBlueColor,
-                                    fontWeight: FontWeight.w800,
-                                    fontSize: 17
+                                    fontWeight: FontWeight.w600,
+                                    fontSize: 15
                                 ),),
                             ],
                           ),
@@ -121,8 +121,8 @@ class FilterScreen extends StatelessWidget {
                                 style: TextStyle(
                                     fontFamily: fontFamilyName,
                                     color: kBlueColor,
-                                    fontWeight: FontWeight.w800,
-                                    fontSize: 17
+                                    fontWeight: FontWeight.w600,
+                                    fontSize: 15
                                 ),),
                             ],
                           ),
@@ -154,7 +154,7 @@ class FilterScreen extends StatelessWidget {
                             fontFamily: fontFamilyName,
                             color: kGreenColor,
                             fontWeight: FontWeight.w700,
-                            fontSize: 20),
+                            fontSize: 17),
                       ),
                     ),
                   ),
@@ -193,7 +193,7 @@ class FilterScreen extends StatelessWidget {
                               "تحميل",
                               style: TextStyle(
                                 fontFamily: fontFamilyName,
-                                fontWeight: FontWeight.w800,
+                                fontWeight: FontWeight.w600,
                                 fontSize: 20,
                                 color: kGreenColor,
                                 height: 1,
@@ -240,7 +240,7 @@ class FilterScreen extends StatelessWidget {
                                     style: const TextStyle(
                                         color: kBlueColor,
                                         fontFamily: fontFamilyName,
-                                        fontWeight: FontWeight.w700),
+                                        fontWeight: FontWeight.w600),
                                   ),
                                   const SizedBox(
                                     height: 10,
@@ -276,7 +276,7 @@ class FilterScreen extends StatelessWidget {
                                 style: TextStyle(
                                     fontFamily: fontFamilyName,
                                     color: kBlueColor,
-                                    fontWeight: FontWeight.w800,
+                                    fontWeight: FontWeight.w600,
                                     fontSize: 15),
                               ),
                               SizedBox(width: 10),
@@ -291,7 +291,7 @@ class FilterScreen extends StatelessWidget {
                                 style: TextStyle(
                                     fontFamily: fontFamilyName,
                                     color: kBlueColor,
-                                    fontWeight: FontWeight.w800,
+                                    fontWeight: FontWeight.w700,
                                     fontSize: 15),
                               ),
                               const SizedBox(width: 10),
@@ -305,7 +305,7 @@ class FilterScreen extends StatelessWidget {
                                       style: const TextStyle(
                                           fontFamily: fontFamilyName,
                                           color: kBlueColor,
-                                          fontWeight: FontWeight.w800,
+                                          fontWeight: FontWeight.w600,
                                           fontSize: 15),
                                     ),
                                     const SizedBox(height: 10,),
@@ -349,7 +349,7 @@ class FilterScreen extends StatelessWidget {
                             fontFamily: fontFamilyName,
                             color: kGreenColor,
                             fontWeight: FontWeight.w700,
-                            fontSize: 20),
+                            fontSize: 17),
                       ),
                     ),
                   ),
@@ -422,7 +422,7 @@ class FilterScreen extends StatelessWidget {
                             textStyle: const TextStyle(
                                 color: kBlueColor,
                                 fontFamily: fontFamilyName,
-                                fontWeight: FontWeight.w700),
+                                fontWeight: FontWeight.w600),
                             onTap: (){
                               controller.choosingSpecialty(e);
                             },
@@ -442,7 +442,7 @@ class FilterScreen extends StatelessWidget {
                                         style: const TextStyle(
                                             color: kBlueColor,
                                             fontFamily: fontFamilyName,
-                                            fontWeight: FontWeight.w700),
+                                            fontWeight: FontWeight.w600),
                                       ),
                                     ],
                                   ),
@@ -480,7 +480,7 @@ class FilterScreen extends StatelessWidget {
                                 style: TextStyle(
                                     fontFamily: fontFamilyName,
                                     color: kBlueColor,
-                                    fontWeight: FontWeight.w800,
+                                    fontWeight: FontWeight.w600,
                                     fontSize: 15),
                               ),
                               const SizedBox(width: 10),
@@ -499,7 +499,7 @@ class FilterScreen extends StatelessWidget {
                                 style: TextStyle(
                                     fontFamily: fontFamilyName,
                                     color: kBlueColor,
-                                    fontWeight: FontWeight.w800,
+                                    fontWeight: FontWeight.w700,
                                     fontSize: 15),
                               ),
                               const SizedBox(width: 10),
@@ -519,7 +519,7 @@ class FilterScreen extends StatelessWidget {
                                          style: const TextStyle(
                                              fontFamily: fontFamilyName,
                                              color: kBlueColor,
-                                             fontWeight: FontWeight.w700,
+                                             fontWeight: FontWeight.w600,
                                              fontSize: 15),),
                                      ],
                                    ),
@@ -564,7 +564,7 @@ class FilterScreen extends StatelessWidget {
                             fontFamily: fontFamilyName,
                             color: kGreenColor,
                             fontWeight: FontWeight.w700,
-                            fontSize: 20),
+                            fontSize: 17),
                       ),
                     ),
                   ),
@@ -603,7 +603,7 @@ class FilterScreen extends StatelessWidget {
                               "تحميل",
                               style: TextStyle(
                                 fontFamily: fontFamilyName,
-                                fontWeight: FontWeight.w800,
+                                fontWeight: FontWeight.w600,
                                 fontSize: 20,
                                 color: kGreenColor,
                                 height: 1,
@@ -637,7 +637,7 @@ class FilterScreen extends StatelessWidget {
                             textStyle: const TextStyle(
                                 color: kBlueColor,
                                 fontFamily: fontFamilyName,
-                                fontWeight: FontWeight.w700),
+                                fontWeight: FontWeight.w600),
                             onTap: (){
                               controller.choosingLevel(e);
                             },
@@ -686,7 +686,7 @@ class FilterScreen extends StatelessWidget {
                                 style: TextStyle(
                                     fontFamily: fontFamilyName,
                                     color: kBlueColor,
-                                    fontWeight: FontWeight.w800,
+                                    fontWeight: FontWeight.w600,
                                     fontSize: 15),
                               ),
                               const SizedBox(width: 10),
@@ -705,7 +705,7 @@ class FilterScreen extends StatelessWidget {
                                 style: TextStyle(
                                     fontFamily: fontFamilyName,
                                     color: kBlueColor,
-                                    fontWeight: FontWeight.w800,
+                                    fontWeight: FontWeight.w700,
                                     fontSize: 15),
                               ),
                               const SizedBox(width: 10),
@@ -718,7 +718,7 @@ class FilterScreen extends StatelessWidget {
                                       style: const TextStyle(
                                           fontFamily: fontFamilyName,
                                           color: kBlueColor,
-                                          fontWeight: FontWeight.w700,
+                                          fontWeight: FontWeight.w600,
                                           fontSize: 15),),
                                     const SizedBox(height: 10,),
                                     const Divider(
@@ -761,7 +761,7 @@ class FilterScreen extends StatelessWidget {
                             fontFamily: fontFamilyName,
                             color: kGreenColor,
                             fontWeight: FontWeight.w700,
-                            fontSize: 20),
+                            fontSize: 17),
                       ),
                     ),
                   ),
@@ -831,9 +831,9 @@ class FilterScreen extends StatelessWidget {
                             maxLength: 3,
                             onFieldSubmitted: controller.changeStartPrice,
                             style:  const TextStyle(
-                              fontSize: 18.0,
+                              fontSize: 15,
                               fontFamily: fontFamilyName,
-                              fontWeight: FontWeight.w700,
+                              fontWeight: FontWeight.w600,
                               color: kGrayColor,
                             ),
                             decoration:  const InputDecoration(
@@ -843,8 +843,8 @@ class FilterScreen extends StatelessWidget {
                                 labelStyle: TextStyle(
                                     fontFamily: fontFamilyName,
                                     color: kBlueColor,
-                                    fontWeight: FontWeight.w800,
-                                    fontSize: 18
+                                    fontWeight: FontWeight.w700,
+                                    fontSize: 15
                                 ),
                                 enabledBorder: UnderlineInputBorder(
                                   borderSide: BorderSide(color: kGreenColor,width: 2),
@@ -877,9 +877,9 @@ class FilterScreen extends StatelessWidget {
                             controller: controller.endPriceRange,
                             onFieldSubmitted: controller.changeEndPrice,
                             style:  const TextStyle(
-                              fontSize: 18.0,
+                              fontSize: 15.0,
                               fontFamily: fontFamilyName,
-                              fontWeight: FontWeight.w700,
+                              fontWeight: FontWeight.w600,
                               color: kGrayColor,
                             ),
                             decoration:  const InputDecoration(
@@ -889,8 +889,8 @@ class FilterScreen extends StatelessWidget {
                                 labelStyle: TextStyle(
                                     fontFamily: fontFamilyName,
                                     color: kBlueColor,
-                                    fontWeight: FontWeight.w800,
-                                    fontSize: 18
+                                    fontWeight: FontWeight.w700,
+                                    fontSize: 15
                                 ),
                                 enabledBorder: UnderlineInputBorder(
                                   borderSide: BorderSide(color: kGreenColor,width: 2),
@@ -933,7 +933,7 @@ class FilterScreen extends StatelessWidget {
                             fontFamily: fontFamilyName,
                             color: kGreenColor,
                             fontWeight: FontWeight.w700,
-                            fontSize: 20),
+                            fontSize: 17),
                       ),
                     ),
                   ),
@@ -964,7 +964,7 @@ class FilterScreen extends StatelessWidget {
                                         style: const TextStyle(
                                             color: kBlueColor,
                                             fontFamily: fontFamilyName,
-                                            fontWeight: FontWeight.w700),
+                                            fontWeight: FontWeight.w600),
                                       ),
                                       StarRating(
                                         color: kGreenColor,
@@ -1013,7 +1013,7 @@ class FilterScreen extends StatelessWidget {
                                 style: TextStyle(
                                     fontFamily: fontFamilyName,
                                     color: kBlueColor,
-                                    fontWeight: FontWeight.w800,
+                                    fontWeight: FontWeight.w600,
                                     fontSize: 15),
                               ),
                               const SizedBox(width: 10),
@@ -1032,7 +1032,7 @@ class FilterScreen extends StatelessWidget {
                                 style: TextStyle(
                                     fontFamily: fontFamilyName,
                                     color: kBlueColor,
-                                    fontWeight: FontWeight.w800,
+                                    fontWeight: FontWeight.w700,
                                     fontSize: 15),
                               ),
                               const SizedBox(width: 10),
@@ -1048,7 +1048,7 @@ class FilterScreen extends StatelessWidget {
                                           style: const TextStyle(
                                               fontFamily: fontFamilyName,
                                               color: kBlueColor,
-                                              fontWeight: FontWeight.w800,
+                                              fontWeight: FontWeight.w600,
                                               fontSize: 13),
 
                                         ),
@@ -1106,7 +1106,7 @@ class FilterScreen extends StatelessWidget {
                             fontFamily: fontFamilyName,
                             color: kGreenColor,
                             fontWeight: FontWeight.w700,
-                            fontSize: 20),
+                            fontSize: 17),
                       ),
                     ),
                   ),
@@ -1140,8 +1140,8 @@ class FilterScreen extends StatelessWidget {
                                 style: TextStyle(
                                     fontFamily: fontFamilyName,
                                     color: kBlueColor,
-                                    fontWeight: FontWeight.w800,
-                                    fontSize: 17
+                                    fontWeight: FontWeight.w600,
+                                    fontSize: 15
                                 ),),
                             ],
                           ),
@@ -1170,8 +1170,8 @@ class FilterScreen extends StatelessWidget {
                                 style: TextStyle(
                                     fontFamily: fontFamilyName,
                                     color: kBlueColor,
-                                    fontWeight: FontWeight.w800,
-                                    fontSize: 17
+                                    fontWeight: FontWeight.w600,
+                                    fontSize: 15
                                 ),),
                             ],
                           ),

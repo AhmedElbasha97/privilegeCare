@@ -6,6 +6,7 @@ import 'package:get/get.dart';
 import 'package:privilegecare/Models/response_model.dart';
 import 'package:privilegecare/Services/auth_services.dart';
 import 'package:privilegecare/Ui/profileScreen/profile_screeen.dart';
+import 'package:privilegecare/Utils/memory.dart';
 import 'package:privilegecare/Utils/translation_key.dart';
 import 'package:privilegecare/Utils/validator.dart';
 
@@ -117,7 +118,9 @@ class ChangePasswordController extends GetxController{
   changingPassword(context) async {
     changePassword = true;
     update();
-    ResponseModel? data = await AuthServices.changePassword(passwordController.text);
+    ResponseModel? data = await AuthServices.changePassword(Get
+        .find<StorageService>()
+        .getId,passwordController.text);
     if(data?.msg == "succeeded"){
       Get.off(const ProfileScreen());
     }else {

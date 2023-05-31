@@ -13,3 +13,5 @@ const error = 'ERROR';
 const phoneNumberError = "Phone_Number_Error";
 const enterPasswordFirst = "Enter_Password_First";
 const refreshKey = "Refresh";
+const cameraSource1 = "Camera_Source_1";
+const cameraSource2 = "Camera_Source_2";

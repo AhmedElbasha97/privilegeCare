@@ -1,3 +1,4 @@
+import 'package:privilegecare/Models/chat_link_model.dart';
 import 'package:privilegecare/Models/privacy_policy_model.dart';
 import 'package:privilegecare/Utils/api_service.dart';
 import 'package:privilegecare/Utils/services.dart';
@@ -18,10 +19,10 @@ class AppInfoServices{
     }
     return null;
   }
-  Future<PrivacyPolicy?> getChatLink() async {
+  Future<String?> getChatLink() async {
     var data = await api.request(Services.getChatLinkEndPoint, "POST");
     if (data != null) {
-      return PrivacyPolicy.fromJson(data);
+      return ChatLink.fromJson(data[0]).link;
     }
     return null;
   }

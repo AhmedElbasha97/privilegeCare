@@ -10,6 +10,7 @@ import 'package:privilegecare/Utils/constant.dart';
 import 'package:privilegecare/Utils/memory.dart';
 import 'package:privilegecare/widgets/bottom_navigation_bar.dart';
 import 'package:privilegecare/widgets/loader.dart';
+import 'package:privilegecare/widgets/no_data_widget.dart';
 
 class HospitalScreens extends StatefulWidget {
 
@@ -30,7 +31,7 @@ class _HospitalScreensState extends State<HospitalScreens> {
           builder: (controller) =>  SizedBox(
             height: Get.height,
             width: Get.width,
-            child: Column(
+            child:controller.hasNoData?NoDataWidget(refreshedFunc: (){}, text: "ليس هنا مستشفيات مسجله حتى الان", imgPath: "assets/images/No data-rafiki.png", hasRefreshButtonOrNot: false) :Column(
               children: [
                 SizedBox(
                   height: Get.height*0.12,
@@ -59,7 +60,8 @@ class _HospitalScreensState extends State<HospitalScreens> {
 
                 const SizedBox(height: 10,),
                 controller.isLoading?Loader(width: Get.width*0.9,
-                  height: Get.height*0.65,):Container(
+                  height: Get.height*0.65,):controller.hasNoDataSpecialty?NoDataWidget(width: Get.width*0.9,
+                    height: Get.height*0.65,refreshedFunc: (){}, text: "ليس هنا مستشفيات مسجله لهذا التخصص", imgPath: "assets/images/No data-rafiki.png", hasRefreshButtonOrNot: false):Container(
                   width: Get.width*0.9,
                   height: Get.height*0.65,
                   child: RawScrollbar(

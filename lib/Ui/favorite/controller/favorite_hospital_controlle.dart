@@ -3,12 +3,9 @@
 import 'package:cool_alert/cool_alert.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:privilegecare/Models/doctort_list_model.dart';
 import 'package:privilegecare/Models/hospital_list_model.dart';
 import 'package:privilegecare/Models/response_model.dart';
-import 'package:privilegecare/Services/doctor_services.dart';
 import 'package:privilegecare/Services/favoutite_services.dart';
-import 'package:privilegecare/Services/hospital_services.dart';
 import 'package:privilegecare/Utils/memory.dart';
 
 class FavoriteHospitalController extends GetxController{

@@ -1,11 +1,11 @@
 // ignore_for_file: sized_box_for_whitespace
 
-import 'dart:ffi';
 
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:cool_alert/cool_alert.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_html/flutter_html.dart';
 import 'package:get/get.dart';
 import 'package:privilegecare/Ui/hospitalDetailed/controller/hospital_detailed_controller.dart';
 
@@ -116,7 +116,7 @@ class HospitalDetailedScreen extends StatelessWidget {
                   const SizedBox(width: 10,),
                   InkWell(
                     onTap: (){
-
+                      controller.shareDoctorLink();
                     },
                     child: Container(
                       height: 30,
@@ -154,7 +154,7 @@ class HospitalDetailedScreen extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
                   const SizedBox(height: 20,),
-                  CachedNetworkImage(
+              controller.hospitalData?.image?.length!=0? CachedNetworkImage(
                     fit: BoxFit.cover,
                     imageUrl: "https://privilegecare.net${controller.hospitalData?.image?[0]??""}",
                     imageBuilder: ((context, image){
@@ -237,7 +237,17 @@ class HospitalDetailedScreen extends StatelessWidget {
                           )
                       );
                     },
-                  ),
+                  ):Container(
+              height: 80,
+              width: 80,
+
+              decoration: const BoxDecoration(
+                image: DecorationImage(
+                  image: AssetImage("assets/images/logo.png"),
+                  fit: BoxFit.fill,
+                ),
+              )
+              ),
 
                   const SizedBox(height: 20,),
                    Padding(
@@ -283,7 +293,7 @@ class HospitalDetailedScreen extends StatelessWidget {
                                       fontFamily: fontFamilyName,
 
                                       color: kBlueColor,
-                                      fontWeight: FontWeight.w800,
+                                      fontWeight: FontWeight.w700,
                                       fontSize: 13),),
                                 const SizedBox(height: 5,),
                                 Text("${controller.hospitalData?.specCount??0} تخصص",
@@ -291,7 +301,7 @@ class HospitalDetailedScreen extends StatelessWidget {
                                       fontFamily: fontFamilyName,
 
                                       color: kGreenColor,
-                                      fontWeight: FontWeight.w800,
+                                      fontWeight: FontWeight.w600,
                                       fontSize: 13),),
                               ],
                             )
@@ -312,7 +322,7 @@ class HospitalDetailedScreen extends StatelessWidget {
                                       fontFamily: fontFamilyName,
 
                                       color: kBlueColor,
-                                      fontWeight: FontWeight.w800,
+                                      fontWeight: FontWeight.w700,
                                       fontSize: 13),),
                                 const SizedBox(height: 5,),
                                 Text("${controller.hospitalData?.doctors??0} دكتور",
@@ -320,7 +330,7 @@ class HospitalDetailedScreen extends StatelessWidget {
                                       fontFamily: fontFamilyName,
 
                                       color: kGreenColor,
-                                      fontWeight: FontWeight.w800,
+                                      fontWeight: FontWeight.w600,
                                       fontSize: 13),),
                               ],
                             )
@@ -351,7 +361,7 @@ class HospitalDetailedScreen extends StatelessWidget {
                                       fontFamily: fontFamilyName,
 
                                       color: kBlueColor,
-                                      fontWeight: FontWeight.w800,
+                                      fontWeight: FontWeight.w700,
                                       fontSize: 13),),
                                 const SizedBox(height: 5,),
                                 Text("${controller.hospitalData?.specCount??0} تخصص",
@@ -359,7 +369,7 @@ class HospitalDetailedScreen extends StatelessWidget {
                                       fontFamily: fontFamilyName,
 
                                       color: kGreenColor,
-                                      fontWeight: FontWeight.w800,
+                                      fontWeight: FontWeight.w600,
                                       fontSize: 13),),
                               ],
                             )
@@ -381,7 +391,7 @@ class HospitalDetailedScreen extends StatelessWidget {
                                       fontFamily: fontFamilyName,
 
                                       color: kBlueColor,
-                                      fontWeight: FontWeight.w800,
+                                      fontWeight: FontWeight.w700,
                                       fontSize: 13),),
                                 const SizedBox(height: 5,),
                                 Text("${controller.hospitalData?.doctors??0} دكتور",
@@ -389,7 +399,7 @@ class HospitalDetailedScreen extends StatelessWidget {
                                       fontFamily: fontFamilyName,
 
                                       color: kGreenColor,
-                                      fontWeight: FontWeight.w800,
+                                      fontWeight: FontWeight.w600,
                                       fontSize: 13),),
                               ],
                             )
@@ -412,7 +422,7 @@ class HospitalDetailedScreen extends StatelessWidget {
                                       fontFamily: fontFamilyName,
 
                                       color: kBlueColor,
-                                      fontWeight: FontWeight.w800,
+                                      fontWeight: FontWeight.w700,
                                       fontSize: 13),),
 
                               ],
@@ -466,7 +476,7 @@ class HospitalDetailedScreen extends StatelessWidget {
                                       fontFamily: fontFamilyName,
 
                                       color: kBlueColor,
-                                      fontWeight: FontWeight.w800,
+                                      fontWeight: FontWeight.w700,
                                       fontSize: 13),),
                                 const SizedBox(height: 5,),
                                 Text("${controller.hospitalData?.specCount??0} تخصص",
@@ -474,7 +484,7 @@ class HospitalDetailedScreen extends StatelessWidget {
                                       fontFamily: fontFamilyName,
 
                                       color: kGreenColor,
-                                      fontWeight: FontWeight.w800,
+                                      fontWeight: FontWeight.w600,
                                       fontSize: 13),),
                               ],
                             )
@@ -495,7 +505,7 @@ class HospitalDetailedScreen extends StatelessWidget {
                                       fontFamily: fontFamilyName,
 
                                       color: kBlueColor,
-                                      fontWeight: FontWeight.w800,
+                                      fontWeight: FontWeight.w700,
                                       fontSize: 13),),
                                 const SizedBox(height: 5,),
                                 Text("${controller.hospitalData?.doctors??0} دكتور",
@@ -503,7 +513,7 @@ class HospitalDetailedScreen extends StatelessWidget {
                                       fontFamily: fontFamilyName,
 
                                       color: kGreenColor,
-                                      fontWeight: FontWeight.w800,
+                                      fontWeight: FontWeight.w600,
                                       fontSize: 13),),
                               ],
                             )
@@ -525,7 +535,7 @@ class HospitalDetailedScreen extends StatelessWidget {
                                       fontFamily: fontFamilyName,
 
                                       color: kBlueColor,
-                                      fontWeight: FontWeight.w800,
+                                      fontWeight: FontWeight.w700,
                                       fontSize: 13),),
 
                               ],
@@ -556,7 +566,7 @@ class HospitalDetailedScreen extends StatelessWidget {
                                       fontFamily: fontFamilyName,
 
                                       color: kBlueColor,
-                                      fontWeight: FontWeight.w800,
+                                      fontWeight: FontWeight.w700,
                                       fontSize: 13),),
                                 const SizedBox(height: 5,),
                                 Text("${controller.hospitalData?.specCount??0} تخصص",
@@ -564,7 +574,7 @@ class HospitalDetailedScreen extends StatelessWidget {
                                       fontFamily: fontFamilyName,
 
                                       color: kGreenColor,
-                                      fontWeight: FontWeight.w800,
+                                      fontWeight: FontWeight.w600,
                                       fontSize: 13),),
                               ],
                             )
@@ -585,7 +595,7 @@ class HospitalDetailedScreen extends StatelessWidget {
                                       fontFamily: fontFamilyName,
 
                                       color: kBlueColor,
-                                      fontWeight: FontWeight.w800,
+                                      fontWeight: FontWeight.w700,
                                       fontSize: 13),),
                                 const SizedBox(height: 5,),
                                 Text("${controller.hospitalData?.doctors??0} دكتور",
@@ -593,7 +603,7 @@ class HospitalDetailedScreen extends StatelessWidget {
                                       fontFamily: fontFamilyName,
 
                                       color: kGreenColor,
-                                      fontWeight: FontWeight.w800,
+                                      fontWeight: FontWeight.w600,
                                       fontSize: 13),),
                               ],
                             )
@@ -615,7 +625,7 @@ class HospitalDetailedScreen extends StatelessWidget {
                                       fontFamily: fontFamilyName,
 
                                       color: kBlueColor,
-                                      fontWeight: FontWeight.w800,
+                                      fontWeight: FontWeight.w700,
                                       fontSize: 13),),
 
                               ],
@@ -627,7 +637,7 @@ class HospitalDetailedScreen extends StatelessWidget {
                     ),
                   ):const SizedBox(),
                   const SizedBox(height: 20,),
-                  CarouselSlider.builder(
+                  controller.hospitalData?.image?.length!=0?CarouselSlider.builder(
                     carouselController: controller.cController,
                     itemCount: controller.hospitalData?.image?.length,
                     itemBuilder: (context, index, realIdx){
@@ -736,6 +746,19 @@ class HospitalDetailedScreen extends StatelessWidget {
                         viewportFraction: 1,
 
                         autoPlay: true),
+                  ):Container(
+                      width: Get.width*0.9,
+                      height: Get.height*0.2,
+                      margin: const EdgeInsets.symmetric(horizontal: 5.0),
+                      decoration: const BoxDecoration(
+                          image: DecorationImage(
+                            image: AssetImage("assets/images/no_data_slideShow.png"),
+                            fit: BoxFit.fill,
+                          ),
+                          borderRadius:
+                          BorderRadius.all(Radius.circular(15))
+
+                      )
                   ),
                   const SizedBox(height: 10,),
                   Container(
@@ -772,7 +795,7 @@ class HospitalDetailedScreen extends StatelessWidget {
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.start,
                       children: [ SizedBox(
-                        height: 25,
+                        height: 15,
                         width: 20,
                         child: Image.asset("assets/images/place.png",fit: BoxFit.fitHeight,),
                       ),
@@ -783,8 +806,8 @@ class HospitalDetailedScreen extends StatelessWidget {
                             style: const TextStyle(
                                 fontFamily:fontFamilyName,
                                 color: kBlueColor,
-                                fontWeight: FontWeight.w700,
-                                fontSize: 17),
+                                fontWeight: FontWeight.w600,
+                                fontSize: 15),
                             textAlign: TextAlign.start,
                           ),
 
@@ -805,8 +828,8 @@ class HospitalDetailedScreen extends StatelessWidget {
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.start,
                         children: [SizedBox(
-                          height: 10,
-                          width: 27,
+                          height: 8,
+                          width: 20,
                           child: Image.asset("assets/images/call.png",fit: BoxFit.fitHeight,),
                         ),
                           const SizedBox(width: 10,),
@@ -817,8 +840,8 @@ class HospitalDetailedScreen extends StatelessWidget {
                               style: const TextStyle(
                                   fontFamily: fontFamilyName,
                                   color: kBlueColor,
-                                  fontWeight: FontWeight.w700,
-                                  fontSize: 17),),
+                                  fontWeight: FontWeight.w600,
+                                  fontSize: 15),),
                           ),
                         ],
                       ),
@@ -897,7 +920,7 @@ class HospitalDetailedScreen extends StatelessWidget {
                   ),
                   const SizedBox(height: 10,),
                    Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    mainAxisAlignment: controller.hospitalData?.lab==1 && controller.hospitalData?.xray == 1?MainAxisAlignment.spaceBetween:MainAxisAlignment.start,
                     children: [
                       InkWell(
                         onTap:(){
@@ -910,11 +933,11 @@ class HospitalDetailedScreen extends StatelessWidget {
                                 fontFamily: fontFamilyName,
 
                                 color: controller.currentActivePage==0?kBlueColor:kGreenColor,
-                                fontWeight: FontWeight.w800,
-                                fontSize: 20),),
+                                fontWeight: FontWeight.w700,
+                                fontSize: 17),),
                         ),
                       ),
-                      InkWell(
+                      controller.hospitalData?.lab==1?InkWell(
                         onTap:(){
                           controller.selectingCategory(1);
                         },
@@ -924,11 +947,11 @@ class HospitalDetailedScreen extends StatelessWidget {
                             style: TextStyle(
                                 fontFamily: fontFamilyName,
                                 color:  controller.currentActivePage==1?kBlueColor:kGreenColor,
-                                fontWeight: FontWeight.w800,
-                                fontSize: 20),),
+                                fontWeight: FontWeight.w700,
+                                fontSize: 17),),
                         ),
-                      ),
-                      InkWell(
+                      ):const SizedBox(),
+                      controller.hospitalData?.xray==1?InkWell(
                         onTap:(){
                           controller.selectingCategory(2);
                         },
@@ -938,15 +961,15 @@ class HospitalDetailedScreen extends StatelessWidget {
                             style: TextStyle(
                                 fontFamily: fontFamilyName,
                                 color:  controller.currentActivePage==2?kBlueColor:kGreenColor,
-                                fontWeight: FontWeight.w800,
-                                fontSize: 20),),
+                                fontWeight: FontWeight.w700,
+                                fontSize: 17),),
                         ),
-                      ),
+                      ):const SizedBox(),
                     ],
                   ),
                   const SizedBox(height: 20,),
                   controller.currentActivePage==0?
-                  controller.hospitalAddedOrNot?Padding(
+                  controller.doctorHasNoData?Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 8.0,vertical: 7.0),
                       child: SizedBox(
                           child: DecoratedBox(
@@ -1023,21 +1046,21 @@ class HospitalDetailedScreen extends StatelessWidget {
                                 },
                               ),
                               const SizedBox(height: 5),
-                              const Text( "دكتور احمد حسن",
+                               Text( Get.find<StorageService>().activeLocale == SupportedLocales.english?controller.doctorsData![index].nameEn!:controller.doctorsData![index].name!,
 
-                                style: TextStyle(
+                                style: const TextStyle(
                                     height: 1,
                                     fontFamily:fontFamilyName,
                                     color: kBlueColor,
-                                    fontWeight: FontWeight.w700,
+                                    fontWeight: FontWeight.w600,
                                     fontSize: 12),),
                               const SizedBox(height: 5,),
-                              const Text("استشاري نساء وتوليد",
-                                style: TextStyle(
+                               Text(Get.find<StorageService>().activeLocale == SupportedLocales.english?controller.doctorsData![index].specialistEn!:controller.doctorsData![index].specialist!,
+                                style: const TextStyle(
                                     height: 1,
                                     fontFamily: fontFamilyName,
                                     color: kBlueColor,
-                                    fontWeight: FontWeight.w700,
+                                    fontWeight: FontWeight.w600,
                                     fontSize: 12),),
                             ],
                           ),
@@ -1045,36 +1068,11 @@ class HospitalDetailedScreen extends StatelessWidget {
                       }
                       )):controller.currentActivePage==1?Column(
                     children: [
-                      Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: Container(
-                          width: Get.width*0.9,
-                          height: Get.height*0.2,
-
-                          margin: const EdgeInsets.symmetric(horizontal: 5.0),
-                          decoration:  const BoxDecoration(
-                            color: Colors.transparent,
-                            image: DecorationImage(
-                                image: AssetImage('assets/images/doctor banner home.png'),
-                                fit: BoxFit.cover),
-                            borderRadius: BorderRadius.all(Radius.circular(10)),
-                            boxShadow: [
-                              BoxShadow(
-                                offset: Offset(0, 2),
-                                blurRadius: 6,
-                                color: Colors.black12,
-                              ),
-                            ],
-                          ),
-
-                        ),
-                      ),
-                      Container(
-                        width: Get.width,
-                        child:  const Padding(
-                          padding: EdgeInsets.symmetric(horizontal: 10.0),
-                          child: Text("عن قسم التحليل",
-                            style: TextStyle(
+                      Center(
+                        child: Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 10.0),
+                          child: Text(Get.find<StorageService>().activeLocale == SupportedLocales.english?controller.lapData?.titleEn??"":controller.lapData?.title??"",
+                            style: const TextStyle(
                                 fontFamily: fontFamilyName,
 
                                 color: kBlueColor,
@@ -1082,54 +1080,27 @@ class HospitalDetailedScreen extends StatelessWidget {
                                 fontSize: 20),),
                         ),
                       ),
-                      const SizedBox(height: 10,),
-                      Container(
-                        width: Get.width,
-                        child:  const Padding(
-                          padding: EdgeInsets.symmetric(horizontal: 10.0),
-                          child: Text("احدى المستشفيات التي تتميز بوجود صفوة الاطباء و الاستشاريين في مختلف التخصصات الطبية ومتعاقده مع كافه النقابات والعديد من شركات الرعاية  وتضم عيادات في جميع التخصصات الطبية وأطباء على أعلى مستوى من الجاهزية والخبرة.",
-
-                            style: TextStyle(
-                                fontFamily: fontFamilyName,
-
-                                color: kGreenColor,
-                                fontWeight: FontWeight.w600,
-                                fontSize: 15),),
-                        ),
-                      ),
+                      Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Html(
+                          data: Get.find<StorageService>().activeLocale == SupportedLocales.english?controller.lapData?.descEn??"":controller.lapData?.desc??"",
+                          style: {
+                            "body": Style(
+                              fontFamily: fontFamilyName,
+                              color: kGreenColor,
+                              fontWeight: FontWeight.w800,
+                              fontSize: FontSize(20),
+                            ),
+                          },),
+                      )
                     ],
                   ):Column(
                     children: [
-                      Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: Container(
-                          width: Get.width*0.9,
-                          height: Get.height*0.2,
-
-                          margin: const EdgeInsets.symmetric(horizontal: 5.0),
-                          decoration:  const BoxDecoration(
-                            color: Colors.transparent,
-                            image: DecorationImage(
-                                image: AssetImage('assets/images/doctor banner home.png'),
-                                fit: BoxFit.cover),
-                            borderRadius: BorderRadius.all(Radius.circular(10)),
-                            boxShadow: [
-                              BoxShadow(
-                                offset: Offset(0, 2),
-                                blurRadius: 6,
-                                color: Colors.black12,
-                              ),
-                            ],
-                          ),
-
-                        ),
-                      ),
-                      Container(
-                        width: Get.width,
-                        child:  const Padding(
-                          padding: EdgeInsets.symmetric(horizontal: 10.0),
-                          child: Text("عن قسم الأشعة",
-                            style: TextStyle(
+                      Center(
+                        child: Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 10.0),
+                          child: Text(Get.find<StorageService>().activeLocale == SupportedLocales.english?controller.xrayData?.titleEn??"":controller.xrayData?.title??"",
+                            style: const TextStyle(
                                 fontFamily: fontFamilyName,
 
                                 color: kBlueColor,
@@ -1137,21 +1108,19 @@ class HospitalDetailedScreen extends StatelessWidget {
                                 fontSize: 20),),
                         ),
                       ),
-                      const SizedBox(height: 10,),
-                      Container(
-                        width: Get.width,
-                        child:  const Padding(
-                          padding: EdgeInsets.symmetric(horizontal: 10.0),
-                          child: Text("احدى المستشفيات التي تتميز بوجود صفوة الاطباء و الاستشاريين في مختلف التخصصات الطبية ومتعاقده مع كافه النقابات والعديد من شركات الرعاية  وتضم عيادات في جميع التخصصات الطبية وأطباء على أعلى مستوى من الجاهزية والخبرة.",
-
-                            style: TextStyle(
-                                fontFamily: fontFamilyName,
-
-                                color: kGreenColor,
-                                fontWeight: FontWeight.w600,
-                                fontSize: 15),),
-                        ),
-                      ),
+                      Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Html(
+                          data: Get.find<StorageService>().activeLocale == SupportedLocales.english?controller.xrayData?.descEn??"":controller.xrayData?.desc??"",
+                          style: {
+                            "body": Style(
+                              fontFamily: fontFamilyName,
+                              color: kGreenColor,
+                              fontWeight: FontWeight.w800,
+                              fontSize: FontSize(20),
+                            ),
+                          },),
+                      )
                     ],
                   ),
                   const SizedBox(height: 20,),
