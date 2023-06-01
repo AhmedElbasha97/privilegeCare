@@ -19,6 +19,7 @@ class Services {
   static String advancedSearchEndPoint = "search";//post
   static String homeDoctorsEndPoint = "6doctors";//post
   static String homeBannersEndPoint = "slider";//post
+  static String hospitalBannersEndPoint = "hospital_banner";//post
   static String hospitalListEndPoint = "specialist_hospital";//post
   static String commentsDoctorsProfileEndPoint = "review";//post
   static String addOrRemoveDoctorsFromFavourite = "favorite/new";// post
@@ -35,5 +36,8 @@ class Services {
   static String editAccountDataEndPoint = "member/edit";//post
   static String getUserDataEndPoint = "member";//post
   static String getXRayDataEndPoint = "xray_topic";//post
- static String getLapDataEndPoint = "laboratory_topic";//post
+  static String getLapDataEndPoint = "laboratory_topic";//post
+  static String getHelpDataEndPoint = "help";//post
+  static String forgetPasswordEndPoint = "member/forget_password";//post
+  static String getHistoryDataEndPoint = "appointments_history";//post
 }

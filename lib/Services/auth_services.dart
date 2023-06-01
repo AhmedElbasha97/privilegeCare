@@ -1,13 +1,10 @@
 
 import 'package:dio/dio.dart';
 import 'package:image_picker/image_picker.dart';
-
-
 import 'package:privilegecare/Models/auth_model.dart';
 import 'package:privilegecare/Models/profile_model.dart';
 import 'package:privilegecare/Models/response_model.dart';
 import 'package:privilegecare/Utils/api_service.dart';
-
 import 'package:privilegecare/Utils/services.dart';
 
 class AuthServices{
@@ -91,5 +88,13 @@ class AuthServices{
     }
     return null;
   }
-
+  static Future<ResponseModel?> forgetPassword (String email) async {
+    var data = await api.request(Services.forgetPasswordEndPoint, "POST",queryParamters: {
+      "email":email,
+    });
+    if (data != null) {
+      return ResponseModel.fromJson(data);
+    }
+    return null;
+  }
 }
