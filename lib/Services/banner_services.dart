@@ -17,13 +17,13 @@ class BannerServices {
     return null;
   }
   static Future<List<HospitalBannerModel>?> getHospitalBanners() async {
-    List<HospitalBannerModel>? bannerList = [];
+    List<HospitalBannerModel>? hospitalBannerList = [];
     var data = await api.request(Services.hospitalBannersEndPoint, "POST");
     if (data != null) {
-      for (var banner in data){
-        bannerList.add(HospitalBannerModel.fromJson(banner));
+      for (var hospitalBanner in data){
+        hospitalBannerList.add(HospitalBannerModel.fromJson(hospitalBanner));
       }
-      return bannerList;
+      return hospitalBannerList;
     }
     return null;
   }

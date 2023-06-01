@@ -1,6 +1,7 @@
 // ignore_for_file: must_be_immutable
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:privilegecare/Ui/HomeScreen/home_screen.dart';
 import 'package:privilegecare/Ui/SpecialtyScreen/specialty_screen.dart';
 import 'package:privilegecare/Ui/welcomeScreen/welcome_screen.dart';
 import 'package:privilegecare/Utils/colors.dart';
@@ -21,9 +22,9 @@ class _SplashScreenState extends State<SplashScreen> {
     super.initState();
     Future.delayed(const Duration(milliseconds: 100), () {
       if(Get.find<StorageService>().checkUserIsSignedIn){
-        Get.to(SpecialtyScreen());
+        Get.off(const HomeScreen());
       }else{
-        Get.to(const WelcomeScreen());
+        Get.off(const WelcomeScreen());
       }
     });
   }

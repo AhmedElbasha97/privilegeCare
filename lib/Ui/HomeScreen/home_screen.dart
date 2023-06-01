@@ -7,10 +7,16 @@ import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:get/get.dart';
 import 'package:privilegecare/Ui/HomeScreen/controller/home_controller.dart';
+import 'package:privilegecare/Ui/SpecialtyScreen/specialty_screen.dart';
 import 'package:privilegecare/Ui/dector_detailed_screen/doctor_detailed_screen.dart';
 import 'package:privilegecare/Ui/doctorsScreen/doctors_screen.dart';
+import 'package:privilegecare/Ui/helpScreen/help_screen.dart';
+import 'package:privilegecare/Ui/hospital%20screen/hospitals_screen.dart';
+import 'package:privilegecare/Ui/hospitalDetailed/hospital_detailed_screen.dart';
 import 'package:privilegecare/Utils/colors.dart';
 import 'package:privilegecare/Utils/constant.dart';
+import 'package:privilegecare/Utils/localization_services.dart';
+import 'package:privilegecare/Utils/memory.dart';
 import 'package:privilegecare/widgets/bottom_navigation_bar.dart';
 import 'package:privilegecare/widgets/loader.dart';
 
@@ -58,7 +64,9 @@ class _HomeScreenState extends State<HomeScreen> {
               height: _isAppbar ?  Get.height*0.09 : 0.0,
               duration: const Duration(milliseconds: 200),
               child: AppBar(
-
+                leading: IconButton(icon: const Icon(Icons.info_outline,color: kBlueColor,size: 35,),onPressed: (){
+                  Get.to(()=>const HelpScreen());
+                },),
                 actions: [
                   IconButton(icon: const Icon(Icons.search_outlined,color: kBlueColor,size: 35,),onPressed: (){
                     
@@ -66,7 +74,8 @@ class _HomeScreenState extends State<HomeScreen> {
 
                   },),
                   IconButton(icon: const Icon(Icons.notifications_none,color: kBlueColor,size: 35,),onPressed: (){
-                  },),],
+                  },),
+                  ],
                 backgroundColor: Colors.white,
                 toolbarHeight: Get.height*0.1,
                 flexibleSpace: SizedBox(
@@ -82,685 +91,672 @@ class _HomeScreenState extends State<HomeScreen> {
           ),
           bottomNavigationBar: const BottomNavigationBarWidget(selectedTap: 2,),
           backgroundColor: kWhiteColor,
-          body: RawScrollbar(
-            thumbColor: kBlueColor,
-            radius: const Radius.circular(20),
-            thickness: 5,
-            child: SingleChildScrollView(
-              controller: _scrollController,
-              child: Padding(
-                padding: const EdgeInsets.all(10.0),
-                child: Column(
-                  children: [
-                    controller.isLoading?const SizedBox():Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceAround,
-                      children: [
-                        controller.doctorData!.length < 0?const SizedBox():InkWell(
-                          onTap: (){
-                            Get.to(DoctorDetailedScreen(doctorId: "${controller.doctorData?[0].id??0}"));
-                          },
-                          child: Column(
-                            children: [
-                              CachedNetworkImage(
-                                fit: BoxFit.cover,
-                                imageUrl: "https://privilegecare.net${controller.doctorData?[0].image??""}",
-                                imageBuilder: ((context, image){
-                                  return  Container(
-                                      height: 80,
-                                      width: 80,
-                                      decoration: BoxDecoration(
+          body: SizedBox.expand(
+            child: GestureDetector(
+            onPanUpdate: (details) {
+            // Swiping in right direction.
+            if (details.delta.dx > 0) {
+              Get.to(()=>const HospitalScreens());
+            }
+
+            // Swiping in left direction.
+            if (details.delta.dx < 0) {
+              Get.to(()=>SpecialtyScreen());
+            }
+            },
+            child: RawScrollbar(
+              thumbColor: kBlueColor,
+              radius: const Radius.circular(20),
+              thickness: 5,
+              child: SingleChildScrollView(
+                controller: _scrollController,
+                child: Padding(
+                  padding: const EdgeInsets.all(10.0),
+                  child: Column(
+                    children: [
+                      controller.isLoading?const SizedBox():Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceAround,
+                        children: [
+                          controller.doctorData!.length < 0?const SizedBox():InkWell(
+                            onTap: (){
+                              Get.to(DoctorDetailedScreen(doctorId: "${controller.doctorData?[0].id??0}"));
+                            },
+                            child: Column(
+                              children: [
+                                CachedNetworkImage(
+                                  fit: BoxFit.cover,
+                                  imageUrl: "https://privilegecare.net${controller.doctorData?[0].image??""}",
+                                  imageBuilder: ((context, image){
+                                    return  Container(
+                                        height: 80,
+                                        width: 80,
+                                        decoration: BoxDecoration(
+                                            image: DecorationImage(
+                                              image: image,
+                                              fit: BoxFit.cover,
+                                            ),
+
+
+                                        )
+                                    );
+                                  }),
+                                  placeholder: (context, image){
+                                    return  const Center(child: CircularProgressIndicator(color: kBlueColor,));
+                                  },
+                                  errorWidget: (context, url, error){
+                                    return Container(
+                                         height: 80,
+                                        width: 80,
+
+                                        decoration: const BoxDecoration(
+                                            image: DecorationImage(
+                                              image: AssetImage("assets/images/doctor.png"),
+                                              fit: BoxFit.fill,
+                                            ),
+
+
+                                        )
+                                    );
+                                  },
+                                ),
+                                const SizedBox(height: 5),
+                                 Text( controller.doctorData?[0].name??"",
+
+                                  style: const TextStyle(
+                                      height: 1,
+                                      fontFamily: fontFamilyName,
+                                      color: kBlueColor,
+                                      fontWeight: FontWeight.w600,
+                                      fontSize: 12),),
+                                const SizedBox(height: 5,),
+                                 Text( controller.doctorData?[0].specialist??"",
+                                  style: const TextStyle(
+                                      height: 1,
+                                      fontFamily: fontFamilyName,
+                                      color: kBlueColor,
+                                      fontWeight: FontWeight.w600,
+                                      fontSize: 12),),
+                              ],
+                            ),
+                          ),
+                          controller.doctorData!.length < 1?const SizedBox():
+                          InkWell(
+                            onTap: (){
+                              Get.to(DoctorDetailedScreen(doctorId: "${controller.doctorData?[1].id??0}"));
+                            },
+                            child: Column(
+                              children: [
+                                CachedNetworkImage(
+                                  fit: BoxFit.cover,
+                                  imageUrl: "https://privilegecare.net${controller.doctorData?[1].image??""}",
+                                  imageBuilder: ((context, image){
+                                    return  Container(
+                                        height: 80,
+                                        width: 80,
+                                        decoration: BoxDecoration(
                                           image: DecorationImage(
                                             image: image,
                                             fit: BoxFit.cover,
                                           ),
 
 
-                                      )
-                                  );
-                                }),
-                                placeholder: (context, image){
-                                  return  const Center(child: CircularProgressIndicator(color: kBlueColor,));
-                                },
-                                errorWidget: (context, url, error){
-                                  return Container(
-                                       height: 80,
-                                      width: 80,
+                                        )
+                                    );
+                                  }),
+                                  placeholder: (context, image){
+                                    return  const Center(child: CircularProgressIndicator(color: kBlueColor,));
+                                  },
+                                  errorWidget: (context, url, error){
+                                    return Container(
+                                        height: 80,
+                                        width: 80,
 
-                                      decoration: const BoxDecoration(
+                                        decoration: const BoxDecoration(
                                           image: DecorationImage(
                                             image: AssetImage("assets/images/doctor.png"),
                                             fit: BoxFit.fill,
                                           ),
 
 
-                                      )
-                                  );
-                                },
-                              ),
-                              const SizedBox(height: 5),
-                               Text( controller.doctorData?[0].name??"",
+                                        )
+                                    );
+                                  },
+                                ),
+                                const SizedBox(height: 5),
+                                 Text( controller.doctorData?[1].name??"",
 
-                                style: const TextStyle(
-                                    height: 1,
-                                    fontFamily: fontFamilyName,
-                                    color: kBlueColor,
-                                    fontWeight: FontWeight.w600,
-                                    fontSize: 12),),
-                              const SizedBox(height: 5,),
-                               Text( controller.doctorData?[0].specialist??"",
-                                style: const TextStyle(
-                                    height: 1,
-                                    fontFamily: fontFamilyName,
-                                    color: kBlueColor,
-                                    fontWeight: FontWeight.w600,
-                                    fontSize: 12),),
-                            ],
+                                  style: const TextStyle(
+                                      height: 1,
+                                      fontFamily: fontFamilyName,
+                                      color: kBlueColor,
+                                      fontWeight: FontWeight.w600,
+                                      fontSize: 12),),
+                                const SizedBox(height: 5,),
+                                 Text(controller.doctorData?[1].specialist??"",
+                                  style: const TextStyle(
+                                      height: 1,
+                                      fontFamily: fontFamilyName,
+                                      color: kBlueColor,
+                                      fontWeight: FontWeight.w600,
+                                      fontSize: 12),),
+                              ],
+                            ),
                           ),
-                        ),
-                        controller.doctorData!.length < 1?const SizedBox():
-                        InkWell(
-                          onTap: (){
-                            Get.to(DoctorDetailedScreen(doctorId: "${controller.doctorData?[1].id??0}"));
-                          },
-                          child: Column(
-                            children: [
-                              CachedNetworkImage(
-                                fit: BoxFit.cover,
-                                imageUrl: "https://privilegecare.net${controller.doctorData?[1].image??""}",
-                                imageBuilder: ((context, image){
-                                  return  Container(
-                                      height: 80,
-                                      width: 80,
-                                      decoration: BoxDecoration(
-                                        image: DecorationImage(
-                                          image: image,
-                                          fit: BoxFit.cover,
-                                        ),
-
-
-                                      )
-                                  );
-                                }),
-                                placeholder: (context, image){
-                                  return  const Center(child: CircularProgressIndicator(color: kBlueColor,));
-                                },
-                                errorWidget: (context, url, error){
-                                  return Container(
-                                      height: 80,
-                                      width: 80,
-
-                                      decoration: const BoxDecoration(
-                                        image: DecorationImage(
-                                          image: AssetImage("assets/images/doctor.png"),
-                                          fit: BoxFit.fill,
-                                        ),
-
-
-                                      )
-                                  );
-                                },
-                              ),
-                              const SizedBox(height: 5),
-                               Text( controller.doctorData?[1].name??"",
-
-                                style: const TextStyle(
-                                    height: 1,
-                                    fontFamily: fontFamilyName,
-                                    color: kBlueColor,
-                                    fontWeight: FontWeight.w600,
-                                    fontSize: 12),),
-                              const SizedBox(height: 5,),
-                               Text(controller.doctorData?[1].specialist??"",
-                                style: const TextStyle(
-                                    height: 1,
-                                    fontFamily: fontFamilyName,
-                                    color: kBlueColor,
-                                    fontWeight: FontWeight.w600,
-                                    fontSize: 12),),
-                            ],
-                          ),
-                        ),
-                        controller.doctorData!.length < 2?const SizedBox():
-                        InkWell(
-                          onTap: (){
-                            Get.to(DoctorDetailedScreen(doctorId: "${controller.doctorData?[2].id??0}"));
-                          },
-                          child: Column(
-                            children: [
-                              CachedNetworkImage(
-                                fit: BoxFit.cover,
-                                imageUrl: "https://privilegecare.net${controller.doctorData?[2].image??""}",
-                                imageBuilder: ((context, image){
-                                  return  Container(
-                                      height: 80,
-                                      width: 80,
-                                      decoration: BoxDecoration(
-                                        image: DecorationImage(
-                                          image: image,
-                                          fit: BoxFit.cover,
-                                        ),
-
-
-                                      )
-                                  );
-                                }),
-                                placeholder: (context, image){
-                                  return  const Center(child: CircularProgressIndicator(color: kBlueColor,));
-                                },
-                                errorWidget: (context, url, error){
-                                  return Container(
-                                      height: 80,
-                                      width: 80,
-
-                                      decoration: const BoxDecoration(
-                                        image: DecorationImage(
-                                          image: AssetImage("assets/images/doctor.png"),
-                                          fit: BoxFit.fill,
-                                        ),
-
-
-                                      )
-                                  );
-                                },
-                              ),
-                              const SizedBox(height: 5),
-                               Text( controller.doctorData?[2].name??"",
-
-                                style: const TextStyle(
-                                    height: 1,
-                                    fontFamily: fontFamilyName,
-                                    color: kBlueColor,
-                                    fontWeight: FontWeight.w600,
-                                    fontSize: 12),),
-                              const SizedBox(height: 5,),
-                               Text(controller.doctorData?[2].specialist??"",
-                                style: const TextStyle(
-                                    height: 1,
-                                    fontFamily: fontFamilyName,
-                                    color: kBlueColor,
-                                    fontWeight: FontWeight.w600,
-                                    fontSize: 12),),
-                            ],
-                          ),
-                        ),
-                      ],
-                    ),
-                    const SizedBox(height: 20,),
-                    controller.isLoading?const SizedBox():Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceAround,
-                      children: [
-                        controller.doctorData!.length < 3?const SizedBox():
-                        InkWell(
-                          onTap: (){
-                            Get.to(DoctorDetailedScreen(doctorId: "${controller.doctorData?[3].id??0}"));
-                          },
-                          child: Column(
-                            children: [
-                              CachedNetworkImage(
-                                fit: BoxFit.cover,
-                                imageUrl: "https://privilegecare.net${controller.doctorData?[3].image??""}",
-                                imageBuilder: ((context, image){
-                                  return  Container(
-                                      height: 80,
-                                      width: 80,
-                                      decoration: BoxDecoration(
-                                        image: DecorationImage(
-                                          image: image,
-                                          fit: BoxFit.cover,
-                                        ),
-
-
-                                      )
-                                  );
-                                }),
-                                placeholder: (context, image){
-                                  return  const Center(child: CircularProgressIndicator(color: kBlueColor,));
-                                },
-                                errorWidget: (context, url, error){
-                                  return Container(
-                                      height: 80,
-                                      width: 80,
-
-                                      decoration: const BoxDecoration(
-                                        image: DecorationImage(
-                                          image: AssetImage("assets/images/doctor.png"),
-                                          fit: BoxFit.fill,
-                                        ),
-
-
-                                      )
-                                  );
-                                },
-                              ),
-                              const SizedBox(height: 5),
-                               Text( controller.doctorData?[3].name??"",
-
-                                style: const TextStyle(
-                                    height: 1,
-                                    fontFamily:fontFamilyName,
-                                    color: kBlueColor,
-                                    fontWeight: FontWeight.w600,
-                                    fontSize: 12),),
-                              const SizedBox(height: 5,),
-                               Text(controller.doctorData?[3].specialist??"",
-                                style: const TextStyle(
-                                    height: 1,
-                                    fontFamily: fontFamilyName,
-                                    color: kBlueColor,
-                                    fontWeight: FontWeight.w600,
-                                    fontSize: 12),),
-                            ],
-                          ),
-                        ),
-                        controller.doctorData!.length < 4?const SizedBox():
-                        InkWell(
-                          onTap: (){
-                            Get.to(DoctorDetailedScreen(doctorId: "${controller.doctorData?[4].id??0}"));
-                          },
-                          child: Column(
-                            children: [
-                              CachedNetworkImage(
-                                fit: BoxFit.cover,
-                                imageUrl: "https://privilegecare.net${controller.doctorData?[4].image??""}",
-                                imageBuilder: ((context, image){
-                                  return  Container(
-                                      height: 80,
-                                      width: 80,
-                                      decoration: BoxDecoration(
-                                        image: DecorationImage(
-                                          image: image,
-                                          fit: BoxFit.cover,
-                                        ),
-
-
-                                      )
-                                  );
-                                }),
-                                placeholder: (context, image){
-                                  return  const Center(child: CircularProgressIndicator(color: kBlueColor,));
-
-                                },
-                                errorWidget: (context, url, error){
-                                  return Container(
-                                      height: 80,
-                                      width: 80,
-
-                                      decoration: const BoxDecoration(
-                                        image: DecorationImage(
-                                          image: AssetImage("assets/images/doctor.png"),
-                                          fit: BoxFit.fill,
-                                        ),
-
-
-                                      )
-                                  );
-                                },
-                              ),
-                              const SizedBox(height: 5),
-                               Text( controller.doctorData?[4].name??"",
-
-                                style: const TextStyle(
-                                    height: 1,
-                                    fontFamily: fontFamilyName,
-                                    color: kBlueColor,
-                                    fontWeight: FontWeight.w600,
-                                    fontSize: 12),),
-                              const SizedBox(height: 5,),
-                               Text(controller.doctorData?[4].specialist??"",
-                                style: const TextStyle(
-                                    height: 1,
-                                    fontFamily: fontFamilyName,
-                                    color: kBlueColor,
-                                    fontWeight: FontWeight.w600,
-                                    fontSize: 12),),
-                            ],
-                          ),
-                        ),
-                        controller.doctorData!.length < 5?const SizedBox():
-                        InkWell(
-                          onTap: (){
-                            Get.to(DoctorDetailedScreen(doctorId: "${controller.doctorData?[5].id??0}"));
-                          },
-                          child: Column(
-                            children: [
-                              CachedNetworkImage(
-                                fit: BoxFit.cover,
-                                imageUrl: "https://privilegecare.net${controller.doctorData?[4].image??""}",
-                                imageBuilder: ((context, image){
-                                  return  Container(
-                                      height: 80,
-                                      width: 80,
-                                      decoration: BoxDecoration(
-                                        image: DecorationImage(
-                                          image: image,
-                                          fit: BoxFit.cover,
-                                        ),
-
-
-                                      )
-                                  );
-                                }),
-                                placeholder: (context, image){
-                                  return  const Center(child: CircularProgressIndicator(color: kBlueColor,));
-
-                                },
-                                errorWidget: (context, url, error){
-                                  return Container(
-                                      height: 80,
-                                      width: 80,
-
-                                      decoration: const BoxDecoration(
-                                        image: DecorationImage(
-                                          image: AssetImage("assets/images/doctor.png"),
-                                          fit: BoxFit.fill,
-                                        ),
-
-
-                                      )
-                                  );
-                                },
-                              ),
-                              const SizedBox(height: 5),
-                               Text( controller.doctorData?[5].name??"",
-
-                                style: const TextStyle(
-                                    height: 1,
-                                    fontFamily:fontFamilyName,
-                                    color: kBlueColor,
-                                    fontWeight: FontWeight.w600,
-                                    fontSize: 12),),
-                              const SizedBox(height: 5,),
-                               Text(controller.doctorData?[5].specialist??"",
-                                style: const TextStyle(
-                                    height: 1,
-                                    fontFamily: fontFamilyName,
-                                    color: kBlueColor,
-                                    fontWeight: FontWeight.w600,
-                                    fontSize: 12),),
-                            ],
-                          ),
-                        ),
-                      ],
-                    ),
-                    const SizedBox(height: 25,),
-                    InkWell(
-                      onTap: (){
-                        Get.to(()=>const DoctorScreen(specialistId: "5"));
-                      },
-                      child: const Text("عرض المزيد من الأطباء",
-                        style: TextStyle(
-                            height: 1,
-                            fontFamily: fontFamilyName,
-                            color: kBlueColor,
-                            fontWeight: FontWeight.w700,
-                            fontSize: 18),),
-                    ),
-                    const SizedBox(height: 18,),
-                    controller.slideShowLoading?Loader(width: MediaQuery.of(context).size.width,height: 150.0):CarouselSlider(
-                      options:  CarouselOptions(
-                        height: Get.height*0.19,
-                        aspectRatio: 2.0,
-                        enlargeCenterPage: false,
-                        viewportFraction: 1,
-                        autoPlay: true),
-
-                      items: controller.sliderData?.map((i) {
-                        return Builder(
-                          builder: (BuildContext context) {
-                            return  InkWell(
-                              onTap: (){
-                                controller.launchURL(context,i.link??"");
-                              },
-                              child: CachedNetworkImage(
-                                fit: BoxFit.cover,
-                                imageUrl: "https://privilegecare.net${i.image}",
-                                imageBuilder: ((context, image){
-                                  return  Container(
-                                      width: MediaQuery.of(context).size.width,
-                                      margin: const EdgeInsets.symmetric(horizontal: 5.0),
-                                      decoration: BoxDecoration(
+                          controller.doctorData!.length < 2?const SizedBox():
+                          InkWell(
+                            onTap: (){
+                              Get.to(DoctorDetailedScreen(doctorId: "${controller.doctorData?[2].id??0}"));
+                            },
+                            child: Column(
+                              children: [
+                                CachedNetworkImage(
+                                  fit: BoxFit.cover,
+                                  imageUrl: "https://privilegecare.net${controller.doctorData?[2].image??""}",
+                                  imageBuilder: ((context, image){
+                                    return  Container(
+                                        height: 80,
+                                        width: 80,
+                                        decoration: BoxDecoration(
                                           image: DecorationImage(
                                             image: image,
+                                            fit: BoxFit.cover,
+                                          ),
+
+
+                                        )
+                                    );
+                                  }),
+                                  placeholder: (context, image){
+                                    return  const Center(child: CircularProgressIndicator(color: kBlueColor,));
+                                  },
+                                  errorWidget: (context, url, error){
+                                    return Container(
+                                        height: 80,
+                                        width: 80,
+
+                                        decoration: const BoxDecoration(
+                                          image: DecorationImage(
+                                            image: AssetImage("assets/images/doctor.png"),
                                             fit: BoxFit.fill,
                                           ),
-                                          borderRadius:
-                                          const BorderRadius.all(Radius.circular(15))
 
-                                      )
-                                  );
-                                }),
-                                placeholder: (context, image){
-                                  return  Padding(
-                                    padding:  const EdgeInsets.all(5),
-                                    child: Container(
+
+                                        )
+                                    );
+                                  },
+                                ),
+                                const SizedBox(height: 5),
+                                 Text( controller.doctorData?[2].name??"",
+
+                                  style: const TextStyle(
+                                      height: 1,
+                                      fontFamily: fontFamilyName,
+                                      color: kBlueColor,
+                                      fontWeight: FontWeight.w600,
+                                      fontSize: 12),),
+                                const SizedBox(height: 5,),
+                                 Text(controller.doctorData?[2].specialist??"",
+                                  style: const TextStyle(
+                                      height: 1,
+                                      fontFamily: fontFamilyName,
+                                      color: kBlueColor,
+                                      fontWeight: FontWeight.w600,
+                                      fontSize: 12),),
+                              ],
+                            ),
+                          ),
+                        ],
+                      ),
+                      const SizedBox(height: 20,),
+                      controller.isLoading?const SizedBox():Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceAround,
+                        children: [
+                          controller.doctorData!.length < 3?const SizedBox():
+                          InkWell(
+                            onTap: (){
+                              Get.to(DoctorDetailedScreen(doctorId: "${controller.doctorData?[3].id??0}"));
+                            },
+                            child: Column(
+                              children: [
+                                CachedNetworkImage(
+                                  fit: BoxFit.cover,
+                                  imageUrl: "https://privilegecare.net${controller.doctorData?[3].image??""}",
+                                  imageBuilder: ((context, image){
+                                    return  Container(
+                                        height: 80,
+                                        width: 80,
+                                        decoration: BoxDecoration(
+                                          image: DecorationImage(
+                                            image: image,
+                                            fit: BoxFit.cover,
+                                          ),
+
+
+                                        )
+                                    );
+                                  }),
+                                  placeholder: (context, image){
+                                    return  const Center(child: CircularProgressIndicator(color: kBlueColor,));
+                                  },
+                                  errorWidget: (context, url, error){
+                                    return Container(
+                                        height: 80,
+                                        width: 80,
+
                                         decoration: const BoxDecoration(
+                                          image: DecorationImage(
+                                            image: AssetImage("assets/images/doctor.png"),
+                                            fit: BoxFit.fill,
+                                          ),
+
+
+                                        )
+                                    );
+                                  },
+                                ),
+                                const SizedBox(height: 5),
+                                 Text( controller.doctorData?[3].name??"",
+
+                                  style: const TextStyle(
+                                      height: 1,
+                                      fontFamily:fontFamilyName,
+                                      color: kBlueColor,
+                                      fontWeight: FontWeight.w600,
+                                      fontSize: 12),),
+                                const SizedBox(height: 5,),
+                                 Text(controller.doctorData?[3].specialist??"",
+                                  style: const TextStyle(
+                                      height: 1,
+                                      fontFamily: fontFamilyName,
+                                      color: kBlueColor,
+                                      fontWeight: FontWeight.w600,
+                                      fontSize: 12),),
+                              ],
+                            ),
+                          ),
+                          controller.doctorData!.length < 4?const SizedBox():
+                          InkWell(
+                            onTap: (){
+                              Get.to(DoctorDetailedScreen(doctorId: "${controller.doctorData?[4].id??0}"));
+                            },
+                            child: Column(
+                              children: [
+                                CachedNetworkImage(
+                                  fit: BoxFit.cover,
+                                  imageUrl: "https://privilegecare.net${controller.doctorData?[4].image??""}",
+                                  imageBuilder: ((context, image){
+                                    return  Container(
+                                        height: 80,
+                                        width: 80,
+                                        decoration: BoxDecoration(
+                                          image: DecorationImage(
+                                            image: image,
+                                            fit: BoxFit.cover,
+                                          ),
+
+
+                                        )
+                                    );
+                                  }),
+                                  placeholder: (context, image){
+                                    return  const Center(child: CircularProgressIndicator(color: kBlueColor,));
+
+                                  },
+                                  errorWidget: (context, url, error){
+                                    return Container(
+                                        height: 80,
+                                        width: 80,
+
+                                        decoration: const BoxDecoration(
+                                          image: DecorationImage(
+                                            image: AssetImage("assets/images/doctor.png"),
+                                            fit: BoxFit.fill,
+                                          ),
+
+
+                                        )
+                                    );
+                                  },
+                                ),
+                                const SizedBox(height: 5),
+                                 Text( controller.doctorData?[4].name??"",
+
+                                  style: const TextStyle(
+                                      height: 1,
+                                      fontFamily: fontFamilyName,
+                                      color: kBlueColor,
+                                      fontWeight: FontWeight.w600,
+                                      fontSize: 12),),
+                                const SizedBox(height: 5,),
+                                 Text(controller.doctorData?[4].specialist??"",
+                                  style: const TextStyle(
+                                      height: 1,
+                                      fontFamily: fontFamilyName,
+                                      color: kBlueColor,
+                                      fontWeight: FontWeight.w600,
+                                      fontSize: 12),),
+                              ],
+                            ),
+                          ),
+                          controller.doctorData!.length < 5?const SizedBox():
+                          InkWell(
+                            onTap: (){
+                              Get.to(DoctorDetailedScreen(doctorId: "${controller.doctorData?[5].id??0}"));
+                            },
+                            child: Column(
+                              children: [
+                                CachedNetworkImage(
+                                  fit: BoxFit.cover,
+                                  imageUrl: "https://privilegecare.net${controller.doctorData?[4].image??""}",
+                                  imageBuilder: ((context, image){
+                                    return  Container(
+                                        height: 80,
+                                        width: 80,
+                                        decoration: BoxDecoration(
+                                          image: DecorationImage(
+                                            image: image,
+                                            fit: BoxFit.cover,
+                                          ),
+
+
+                                        )
+                                    );
+                                  }),
+                                  placeholder: (context, image){
+                                    return  const Center(child: CircularProgressIndicator(color: kBlueColor,));
+
+                                  },
+                                  errorWidget: (context, url, error){
+                                    return Container(
+                                        height: 80,
+                                        width: 80,
+
+                                        decoration: const BoxDecoration(
+                                          image: DecorationImage(
+                                            image: AssetImage("assets/images/doctor.png"),
+                                            fit: BoxFit.fill,
+                                          ),
+
+
+                                        )
+                                    );
+                                  },
+                                ),
+                                const SizedBox(height: 5),
+                                 Text( controller.doctorData?[5].name??"",
+
+                                  style: const TextStyle(
+                                      height: 1,
+                                      fontFamily:fontFamilyName,
+                                      color: kBlueColor,
+                                      fontWeight: FontWeight.w600,
+                                      fontSize: 12),),
+                                const SizedBox(height: 5,),
+                                 Text(controller.doctorData?[5].specialist??"",
+                                  style: const TextStyle(
+                                      height: 1,
+                                      fontFamily: fontFamilyName,
+                                      color: kBlueColor,
+                                      fontWeight: FontWeight.w600,
+                                      fontSize: 12),),
+                              ],
+                            ),
+                          ),
+                        ],
+                      ),
+                      const SizedBox(height: 25,),
+                      InkWell(
+                        onTap: (){
+                          Get.to(()=>const DoctorScreen(specialistId: "5"));
+                        },
+                        child: const Text("عرض المزيد من الأطباء",
+                          style: TextStyle(
+                              height: 1,
+                              fontFamily: fontFamilyName,
+                              color: kBlueColor,
+                              fontWeight: FontWeight.w700,
+                              fontSize: 18),),
+                      ),
+                      const SizedBox(height: 18,),
+                      controller.slideShowLoading?Loader(width: MediaQuery.of(context).size.width,height: 150.0):
+                      CarouselSlider(
+                        options:  CarouselOptions(
+                          height: Get.height*0.19,
+                          aspectRatio: 2.0,
+                          enlargeCenterPage: false,
+                          viewportFraction: 1,
+                          autoPlay: true),
+
+                        items: controller.sliderData?.map((i) {
+                          return Builder(
+                            builder: (BuildContext context) {
+                              return  InkWell(
+                                onTap: (){
+                                  controller.launchURL(context,i.link??"");
+                                },
+                                child: CachedNetworkImage(
+                                  fit: BoxFit.cover,
+                                  imageUrl: "https://privilegecare.net${i.image}",
+                                  imageBuilder: ((context, image){
+                                    return  Container(
+                                        width: MediaQuery.of(context).size.width,
+                                        margin: const EdgeInsets.symmetric(horizontal: 5.0),
+                                        decoration: BoxDecoration(
+                                            image: DecorationImage(
+                                              image: image,
+                                              fit: BoxFit.fill,
+                                            ),
+                                            borderRadius:
+                                            const BorderRadius.all(Radius.circular(15))
+
+                                        )
+                                    );
+                                  }),
+                                  placeholder: (context, image){
+                                    return  Padding(
+                                      padding:  const EdgeInsets.all(5),
+                                      child: Container(
+                                          decoration: const BoxDecoration(
+                                              borderRadius:
+                                              BorderRadius.all(Radius.circular(15))
+                                          ),
+                                          child: Loader(width: MediaQuery.of(context).size.width,height: 150.0)),
+                                    );
+                                  },
+                                  errorWidget: (context, url, error){
+                                    return Container(
+                                        width: MediaQuery.of(context).size.width,
+
+                                        height: Get.height*0.2,
+                                        margin: const EdgeInsets.symmetric(horizontal: 5.0),
+                                        decoration: const BoxDecoration(
+                                            image: DecorationImage(
+                                              image: AssetImage("assets/images/no_data_slideShow.png"),
+                                              fit: BoxFit.fill,
+                                            ),
                                             borderRadius:
                                             BorderRadius.all(Radius.circular(15))
-                                        ),
-                                        child: Loader(width: MediaQuery.of(context).size.width,height: 150.0)),
-                                  );
-                                },
-                                errorWidget: (context, url, error){
-                                  return Container(
-                                      width: MediaQuery.of(context).size.width,
 
-                                      height: Get.height*0.2,
-                                      margin: const EdgeInsets.symmetric(horizontal: 5.0),
-                                      decoration: const BoxDecoration(
-                                          image: DecorationImage(
-                                            image: AssetImage("assets/images/no_data_slideShow.png"),
-                                            fit: BoxFit.fill,
-                                          ),
-                                          borderRadius:
-                                          BorderRadius.all(Radius.circular(15))
-
-                                      )
-                                  );
-                                },
-                              ),
-                            );
-                          },
-                        );
-                      }).toList(),
-                    ),
-                    const SizedBox(height: 10,),
-                    const Divider(
-                      color: kGreenColor,
-                      height: 1,
-                      thickness: 1,
-                      endIndent: 20,
-                      indent: 20,
-                    ),
-                    const SizedBox(height: 20,),
-                    Container(
-                      height: Get.height*0.8,
-                      width: Get.width*0.95,
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(15),
-                        border: Border.all(color: kBlueColor,width: 1),
-                        color: Colors.white,
+                                        )
+                                    );
+                                  },
+                                ),
+                              );
+                            },
+                          );
+                        }).toList(),
                       ),
-                      child: Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: Column(
-                          children: [
-                            SizedBox(
-                              width:Get.width*0.8,
-                              child: const Row(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      const SizedBox(height: 10,),
+                      const Divider(
+                        color: kGreenColor,
+                        height: 1,
+                        thickness: 1,
+                        endIndent: 20,
+                        indent: 20,
+                      ),
+                      const SizedBox(height: 20,),
+                      Container(
+
+                        width: Get.width*0.95,
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(15),
+                          border: Border.all(color: kBlueColor,width: 1),
+                          color: Colors.white,
+                        ),
+                        child: Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: controller.hospitalSlideShowLoading?Loader(width: MediaQuery.of(context).size.width,height: 150.0):controller.hospitalBanner?.length==0?Center(
+                            child: Container(
+                              height: 130,
+                              width: Get.width*0.75,
+                              child: Row(
                                 children: [
-                                  Column(
-                                    crossAxisAlignment: CrossAxisAlignment.start,
-                                    children: [
-                                      Text(
-                                        "مستشفى النيل",
-
-                                        style: TextStyle(
-                                            height: 1,
-                                            fontFamily: fontFamilyName,
-                                            color: kBlueColor,
-                                            fontWeight: FontWeight.w700,
-                                            fontSize: 15),),
-                                      SizedBox(height: 5,),
-                                      Text(
-                                        " نبذه عن مسشفى",
-
-                                        style: TextStyle(
-                                            height: 1,
-                                            fontFamily: fontFamilyName,
-                                            color: kBlueColor,
-                                            fontWeight: FontWeight.w600,
-                                            fontSize: 15),),
-                                    ],
-                                  ),
-                                  Text("عرض التفاصيل",
-
-                                    style: TextStyle(
-                                        height: 1,
-                                        fontFamily: fontFamilyName,
-                                        color: kBlueColor,
-                                        fontWeight: FontWeight.w600,
-                                        fontSize: 15),),
+                                  Image.asset("assets/images/Hospital building-rafiki.png",height: Get.width*0.23,),
+                                  const Text("ليس هناك فيديو متاح الان",style: TextStyle(color: kGreenColor,fontWeight: FontWeight.bold,fontSize: 18),textAlign: TextAlign.center,),
                                 ],
                               ),
                             ),
-                            const SizedBox(height: 10,),
-                            CarouselSlider.builder(
-                              itemCount: 5,
-                              itemBuilder: (context, index, realIdx){
-                                return Image.asset('assets/images/doctor banner home.png',fit: BoxFit.fitWidth,);
-                              },
-                              options: CarouselOptions(
-                                  height: Get.height*0.19,
-                                  aspectRatio: 2.0,
-                                  enlargeCenterPage: false,
-                                  viewportFraction: 1,
-                                  autoPlay: true),
-                            ),
-                            const SizedBox(height: 10,),
-                            Container(
-                              width:Get.width*0.8,
-                              child: const Row(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          ):Column(
+                            children: controller.hospitalBanner!.map((e){
+                              return  Column(
                                 children: [
-                                  Column(
-                                    crossAxisAlignment: CrossAxisAlignment.start,
-                                    children: [
-                                      Text(
-                                        "مستشفى النيل",
+                                  SizedBox(
+                                    width:Get.width*0.8,
+                                    child:  Row(
+                                      crossAxisAlignment: CrossAxisAlignment.start,
+                                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                      children: [
+                                        Column(
+                                          crossAxisAlignment: CrossAxisAlignment.start,
+                                          children: [
+                                            Text(
+                                              Get.find<StorageService>().activeLocale == SupportedLocales.english?e.nameEn:e.name,
 
-                                        style: TextStyle(
-                                            height: 1,
-                                            fontFamily: fontFamilyName,
-                                            color: kBlueColor,
-                                            fontWeight: FontWeight.w700,
-                                            fontSize: 15),),
-                                      SizedBox(height: 5,),
-                                      Text(
-                                        " نبذه عن مسشفى",
+                                              style: const TextStyle(
+                                                  height: 1,
+                                                  fontFamily: fontFamilyName,
+                                                  color: kBlueColor,
+                                                  fontWeight: FontWeight.w700,
+                                                  fontSize: 15),),
+                                            const SizedBox(height: 5,),
+                                            const Text(
+                                              " نبذه عن مسشفى",
 
-                                        style: TextStyle(
-                                            height: 1,
-                                            fontFamily: fontFamilyName,
-                                            color: kBlueColor,
-                                            fontWeight: FontWeight.w600,
-                                            fontSize: 15),),
-                                    ],
+                                              style: TextStyle(
+                                                  height: 1,
+                                                  fontFamily: fontFamilyName,
+                                                  color: kBlueColor,
+                                                  fontWeight: FontWeight.w600,
+                                                  fontSize: 15),),
+                                          ],
+                                        ),
+                                        InkWell(
+                                          onTap: (){
+                                            Get.to(()=>HospitalDetailedScreen(hospitalId: "${e.id}"));
+                                          },
+                                          child: const Text("عرض التفاصيل",
+
+                                            style: TextStyle(
+                                                height: 1,
+                                                fontFamily: fontFamilyName,
+                                                color: kBlueColor,
+                                                fontWeight: FontWeight.w600,
+                                                fontSize: 15),),
+                                        ),
+                                      ],
+                                    ),
                                   ),
-                                  Text("عرض التفاصيل",
-                                    style: TextStyle(
-                                        height: 1,
-                                        fontFamily:fontFamilyName,
-                                        color: kBlueColor,
-                                        fontWeight: FontWeight.w600,
-                                        fontSize: 15),),
-                                ],
+                                  const SizedBox(height: 10,),
+                                  e.image?.length==0?Container(
+                              width: Get.width*0.9,
+                              height: Get.height*0.2,
+                              margin: const EdgeInsets.symmetric(horizontal: 5.0),
+                              decoration: const BoxDecoration(
+                              image: DecorationImage(
+                              image: AssetImage("assets/images/no_data_slideShow.png"),
+                              fit: BoxFit.fill,
                               ),
-                            ),
-                            const SizedBox(height: 10,),
-                            CarouselSlider.builder(
-                              itemCount: 5,
-                              itemBuilder: (context, index, realIdx){
-                                return Image.asset('assets/images/doctor banner home.png',fit: BoxFit.fitWidth,);
-                              },
-                              options: CarouselOptions(
-                                  height: Get.height*0.19,
-                                  aspectRatio: 2.0,
-                                  enlargeCenterPage: false,
-                                  viewportFraction: 1,
-                                  autoPlay: true),
-                            ),
-                            const SizedBox(height: 10,),
-                            SizedBox(
-                              width:Get.width*0.8,
-                              child: const Row(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                children: [
-                                  Column(
-                                    crossAxisAlignment: CrossAxisAlignment.start,
-                                    children: [
-                                      Text(
-                                        "مستشفى النيل",
+                              borderRadius:
+                              BorderRadius.all(Radius.circular(15))
 
-                                        style: TextStyle(
-                                            height: 1,
-                                            fontFamily: fontFamilyName,
-                                            color: kBlueColor,
-                                            fontWeight: FontWeight.w700,
-                                            fontSize: 15),),
-                                      SizedBox(height: 5,),
-                                      Text(
-                                        " نبذه عن مسشفى",
+                              )
+                              ):CarouselSlider(
+                                    options:  CarouselOptions(
+                                        height: Get.height*0.19,
+                                        aspectRatio: 2.0,
+                                        enlargeCenterPage: false,
+                                        viewportFraction: 1,
+                                        autoPlay: true),
 
-                                        style: TextStyle(
-                                            height: 1,
-                                            fontFamily: fontFamilyName,
-                                            color: kBlueColor,
-                                            fontWeight: FontWeight.w600,
-                                            fontSize: 15),),
-                                    ],
+                                    items: e.image?.map((i) {
+                                      return Builder(
+                                        builder: (BuildContext context) {
+                                          return  CachedNetworkImage(
+                                            fit: BoxFit.cover,
+                                            imageUrl: "https://privilegecare.net$i",
+                                            imageBuilder: ((context, image){
+                                              return  Container(
+                                                  width: MediaQuery.of(context).size.width,
+                                                  margin: const EdgeInsets.symmetric(horizontal: 5.0),
+                                                  decoration: BoxDecoration(
+                                                      image: DecorationImage(
+                                                        image: image,
+                                                        fit: BoxFit.fill,
+                                                      ),
+                                                      borderRadius:
+                                                      const BorderRadius.all(Radius.circular(15))
+
+                                                  )
+                                              );
+                                            }),
+                                            placeholder: (context, image){
+                                              return  Padding(
+                                                padding:  const EdgeInsets.all(5),
+                                                child: Container(
+                                                    decoration: const BoxDecoration(
+                                                        borderRadius:
+                                                        BorderRadius.all(Radius.circular(15))
+                                                    ),
+                                                    child: Loader(width: MediaQuery.of(context).size.width,height: 150.0)),
+                                              );
+                                            },
+                                            errorWidget: (context, url, error){
+                                              return Container(
+                                                  width: MediaQuery.of(context).size.width,
+
+                                                  height: Get.height*0.2,
+                                                  margin: const EdgeInsets.symmetric(horizontal: 5.0),
+                                                  decoration: const BoxDecoration(
+                                                      image: DecorationImage(
+                                                        image: AssetImage("assets/images/no_data_slideShow.png"),
+                                                        fit: BoxFit.fill,
+                                                      ),
+                                                      borderRadius:
+                                                      BorderRadius.all(Radius.circular(15))
+
+                                                  )
+                                              );
+                                            },
+                                          );
+                                        },
+                                      );
+                                    }).toList(),
                                   ),
-                                  Text("عرض التفاصيل",
-
-                                    style: TextStyle(
-                                        height: 1,
-                                        fontFamily: fontFamilyName,
-                                        color: kBlueColor,
-                                        fontWeight: FontWeight.w600,
-                                        fontSize: 15),),
                                 ],
-                              ),
-                            ),
-                            const SizedBox(height: 10,),
-                            CarouselSlider.builder(
-                              itemCount: 5,
-                              itemBuilder: (context, index, realIdx){
-                                return Image.asset('assets/images/doctor banner home.png',fit: BoxFit.fitWidth,);
-                              },
-                              options: CarouselOptions(
-                                  height: Get.height*0.19,
-                                  aspectRatio: 2.0,
-                                  enlargeCenterPage: false,
-                                  viewportFraction: 1,
-                                  autoPlay: true),
-                            ),
-                            const SizedBox(height: 10,),
-
-
-                          ],
+                              );
+                            }).toList()
+                          ),
                         ),
                       ),
-                    ),
-                  ],
+                    ],
+                  ),
                 ),
               ),
             ),
           ),
         ),
       ),
+    )
     );
   }
 }

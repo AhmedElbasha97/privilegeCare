@@ -26,7 +26,7 @@ class AppInfoServices{
     }
     return null;
   }
-  static Future<PrivacyPolicy?> getHelpData(String hospitalId) async {
+  static Future<PrivacyPolicy?> getHelpData() async {
     var data = await api.request(Services.getHelpDataEndPoint, "POST",);
     if (data != null) {
       return PrivacyPolicy.fromJson(data[0]);
