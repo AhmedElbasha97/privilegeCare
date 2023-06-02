@@ -4,7 +4,7 @@ import 'package:privilegecare/Utils/services.dart';
 
 class HistoryServices{
   static ApiService api = ApiService();
-  static Future<List<HistoryDataModel>?> getHospitalBanners(String memberId,String homeVisit) async {
+  static Future<List<HistoryDataModel>?> getHistoryData(String memberId,String homeVisit) async {
     List<HistoryDataModel>? historyList = [];
     var data = await api.request(Services.getHistoryDataEndPoint, "POST",queryParamters: {
       "member_id":memberId,

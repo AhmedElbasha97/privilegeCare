@@ -12,6 +12,7 @@ import 'package:privilegecare/Services/biomatrics_auth_services.dart';
 import 'package:privilegecare/Ui/changePassword/change_password_screen.dart';
 import 'package:privilegecare/Ui/editProfile/edit_profile_screen.dart';
 import 'package:privilegecare/Ui/favorite/favorite_screen.dart';
+import 'package:privilegecare/Ui/insurancescreens/insurance_screen.dart';
 import 'package:privilegecare/Ui/privacypolicy/privacyPolicyScreen.dart';
 import 'package:privilegecare/Ui/profileScreen/widget/choose_camera_source.dart';
 import 'package:privilegecare/Ui/term&condition/terms_screen.dart';
@@ -68,7 +69,7 @@ class ProfileController extends GetxController{
       }
       break;
       case 1:{
-
+        Get.to(()=>const InsuranceScreen());
       }
       break;
       case 2:{

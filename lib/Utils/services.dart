@@ -40,4 +40,6 @@ class Services {
   static String getHelpDataEndPoint = "help";//post
   static String forgetPasswordEndPoint = "member/forget_password";//post
   static String getHistoryDataEndPoint = "appointments_history";//post
+  static String getHealthInsuranceData = "member_inc";//post
+  static String setHealthInsuranceData = "member_inc/edit";//post
 }
