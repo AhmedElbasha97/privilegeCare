@@ -22,7 +22,7 @@ class  EditInsuranceDataScreen extends StatelessWidget {
       centerTitle: true,
       title:   Text(
         addingNewCard?"اضافه بطاقه التأمين الصحى":"تعديل بينات بطاقه التأمين الصحي",
-        style: TextStyle(
+        style: const TextStyle(
             fontFamily: fontFamilyName,
             color: kWhiteColor,
             fontWeight: FontWeight.w800,

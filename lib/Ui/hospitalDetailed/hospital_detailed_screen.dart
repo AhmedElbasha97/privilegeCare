@@ -1,4 +1,4 @@
-// ignore_for_file: sized_box_for_whitespace
+// ignore_for_file: sized_box_for_whitespace, prefer_is_empty
 
 
 import 'package:cached_network_image/cached_network_image.dart';

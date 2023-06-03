@@ -4,6 +4,7 @@ import 'package:cool_alert/cool_alert.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:privilegecare/Ui/HomeScreen/home_screen.dart';
+import 'package:privilegecare/Ui/forgetPassword/forget_password_screen.dart';
 import 'package:privilegecare/Ui/logInScreen/Controller/login_controller.dart';
 import 'package:privilegecare/Utils/colors.dart';
 import 'package:privilegecare/Utils/constant.dart';
@@ -149,12 +150,17 @@ class LoginScreen extends StatelessWidget {
                         ),
                           ),
                         ),
-                        const Text("Forget Your Password",
-                          style: TextStyle(
-                              fontFamily: fontFamilyName,
-                              color: kBlackColor,
-                              fontWeight: FontWeight.w700,
-                              fontSize: 15),),
+                        InkWell(
+                          onTap: (){
+                            Get.to(()=>const ForgettingPasswordScreen());
+                          },
+                          child: const Text("Forget Your Password",
+                            style: TextStyle(
+                                fontFamily: fontFamilyName,
+                                color: kBlackColor,
+                                fontWeight: FontWeight.w700,
+                                fontSize: 15),),
+                        ),
                         InkWell(
                           onTap: (){
                             if(!controller.signingIn) {

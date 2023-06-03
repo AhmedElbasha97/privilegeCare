@@ -2,7 +2,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:privilegecare/Ui/HomeScreen/home_screen.dart';
-import 'package:privilegecare/Ui/SpecialtyScreen/specialty_screen.dart';
 import 'package:privilegecare/Ui/welcomeScreen/welcome_screen.dart';
 import 'package:privilegecare/Utils/colors.dart';
 import 'package:privilegecare/Utils/memory.dart';

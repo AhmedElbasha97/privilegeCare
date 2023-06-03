@@ -48,7 +48,6 @@ getData() async {
   hospitalAddedOrNot = await checkHospitalAddedOrNot(hospitalId);
 
   if(doctorsData == []||doctorsData?.length==0){
-    print("hiiiiiiiiiii");
     doctorHasNoData = true;
   }
   isLoading = false;
