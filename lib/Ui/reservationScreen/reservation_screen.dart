@@ -5,6 +5,7 @@ import 'package:get/get.dart';
 import 'package:privilegecare/Ui/reservationScreen/controller/reservation_controller.dart';
 import 'package:privilegecare/Utils/colors.dart';
 import 'package:privilegecare/Utils/constant.dart';
+import 'package:privilegecare/widgets/loader.dart';
 
 class ReservationScreen extends StatelessWidget {
   final String doctorId;
@@ -18,7 +19,7 @@ class ReservationScreen extends StatelessWidget {
         init: ReservationController(doctorId),
         builder: (controller) => SingleChildScrollView(
           physics: const NeverScrollableScrollPhysics(),
-          child: Container(
+          child:controller.isLoading?const Loader() : Container(
             width: Get.width,
             height: Get.height,
             child: Column(
@@ -95,7 +96,20 @@ class ReservationScreen extends StatelessWidget {
                       ),
                     ],
                   ),
-                  child: Column(
+                  child:
+                  controller.doctorData?.schedule?.length==0?Center(
+                    child: Container(
+                      height: 130,
+                      width: Get.width*0.75,
+                      child: Row(
+                        children: [
+                          Image.asset("assets/images/Time management-rafiki.png",height: Get.width*0.23,),
+                          const Text("ليس هناك مواعيد متاح حاليا",style: TextStyle(color: kGreenColor,fontWeight: FontWeight.bold,fontSize: 18),textAlign: TextAlign.center,),
+                        ],
+                      ),
+                    ),
+                  ):
+                  Column(
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
                       const SizedBox(height: 10,),

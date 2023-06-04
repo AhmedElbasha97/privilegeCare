@@ -16,6 +16,7 @@ import 'package:privilegecare/Ui/insurancescreens/insurance_screen.dart';
 import 'package:privilegecare/Ui/privacypolicy/privacyPolicyScreen.dart';
 import 'package:privilegecare/Ui/profileScreen/widget/choose_camera_source.dart';
 import 'package:privilegecare/Ui/term&condition/terms_screen.dart';
+import 'package:privilegecare/Ui/userHistory/user_history_screen.dart';
 import 'package:privilegecare/Ui/welcomeScreen/welcome_screen.dart';
 import 'package:privilegecare/Utils/colors.dart';
 import 'package:privilegecare/Utils/constant.dart';
@@ -34,6 +35,7 @@ class ProfileController extends GetxController{
     "updateProfileIcon",
     "medicalInsuranceIcon",
     "helpIcon",
+    "historyIcon",
     "changePasswordIcon",
     "favoriteIcon",
     "settingsIcon",
@@ -46,10 +48,12 @@ class ProfileController extends GetxController{
   List<String> title =[
     "تحديث الملف الشخصي",
     "تأمين طبي",
-    "يساعد",
+    "الدعم الفنى(شات)",
+    "تاريخ معملاتى",
     "تغيير كلمة المرور",
+
     "مفضل",
-    "إعدادات",
+    "تغير اللغة",
     "سياسة الخصوصية",
     "الأحكام والشروط",
     "نقاط رعاية الامتياز",
@@ -77,34 +81,38 @@ class ProfileController extends GetxController{
       }
       break;
       case 3:{
-        goToChangePass();
+       Get.to(()=>const HistoryScreen());
       }
       break;
       case 4:{
-        Get.to(()=>const FavoriteScreen());
+        goToChangePass();
       }
       break;
       case 5:{
-
+        Get.to(()=>const FavoriteScreen());
       }
       break;
       case 6:{
-        Get.to(()=>const PrivacyPolicyScreen());
-      }
-      break;
-      case 7:{
-        Get.to(()=>const TermsScreen());
-      }
-      break;
-      case 8:{
 
       }
       break;
+      case 7:{
+        Get.to(()=>const PrivacyPolicyScreen());
+      }
+      break;
+      case 8:{
+        Get.to(()=>const TermsScreen());
+      }
+      break;
       case 9:{
-        rateMyApp();
+
       }
       break;
       case 10:{
+        rateMyApp();
+      }
+      break;
+      case 11:{
         signingOut(context);
       }
       break;

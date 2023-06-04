@@ -18,11 +18,13 @@ class ReviewingServices{
     }
     return null;
   }
-  static Future<ResponseModel?> addReviewToDoctor(String appointmentId,String memberId, String review) async {
+  static Future<ResponseModel?> addReviewToDoctor(String appointmentId,String memberId, String review,String hospitalRate,String doctorRate) async {
     var data = await api.request(Services.addReviewToDoctor, "POST",queryParamters: {
       "appointment_id":appointmentId,
       "member_id":memberId,
       "review":review,
+      "hospital_rate":hospitalRate,
+      "doctor_rate":doctorRate,
     });
     if (data != null) {
       return ResponseModel.fromJson(data);

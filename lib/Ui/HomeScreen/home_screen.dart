@@ -114,6 +114,76 @@ class _HomeScreenState extends State<HomeScreen> {
                   padding: const EdgeInsets.all(10.0),
                   child: Column(
                     children: [
+                      const SizedBox(height: 10,),
+                      controller.slideShowLoading?Loader(width: MediaQuery.of(context).size.width,height: 150.0):
+                      CarouselSlider(
+                        options:  CarouselOptions(
+                            height: Get.height*0.19,
+                            aspectRatio: 2.0,
+                            enlargeCenterPage: false,
+                            viewportFraction: 1,
+                            autoPlay: true),
+
+                        items: controller.sliderData?.map((i) {
+                          return Builder(
+                            builder: (BuildContext context) {
+                              return  InkWell(
+                                onTap: (){
+                                  controller.launchURL(context,i.link??"");
+                                },
+                                child: CachedNetworkImage(
+                                  fit: BoxFit.cover,
+                                  imageUrl: "https://privilegecare.net${i.image}",
+                                  imageBuilder: ((context, image){
+                                    return  Container(
+                                        width: MediaQuery.of(context).size.width,
+                                        margin: const EdgeInsets.symmetric(horizontal: 5.0),
+                                        decoration: BoxDecoration(
+                                            image: DecorationImage(
+                                              image: image,
+                                              fit: BoxFit.fill,
+                                            ),
+                                            borderRadius:
+                                            const BorderRadius.all(Radius.circular(15))
+
+                                        )
+                                    );
+                                  }),
+                                  placeholder: (context, image){
+                                    return  Padding(
+                                      padding:  const EdgeInsets.all(5),
+                                      child: Container(
+                                          decoration: const BoxDecoration(
+                                              borderRadius:
+                                              BorderRadius.all(Radius.circular(15))
+                                          ),
+                                          child: Loader(width: MediaQuery.of(context).size.width,height: 150.0)),
+                                    );
+                                  },
+                                  errorWidget: (context, url, error){
+                                    return Container(
+                                        width: MediaQuery.of(context).size.width,
+
+                                        height: Get.height*0.2,
+                                        margin: const EdgeInsets.symmetric(horizontal: 5.0),
+                                        decoration: const BoxDecoration(
+                                            image: DecorationImage(
+                                              image: AssetImage("assets/images/no_data_slideShow.png"),
+                                              fit: BoxFit.fill,
+                                            ),
+                                            borderRadius:
+                                            BorderRadius.all(Radius.circular(15))
+
+                                        )
+                                    );
+                                  },
+                                ),
+                              );
+                            },
+                          );
+                        }).toList(),
+                      ),
+                      const SizedBox(height: 18,),
                       controller.isLoading?const SizedBox():Row(
                         mainAxisAlignment: MainAxisAlignment.spaceAround,
                         children: [
@@ -618,29 +688,45 @@ class _HomeScreenState extends State<HomeScreen> {
                             ),
                           ):Column(
                             children: controller.hospitalBanner!.map((e){
-                              return  Column(
-                                children: [
-                                  SizedBox(
-                                    width:Get.width*0.8,
-                                    child:  Row(
-                                      crossAxisAlignment: CrossAxisAlignment.start,
-                                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                      children: [
-                                        Column(
+                              return  Padding(
+                                padding: const EdgeInsets.symmetric(vertical: 10.0),
+                                child: InkWell(
+                                  onTap: (){
+                                    Get.to(()=>HospitalDetailedScreen(hospitalId: "${e.id}"));
+                                  },
+                                  child: Column(
+                                    children: [
+                                      SizedBox(
+                                        width:Get.width*0.8,
+                                        child:  Row(
                                           crossAxisAlignment: CrossAxisAlignment.start,
+                                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                           children: [
-                                            Text(
-                                              Get.find<StorageService>().activeLocale == SupportedLocales.english?e.nameEn:e.name,
+                                            Column(
+                                              crossAxisAlignment: CrossAxisAlignment.start,
+                                              children: [
+                                                Text(
+                                                  Get.find<StorageService>().activeLocale == SupportedLocales.english?e.nameEn:e.name,
 
-                                              style: const TextStyle(
-                                                  height: 1,
-                                                  fontFamily: fontFamilyName,
-                                                  color: kBlueColor,
-                                                  fontWeight: FontWeight.w700,
-                                                  fontSize: 15),),
-                                            const SizedBox(height: 5,),
-                                            const Text(
-                                              " نبذه عن مسشفى",
+                                                  style: const TextStyle(
+                                                      height: 1,
+                                                      fontFamily: fontFamilyName,
+                                                      color: kBlueColor,
+                                                      fontWeight: FontWeight.w700,
+                                                      fontSize: 15),),
+                                                const SizedBox(height: 5,),
+                                                const Text(
+                                                  " نبذه عن مسشفى",
+
+                                                  style: TextStyle(
+                                                      height: 1,
+                                                      fontFamily: fontFamilyName,
+                                                      color: kBlueColor,
+                                                      fontWeight: FontWeight.w600,
+                                                      fontSize: 15),),
+                                              ],
+                                            ),
+                                            const Text("عرض التفاصيل",
 
                                               style: TextStyle(
                                                   height: 1,
@@ -650,99 +736,95 @@ class _HomeScreenState extends State<HomeScreen> {
                                                   fontSize: 15),),
                                           ],
                                         ),
-                                        InkWell(
-                                          onTap: (){
-                                            Get.to(()=>HospitalDetailedScreen(hospitalId: "${e.id}"));
-                                          },
-                                          child: const Text("عرض التفاصيل",
-
-                                            style: TextStyle(
-                                                height: 1,
-                                                fontFamily: fontFamilyName,
-                                                color: kBlueColor,
-                                                fontWeight: FontWeight.w600,
-                                                fontSize: 15),),
-                                        ),
-                                      ],
-                                    ),
+                                      ),
+                                      const SizedBox(height: 10,),
+                                      e.image?.length==0?Container(
+                                  width: Get.width*0.9,
+                                  height: Get.height*0.2,
+                                  margin: const EdgeInsets.symmetric(horizontal: 5.0),
+                                  decoration: const BoxDecoration(
+                                  image: DecorationImage(
+                                  image: AssetImage("assets/images/no_data_slideShow.png"),
+                                  fit: BoxFit.fill,
                                   ),
-                                  const SizedBox(height: 10,),
-                                  e.image?.length==0?Container(
-                              width: Get.width*0.9,
-                              height: Get.height*0.2,
-                              margin: const EdgeInsets.symmetric(horizontal: 5.0),
-                              decoration: const BoxDecoration(
-                              image: DecorationImage(
-                              image: AssetImage("assets/images/no_data_slideShow.png"),
-                              fit: BoxFit.fill,
-                              ),
-                              borderRadius:
-                              BorderRadius.all(Radius.circular(15))
+                                  borderRadius:
+                                  BorderRadius.all(Radius.circular(15))
 
-                              )
-                              ):CarouselSlider(
-                                    options:  CarouselOptions(
-                                        height: Get.height*0.19,
-                                        aspectRatio: 2.0,
-                                        enlargeCenterPage: false,
-                                        viewportFraction: 1,
-                                        autoPlay: true),
+                                  )
+                                  ):
+                                      CarouselSlider(
+                                        options:  CarouselOptions(
+                                            height: Get.height*0.19,
+                                            aspectRatio: 2.0,
+                                            enlargeCenterPage: false,
+                                            viewportFraction: 1,
+                                            autoPlay: true),
 
-                                    items: e.image?.map((i) {
-                                      return Builder(
-                                        builder: (BuildContext context) {
-                                          return  CachedNetworkImage(
-                                            fit: BoxFit.cover,
-                                            imageUrl: "https://privilegecare.net$i",
-                                            imageBuilder: ((context, image){
-                                              return  Container(
-                                                  width: MediaQuery.of(context).size.width,
-                                                  margin: const EdgeInsets.symmetric(horizontal: 5.0),
-                                                  decoration: BoxDecoration(
-                                                      image: DecorationImage(
-                                                        image: image,
-                                                        fit: BoxFit.fill,
-                                                      ),
-                                                      borderRadius:
-                                                      const BorderRadius.all(Radius.circular(15))
+                                        items: e.image?.map((i) {
+                                          return Builder(
+                                            builder: (BuildContext context) {
+                                              return  CachedNetworkImage(
+                                                fit: BoxFit.cover,
+                                                imageUrl: "https://privilegecare.net$i",
+                                                imageBuilder: ((context, image){
+                                                  return  Container(
+                                                      width: MediaQuery.of(context).size.width,
+                                                      margin: const EdgeInsets.symmetric(horizontal: 5.0),
+                                                      decoration: BoxDecoration(
+                                                          image: DecorationImage(
+                                                            image: image,
+                                                            fit: BoxFit.fill,
+                                                          ),
+                                                          borderRadius:
+                                                          const BorderRadius.all(Radius.circular(15))
 
-                                                  )
-                                              );
-                                            }),
-                                            placeholder: (context, image){
-                                              return  Padding(
-                                                padding:  const EdgeInsets.all(5),
-                                                child: Container(
-                                                    decoration: const BoxDecoration(
-                                                        borderRadius:
-                                                        BorderRadius.all(Radius.circular(15))
-                                                    ),
-                                                    child: Loader(width: MediaQuery.of(context).size.width,height: 150.0)),
-                                              );
-                                            },
-                                            errorWidget: (context, url, error){
-                                              return Container(
-                                                  width: MediaQuery.of(context).size.width,
+                                                      )
+                                                  );
+                                                }),
+                                                placeholder: (context, image){
+                                                  return  Padding(
+                                                    padding:  const EdgeInsets.all(5),
+                                                    child: Container(
+                                                        decoration: const BoxDecoration(
+                                                            borderRadius:
+                                                            BorderRadius.all(Radius.circular(15))
+                                                        ),
+                                                        child: Loader(width: MediaQuery.of(context).size.width,height: 150.0)),
+                                                  );
+                                                },
+                                                errorWidget: (context, url, error){
+                                                  return Container(
+                                                      width: MediaQuery.of(context).size.width,
 
-                                                  height: Get.height*0.2,
-                                                  margin: const EdgeInsets.symmetric(horizontal: 5.0),
-                                                  decoration: const BoxDecoration(
-                                                      image: DecorationImage(
-                                                        image: AssetImage("assets/images/no_data_slideShow.png"),
-                                                        fit: BoxFit.fill,
-                                                      ),
-                                                      borderRadius:
-                                                      BorderRadius.all(Radius.circular(15))
+                                                      height: Get.height*0.2,
+                                                      margin: const EdgeInsets.symmetric(horizontal: 5.0),
+                                                      decoration: const BoxDecoration(
+                                                          image: DecorationImage(
+                                                            image: AssetImage("assets/images/no_data_slideShow.png"),
+                                                            fit: BoxFit.fill,
+                                                          ),
+                                                          borderRadius:
+                                                          BorderRadius.all(Radius.circular(15))
 
-                                                  )
+                                                      )
+                                                  );
+                                                },
                                               );
                                             },
                                           );
-                                        },
-                                      );
-                                    }).toList(),
+                                        }).toList(),
+                                      ),
+                                      SizedBox(height: 15,),
+                                      const Divider(
+                                        color: kGreenColor,
+                                        height: 1,
+                                        thickness: 1,
+                                        endIndent: 20,
+                                        indent: 20,
+                                      ),
+                                    ],
                                   ),
-                                ],
+                                ),
                               );
                             }).toList()
                           ),

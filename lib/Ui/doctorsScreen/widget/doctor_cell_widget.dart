@@ -126,7 +126,7 @@ class _DoctorCellWidgetState extends State<DoctorCellWidget> {
                                 fontFamily: fontFamilyName,
                                 color: kBlueColor,
                                 fontWeight: FontWeight.w700,
-                                fontSize: 19),),
+                                fontSize: 17),),
                            const SizedBox(height: 5,),
                            Text(Get.find<StorageService>().activeLocale == SupportedLocales.english?widget.doctorData?.specialistEn??"":widget.doctorData?.specialist??"",
                             style: const TextStyle(
@@ -154,13 +154,13 @@ class _DoctorCellWidgetState extends State<DoctorCellWidget> {
                                 height: 1,
                                 fontFamily: fontFamilyName,
                                 color: kBlueColor,
-                                fontWeight: FontWeight.w700,
+                                fontWeight: FontWeight.w600,
                                 fontSize: 13),) :Text("التقييم العام من ${widget.doctorData?.visitors??0} زائر",
                             style: const TextStyle(
                                 height: 1,
                                 fontFamily: fontFamilyName,
                                 color: kBlueColor,
-                                fontWeight: FontWeight.w700,
+                                fontWeight: FontWeight.w600,
                                 fontSize: 14),),
 
                         ],
@@ -309,7 +309,7 @@ class _DoctorCellWidgetState extends State<DoctorCellWidget> {
                         child: Image.asset("assets/images/cash.png",fit: BoxFit.fitHeight,),
                       ),
                       const SizedBox(width: 10,),
-                       Text("الكشف :${widget.doctorData?.amount} جنيه",
+                       Text("الكشف :${widget.doctorData?.amount}  ريال",
                         style: const TextStyle(
                             fontFamily: fontFamilyName,
                             color: kBlueColor,

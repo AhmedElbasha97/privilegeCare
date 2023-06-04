@@ -339,7 +339,7 @@ class DoctorDetailedScreen extends StatelessWidget {
                                     children: [
                                       Container(
                                         width: Get.width*0.2,
-                                        child: Text("${controller.doctorData?.amount??0} جنيه",
+                                        child: Text("${controller.doctorData?.amount??0}    ريال",
                                           textAlign: TextAlign.start,
                                           style: const TextStyle(
                                               fontFamily: fontFamilyName,

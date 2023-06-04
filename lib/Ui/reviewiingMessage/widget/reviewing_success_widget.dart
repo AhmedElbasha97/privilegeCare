@@ -1,15 +1,12 @@
-
-// ignore_for_file: sized_box_for_whitespace
-
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:privilegecare/Utils/colors.dart';
 import 'package:privilegecare/Utils/constant.dart';
 
 
-class ReservationSuccessWidget extends StatelessWidget {
-  final String doctorName;
-  const ReservationSuccessWidget({Key? key, required this.doctorName}) : super(key: key);
+class ReviewingSuccessWidget extends StatelessWidget {
+
+  const ReviewingSuccessWidget({Key? key,}) : super(key: key);
   @override
   Widget build(BuildContext context) {
     return Dialog(
@@ -18,7 +15,7 @@ class ReservationSuccessWidget extends StatelessWidget {
       child:
       Container(
         color: kWhiteColor,
-        height: Get.height*0.45,
+        height: Get.height*0.4,
         width: MediaQuery.of(context).size.width * 0.9,
         padding: const EdgeInsets.all(10.0),
         child: Column(
@@ -34,8 +31,8 @@ class ReservationSuccessWidget extends StatelessWidget {
             Container(
               width: MediaQuery.of(context).size.width * 0.9,
               child: Center(
-                child:  Text("تم حجز الدكتور $doctorName بنجاح ",
-                  style: const TextStyle(
+                child: const Text("تم رفع التعليق بنجاح",
+                  style: TextStyle(
                       height: 1,
                       fontFamily: fontFamilyName,
                       color: kGreenColor,
@@ -47,7 +44,7 @@ class ReservationSuccessWidget extends StatelessWidget {
           ],
         ),
       ),
-      );
+    );
 
   }
 }

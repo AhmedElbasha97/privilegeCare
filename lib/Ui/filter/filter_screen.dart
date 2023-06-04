@@ -283,7 +283,7 @@ class FilterScreen extends StatelessWidget {
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 children: [
                                   Text(
-                                    "أختر المنطقة التى سوف يتم فيها البحث",
+                                    "إختر المنطقة التى سوف يتم فيها البحث",
                                     style: TextStyle(
                                         fontFamily: fontFamilyName,
                                         color: kBlueColor,
@@ -487,7 +487,7 @@ class FilterScreen extends StatelessWidget {
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 children: [
                                   const Text(
-                                    "أختر التخصص الذى سوف يتم بناء البحث عليه",
+                                    "إختر التخصص الذى سوف يتم بناء البحث عليه",
                                     style: TextStyle(
                                         fontFamily: fontFamilyName,
                                         color: kBlueColor,
@@ -569,7 +569,7 @@ class FilterScreen extends StatelessWidget {
                         padding: const EdgeInsets.symmetric(horizontal: 10.0),
                         child: Container(
                           width: Get.width,
-                          child: const Text("أختر مستوى الطبيب :",
+                          child: const Text("إختر مستوى الطبيب :",
                             textAlign: TextAlign.start,
                             style: TextStyle(
                                 fontFamily: fontFamilyName,
@@ -693,7 +693,7 @@ class FilterScreen extends StatelessWidget {
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 children: [
                                   const Text(
-                                    "أختر مستوى الطبيب الذى تريد البحث عنه",
+                                    "إختر مستوى الطبيب الذى تريد البحث عنه",
                                     style: TextStyle(
                                         fontFamily: fontFamilyName,
                                         color: kBlueColor,
@@ -766,7 +766,7 @@ class FilterScreen extends StatelessWidget {
                         padding: const EdgeInsets.symmetric(horizontal: 10.0),
                         child: Container(
                           width: Get.width,
-                          child: const Text("أختر مدي السعر للكشف :",
+                          child: const Text("إختر مدي السعر للكشف :",
                             textAlign: TextAlign.start,
                             style: TextStyle(
                                 fontFamily: fontFamilyName,
@@ -938,7 +938,7 @@ class FilterScreen extends StatelessWidget {
                         padding: const EdgeInsets.symmetric(horizontal: 10.0),
                         child: Container(
                           width: Get.width,
-                          child: const Text("أختر مستوى التقيم :",
+                          child: const Text("إختر مستوى التقيم :",
                             textAlign: TextAlign.start,
                             style: TextStyle(
                                 fontFamily: fontFamilyName,
@@ -1020,7 +1020,7 @@ class FilterScreen extends StatelessWidget {
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 children: [
                                   const Text(
-                                    "اختيار مستوى الطبيب الذى تريد البحث عنه",
+                                    "إختر مستوى الطبيب الذى تريد البحث عنه",
                                     style: TextStyle(
                                         fontFamily: fontFamilyName,
                                         color: kBlueColor,
