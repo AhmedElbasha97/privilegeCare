@@ -41,7 +41,7 @@ class ProfileController extends GetxController{
     "settingsIcon",
     "termsIcon",
     "termsIcon",
-    "privilegeIcon",
+
     "evaluationIcon",
     "signOutIcon"
   ];
@@ -56,7 +56,7 @@ class ProfileController extends GetxController{
     "تغير اللغة",
     "سياسة الخصوصية",
     "الأحكام والشروط",
-    "نقاط رعاية الامتياز",
+
     "تقييم التطبيق",
     "خروج",
   ];

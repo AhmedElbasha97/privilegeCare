@@ -124,7 +124,7 @@ class _HomeScreenState extends State<HomeScreen> {
                             viewportFraction: 1,
                             autoPlay: true),
 
-                        items: controller.sliderData?.map((i) {
+                        items: controller.secondSliderData?.map((i) {
                           return Builder(
                             builder: (BuildContext context) {
                               return  InkWell(

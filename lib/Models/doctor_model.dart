@@ -26,6 +26,8 @@ class DoctorProfile {
   String? specialist;
   String? specialistEn;
   int? visitors;
+  int? doctorRate;
+  int? hospRate;
   List<Schedule>? schedule;
 
   DoctorProfile({
@@ -50,6 +52,8 @@ class DoctorProfile {
     this.specialist,
     this.specialistEn,
     this.visitors,
+    this.doctorRate,
+    this.hospRate,
     this.schedule,
   });
 
@@ -60,7 +64,7 @@ class DoctorProfile {
     waiting: json["waiting"],
     amount: json["amount"],
     image: json["image"],
-    video: json["video"].toString(),
+    video: "${json["video"]}",
     hosp: json["hosp"],
     phone: json["phone"],
     locationLon: json["location_lon"],
@@ -75,7 +79,9 @@ class DoctorProfile {
     specialist: json["specialist"],
     specialistEn: json["specialist_en"],
     visitors: json["visitors"],
-    schedule: json["schedule"] == null ? [] : List<Schedule>.from(json["schedule"]!.map((x) => Schedule.fromJson(x))),
+    doctorRate: json["doctor_rate"],
+    hospRate: json["hosp_rate"],
+    schedule: json["schedule"] == null ? [] : List<Schedule>.from(json["schedule"]!.map((x) => x)),
   );
 
   Map<String, dynamic> toJson() => {
@@ -100,9 +106,12 @@ class DoctorProfile {
     "specialist": specialist,
     "specialist_en": specialistEn,
     "visitors": visitors,
-    "schedule": schedule == null ? [] : List<dynamic>.from(schedule!.map((x) => x.toJson())),
+    "doctor_rate": doctorRate,
+    "hosp_rate": hospRate,
+    "schedule": schedule == null ? [] : List<Schedule>.from(schedule!.map((x) => x)),
   };
 }
+
 
 class Schedule {
   int? id;

@@ -498,7 +498,7 @@ class DoctorDetailedScreen extends StatelessWidget {
                     ),
                   ),
                 ),
-                controller.doctorData?.video =="0"?Padding(
+                controller.doctorData?.video == "0" ?Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 8.0,vertical: 7.0),
                     child: SizedBox(
                     child: DecoratedBox(
@@ -693,8 +693,8 @@ class DoctorDetailedScreen extends StatelessWidget {
                                     child: Image.asset("assets/images/Star.png",fit: BoxFit.fitHeight,),
                                   ),
                                     const SizedBox(width: 5,),
-                                    const Text("5/4.5 تقييم العيادة",
-                                      style: TextStyle(
+                                     Text("5/${controller.doctorData?.hospRate??0} تقييم العيادة",
+                                      style: const TextStyle(
                                           fontFamily: fontFamilyName,
                                           color: kBlueColor,
                                           fontWeight: FontWeight.w700,
@@ -711,8 +711,8 @@ class DoctorDetailedScreen extends StatelessWidget {
                                     child: Image.asset("assets/images/Star.png",fit: BoxFit.fitHeight,),
                                   ),
                                     const SizedBox(width: 5,),
-                                    const Text("5/4.5 تقييم المساعد",
-                                      style: TextStyle(
+                                     Text("5/${controller.doctorData?.doctorRate??0} تقييم الطبيب",
+                                      style: const TextStyle(
                                           fontFamily: fontFamilyName,
                                           color: kBlueColor,
                                           fontWeight: FontWeight.w700,
@@ -877,7 +877,7 @@ class DoctorDetailedScreen extends StatelessWidget {
                                         color: kGreenColor,
                                         mainAxisAlignment: MainAxisAlignment.center,
                                         length: 5,
-                                        rating: 0.0,
+                                        rating: double.parse("${controller.doctorData?.doctorRate??0}"),
                                         between: 0,
                                         starSize: 20,
                                         onRaitingTap: (rating) {
@@ -916,7 +916,7 @@ class DoctorDetailedScreen extends StatelessWidget {
                                         color: kGreenColor,
                                         mainAxisAlignment: MainAxisAlignment.center,
                                         length: 5,
-                                        rating: 0.0,
+                                        rating: double.parse("${controller.doctorData?.hospRate??0}"),
                                         between: 0,
                                         starSize: 20,
                                         onRaitingTap: (rating) {

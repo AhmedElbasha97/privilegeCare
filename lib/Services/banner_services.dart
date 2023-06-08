@@ -16,6 +16,17 @@ class BannerServices {
     }
     return null;
   }
+  static Future<List<BannerModel>?> getSecondHomeBanners() async {
+    List<BannerModel>? bannerList = [];
+    var data = await api.request(Services.secondHomeBannersEndPoint, "POST");
+    if (data != null) {
+      for (var banner in data){
+        bannerList.add(BannerModel.fromJson(banner));
+      }
+      return bannerList;
+    }
+    return null;
+  }
   static Future<List<HospitalBannerModel>?> getHospitalBanners() async {
     List<HospitalBannerModel>? hospitalBannerList = [];
     var data = await api.request(Services.hospitalBannersEndPoint, "POST");

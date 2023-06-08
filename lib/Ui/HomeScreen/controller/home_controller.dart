@@ -13,6 +13,7 @@ class HomeController extends GetxController{
   bool hospitalSlideShowLoading = true;
   List<DoctorHomeModelData>? doctorData = [];
   List<BannerModel>? sliderData = [];
+  List<BannerModel>? secondSliderData = [];
   List<HospitalBannerModel>? hospitalBanner = [];
   @override
   void onInit() {
@@ -20,6 +21,7 @@ class HomeController extends GetxController{
 
     getData();
     getSliderData();
+    getSecondSliderData();
     getHospitalSliderData();
     super.onInit();
   }
@@ -32,6 +34,11 @@ class HomeController extends GetxController{
 
   getSliderData() async {
     sliderData = await BannerServices.getHomeBanners();
+    slideShowLoading = false;
+    update();
+  }
+  getSecondSliderData() async {
+    secondSliderData = await BannerServices.getSecondHomeBanners();
     slideShowLoading = false;
     update();
   }
