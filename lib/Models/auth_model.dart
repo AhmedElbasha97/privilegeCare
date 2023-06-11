@@ -7,23 +7,27 @@ String authModelToJson(AuthModel data) => json.encode(data.toJson());
 class AuthModel {
   String? status;
   String? msg;
+  String? msgAr;
   Info? info;
 
   AuthModel({
     this.status,
     this.msg,
+    this.msgAr,
     this.info,
   });
 
   factory AuthModel.fromJson(Map<String, dynamic> json) => AuthModel(
     status: json["status"],
     msg: json["msg"],
+    msgAr: json["msg_ar"],
     info: json["info"] == null ? null : Info.fromJson(json["info"]),
   );
 
   Map<String, dynamic> toJson() => {
     "status": status,
     "msg": msg,
+    "msg_ar": msgAr,
     "info": info?.toJson(),
   };
 }

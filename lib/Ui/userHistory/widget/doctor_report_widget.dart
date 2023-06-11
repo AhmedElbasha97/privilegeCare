@@ -2,10 +2,10 @@ import 'package:cool_alert/cool_alert.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:privilegecare/Models/history_data_model.dart';
-import 'package:privilegecare/Ui/logInScreen/Controller/login_controller.dart';
 import 'package:privilegecare/Utils/colors.dart';
 import 'package:privilegecare/Utils/constant.dart';
-import 'package:privilegecare/widgets/text_field_widget.dart';
+
+import '../../../Utils/translation_key.dart';
 
 
 class DoctorReport extends StatelessWidget {
@@ -24,7 +24,7 @@ class DoctorReport extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Image.asset("assets/icons/Documents-amico.png",height: Get.width*0.65,),
-                const Text("لم يتم رفع تقرير من الطبيب حتى الأن",style: TextStyle(color: kGreenColor,fontWeight: FontWeight.bold,fontSize: 30),textAlign: TextAlign.center,),
+                 Text(noDoctorReport.tr,style: const TextStyle(color: kGreenColor,fontWeight: FontWeight.bold,fontSize: 30),textAlign: TextAlign.center,),
                 InkWell(
                   onTap: (){
                     Get.back();
@@ -52,12 +52,12 @@ class DoctorReport extends StatelessWidget {
 
                       ),
                       child:  Padding(
-                        padding: EdgeInsets.all(5.0),
+                        padding: const EdgeInsets.all(5.0),
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children:  [Text(
-                              "الرجوع",
-                              style: TextStyle(
+                              goBack.tr,
+                              style: const TextStyle(
                                   fontFamily:fontFamilyName,
                                   color:kBlueColor,
                                   fontWeight: FontWeight.w600,
@@ -75,7 +75,7 @@ class DoctorReport extends StatelessWidget {
             ):Column(
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               children:  [
-                 Text("تقرير الطبيب ${historyData?.doctor??""}",
+                 Text("${doctorReport.tr}${historyData?.doctor??""}",
                   style: const TextStyle(
                       fontFamily: fontFamilyName,
                       color: kGreenColor,
@@ -123,12 +123,12 @@ class DoctorReport extends StatelessWidget {
 
                       ),
                       child:  Padding(
-                        padding: EdgeInsets.all(5.0),
+                        padding: const EdgeInsets.all(5.0),
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children:  [Text(
-                              "الرجوع",
-                              style: TextStyle(
+                              goBack.tr,
+                              style: const TextStyle(
                                   fontFamily:fontFamilyName,
                                   color:kBlueColor,
                                   fontWeight: FontWeight.w600,

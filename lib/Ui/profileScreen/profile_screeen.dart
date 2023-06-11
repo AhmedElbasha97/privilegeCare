@@ -10,6 +10,7 @@ import 'package:privilegecare/Ui/profileScreen/widget/profile_cell_widget.dart';
 import 'package:privilegecare/Ui/signUpScreen/signup_screen.dart';
 import 'package:privilegecare/Utils/colors.dart';
 import 'package:privilegecare/Utils/constant.dart';
+import 'package:privilegecare/Utils/translation_key.dart';
 import 'package:privilegecare/widgets/bottom_navigation_bar.dart';
 import 'package:privilegecare/widgets/loader.dart';
 
@@ -296,7 +297,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       Image.asset("assets/images/Sign in-pana.png",height: Get.width*0.65,),
-                      const Text("يجب تسجيل دخولك او انشاء حساب ليصبح لك صفحه شخصية وتفعيل بعض المزايا",style: TextStyle(color: kGreenColor,fontWeight: FontWeight.bold,fontSize: 30),textAlign: TextAlign.center,),
+                       Text(notRegisterUserProfile.tr,style: const TextStyle(color: kGreenColor,fontWeight: FontWeight.bold,fontSize: 30),textAlign: TextAlign.center,),
                       const SizedBox(height: 30,),
                       Column(
                         children: [
@@ -320,9 +321,9 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                   padding: const EdgeInsets.all(5.0),
                                   child: Row(
                                     mainAxisAlignment: MainAxisAlignment.center,
-                                    children:  [const Text(
-                                        "إنشاء حساب",
-                                        style: TextStyle(
+                                    children:  [ Text(
+                                        signUpProfile.tr,
+                                        style: const TextStyle(
                                             fontFamily: fontFamilyName,
                                             color:kBlueColor,
                                             fontWeight: FontWeight.w800,
@@ -361,9 +362,9 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                   padding: const EdgeInsets.all(5.0),
                                   child: Row(
                                     mainAxisAlignment: MainAxisAlignment.center,
-                                    children:  [const Text(
-                                        "تسجيل الدخول",
-                                        style: TextStyle(
+                                    children:  [ Text(
+                                        signInProfile.tr,
+                                        style: const TextStyle(
                                             fontFamily: fontFamilyName,
                                             color:kBlueColor,
                                             fontWeight: FontWeight.w800,

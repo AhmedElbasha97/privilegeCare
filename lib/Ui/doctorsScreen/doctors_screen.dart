@@ -10,6 +10,7 @@ import 'package:privilegecare/Ui/governmentScreen/govrnment_screen.dart';
 import 'package:privilegecare/Utils/colors.dart';
 import 'package:privilegecare/Utils/constant.dart';
 import 'package:privilegecare/Utils/memory.dart';
+import 'package:privilegecare/Utils/translation_key.dart';
 import 'package:privilegecare/widgets/bottom_navigation_bar.dart';
 import 'package:privilegecare/widgets/loader.dart';
 import 'package:privilegecare/widgets/no_data_widget.dart';
@@ -77,17 +78,17 @@ class DoctorScreen extends StatelessWidget {
 
                               Container(
                                 color: kDarkBlueColor,
-                                child: const Row(
+                                child:  Row(
                                   children: [
 
 
-                                    Text("كل المناطق ",
-                                      style: TextStyle(
+                                    Text(allAreaKey.tr,
+                                      style: const TextStyle(
                                           fontFamily: fontFamilyName,
                                           color: kWhiteColor,
                                           fontWeight: FontWeight.w700,
                                           fontSize: 17),),
-                                    Icon(Icons.arrow_downward,color: kWhiteColor,size: 18,),
+                                    const Icon(Icons.arrow_downward,color: kWhiteColor,size: 18,),
                                   ],
                                 ),
                               )
@@ -129,7 +130,7 @@ class DoctorScreen extends StatelessWidget {
                             borderSide:   const BorderSide(color: kBlueColor,width: 3.0),
                             borderRadius: BorderRadius.circular(15)),
 
-                          hintText: "ابحث باسم الدكتور",
+                          hintText: searchWithDoctorName.tr,
                           hintStyle: const TextStyle(
                               fontFamily: fontFamilyName,
                               color: kGrayColor,
@@ -148,18 +149,18 @@ class DoctorScreen extends StatelessWidget {
                   controller.isLoading?Loader(height: Get.height*0.65,width: Get.width,):
                   controller.hasNoData?NoDataWidget(refreshedFunc: (){
                     controller.getData();
-                  }, text: "ليس هناك أطباء متخصصين مسجلين فى هذا التخصص حتى الآن", imgPath: "assets/images/No data-rafiki.png", hasRefreshButtonOrNot: true,height: Get.height*0.7,):
+                  }, text: doctorHasNoScreen1.tr, imgPath: "assets/images/No data-rafiki.png", hasRefreshButtonOrNot: true,height: Get.height*0.7,):
                   controller.searchHasNoResult?NoDataWidget(refreshedFunc: (){
                     controller.getData();
-                  }, text: "ليس هناك طبيب بهذا الاسم", imgPath: "assets/images/Search-rafiki.png", hasRefreshButtonOrNot: false,height: Get.height*0.7,)
+                  }, text: doctorHasNoScreen2.tr, imgPath: "assets/images/Search-rafiki.png", hasRefreshButtonOrNot: false,height: Get.height*0.7,)
                       :controller.areaHasNoResult?
                   NoDataWidget(refreshedFunc: (){
                     controller.getData();
-                  }, text: "ليس هناك اطباء فى هذه المنطقه", imgPath: "assets/images/No data-rafiki.png", hasRefreshButtonOrNot: true,height: Get.height*0.7,)
+                  }, text: doctorHasNoScreen3.tr, imgPath: "assets/images/No data-rafiki.png", hasRefreshButtonOrNot: true,height: Get.height*0.7,)
                   :controller.noSearchForThisArea?
                   NoDataWidget(refreshedFunc: (){
                     controller.getData();
-                  }, text: "ليس هناك اطباء بهذا الاسم فى هذه المنطقه", imgPath: "assets/images/Search-rafiki.png", hasRefreshButtonOrNot: false,height: Get.height*0.7,)
+                  }, text: doctorHasNoScreen4.tr, imgPath: "assets/images/Search-rafiki.png", hasRefreshButtonOrNot: false,height: Get.height*0.7,)
                       :Container(
 
                     width: Get.width,
@@ -180,7 +181,7 @@ class DoctorScreen extends StatelessWidget {
                                 context: context,
                                 type: CoolAlertType.confirm,
                                 title: "",
-                                text: 'لا يمكن اضافه إلى قائمة المفضلة الا عند تسجيل الدخول او انشاء الحساب',
+                                text: addToFavText.tr,
                                 textTextStyle: const TextStyle(
                                     fontFamily: fontFamilyName,
                                     color: kBlueColor,
@@ -192,8 +193,8 @@ class DoctorScreen extends StatelessWidget {
                                 onCancelBtnTap:(){
                                   controller.screenIndex = 2;
                                 },
-                                confirmBtnText: 'تسجيل الدخول',
-                                cancelBtnText: 'إنشاء حساب',
+                                confirmBtnText: signInProfile.tr,
+                                cancelBtnText: signUpProfile.tr,
                                 confirmBtnColor: Colors.white,
                                 cancelBtnTextStyle:   const TextStyle(
                                     fontFamily: fontFamilyName,

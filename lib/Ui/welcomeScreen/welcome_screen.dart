@@ -8,6 +8,8 @@ import 'package:privilegecare/Ui/signUpScreen/signup_screen.dart';
 import 'package:privilegecare/Utils/colors.dart';
 import 'package:privilegecare/Utils/constant.dart';
 
+import '../../Utils/translation_key.dart';
+
 class WelcomeScreen extends StatelessWidget {
   const WelcomeScreen({Key? key}) : super(key: key);
 
@@ -27,16 +29,16 @@ class WelcomeScreen extends StatelessWidget {
               width: Get.width*0.5,
               child: Image.asset("assets/images/logo.png",fit: BoxFit.fitHeight,),
             ),
-             const Column(
+              Column(
               children: [
-                Text("Welcome",
-                  style: TextStyle(
+                Text(welcomeText.tr,
+                  style: const TextStyle(
 
                       fontFamily: fontFamilyName,
                       color: kBlueColor,
                       fontWeight: FontWeight.w700,
                       fontSize: 25),),
-                Text("Here We Can Help you save your time \n while asking for a medical help",
+                Text("${welcomeText1.tr} \n ${welcomeText2.tr}",
                   textAlign: TextAlign.center,
                   style: TextStyle(
 
@@ -64,11 +66,11 @@ class WelcomeScreen extends StatelessWidget {
                       borderRadius: BorderRadius.circular(20),
                       color: kBlueColor
                     ),
-                    child: const Center(
-                      child:  Text("Login",
+                    child:  Center(
+                      child:  Text(welcomeBTN1.tr,
                         textAlign: TextAlign.center,
-                        style: TextStyle(
-                            fontFamily: "Inter",
+                        style: const TextStyle(
+                            fontFamily: fontFamilyName,
                             color: kWhiteColor,
                             fontWeight: FontWeight.w600,
                             fontSize: 16),),
@@ -86,11 +88,11 @@ class WelcomeScreen extends StatelessWidget {
                       borderRadius: BorderRadius.circular(20),
                       color: kBlueColor
                     ),
-                    child: const Center(
-                      child:  Text("Register Now",
+                    child:  Center(
+                      child:  Text(welcomeBTN2.tr,
                         textAlign: TextAlign.center,
-                        style: TextStyle(
-                            fontFamily: "Inter",
+                        style: const TextStyle(
+                            fontFamily: fontFamilyName,
                             color: kWhiteColor,
                             fontWeight: FontWeight.w600,
                             fontSize: 16),),

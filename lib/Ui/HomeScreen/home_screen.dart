@@ -17,6 +17,7 @@ import 'package:privilegecare/Utils/colors.dart';
 import 'package:privilegecare/Utils/constant.dart';
 import 'package:privilegecare/Utils/localization_services.dart';
 import 'package:privilegecare/Utils/memory.dart';
+import 'package:privilegecare/Utils/translation_key.dart';
 import 'package:privilegecare/widgets/bottom_navigation_bar.dart';
 import 'package:privilegecare/widgets/loader.dart';
 
@@ -579,8 +580,8 @@ class _HomeScreenState extends State<HomeScreen> {
                         onTap: (){
                           Get.to(()=>const DoctorScreen(specialistId: "5"));
                         },
-                        child: const Text("عرض المزيد من الأطباء",
-                          style: TextStyle(
+                        child:  Text(showMoreDoctorsHome.tr,
+                          style: const TextStyle(
                               height: 1,
                               fontFamily: fontFamilyName,
                               color: kBlueColor,
@@ -682,7 +683,7 @@ class _HomeScreenState extends State<HomeScreen> {
                               child: Row(
                                 children: [
                                   Image.asset("assets/images/Hospital building-rafiki.png",height: Get.width*0.23,),
-                                  const Text("ليس هناك فيديو متاح الان",style: TextStyle(color: kGreenColor,fontWeight: FontWeight.bold,fontSize: 18),textAlign: TextAlign.center,),
+                                   Text(noHospAvailableHome.tr,style: const TextStyle(color: kGreenColor,fontWeight: FontWeight.bold,fontSize: 18),textAlign: TextAlign.center,),
                                 ],
                               ),
                             ),
@@ -715,10 +716,10 @@ class _HomeScreenState extends State<HomeScreen> {
                                                       fontWeight: FontWeight.w700,
                                                       fontSize: 15),),
                                                 const SizedBox(height: 5,),
-                                                const Text(
-                                                  " نبذه عن مسشفى",
+                                                 Text(
+                                                  hospInfo.tr,
 
-                                                  style: TextStyle(
+                                                  style: const TextStyle(
                                                       height: 1,
                                                       fontFamily: fontFamilyName,
                                                       color: kBlueColor,
@@ -726,9 +727,9 @@ class _HomeScreenState extends State<HomeScreen> {
                                                       fontSize: 15),),
                                               ],
                                             ),
-                                            const Text("عرض التفاصيل",
+                                             Text(moreInfoHosp.tr,
 
-                                              style: TextStyle(
+                                              style: const TextStyle(
                                                   height: 1,
                                                   fontFamily: fontFamilyName,
                                                   color: kBlueColor,
@@ -814,7 +815,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                           );
                                         }).toList(),
                                       ),
-                                      SizedBox(height: 15,),
+                                      const SizedBox(height: 15,),
                                       const Divider(
                                         color: kGreenColor,
                                         height: 1,

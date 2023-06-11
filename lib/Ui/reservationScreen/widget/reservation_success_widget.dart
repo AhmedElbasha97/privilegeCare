@@ -6,6 +6,8 @@ import 'package:get/get.dart';
 import 'package:privilegecare/Utils/colors.dart';
 import 'package:privilegecare/Utils/constant.dart';
 
+import '../../../Utils/translation_key.dart';
+
 
 class ReservationSuccessWidget extends StatelessWidget {
   final String doctorName;
@@ -34,7 +36,7 @@ class ReservationSuccessWidget extends StatelessWidget {
             Container(
               width: MediaQuery.of(context).size.width * 0.9,
               child: Center(
-                child:  Text("تم حجز الدكتور $doctorName بنجاح ",
+                child:  Text("${reservationSuccess1.tr}$doctorName ${reservationSuccess2.tr} ",
                   style: const TextStyle(
                       height: 1,
                       fontFamily: fontFamilyName,

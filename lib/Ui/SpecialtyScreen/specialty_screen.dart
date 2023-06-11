@@ -15,6 +15,8 @@ import 'package:privilegecare/Utils/localization_services.dart';
 import 'package:privilegecare/Utils/memory.dart';
 import 'package:privilegecare/widgets/bottom_navigation_bar.dart';
 
+import '../../Utils/translation_key.dart';
+
 class SpecialtyScreen extends StatelessWidget {
    SpecialtyScreen({Key? key}) : super(key: key);
    final ScrollController controllerScroll = ScrollController();
@@ -74,12 +76,12 @@ class SpecialtyScreen extends StatelessWidget {
                           ),
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.start,
-                            children: const [ SizedBox(width: 5,), Icon(
+                            children:  [ SizedBox(width: 5,), Icon(
                               Icons.arrow_circle_right_outlined,
                               color: kWhiteColor,
                               size: 40,),
                               SizedBox(width: 70,),
-                              Text("ابحث عن دكتور",
+                              Text(searchForDoctor.tr,
                               style: TextStyle(
                                   fontFamily: fontFamilyName,
 
@@ -115,13 +117,13 @@ class SpecialtyScreen extends StatelessWidget {
                           ),
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.start,
-                            children: const [  SizedBox(width: 5,),
+                            children:  [  SizedBox(width: 5,),
                               Icon(
                                 Icons.search_outlined,
                                 color: kGrayColor,
                                 size: 30,),
                               SizedBox(width: 15,),
-                              Text("ابحث باسم الدكتور",
+                              Text(searchWithDoctorName.tr,
                               style: TextStyle(
                                   fontFamily: fontFamilyName,
 
@@ -143,9 +145,9 @@ class SpecialtyScreen extends StatelessWidget {
                           child: Column(
                            crossAxisAlignment: CrossAxisAlignment.start,
                             children:  [
-                              const Padding(
+                               Padding(
                                 padding: EdgeInsets.symmetric(horizontal: 10.0),
-                                child: Text("التخصصات الأكثر اختيارا",
+                                child: Text(mostChosenSpecialty.tr,
                                   style: TextStyle(
                                       fontFamily: fontFamilyName,
 
@@ -173,9 +175,9 @@ class SpecialtyScreen extends StatelessWidget {
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children:  [
-                              const Padding(
+                               Padding(
                                 padding: EdgeInsets.symmetric(horizontal: 10.0),
-                                child: Text("التخصصات الأخري",
+                                child: Text(anotherSpecialty.tr,
                                   style: TextStyle(
                                       fontFamily: fontFamilyName,
                                       color: kBlueColor,

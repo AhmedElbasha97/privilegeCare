@@ -13,6 +13,7 @@ import 'package:privilegecare/Utils/colors.dart';
 import 'package:privilegecare/Utils/constant.dart';
 import 'package:privilegecare/Utils/localization_services.dart';
 import 'package:privilegecare/Utils/memory.dart';
+import 'package:privilegecare/Utils/translation_key.dart';
 import 'package:privilegecare/widgets/bottom_navigation_bar.dart';
 import 'package:privilegecare/widgets/loader.dart';
 import 'package:star_rating/star_rating.dart';
@@ -33,9 +34,9 @@ class DoctorDetailedScreen extends StatelessWidget {
             Get.back();
           },),
           centerTitle: true,
-          title:  const Text(
-            "بيانات الدكتور",
-            style: TextStyle(
+          title:   Text(
+            doctorDetailedTitle.tr,
+            style: const TextStyle(
                 fontFamily: fontFamilyName,
                 color: kWhiteColor,
                 fontWeight: FontWeight.w800,
@@ -50,7 +51,7 @@ class DoctorDetailedScreen extends StatelessWidget {
       context: context,
       type: CoolAlertType.confirm,
       title: "",
-      text: 'لا يمكن اضافه إلى قائمة المفضلة الا عند تسجيل الدخول او انشاء الحساب',
+        text: addToFavText.tr,
       textTextStyle: const TextStyle(
       fontFamily: fontFamilyName,
       color: kBlueColor,
@@ -62,8 +63,8 @@ class DoctorDetailedScreen extends StatelessWidget {
         onCancelBtnTap:(){
           controller.screenIndex = 2;
         },
-      confirmBtnText: 'تسجيل الدخول',
-      cancelBtnText: 'إنشاء حساب',
+        confirmBtnText: signInProfile.tr,
+        cancelBtnText: signUpProfile.tr,
       confirmBtnColor: Colors.white,
       cancelBtnTextStyle:   const TextStyle(
       fontFamily: fontFamilyName,
@@ -239,14 +240,14 @@ class DoctorDetailedScreen extends StatelessWidget {
                                     ),
                                     const SizedBox(height: 5,),
                                     controller.doctorData?.visitors == 0?
-                                    const Text("ليس هناك تقيم عن هذا الطبيب حتى الان",
-                                      style: TextStyle(
+                                     Text(noReviewsOnDoc.tr,
+                                      style: const TextStyle(
                                           height: 1,
                                           fontFamily: fontFamilyName,
                                           color: kBlueColor,
                                           fontWeight: FontWeight.w700,
                                           fontSize: 14),) :
-                                     Text("التقييم العام من ${controller.doctorData?.visitors??0} زائر",
+                                     Text("${reviewsOnDoc1.tr}${controller.doctorData?.visitors??0} ${reviewsOnDoc2.tr}",
                                       style: const TextStyle(
                                           height: 1,
                                           fontFamily: fontFamilyName,
@@ -304,7 +305,7 @@ class DoctorDetailedScreen extends StatelessWidget {
                                     children: [
                                       Container(
                                         width: Get.width*0.2,
-                                        child: Text("${controller.doctorData?.waiting??0} دقيقة",
+                                        child: Text("${controller.doctorData?.waiting??0} ${waitingTimeDocDetailedScreenText1.tr}",
                                           textAlign: TextAlign.start,
                                           style: const TextStyle(
                                               fontFamily: fontFamilyName,
@@ -312,8 +313,8 @@ class DoctorDetailedScreen extends StatelessWidget {
                                               fontWeight: FontWeight.w700,
                                               fontSize: 15),),
                                       ),
-                                      const Text("وقت الانتظار",
-                                        style: TextStyle(
+                                       Text(waitingTimeDocDetailedScreenText2.tr,
+                                        style: const TextStyle(
                                             fontFamily: fontFamilyName,
                                             color: kBlueColor,
                                             fontWeight: FontWeight.w700,
@@ -339,7 +340,7 @@ class DoctorDetailedScreen extends StatelessWidget {
                                     children: [
                                       Container(
                                         width: Get.width*0.2,
-                                        child: Text("${controller.doctorData?.amount??0}    ريال",
+                                        child: Text("${controller.doctorData?.amount??0}${priceDocDetailedScreenText1.tr}",
                                           textAlign: TextAlign.start,
                                           style: const TextStyle(
                                               fontFamily: fontFamilyName,
@@ -347,8 +348,8 @@ class DoctorDetailedScreen extends StatelessWidget {
                                               fontWeight: FontWeight.w700,
                                               fontSize: 15),),
                                       ),
-                                      const Text("سعر الكشف",
-                                        style: TextStyle(
+                                       Text(priceDocDetailedScreenText2.tr,
+                                        style: const TextStyle(
                                             fontFamily:fontFamilyName,
                                             color: kBlueColor,
                                             fontWeight: FontWeight.w700,
@@ -423,8 +424,8 @@ class DoctorDetailedScreen extends StatelessWidget {
                                         onTap: (){
                                           controller.showDoctorLocation();
                                         },
-                                        child: const Text("فتح موقع المكان على جوجل ماب",
-                                          style: TextStyle(
+                                        child:  Text(showOnGoogleMap.tr,
+                                          style: const TextStyle(
                                               fontFamily: fontFamilyName,
                                               color: kBlueColor,
                                               fontWeight: FontWeight.w700,
@@ -520,7 +521,7 @@ class DoctorDetailedScreen extends StatelessWidget {
                     child: Row(
                     children: [
                     Image.asset("assets/images/noVideo.png",height: Get.width*0.23,),
-                    const Text("ليس هناك فيديو متاح الان",style: TextStyle(color: kGreenColor,fontWeight: FontWeight.bold,fontSize: 18),textAlign: TextAlign.center,),
+                     Text(noVideo.tr,style: const TextStyle(color: kGreenColor,fontWeight: FontWeight.bold,fontSize: 18),textAlign: TextAlign.center,),
                     ],
                     ),
                     ),
@@ -547,7 +548,7 @@ class DoctorDetailedScreen extends StatelessWidget {
                           child: Row(
                             children: [
                               Image.asset("assets/images/Time management-rafiki.png",height: Get.width*0.23,),
-                              const Text("ليس هناك مواعيد متاح حاليا",style: TextStyle(color: kGreenColor,fontWeight: FontWeight.bold,fontSize: 18),textAlign: TextAlign.center,),
+                               Text(noTimeDocDetailedScreen.tr,style: const TextStyle(color: kGreenColor,fontWeight: FontWeight.bold,fontSize: 18),textAlign: TextAlign.center,),
                             ],
                           ),
                         ),
@@ -555,9 +556,9 @@ class DoctorDetailedScreen extends StatelessWidget {
                         crossAxisAlignment: CrossAxisAlignment.center,
                         children:  [
                           const SizedBox(height: 10,),
-                         const Center(
-                           child:  Text("اختر ميعاد حجزك",
-                             style: TextStyle(
+                          Center(
+                           child:  Text(timeDocDetailedScreenText1.tr,
+                             style: const TextStyle(
                                  fontFamily: fontFamilyName,
                                  color: kBlueColor,
                                  fontWeight: FontWeight.w700,
@@ -590,9 +591,9 @@ class DoctorDetailedScreen extends StatelessWidget {
                             ),
                           ),
                           const SizedBox(height: 10,),
-                          const Center(
-                            child:  Text("الدخول بأسبقية الحضور",
-                              style: TextStyle(
+                           Center(
+                            child:  Text(timeDocDetailedScreenText2.tr,
+                              style: const TextStyle(
                                   fontFamily: fontFamilyName,
                                   color: kBlueColor,
                                   fontWeight: FontWeight.w700,
@@ -640,7 +641,7 @@ class DoctorDetailedScreen extends StatelessWidget {
                                       crossAxisAlignment: CrossAxisAlignment.end,
                                       mainAxisSize: MainAxisSize.min,
                                       children: [
-                                        Text("ستحصل علي ${controller.doctorData?.point??0} نقطة عند الحجز",
+                                        Text("${pointDocDetailedScreenText1.tr}${controller.doctorData?.point??0}${pointDocDetailedScreenText2.tr}",
                                           style: const TextStyle(
                                               fontFamily: fontFamilyName,
                                               color: kBlueColor,
@@ -693,7 +694,7 @@ class DoctorDetailedScreen extends StatelessWidget {
                                     child: Image.asset("assets/images/Star.png",fit: BoxFit.fitHeight,),
                                   ),
                                     const SizedBox(width: 5,),
-                                     Text("5/${controller.doctorData?.hospRate??0} تقييم العيادة",
+                                     Text("5/${controller.doctorData?.hospRate??0} ${placeReview.tr}",
                                       style: const TextStyle(
                                           fontFamily: fontFamilyName,
                                           color: kBlueColor,
@@ -711,7 +712,7 @@ class DoctorDetailedScreen extends StatelessWidget {
                                     child: Image.asset("assets/images/Star.png",fit: BoxFit.fitHeight,),
                                   ),
                                     const SizedBox(width: 5,),
-                                     Text("5/${controller.doctorData?.doctorRate??0} تقييم الطبيب",
+                                     Text("5/${controller.doctorData?.doctorRate??0}${doctorReview.tr}",
                                       style: const TextStyle(
                                           fontFamily: fontFamilyName,
                                           color: kBlueColor,
@@ -766,8 +767,8 @@ class DoctorDetailedScreen extends StatelessWidget {
                                       crossAxisAlignment: CrossAxisAlignment.start,
                                       mainAxisSize: MainAxisSize.min,
                                       children:  [
-                                        const Text("معلومات عن الدكتور",
-                                          style: TextStyle(
+                                         Text(doctorInformation.tr,
+                                          style: const TextStyle(
                                               fontFamily: fontFamilyName,
                                               color: kBlueColor,
                                               fontWeight: FontWeight.w700,
@@ -821,11 +822,11 @@ class DoctorDetailedScreen extends StatelessWidget {
                           const SizedBox(height: 10,),
                           Container(
                             width: Get.width,
-                            child: const Padding(
-                              padding: EdgeInsets.fromLTRB(0,0,30,0),
-                              child: Text("تقييمات الزائرين",
+                            child:  Padding(
+                              padding: const EdgeInsets.fromLTRB(0,0,30,0),
+                              child: Text(doctorReviewsTitle.tr,
                                 textAlign: TextAlign.start,
-                                style: TextStyle(
+                                style: const TextStyle(
                                     fontFamily: fontFamilyName,
                                     color: kBlueColor,
                                     fontWeight: FontWeight.w700,
@@ -836,13 +837,13 @@ class DoctorDetailedScreen extends StatelessWidget {
                           Container(
                             width: Get.width,
                             child:   controller.doctorData?.visitors == 0?
-                            const Text("ليس هناك تقيم عن هذا الطبيب حتى الان",
+                             Text(noReviewsOnDoc.tr,
                               textAlign: TextAlign.center,
-                              style: TextStyle(
+                              style: const TextStyle(
                                   fontFamily: fontFamilyName,
                                   color: kGreenColor,
                                   fontWeight: FontWeight.w700,
-                                  fontSize: 15),) :Text("التقييمات من ${controller.doctorData?.visitors??0} زائر",
+                                  fontSize: 15),) :Text("${reviewsOnDoc1.tr}${controller.doctorData?.visitors??0} ${reviewsOnDoc2.tr}",
                               textAlign: TextAlign.center,
                               style: const TextStyle(
                                   fontFamily: fontFamilyName,
@@ -885,8 +886,8 @@ class DoctorDetailedScreen extends StatelessWidget {
                                         },
                                       ),
                                       const SizedBox(height: 10,),
-                                      const Text("تقييم الدكتور",
-                                        style: TextStyle(
+                                       Text(doctorReview.tr,
+                                        style: const TextStyle(
                                             fontFamily: fontFamilyName,
                                             color: kBlueColor,
                                             fontWeight: FontWeight.w700,
@@ -924,8 +925,8 @@ class DoctorDetailedScreen extends StatelessWidget {
                                         },
                                       ),
                                       const SizedBox(height: 10,),
-                                      const Text("التقييم العام",
-                                        style: TextStyle(
+                                       Text(placeReview.tr,
+                                        style: const TextStyle(
                                             fontFamily: fontFamilyName,
                                             color: kBlueColor,
                                             fontWeight: FontWeight.w700,
@@ -945,7 +946,7 @@ class DoctorDetailedScreen extends StatelessWidget {
                           children: [
 
                           Image.asset("assets/images/noReviews.png",height: Get.width*0.23,),
-                          const Text("لا توجد تعليقات",style: TextStyle(color: kGreenColor,fontWeight: FontWeight.bold,fontSize: 18),textAlign: TextAlign.center,),
+                           Text(noReviews.tr,style: const TextStyle(color: kGreenColor,fontWeight: FontWeight.bold,fontSize: 18),textAlign: TextAlign.center,),
                         ],):Column(
                           children: controller.comments!.map((e){
                             return CommentWidget(data: e);

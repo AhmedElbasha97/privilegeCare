@@ -13,6 +13,7 @@ import 'package:privilegecare/Utils/colors.dart';
 import 'package:privilegecare/Utils/constant.dart';
 import 'package:privilegecare/Utils/localization_services.dart';
 import 'package:privilegecare/Utils/memory.dart';
+import 'package:privilegecare/Utils/translation_key.dart';
 import 'package:privilegecare/widgets/bottom_navigation_bar.dart';
 import 'package:privilegecare/widgets/loader.dart';
 import 'package:star_rating/star_rating.dart';
@@ -33,9 +34,9 @@ class HospitalDetailedScreen extends StatelessWidget {
             Get.back();
           },),
           centerTitle: false,
-          title:  const Text(
-            "بيانات المستشفي",
-            style: TextStyle(
+          title:   Text(
+            hospDetailsTitle.tr,
+            style: const TextStyle(
                 fontFamily: fontFamilyName,
                 color: kWhiteColor,
                 fontWeight: FontWeight.w800,
@@ -59,7 +60,7 @@ class HospitalDetailedScreen extends StatelessWidget {
             context: context,
             type: CoolAlertType.confirm,
             title: "",
-            text: 'لا يمكن اضافه إلى قائمة المفضلة الا عند تسجيل الدخول او انشاء الحساب',
+            text: addToFavText.tr,
             textTextStyle: const TextStyle(
             fontFamily: fontFamilyName,
             color: kBlueColor,
@@ -71,8 +72,8 @@ class HospitalDetailedScreen extends StatelessWidget {
             onCancelBtnTap:(){
             controller.screenIndex = 2;
             },
-            confirmBtnText: 'تسجيل الدخول',
-            cancelBtnText: 'إنشاء حساب',
+            confirmBtnText: signInProfile.tr,
+            cancelBtnText: signUpProfile.tr,
             confirmBtnColor: Colors.white,
             cancelBtnTextStyle:   const TextStyle(
             fontFamily: fontFamilyName,
@@ -288,15 +289,15 @@ class HospitalDetailedScreen extends StatelessWidget {
                             const SizedBox(width: 5,),
                              Column(
                               children: [
-                                const Text("التخصصات",
-                                  style: TextStyle(
+                                 Text(hospCategoryTitle2.tr,
+                                  style: const TextStyle(
                                       fontFamily: fontFamilyName,
 
                                       color: kBlueColor,
                                       fontWeight: FontWeight.w700,
                                       fontSize: 13),),
                                 const SizedBox(height: 5,),
-                                Text("${controller.hospitalData?.specCount??0} تخصص",
+                                Text("${controller.hospitalData?.specCount??0} ${hospCategoryText2.tr}",
                                   style: const TextStyle(
                                       fontFamily: fontFamilyName,
 
@@ -317,15 +318,15 @@ class HospitalDetailedScreen extends StatelessWidget {
                             const SizedBox(width: 5,),
                              Column(
                               children: [
-                                const Text("الدكاترة",
-                                  style: TextStyle(
+                                 Text(hospCategoryTitle1.tr,
+                                  style: const TextStyle(
                                       fontFamily: fontFamilyName,
 
                                       color: kBlueColor,
                                       fontWeight: FontWeight.w700,
                                       fontSize: 13),),
                                 const SizedBox(height: 5,),
-                                Text("${controller.hospitalData?.doctors??0} دكتور",
+                                Text("${controller.hospitalData?.doctors??0} ${hospCategoryText1.tr}",
                                   style: const TextStyle(
                                       fontFamily: fontFamilyName,
 
@@ -347,34 +348,34 @@ class HospitalDetailedScreen extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         Row(
-                          children: [
-                            SizedBox(
-                              height: 35,
-                              width: 27,
-                              child: Image.asset("assets/icons/specialty_icon.png",fit: BoxFit.fitHeight,),
-                            ),
-                            const SizedBox(width: 5,),
-                            Column(
-                              children: [
-                                const Text("التخصصات",
-                                  style: TextStyle(
-                                      fontFamily: fontFamilyName,
+                        children: [
+                          SizedBox(
+                            height: 35,
+                            width: 27,
+                            child: Image.asset("assets/icons/specialty_icon.png",fit: BoxFit.fitHeight,),
+                          ),
+                          const SizedBox(width: 5,),
+                          Column(
+                            children: [
+                              Text(hospCategoryTitle2.tr,
+                                style: const TextStyle(
+                                    fontFamily: fontFamilyName,
 
-                                      color: kBlueColor,
-                                      fontWeight: FontWeight.w700,
-                                      fontSize: 13),),
-                                const SizedBox(height: 5,),
-                                Text("${controller.hospitalData?.specCount??0} تخصص",
-                                  style: const TextStyle(
-                                      fontFamily: fontFamilyName,
+                                    color: kBlueColor,
+                                    fontWeight: FontWeight.w700,
+                                    fontSize: 13),),
+                              const SizedBox(height: 5,),
+                              Text("${controller.hospitalData?.specCount??0} ${hospCategoryText2.tr}",
+                                style: const TextStyle(
+                                    fontFamily: fontFamilyName,
 
-                                      color: kGreenColor,
-                                      fontWeight: FontWeight.w600,
-                                      fontSize: 13),),
-                              ],
-                            )
-                          ],
-                        ),
+                                    color: kGreenColor,
+                                    fontWeight: FontWeight.w600,
+                                    fontSize: 13),),
+                            ],
+                          )
+                        ],
+                      ),
                         const SizedBox(width: 5,),
                         Row(
                           children: [
@@ -386,15 +387,15 @@ class HospitalDetailedScreen extends StatelessWidget {
                             const SizedBox(width: 5,),
                             Column(
                               children: [
-                                const Text("الدكاترة",
-                                  style: TextStyle(
+                                Text(hospCategoryTitle1.tr,
+                                  style: const TextStyle(
                                       fontFamily: fontFamilyName,
 
                                       color: kBlueColor,
                                       fontWeight: FontWeight.w700,
                                       fontSize: 13),),
                                 const SizedBox(height: 5,),
-                                Text("${controller.hospitalData?.doctors??0} دكتور",
+                                Text("${controller.hospitalData?.doctors??0} ${hospCategoryText1.tr}",
                                   style: const TextStyle(
                                       fontFamily: fontFamilyName,
 
@@ -414,11 +415,11 @@ class HospitalDetailedScreen extends StatelessWidget {
                               child: Image.asset("assets/icons/analysis_icon.png",fit: BoxFit.fitHeight,),
                             ),
                             const SizedBox(width: 5,),
-                            const Column(
+                             Column(
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: [
-                                Text("التحاليل",
-                                  style: TextStyle(
+                                Text(hospCategoryTitle3.tr,
+                                  style: const TextStyle(
                                       fontFamily: fontFamilyName,
 
                                       color: kBlueColor,
@@ -438,11 +439,11 @@ class HospitalDetailedScreen extends StatelessWidget {
                               child: Image.asset("assets/icons/rays_icons.png",fit: BoxFit.fitHeight,),
                             ),
                             const SizedBox(width: 5,),
-                            const Column(
+                             Column(
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: [
-                                Text("الأشعة",
-                                  style: TextStyle(
+                                Text(hospCategoryTitle4.tr,
+                                  style: const TextStyle(
                                       fontFamily: fontFamilyName,
 
                                       color: kBlueColor,
@@ -471,15 +472,15 @@ class HospitalDetailedScreen extends StatelessWidget {
                             const SizedBox(width: 5,),
                             Column(
                               children: [
-                                const Text("التخصصات",
-                                  style: TextStyle(
+                                Text(hospCategoryTitle2.tr,
+                                  style: const TextStyle(
                                       fontFamily: fontFamilyName,
 
                                       color: kBlueColor,
                                       fontWeight: FontWeight.w700,
                                       fontSize: 13),),
                                 const SizedBox(height: 5,),
-                                Text("${controller.hospitalData?.specCount??0} تخصص",
+                                Text("${controller.hospitalData?.specCount??0} ${hospCategoryText2.tr}",
                                   style: const TextStyle(
                                       fontFamily: fontFamilyName,
 
@@ -500,15 +501,15 @@ class HospitalDetailedScreen extends StatelessWidget {
                             const SizedBox(width: 5,),
                             Column(
                               children: [
-                                const Text("الدكاترة",
-                                  style: TextStyle(
+                                Text(hospCategoryTitle1.tr,
+                                  style: const TextStyle(
                                       fontFamily: fontFamilyName,
 
                                       color: kBlueColor,
                                       fontWeight: FontWeight.w700,
                                       fontSize: 13),),
                                 const SizedBox(height: 5,),
-                                Text("${controller.hospitalData?.doctors??0} دكتور",
+                                Text("${controller.hospitalData?.doctors??0} ${hospCategoryText1.tr}",
                                   style: const TextStyle(
                                       fontFamily: fontFamilyName,
 
@@ -527,11 +528,11 @@ class HospitalDetailedScreen extends StatelessWidget {
                               child: Image.asset("assets/icons/analysis_icon.png",fit: BoxFit.fitHeight,),
                             ),
                             const SizedBox(width: 5,),
-                            const Column(
+                            Column(
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: [
-                                Text("التحاليل",
-                                  style: TextStyle(
+                                Text(hospCategoryTitle3.tr,
+                                  style: const TextStyle(
                                       fontFamily: fontFamilyName,
 
                                       color: kBlueColor,
@@ -542,6 +543,7 @@ class HospitalDetailedScreen extends StatelessWidget {
                             )
                           ],
                         ),
+
 
                       ],
                     ),
@@ -561,15 +563,15 @@ class HospitalDetailedScreen extends StatelessWidget {
                             const SizedBox(width: 5,),
                             Column(
                               children: [
-                                const Text("التخصصات",
-                                  style: TextStyle(
+                                Text(hospCategoryTitle2.tr,
+                                  style: const TextStyle(
                                       fontFamily: fontFamilyName,
 
                                       color: kBlueColor,
                                       fontWeight: FontWeight.w700,
                                       fontSize: 13),),
                                 const SizedBox(height: 5,),
-                                Text("${controller.hospitalData?.specCount??0} تخصص",
+                                Text("${controller.hospitalData?.specCount??0} ${hospCategoryText2.tr}",
                                   style: const TextStyle(
                                       fontFamily: fontFamilyName,
 
@@ -590,15 +592,15 @@ class HospitalDetailedScreen extends StatelessWidget {
                             const SizedBox(width: 5,),
                             Column(
                               children: [
-                                const Text("الدكاترة",
-                                  style: TextStyle(
+                                Text(hospCategoryTitle1.tr,
+                                  style: const TextStyle(
                                       fontFamily: fontFamilyName,
 
                                       color: kBlueColor,
                                       fontWeight: FontWeight.w700,
                                       fontSize: 13),),
                                 const SizedBox(height: 5,),
-                                Text("${controller.hospitalData?.doctors??0} دكتور",
+                                Text("${controller.hospitalData?.doctors??0} ${hospCategoryText1.tr}",
                                   style: const TextStyle(
                                       fontFamily: fontFamilyName,
 
@@ -609,6 +611,7 @@ class HospitalDetailedScreen extends StatelessWidget {
                             )
                           ],
                         ),
+
                         Row(
                           children: [
                             SizedBox(
@@ -617,15 +620,15 @@ class HospitalDetailedScreen extends StatelessWidget {
                               child: Image.asset("assets/icons/rays_icons.png",fit: BoxFit.fitHeight,),
                             ),
                             const SizedBox(width: 5,),
-                            const Column(
+                            Column(
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: [
-                                Text("الأشعة",
-                                  style: TextStyle(
+                                Text(hospCategoryTitle3.tr,
+                                  style: const TextStyle(
                                       fontFamily: fontFamilyName,
 
                                       color: kBlueColor,
-                                      fontWeight: FontWeight.w700,
+                                      fontWeight: FontWeight.w800,
                                       fontSize: 13),),
 
                               ],
@@ -763,10 +766,10 @@ class HospitalDetailedScreen extends StatelessWidget {
                   const SizedBox(height: 10,),
                   Container(
                     width: Get.width,
-                    child:  const Padding(
-                      padding: EdgeInsets.symmetric(horizontal: 10.0),
-                      child: Text("عن المستشفي",
-                        style: TextStyle(
+                    child:    Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 10.0),
+                      child: Text(aboutHospKey.tr,
+                        style: const TextStyle(
                             fontFamily: fontFamilyName,
 
                             color: kBlueColor,
@@ -908,10 +911,10 @@ class HospitalDetailedScreen extends StatelessWidget {
                     onTap: (){
                       controller.showHospitalLocation();
                     },
-                    child: const Padding(
-                      padding: EdgeInsets.symmetric(horizontal: 10.0),
-                      child: Text("عرض المزيد من التفاصيل",
-                        style: TextStyle(
+                    child:  Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 10.0),
+                      child: Text(moreDetailsHosp.tr,
+                        style: const TextStyle(
                             fontFamily: fontFamilyName,
                             color: kGreenColor,
                             fontWeight: FontWeight.w800,
@@ -928,7 +931,7 @@ class HospitalDetailedScreen extends StatelessWidget {
                         },
                         child:  Padding(
                           padding: const EdgeInsets.symmetric(horizontal: 10.0),
-                          child: Text("الدكاترة",
+                          child: Text(hospCategoryTitle1.tr,
                             style: TextStyle(
                                 fontFamily: fontFamilyName,
 
@@ -943,7 +946,7 @@ class HospitalDetailedScreen extends StatelessWidget {
                         },
                         child: Padding(
                           padding: const EdgeInsets.symmetric(horizontal: 10.0),
-                          child: Text("التحليل",
+                          child: Text(hospCategoryTitle3.tr,
                             style: TextStyle(
                                 fontFamily: fontFamilyName,
                                 color:  controller.currentActivePage==1?kBlueColor:kGreenColor,
@@ -957,7 +960,7 @@ class HospitalDetailedScreen extends StatelessWidget {
                         },
                         child: Padding(
                           padding: const EdgeInsets.symmetric(horizontal: 10.0),
-                          child: Text("الأشعة",
+                          child: Text(hospCategoryTitle4.tr,
                             style: TextStyle(
                                 fontFamily: fontFamilyName,
                                 color:  controller.currentActivePage==2?kBlueColor:kGreenColor,
@@ -993,7 +996,7 @@ class HospitalDetailedScreen extends StatelessWidget {
                                       Image.asset("assets/images/Doctors-rafiki.png",height: Get.width*0.23,),
                                       Container(
                                         width: Get.width*0.5,
-                                          child: const Text("لم يتم تسجيل اطباء فى المستشفى حتى الان",style: TextStyle(color: kGreenColor,fontWeight: FontWeight.bold,fontSize: 18),textAlign: TextAlign.center,)),
+                                          child:  Text(noDoctorDataHosp.tr,style: const TextStyle(color: kGreenColor,fontWeight: FontWeight.bold,fontSize: 18),textAlign: TextAlign.center,)),
                                     ],
                                   ),
                                 ),

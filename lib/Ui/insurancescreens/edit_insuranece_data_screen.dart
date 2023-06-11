@@ -4,6 +4,7 @@ import 'package:get/get.dart';
 import 'package:privilegecare/Ui/insurancescreens/controller/insurance_controller.dart';
 import 'package:privilegecare/Utils/colors.dart';
 import 'package:privilegecare/Utils/constant.dart';
+import 'package:privilegecare/Utils/translation_key.dart';
 import 'package:privilegecare/widgets/text_field_widget.dart';
 
 class  EditInsuranceDataScreen extends StatelessWidget {
@@ -21,7 +22,7 @@ class  EditInsuranceDataScreen extends StatelessWidget {
       },),
       centerTitle: true,
       title:   Text(
-        addingNewCard?"اضافه بطاقه التأمين الصحى":"تعديل بينات بطاقه التأمين الصحي",
+        addingNewCard?insuranceAddData.tr:insuranceDataEdit.tr,
         style: const TextStyle(
             fontFamily: fontFamilyName,
             color: kWhiteColor,
@@ -50,10 +51,10 @@ class  EditInsuranceDataScreen extends StatelessWidget {
                     children: [
                       Column(
                           children:[
-                            const Padding(
-                              padding: EdgeInsets.symmetric(horizontal: 10.0),
-                              child: Text("ادخل اسم شركه التأمين",
-                                style: TextStyle(
+                             Padding(
+                              padding: const EdgeInsets.symmetric(horizontal: 10.0),
+                              child: Text(insuranceDataEditNameTitle.tr,
+                                style: const TextStyle(
                                     fontFamily: fontFamilyName,
                                     color: kGreenColor,
                                     fontWeight: FontWeight.w700,
@@ -75,7 +76,7 @@ class  EditInsuranceDataScreen extends StatelessWidget {
                                       child: CustomInputField(
                                         textAligning: TextAlign.center,
                                         hasIntialValue: true,
-                                        labelText: "شركه التأمين",
+                                        labelText:insuranceDataEditNameText.tr,
                                         textInputAction: TextInputAction.next,
                                         keyboardType: TextInputType.name,
                                         controller:controller.companyNameController,
@@ -99,10 +100,10 @@ class  EditInsuranceDataScreen extends StatelessWidget {
                               ),
                             ),
                             const SizedBox(height: 5,),
-                            const Padding(
-                              padding: EdgeInsets.symmetric(horizontal: 10.0),
-                              child: Text("ادخل رقم بطاقة التأمين",
-                                style: TextStyle(
+                             Padding(
+                              padding: const EdgeInsets.symmetric(horizontal: 10.0),
+                              child: Text(insuranceDataEditNumTitle.tr,
+                                style: const TextStyle(
                                     fontFamily: fontFamilyName,
                                     color: kGreenColor,
                                     fontWeight: FontWeight.w700,
@@ -158,7 +159,7 @@ class  EditInsuranceDataScreen extends StatelessWidget {
                                 color:controller.editingInsuranceCard?kGrayColor:kBlueColor
                             ),
                             child:  Center(
-                              child:  Text(addingNewCard?"اضافه بطاقه التأمين الصحى":"تعديل بينات بطاقه التأمين الصحي",
+                              child:  Text(addingNewCard?insuranceAddData.tr:insuranceDataEdit.tr,
                                 textAlign: TextAlign.center,
                                 style: const TextStyle(
                                     fontFamily: fontFamilyName,

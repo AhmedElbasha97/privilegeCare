@@ -5,6 +5,7 @@ import 'package:privilegecare/Models/doctor_home_model.dart';
 import 'package:privilegecare/Models/hospital_banner_model.dart';
 import 'package:privilegecare/Services/banner_services.dart';
 import 'package:privilegecare/Services/doctor_services.dart';
+import 'package:privilegecare/Utils/translation_key.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class HomeController extends GetxController{
@@ -55,8 +56,8 @@ class HomeController extends GetxController{
       CoolAlert.show(
           context: context,
           type: CoolAlertType.error,
-          title: "حدث خطأ",
-          text: "لا يمكن فتح هذا الرابط"
+          title: errorKey.tr,
+          text: notAvailableLink.tr
       );
 
     }

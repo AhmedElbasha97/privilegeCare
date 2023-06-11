@@ -8,6 +8,8 @@ import 'package:privilegecare/Utils/colors.dart';
 import 'package:privilegecare/Utils/constant.dart';
 import 'package:privilegecare/widgets/text_field_widget.dart';
 
+import '../../Utils/translation_key.dart';
+
 class SignUpScreen extends StatelessWidget {
   const SignUpScreen({Key? key}) : super(key: key);
    @override
@@ -20,9 +22,9 @@ class SignUpScreen extends StatelessWidget {
           backgroundColor: kGreenColor,
           actions:  [ TextButton(onPressed: (){
             Get.to(() => const HomeScreen());
-          }, child: const Text(
-            "skip to home >",
-            style: TextStyle(
+          }, child:  Text(
+            skipToHomeBTN.tr,
+            style: const TextStyle(
               fontSize: 18.0,
               fontFamily: fontFamilyName,
               color: kWhiteColor,
@@ -32,9 +34,9 @@ class SignUpScreen extends StatelessWidget {
             Get.back();
           },),
           centerTitle: true,
-          title:  const Text(
-            "Sign Up",
-            style: TextStyle(
+          title:  Text(
+            signUpTitle.tr,
+            style: const TextStyle(
                 fontFamily: fontFamilyName,
                 color: kWhiteColor,
                 fontWeight: FontWeight.w800,
@@ -61,10 +63,10 @@ class SignUpScreen extends StatelessWidget {
                       ),
                     ),
                   ),
-                   const Padding(
-                     padding: EdgeInsets.symmetric(horizontal: 10.0),
-                     child: Text("Enter Your Full Name",
-                      style: TextStyle(
+                    Padding(
+                     padding: const EdgeInsets.symmetric(horizontal: 10.0),
+                     child: Text(signUpTitleName.tr,
+                      style: const TextStyle(
                           fontFamily: fontFamilyName,
                           color: kGreenColor,
                           fontWeight: FontWeight.w700,
@@ -86,7 +88,7 @@ class SignUpScreen extends StatelessWidget {
                             child: CustomInputField(
                               textAligning: TextAlign.center,
                               hasIntialValue: true,
-                              labelText: "Last",
+                              labelText:signUpTextName3.tr,
                               textInputAction: TextInputAction.next,
                               keyboardType: TextInputType.name,
 
@@ -114,7 +116,7 @@ class SignUpScreen extends StatelessWidget {
                             child: CustomInputField(
                               textAligning: TextAlign.center,
                               hasIntialValue: true,
-                              labelText: "Middle",
+                              labelText: signUpTextName2,
                               textInputAction: TextInputAction.next,
 
                               controller:controller.secondNameController,
@@ -141,7 +143,7 @@ class SignUpScreen extends StatelessWidget {
                             child: CustomInputField(
                               textAligning: TextAlign.center,
                               hasIntialValue: true,
-                              labelText: "First",
+                              labelText: signUpTextName1.tr,
                               textInputAction: TextInputAction.next,
                               keyboardType: TextInputType.name,
 
@@ -165,10 +167,10 @@ class SignUpScreen extends StatelessWidget {
                     ),
                   ),
                   const SizedBox(height: 5,),
-                  const Padding(
-                    padding: EdgeInsets.symmetric(horizontal: 10.0),
-                    child: Text("Enter Your Email",
-                      style: TextStyle(
+                   Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 10.0),
+                    child: Text(signUpTitleEmail.tr,
+                      style: const TextStyle(
                           fontFamily: fontFamilyName,
                           color: kGreenColor,
                           fontWeight: FontWeight.w700,
@@ -181,7 +183,7 @@ class SignUpScreen extends StatelessWidget {
                       width: Get.width*0.95,
                       child: CustomInputField(
                         hasIntialValue: true,
-                        labelText: "example@example.com",
+                        labelText: signUpTextEmail.tr,
 
                         textInputAction: TextInputAction.next,
                         keyboardType: TextInputType.emailAddress,
@@ -203,10 +205,10 @@ class SignUpScreen extends StatelessWidget {
                     ),
                   ),
                   const SizedBox(height: 5,),
-                  const Padding(
-                    padding: EdgeInsets.symmetric(horizontal: 10.0),
-                    child: Text("Enter Your Phone Number",
-                      style: TextStyle(
+                   Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 10.0),
+                    child: Text(signUpTitlePhone.tr,
+                      style: const TextStyle(
                           fontFamily: fontFamilyName,
                           color: kGreenColor,
                           fontWeight: FontWeight.w700,
@@ -219,7 +221,7 @@ class SignUpScreen extends StatelessWidget {
                       width: Get.width*0.95,
                       child: CustomInputField(
                         hasIntialValue: true,
-                        labelText: "123-4567-8",
+                        labelText: signUpTextPhone.tr,
                         textInputAction: TextInputAction.next,
                         keyboardType: TextInputType.number,
 
@@ -228,40 +230,40 @@ class SignUpScreen extends StatelessWidget {
                         validator: controller.validatePhoneNumber,
                         icon: (controller.phoneValidated)
                             ? (controller.phoneState)
-                            ? const Row(
+                            ?  Row(
                           mainAxisSize: MainAxisSize.min,
                               children: [
 
-                                Text("   974+    ", style: TextStyle(
+                                Text("   ${signUpTextPhoneKey.tr}    ", style: const TextStyle(
                                   fontSize: 15.0,
                                   fontFamily: fontFamilyName,
                                   color: kGrayColor,
                                 ),),
-                                Icon(Icons.check_rounded,
+                                const Icon(Icons.check_rounded,
                                 color: kBlueColor),
-                                SizedBox(width: 5,),
+                                const SizedBox(width: 5,),
                               ],
                             )
-                            : const Row(
+                            :  Row(
                           mainAxisSize: MainAxisSize.min,
                               children: [
 
-                                Text("   974+    ", style: TextStyle(
+                                Text("   ${signUpTextPhoneKey.tr}    ", style: const TextStyle(
                                   fontSize: 15.0,
                                   fontFamily: fontFamilyName,
                                   color: kGrayColor,
                                 ),),
-                                Icon(
+                                const Icon(
                           Icons.close_outlined,
                           color: kErrorColor,
-                        ),SizedBox(width: 5,),
+                        ),const SizedBox(width: 5,),
                               ],
                             )
-                            : const Row(
+                            :  Row(
                           mainAxisSize: MainAxisSize.min,
                               children: [
 
-                                Text("   974+    ", style: TextStyle(
+                                Text("   ${signUpTextPhoneKey.tr}    ", style: const TextStyle(
                           fontSize: 15.0,
                           fontFamily: fontFamilyName,
                           color: kGrayColor,
@@ -273,10 +275,10 @@ class SignUpScreen extends StatelessWidget {
                     ),
                   ),
                   const SizedBox(height: 5,),
-                  const Padding(
-                    padding: EdgeInsets.symmetric(horizontal: 10.0),
-                    child: Text("Enter Your Password",
-                      style: TextStyle(
+                   Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 10.0),
+                    child: Text(signUpTitlePass.tr,
+                      style: const TextStyle(
                           fontFamily: fontFamilyName,
                           color: kGreenColor,
                           fontWeight: FontWeight.w700,
@@ -314,10 +316,10 @@ class SignUpScreen extends StatelessWidget {
                     ),
                   ),
                   const SizedBox(height: 5,),
-                  const Padding(
-                    padding: EdgeInsets.symmetric(horizontal: 10.0),
-                    child: Text("Confirm Your Password",
-                      style: TextStyle(
+                   Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 10.0),
+                    child: Text(signUpTitleConfirmPass.tr,
+                      style: const TextStyle(
                           fontFamily: fontFamilyName,
                           color: kGreenColor,
                           fontWeight: FontWeight.w700,
@@ -376,10 +378,10 @@ class SignUpScreen extends StatelessWidget {
                             borderRadius: BorderRadius.circular(20),
                             color:controller.signingUp?kGrayColor:kBlueColor
                         ),
-                        child: const Center(
-                          child:  Text("Sign Up",
+                        child:  Center(
+                          child:  Text(signUpBTN.tr,
                             textAlign: TextAlign.center,
-                            style: TextStyle(
+                            style: const TextStyle(
                                 fontFamily: fontFamilyName,
                                 color: kWhiteColor,
                                 fontWeight: FontWeight.w600,
@@ -398,17 +400,17 @@ class SignUpScreen extends StatelessWidget {
                         onTap: (){
                           Get.to(const LoginScreen());
                         },
-                        child: const Text("Sign In",
+                        child:  Text(signUpText2.tr,
                           textAlign: TextAlign.center,
-                          style: TextStyle(
+                          style: const TextStyle(
                               fontFamily: fontFamilyName,
                               color: kBlueColor,
                               fontWeight: FontWeight.w600,
                               fontSize: 15),),
                       ),
-                        const Text("?Already have an account",
+                         Text(signUpText1.tr,
                           textAlign: TextAlign.center,
-                          style: TextStyle(
+                          style: const TextStyle(
                               fontFamily:fontFamilyName,
                               color: kGrayColor,
                               fontWeight: FontWeight.w600,

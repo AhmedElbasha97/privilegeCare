@@ -35,7 +35,7 @@ class CommentWidget extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
               const SizedBox(width: 20,),
-              const Text("التقييم العام",
+              const Text("التقييم الدكتور",
                 style: TextStyle(
                     fontFamily: fontFamilyName,
                     color: kBlueColor,

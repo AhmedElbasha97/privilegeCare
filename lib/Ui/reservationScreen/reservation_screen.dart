@@ -5,6 +5,7 @@ import 'package:get/get.dart';
 import 'package:privilegecare/Ui/reservationScreen/controller/reservation_controller.dart';
 import 'package:privilegecare/Utils/colors.dart';
 import 'package:privilegecare/Utils/constant.dart';
+import 'package:privilegecare/Utils/translation_key.dart';
 import 'package:privilegecare/widgets/loader.dart';
 
 class ReservationScreen extends StatelessWidget {
@@ -104,7 +105,7 @@ class ReservationScreen extends StatelessWidget {
                       child: Row(
                         children: [
                           Image.asset("assets/images/Time management-rafiki.png",height: Get.width*0.23,),
-                          const Text("ليس هناك مواعيد متاح حاليا",style: TextStyle(color: kGreenColor,fontWeight: FontWeight.bold,fontSize: 18),textAlign: TextAlign.center,),
+                           Text(reservationNoDateAvailable.tr,style: const TextStyle(color: kGreenColor,fontWeight: FontWeight.bold,fontSize: 18),textAlign: TextAlign.center,),
                         ],
                       ),
                     ),
@@ -121,9 +122,9 @@ class ReservationScreen extends StatelessWidget {
                             Row(
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: [
-                                const Text(
-                                  "اليوم",
-                                  style: TextStyle(
+                                 Text(
+                                  reservationDate.tr,
+                                  style: const TextStyle(
                                       fontFamily: fontFamilyName,
                                       color: kBlueColor,
                                       fontWeight: FontWeight.w800,
@@ -179,9 +180,9 @@ class ReservationScreen extends StatelessWidget {
                         child:  Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
-                            const Text(
-                              "الميعاد",
-                              style: TextStyle(
+                             Text(
+                              reservationTime.tr,
+                              style: const TextStyle(
                                   fontFamily: fontFamilyName,
                                   color: kBlueColor,
                                   fontWeight: FontWeight.w800,
@@ -267,16 +268,16 @@ class ReservationScreen extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.center,
                     mainAxisAlignment: MainAxisAlignment.spaceAround,
                     children: [
-                    const Text(
-                    "معلومات إضافية للدكتور",
-                    style: TextStyle(
+                     Text(
+                      extraDataTitle.tr,
+                    style: const TextStyle(
                         fontFamily: fontFamilyName,
                         color: kBlueColor,
                         fontWeight: FontWeight.w800,
                         fontSize: 18),),
-                      const Text(
-                    "(إختيار)",
-                    style: TextStyle(
+                       Text(
+                         extraDataText.tr,
+                    style: const TextStyle(
                         fontFamily: fontFamilyName,
                         color: kGreenColor,
                         fontWeight: FontWeight.w800,
@@ -299,25 +300,25 @@ class ReservationScreen extends StatelessWidget {
                                     fontWeight: FontWeight.w700,
                                     color: kGrayColor,
                                   ),
-                                    decoration:  const InputDecoration(
-                                        labelText: "السن",
+                                    decoration:   InputDecoration(
+                                        labelText: extraDataAgeTitle.tr,
                                         counterText: '',
 
-                                        labelStyle: TextStyle(
+                                        labelStyle: const TextStyle(
                                             fontFamily: fontFamilyName,
                                             color: kBlueColor,
                                             fontWeight: FontWeight.w800,
                                             fontSize: 18
                                         ),
-                                        enabledBorder: UnderlineInputBorder(
+                                        enabledBorder: const UnderlineInputBorder(
                                           borderSide: BorderSide(color: kGreenColor,width: 2),
                                           //  when the TextFormField in unfocused
                                         ) ,
-                                        focusedBorder: UnderlineInputBorder(
+                                        focusedBorder: const UnderlineInputBorder(
                                           borderSide: BorderSide(color: kGreenColor,width: 2),
                                           //  when the TextFormField in focused
                                         ) ,
-                                        border: UnderlineInputBorder(
+                                        border: const UnderlineInputBorder(
                                         )
                                     ),
                                     keyboardType: TextInputType.phone,
@@ -332,10 +333,10 @@ class ReservationScreen extends StatelessWidget {
                               child:  Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
-                                  const Text(
-                                    "النوع",
+                                   Text(
+                                    extraDataGenderTitle.tr,
 
-                                    style: TextStyle(
+                                    style: const TextStyle(
                                         fontFamily: fontFamilyName,
                                         color: kBlueColor,
                                         fontWeight: FontWeight.w800,
@@ -363,9 +364,9 @@ class ReservationScreen extends StatelessWidget {
                                               ),
                                             ),
                                             const SizedBox(width: 10,),
-                                            const Text(
-                                              "الذكر",
-                                              style: TextStyle(
+                                             Text(
+                                               extraDataGenderMale.tr,
+                                              style: const TextStyle(
                                                   fontFamily: fontFamilyName,
                                                   color: kBlueColor,
                                                   fontWeight: FontWeight.w800,
@@ -392,9 +393,9 @@ class ReservationScreen extends StatelessWidget {
                                               ),
                                             ),
                                             const SizedBox(width: 10,),
-                                            const Text(
-                                              "أنثى",
-                                              style: TextStyle(
+                                             Text(
+                                               extraDataGenderFemale.tr,
+                                              style: const TextStyle(
                                                   fontFamily: fontFamilyName,
                                                   color: kBlueColor,
                                                   fontWeight: FontWeight.w800,
@@ -430,10 +431,10 @@ class ReservationScreen extends StatelessWidget {
                           child: Column(
                            crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              const Text(
-                                "الإعراض",
+                               Text(
+                                extraDataComment.tr,
 
-                                style: TextStyle(
+                                style: const TextStyle(
                                     fontFamily: fontFamilyName,
                                     color: kBlueColor,
                                     fontWeight: FontWeight.w800,
@@ -463,7 +464,7 @@ class ReservationScreen extends StatelessWidget {
                                             borderSide:   const BorderSide(color: kBlueColor,width: 1.0),
                                             borderRadius: BorderRadius.circular(15)),
 
-                                        hintText: "مثل الكحه ألام الظهر ما إلى ذلك",
+                                        hintText: extraDataCommentText.tr,
                                         hintStyle: const TextStyle(
                                             fontFamily: fontFamilyName,
                                             color: kGrayColor,
@@ -488,10 +489,10 @@ class ReservationScreen extends StatelessWidget {
                           child: Column(
                            crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              const Text(
-                                "ملفات",
+                               Text(
+                                 extraDataFileTitle.tr,
 
-                                style: TextStyle(
+                                style: const TextStyle(
                                     fontFamily: fontFamilyName,
                                     color: kBlueColor,
                                     fontWeight: FontWeight.w800,
@@ -517,19 +518,19 @@ class ReservationScreen extends StatelessWidget {
                                           color: kBlueColor,
                                           fontWeight: FontWeight.w800,
                                           fontSize: 15),
-                                    ):const Row(
+                                    ): Row(
                                       mainAxisAlignment: MainAxisAlignment.center,
                                       children: [
                                         Text(
-                                          "أضف ملفات",
-                                          style: TextStyle(
+                                          extraDataFileText.tr,
+                                          style: const TextStyle(
                                               fontFamily: fontFamilyName,
                                               color: kBlueColor,
                                               fontWeight: FontWeight.w800,
                                               fontSize: 15),
                                         ),
-                                        SizedBox(width: 10),
-                                        Icon(Icons.add,color: kBlueColor,size: 30,)
+                                        const SizedBox(width: 10),
+                                        const Icon(Icons.add,color: kBlueColor,size: 30,)
 
                                       ],
                                     ),
@@ -557,10 +558,10 @@ class ReservationScreen extends StatelessWidget {
                       color: kBlueColor,
                       borderRadius: BorderRadius.circular(15),
                     ),
-                    child: const Center(
+                    child:  Center(
                       child:  Text(
-                        "التالى",
-                        style: TextStyle(
+                        nextPageBTN.tr,
+                        style: const TextStyle(
                             fontFamily: fontFamilyName,
                             color: Colors.white,
                             fontWeight: FontWeight.w800,

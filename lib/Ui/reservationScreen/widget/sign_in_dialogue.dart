@@ -94,12 +94,7 @@ class LoginDialogue extends StatelessWidget {
                       ),
                     ),
                   ),
-                  const Text("Forget Your Password",
-                    style: TextStyle(
-                        fontFamily: fontFamilyName,
-                        color: kBlackColor,
-                        fontWeight: FontWeight.w700,
-                        fontSize: 15),),
+
                   InkWell(
                     onTap: (){
                       if(!controller.signingIn) {

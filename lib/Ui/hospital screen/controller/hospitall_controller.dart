@@ -11,7 +11,9 @@ import 'package:privilegecare/Services/hospital_services.dart';
 import 'package:privilegecare/Services/specialist_services.dart';
 import 'package:privilegecare/Ui/logInScreen/login_screen.dart';
 import 'package:privilegecare/Ui/signUpScreen/signup_screen.dart';
+import 'package:privilegecare/Utils/localization_services.dart';
 import 'package:privilegecare/Utils/memory.dart';
+import 'package:privilegecare/Utils/translation_key.dart';
 
 class HospitalController extends GetxController{
   bool isLoading = true;
@@ -46,7 +48,7 @@ class HospitalController extends GetxController{
 
       if (status?.msg == "succeeded") {
         final snackBar = SnackBar(
-          content: Text(' تم حذف المستشفى $hospitalName من قائمة المفضله  '),
+          content: Text(' ${removeHospToFavText1.tr} $hospitalName ${removeHospToFavText2.tr}  '),
 
         );
         ScaffoldMessenger.of(context).showSnackBar(snackBar);
@@ -57,8 +59,8 @@ class HospitalController extends GetxController{
         CoolAlert.show(
             context: context,
             type: CoolAlertType.error,
-            title: "حدث خطأ",
-            text: data?.msg
+            title: errorKey.tr,
+            text: Get.find<StorageService>().activeLocale == SupportedLocales.english?data?.msg:data?.msgAr
         );
       }
     } else {
@@ -70,7 +72,7 @@ class HospitalController extends GetxController{
 
       if (status?.msg == "succeeded") {
         final snackBar = SnackBar(
-          content: Text(' تم اضاف المستشفى $hospitalName الى قائمة المفضلة '),
+          content: Text(' ${addHospToFavText1.tr} $hospitalName ${addHospToFavText2.tr} '),
 
         );
         ScaffoldMessenger.of(context).showSnackBar(snackBar);
@@ -81,8 +83,8 @@ class HospitalController extends GetxController{
         CoolAlert.show(
             context: context,
             type: CoolAlertType.error,
-            title: "حدث خطأ",
-            text: data?.msg
+            title: errorKey.tr,
+            text: Get.find<StorageService>().activeLocale == SupportedLocales.english?data?.msg:data?.msgAr
         );
       }
     }

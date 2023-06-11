@@ -9,6 +9,7 @@ import 'package:privilegecare/Utils/colors.dart';
 import 'package:privilegecare/Utils/constant.dart';
 import 'package:privilegecare/Utils/localization_services.dart';
 import 'package:privilegecare/Utils/memory.dart';
+import 'package:privilegecare/Utils/translation_key.dart';
 import 'package:privilegecare/widgets/bottom_navigation_bar.dart';
 import 'package:star_rating/star_rating.dart';
 
@@ -38,9 +39,9 @@ class FilterScreen extends StatelessWidget {
               ),
 
               centerTitle: true,
-              title:  const Text(
-                "خيرات البحث المتقدم",
-                style: TextStyle(
+              title:   Text(
+                advancedSearchTitle.tr,
+                style: const TextStyle(
                     fontFamily: fontFamilyName,
                     color: kWhiteColor,
                     fontWeight: FontWeight.w700,
@@ -62,9 +63,9 @@ class FilterScreen extends StatelessWidget {
                         padding: const EdgeInsets.symmetric(horizontal: 10.0),
                         child: Container(
                           width: Get.width,
-                          child: const Text("نوع البحث:",
+                          child:  Text(searchTypeTitle.tr,
                             textAlign: TextAlign.start,
-                            style: TextStyle(
+                            style: const TextStyle(
                                 fontFamily: fontFamilyName,
                                 color: kGreenColor,
                                 fontWeight: FontWeight.w800,
@@ -97,9 +98,9 @@ class FilterScreen extends StatelessWidget {
                                     ),
                                   ),
                                   const SizedBox(width: 10,),
-                                  const Text(
-                                    "مستشفى",
-                                    style: TextStyle(
+                                   Text(
+                                    searchType1.tr,
+                                    style: const TextStyle(
                                         fontFamily: fontFamilyName,
                                         color: kBlueColor,
                                         fontWeight: FontWeight.w600,
@@ -127,9 +128,9 @@ class FilterScreen extends StatelessWidget {
                                     ),
                                   ),
                                   const SizedBox(width: 10,),
-                                  const Text(
-                                    "طبيب",
-                                    style: TextStyle(
+                                   Text(
+                                    searchType2.tr,
+                                    style: const TextStyle(
                                         fontFamily: fontFamilyName,
                                         color: kBlueColor,
                                         fontWeight: FontWeight.w600,
@@ -159,9 +160,9 @@ class FilterScreen extends StatelessWidget {
                         padding: const EdgeInsets.symmetric(horizontal: 10.0),
                         child: SizedBox(
                           width: Get.width,
-                          child: const Text("منطقه البحث:",
+                          child:  Text(searchAreaTitle.tr,
                             textAlign: TextAlign.start,
-                            style: TextStyle(
+                            style: const TextStyle(
                                 fontFamily: fontFamilyName,
                                 color: kGreenColor,
                                 fontWeight: FontWeight.w700,
@@ -200,9 +201,9 @@ class FilterScreen extends StatelessWidget {
                               children: [
 
 
-                                const Text(
-                                  "تحميل",
-                                  style: TextStyle(
+                                 Text(
+                                  loadingKey.tr,
+                                  style: const TextStyle(
                                     fontFamily: fontFamilyName,
                                     fontWeight: FontWeight.w600,
                                     fontSize: 20,
@@ -279,27 +280,27 @@ class FilterScreen extends StatelessWidget {
                                 border: Border.all(color: kBlueColor,width: 1)
                             ),
                             child:   Center(
-                              child:  controller.placeName==""?const Row(
+                              child:  controller.placeName==""? Row(
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 children: [
                                   Text(
-                                    "إختر المنطقة التى سوف يتم فيها البحث",
-                                    style: TextStyle(
+                                    searchAreaText1.tr,
+                                    style: const TextStyle(
                                         fontFamily: fontFamilyName,
                                         color: kBlueColor,
                                         fontWeight: FontWeight.w600,
                                         fontSize: 15),
                                   ),
-                                  SizedBox(width: 10),
-                                  Icon(Icons.place_outlined,color: kGreenColor,size: 30,)
+                                  const SizedBox(width: 10),
+                                  const Icon(Icons.place_outlined,color: kGreenColor,size: 30,)
 
                                 ],
                               ):Row(
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 children: [
-                                  const Text(
-                                    "المنطقة المختاره:",
-                                    style: TextStyle(
+                                   Text(
+                                    searchAreaText2.tr,
+                                    style: const TextStyle(
                                         fontFamily: fontFamilyName,
                                         color: kBlueColor,
                                         fontWeight: FontWeight.w700,
@@ -354,9 +355,9 @@ class FilterScreen extends StatelessWidget {
                         padding: const EdgeInsets.symmetric(horizontal: 10.0),
                         child: Container(
                           width: Get.width,
-                          child: const Text("التخصص المحدد للبحث :",
+                          child:  Text(searchSpecTitle.tr,
                             textAlign: TextAlign.start,
-                            style: TextStyle(
+                            style: const TextStyle(
                                 fontFamily: fontFamilyName,
                                 color: kGreenColor,
                                 fontWeight: FontWeight.w700,
@@ -395,9 +396,9 @@ class FilterScreen extends StatelessWidget {
                               children: [
 
 
-                                const Text(
-                                  "تحميل",
-                                  style: TextStyle(
+                                 Text(
+                                  loadingKey.tr,
+                                  style: const TextStyle(
                                     fontFamily: fontFamilyName,
                                     fontWeight: FontWeight.w800,
                                     fontSize: 20,
@@ -486,9 +487,9 @@ class FilterScreen extends StatelessWidget {
                               child:  controller.specialtyName==""? Row(
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 children: [
-                                  const Text(
-                                    "إختر التخصص الذى سوف يتم بناء البحث عليه",
-                                    style: TextStyle(
+                                   Text(
+                                    searchSpecText1.tr,
+                                    style: const TextStyle(
                                         fontFamily: fontFamilyName,
                                         color: kBlueColor,
                                         fontWeight: FontWeight.w600,
@@ -505,9 +506,9 @@ class FilterScreen extends StatelessWidget {
                               ):Row(
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 children: [
-                                  const Text(
-                                    "التخصص المختاره:",
-                                    style: TextStyle(
+                                   Text(
+                                    searchSpecText2.tr,
+                                    style: const TextStyle(
                                         fontFamily: fontFamilyName,
                                         color: kBlueColor,
                                         fontWeight: FontWeight.w700,
@@ -569,9 +570,9 @@ class FilterScreen extends StatelessWidget {
                         padding: const EdgeInsets.symmetric(horizontal: 10.0),
                         child: Container(
                           width: Get.width,
-                          child: const Text("إختر مستوى الطبيب :",
+                          child:  Text(searchLevelTitle.tr,
                             textAlign: TextAlign.start,
-                            style: TextStyle(
+                            style: const TextStyle(
                                 fontFamily: fontFamilyName,
                                 color: kGreenColor,
                                 fontWeight: FontWeight.w700,
@@ -610,9 +611,9 @@ class FilterScreen extends StatelessWidget {
                               children: [
 
 
-                                const Text(
-                                  "تحميل",
-                                  style: TextStyle(
+                                 Text(
+                                   loadingKey.tr,
+                                  style: const TextStyle(
                                     fontFamily: fontFamilyName,
                                     fontWeight: FontWeight.w600,
                                     fontSize: 20,
@@ -692,9 +693,9 @@ class FilterScreen extends StatelessWidget {
                               child:  controller.levelName==""? Row(
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 children: [
-                                  const Text(
-                                    "إختر مستوى الطبيب الذى تريد البحث عنه",
-                                    style: TextStyle(
+                                   Text(
+                                    searchLevelText1.tr,
+                                    style: const TextStyle(
                                         fontFamily: fontFamilyName,
                                         color: kBlueColor,
                                         fontWeight: FontWeight.w600,
@@ -711,9 +712,9 @@ class FilterScreen extends StatelessWidget {
                               ):Row(
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 children: [
-                                  const Text(
-                                    "مستوى الطبيب :",
-                                    style: TextStyle(
+                                   Text(
+                                     searchLevelText2.tr,
+                                    style: const TextStyle(
                                         fontFamily: fontFamilyName,
                                         color: kBlueColor,
                                         fontWeight: FontWeight.w700,
@@ -766,9 +767,9 @@ class FilterScreen extends StatelessWidget {
                         padding: const EdgeInsets.symmetric(horizontal: 10.0),
                         child: Container(
                           width: Get.width,
-                          child: const Text("إختر مدي السعر للكشف :",
+                          child:  Text(searchPriceTitle.tr,
                             textAlign: TextAlign.start,
-                            style: TextStyle(
+                            style: const TextStyle(
                                 fontFamily: fontFamilyName,
                                 color: kGreenColor,
                                 fontWeight: FontWeight.w700,
@@ -847,25 +848,25 @@ class FilterScreen extends StatelessWidget {
                                   fontWeight: FontWeight.w600,
                                   color: kGrayColor,
                                 ),
-                                decoration:  const InputDecoration(
-                                    labelText: "السعر المبدئي",
+                                decoration:   InputDecoration(
+                                    labelText: searchPriceText1.tr,
                                     counterText: '',
 
-                                    labelStyle: TextStyle(
+                                    labelStyle: const TextStyle(
                                         fontFamily: fontFamilyName,
                                         color: kBlueColor,
                                         fontWeight: FontWeight.w700,
                                         fontSize: 15
                                     ),
-                                    enabledBorder: UnderlineInputBorder(
+                                    enabledBorder: const UnderlineInputBorder(
                                       borderSide: BorderSide(color: kGreenColor,width: 2),
                                       //  when the TextFormField in unfocused
                                     ) ,
-                                    focusedBorder: UnderlineInputBorder(
+                                    focusedBorder: const UnderlineInputBorder(
                                       borderSide: BorderSide(color: kGreenColor,width: 2),
                                       //  when the TextFormField in focused
                                     ) ,
-                                    border: UnderlineInputBorder(
+                                    border: const UnderlineInputBorder(
                                     )
                                 ),
                                 keyboardType: TextInputType.phone,
@@ -893,25 +894,25 @@ class FilterScreen extends StatelessWidget {
                                   fontWeight: FontWeight.w600,
                                   color: kGrayColor,
                                 ),
-                                decoration:  const InputDecoration(
-                                    labelText: "السعر النهائي",
+                                decoration:   InputDecoration(
+                                    labelText: searchPriceText2.tr,
                                     counterText: '',
 
-                                    labelStyle: TextStyle(
+                                    labelStyle: const TextStyle(
                                         fontFamily: fontFamilyName,
                                         color: kBlueColor,
                                         fontWeight: FontWeight.w700,
                                         fontSize: 15
                                     ),
-                                    enabledBorder: UnderlineInputBorder(
+                                    enabledBorder: const UnderlineInputBorder(
                                       borderSide: BorderSide(color: kGreenColor,width: 2),
                                       //  when the TextFormField in unfocused
                                     ) ,
-                                    focusedBorder: UnderlineInputBorder(
+                                    focusedBorder: const UnderlineInputBorder(
                                       borderSide: BorderSide(color: kGreenColor,width: 2),
                                       //  when the TextFormField in focused
                                     ) ,
-                                    border: UnderlineInputBorder(
+                                    border: const UnderlineInputBorder(
                                     )
                                 ),
                                 keyboardType: TextInputType.phone,
@@ -938,9 +939,9 @@ class FilterScreen extends StatelessWidget {
                         padding: const EdgeInsets.symmetric(horizontal: 10.0),
                         child: Container(
                           width: Get.width,
-                          child: const Text("إختر مستوى التقيم :",
+                          child:  Text(searchRateTitle.tr,
                             textAlign: TextAlign.start,
-                            style: TextStyle(
+                            style: const TextStyle(
                                 fontFamily: fontFamilyName,
                                 color: kGreenColor,
                                 fontWeight: FontWeight.w700,
@@ -1019,9 +1020,9 @@ class FilterScreen extends StatelessWidget {
                               child:  controller.ratingName==""? Row(
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 children: [
-                                  const Text(
-                                    "إختر مستوى الطبيب الذى تريد البحث عنه",
-                                    style: TextStyle(
+                                   Text(
+                                    searchRateText1.tr,
+                                    style: const TextStyle(
                                         fontFamily: fontFamilyName,
                                         color: kBlueColor,
                                         fontWeight: FontWeight.w600,
@@ -1038,9 +1039,9 @@ class FilterScreen extends StatelessWidget {
                               ):Row(
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 children: [
-                                  const Text(
-                                    "مستوى التقيم :",
-                                    style: TextStyle(
+                                   Text(
+                                    searchRateText2.tr,
+                                    style: const TextStyle(
                                         fontFamily: fontFamilyName,
                                         color: kBlueColor,
                                         fontWeight: FontWeight.w700,
@@ -1111,9 +1112,9 @@ class FilterScreen extends StatelessWidget {
                         padding: const EdgeInsets.symmetric(horizontal: 10.0),
                         child: Container(
                           width: Get.width,
-                          child: const Text("نوع الكشف :",
+                          child:  Text(searchReservationTypeTitle.tr,
                             textAlign: TextAlign.start,
-                            style: TextStyle(
+                            style: const TextStyle(
                                 fontFamily: fontFamilyName,
                                 color: kGreenColor,
                                 fontWeight: FontWeight.w700,
@@ -1146,9 +1147,9 @@ class FilterScreen extends StatelessWidget {
                                     ),
                                   ),
                                   const SizedBox(width: 10,),
-                                  const Text(
-                                    "كشف منزلي",
-                                    style: TextStyle(
+                                   Text(
+                                     searchReservationTypeText1.tr,
+                                    style: const TextStyle(
                                         fontFamily: fontFamilyName,
                                         color: kBlueColor,
                                         fontWeight: FontWeight.w600,
@@ -1176,9 +1177,9 @@ class FilterScreen extends StatelessWidget {
                                     ),
                                   ),
                                   const SizedBox(width: 10,),
-                                  const Text(
-                                    "كشف في العياده",
-                                    style: TextStyle(
+                                   Text(
+                                    searchReservationTypeText2.tr,
+                                    style: const TextStyle(
                                         fontFamily: fontFamilyName,
                                         color: kBlueColor,
                                         fontWeight: FontWeight.w600,
@@ -1217,10 +1218,10 @@ class FilterScreen extends StatelessWidget {
                               color: kBlueColor,
                               borderRadius: BorderRadius.circular(15),
                             ),
-                            child: const Center(
+                            child:  Center(
                               child:  Text(
-                                "ابداء البحث",
-                                style: TextStyle(
+                                advancedSearchBTN.tr,
+                                style: const TextStyle(
                                     fontFamily: fontFamilyName,
                                     color: Colors.white,
                                     fontWeight: FontWeight.w800,

@@ -8,6 +8,7 @@ import 'package:privilegecare/Services/auth_services.dart';
 import 'package:privilegecare/Ui/profileScreen/profile_screeen.dart';
 import 'package:privilegecare/Utils/localization_services.dart';
 import 'package:privilegecare/Utils/memory.dart';
+import 'package:privilegecare/Utils/translation_key.dart';
 import 'package:privilegecare/Utils/validator.dart';
 
 class EditProfileController extends GetxController{
@@ -255,8 +256,8 @@ class EditProfileController extends GetxController{
         CoolAlert.show(
             context: context,
             type: CoolAlertType.error,
-            title: "حدث خطأ",
-            text: Get.find<StorageService>().activeLocale == SupportedLocales.english?data?.msg??"":data?.msgAr??"",
+            title: errorKey.tr,
+            text: Get.find<StorageService>().activeLocale == SupportedLocales.english?data?.msg:data?.msgAr
         );
       }
     }

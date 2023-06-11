@@ -9,7 +9,9 @@ import 'package:privilegecare/Services/doctor_services.dart';
 import 'package:privilegecare/Services/favoutite_services.dart';
 import 'package:privilegecare/Ui/logInScreen/login_screen.dart';
 import 'package:privilegecare/Ui/signUpScreen/signup_screen.dart';
+import 'package:privilegecare/Utils/localization_services.dart';
 import 'package:privilegecare/Utils/memory.dart';
+import 'package:privilegecare/Utils/translation_key.dart';
 
 class DoctorListController extends GetxController {
   bool isLoading = true;
@@ -92,7 +94,7 @@ goToScreen(){
 
       if (status?.msg == "succeeded") {
         final snackBar = SnackBar(
-          content: Text(' تم حذف الطبيب $doctorName من قائمة المفضله  '),
+          content: Text(' ${removeDocFromFav1.tr} $doctorName ${removeDocFromFav2.tr}  '),
 
         );
         ScaffoldMessenger.of(context).showSnackBar(snackBar);
@@ -103,8 +105,8 @@ goToScreen(){
         CoolAlert.show(
             context: context,
             type: CoolAlertType.error,
-            title: "حدث خطأ",
-            text: data?.msg
+            title: errorKey.tr,
+            text: Get.find<StorageService>().activeLocale == SupportedLocales.english?data?.msg:data?.msgAr
         );
       }
     } else {
@@ -116,7 +118,7 @@ goToScreen(){
 
       if (status?.msg == "succeeded") {
         final snackBar = SnackBar(
-          content: Text(' تم اضاف الطبيب $doctorName الى قائمة المفضلة '),
+          content: Text( "${addDocToFav1.tr} $doctorName ${addDocToFav2.tr}" ),
 
         );
         ScaffoldMessenger.of(context).showSnackBar(snackBar);
@@ -127,8 +129,8 @@ goToScreen(){
         CoolAlert.show(
             context: context,
             type: CoolAlertType.error,
-            title: "حدث خطأ",
-            text: data?.msg
+            title: errorKey.tr,
+            text: Get.find<StorageService>().activeLocale == SupportedLocales.english?data?.msg:data?.msgAr
         );
       }
     }

@@ -1,14 +1,12 @@
 import 'package:cool_alert/cool_alert.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-
 import 'package:privilegecare/Ui/reviewiingMessage/controller/reviewing_controller.dart';
-import 'package:privilegecare/Ui/reviewiingMessage/widget/reviewing_success_widget.dart';
 import 'package:privilegecare/Utils/colors.dart';
 import 'package:privilegecare/Utils/constant.dart';
 import 'package:star_rating/star_rating.dart';
 
-
+import '../../Utils/translation_key.dart';
 class ReviewingMessageWidget extends StatelessWidget {
   final  int historyId;
   const ReviewingMessageWidget({Key? key, required this.historyId, }) : super(key: key);
@@ -29,8 +27,8 @@ class ReviewingMessageWidget extends StatelessWidget {
               children:  [
                 Row(
                   children: [
-                    const Text("تقيم المستشفى :",
-                      style: TextStyle(
+                     Text(hospRating.tr,
+                      style: const TextStyle(
                           fontFamily: fontFamilyName,
                           color: kGreenColor,
                           fontWeight: FontWeight.w700,
@@ -49,16 +47,16 @@ class ReviewingMessageWidget extends StatelessWidget {
                     ),
                   ],
                 ),
-                SizedBox(height: 10,),
+                const SizedBox(height: 10,),
                 Row(
                   children: [
-                    const Text("تقيم الطبيب :",
-                      style: TextStyle(
+                     Text(doctorRating.tr,
+                      style: const TextStyle(
                           fontFamily: fontFamilyName,
                           color: kGreenColor,
                           fontWeight: FontWeight.w700,
                           fontSize: 18),),
-                    SizedBox(width: 10,),
+                    const SizedBox(width: 10,),
                     StarRating(
                       color: kGreenColor,
                       mainAxisAlignment: MainAxisAlignment.center,
@@ -72,7 +70,7 @@ class ReviewingMessageWidget extends StatelessWidget {
                     ),
                   ],
                 ),
-                SizedBox(height: 10,),
+                const SizedBox(height: 10,),
                 Padding(
                   padding: const EdgeInsets.all(18.0),
                   child: TextFormField(
@@ -82,7 +80,7 @@ class ReviewingMessageWidget extends StatelessWidget {
                       decoration:   InputDecoration(
                         floatingLabelBehavior: FloatingLabelBehavior.auto,
                         fillColor: kBlueColor,
-                        hintText: "التعليق",
+                        hintText: comment.tr,
                         errorBorder: UnderlineInputBorder(
                             borderSide: const BorderSide(color: Colors.red),
                             borderRadius: BorderRadius.circular(4)),
@@ -135,13 +133,13 @@ class ReviewingMessageWidget extends StatelessWidget {
                         borderRadius: BorderRadius.circular(10),
 
                       ),
-                      child:  const Padding(
-                        padding: EdgeInsets.all(5.0),
+                      child:   Padding(
+                        padding: const EdgeInsets.all(5.0),
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children:  [Text(
-                              "أضف التعليق",
-                              style: TextStyle(
+                              addReview.tr,
+                              style: const TextStyle(
                                   fontFamily:fontFamilyName,
                                   color:kBlueColor,
                                   fontWeight: FontWeight.w600,

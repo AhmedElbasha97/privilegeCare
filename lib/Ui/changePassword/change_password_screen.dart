@@ -6,6 +6,7 @@ import 'package:get/get.dart';
 import 'package:privilegecare/Ui/changePassword/controller/change_password_controller.dart';
 import 'package:privilegecare/Utils/colors.dart';
 import 'package:privilegecare/Utils/constant.dart';
+import 'package:privilegecare/Utils/translation_key.dart';
 import 'package:privilegecare/widgets/text_field_widget.dart';
 
 class ChangePasswordScreen extends StatelessWidget {
@@ -23,9 +24,9 @@ appBar:  AppBar(
       Get.back();
   },),
   centerTitle: true,
-  title:  const Text(
-      "تغير كلمه السر",
-      style: TextStyle(
+  title:   Text(
+    changePassScreenTitle.tr,
+      style: const TextStyle(
           fontFamily: fontFamilyName,
           color: kWhiteColor,
           fontWeight: FontWeight.w800,
@@ -42,11 +43,11 @@ appBar:  AppBar(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   const SizedBox(height: 5,),
-                  const Padding(
-                    padding: EdgeInsets.symmetric(horizontal: 10.0),
-                    child: Text("كلمه السر الجديدة",
+                   Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 10.0),
+                    child: Text(changePassScreenText1.tr,
 
-                      style: TextStyle(
+                      style: const TextStyle(
                           fontFamily: fontFamilyName,
                           color: kGreenColor,
                           fontWeight: FontWeight.w700,
@@ -84,10 +85,10 @@ appBar:  AppBar(
                     ),
                   ),
                   const SizedBox(height: 5,),
-                  const Padding(
-                    padding: EdgeInsets.symmetric(horizontal: 10.0),
-                    child: Text("أعد كتابة كلمة السر الجديدة",
-                      style: TextStyle(
+                   Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 10.0),
+                    child: Text(changePassScreenText2.tr,
+                      style: const TextStyle(
                           fontFamily: fontFamilyName,
                           color: kGreenColor,
                           fontWeight: FontWeight.w700,
@@ -127,15 +128,15 @@ appBar:  AppBar(
                   ),
                   const SizedBox(height: 10,),
                   RichText(
-                    text:  const TextSpan(
+                    text:   TextSpan(
                       children: [
 
-                        WidgetSpan(
+                        const WidgetSpan(
                           child: Icon(Icons.info_sharp, size: 14,color: kBlueColor,),
                         ),
                         TextSpan(
-                          text: "يجب أن يكون كلمه السر تحتوى على حرف كبير و حرف صغير ورموز خاصه مثل :(@,#,!,&,*,~)و رقم وليس أقل من ٨أحرف",
-                          style:  TextStyle(
+                          text: changePassScreenText3.tr,
+                          style:  const TextStyle(
                               fontSize: 12.0,
                               fontFamily: fontFamilyName,
                               fontWeight: FontWeight.w600,
@@ -166,10 +167,10 @@ appBar:  AppBar(
                             borderRadius: BorderRadius.circular(20),
                             color:controller.changePassword?kGrayColor:kBlueColor
                         ),
-                        child: const Center(
-                          child:  Text("تغير كلمه السر",
+                        child:  Center(
+                          child:  Text(changePassScreenTitle.tr,
                             textAlign: TextAlign.center,
-                            style: TextStyle(
+                            style: const TextStyle(
                                 fontFamily: fontFamilyName,
                                 color: kWhiteColor,
                                 fontWeight: FontWeight.w600,

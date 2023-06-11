@@ -22,6 +22,7 @@ import 'package:privilegecare/Utils/colors.dart';
 import 'package:privilegecare/Utils/constant.dart';
 import 'package:privilegecare/Utils/localization_services.dart';
 import 'package:privilegecare/Utils/memory.dart';
+import 'package:privilegecare/Utils/translation_key.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class ProfileController extends GetxController{
@@ -46,19 +47,17 @@ class ProfileController extends GetxController{
     "signOutIcon"
   ];
   List<String> title =[
-    "تحديث الملف الشخصي",
-    "تأمين طبي",
-    "الدعم الفنى(شات)",
-    "تاريخ معملاتى",
-    "تغيير كلمة المرور",
-
-    "مفضل",
-    "تغير اللغة",
-    "سياسة الخصوصية",
-    "الأحكام والشروط",
-
-    "تقييم التطبيق",
-    "خروج",
+    profileTag1.tr,
+    profileTag2.tr,
+    profileTag3.tr,
+    profileTag4.tr,
+    profileTag5.tr,
+    profileTag6.tr,
+    profileTag7.tr,
+    profileTag8.tr,
+    profileTag9.tr,
+    profileTag10.tr,
+    profileTag11.tr,
   ];
   bool userIsSigned = true;
   @override
@@ -129,7 +128,7 @@ class ProfileController extends GetxController{
      }
    }
   goToChangePass() async {
-    if(await BiomatricsAuthService.authenticateUser("تغير كلمه السر")) {
+    if(await BiomatricsAuthService.authenticateUser(changePassScreenTitle.tr)) {
       Get.to(() => const ChangePasswordScreen());
     }
   }
@@ -172,7 +171,7 @@ class ProfileController extends GetxController{
       CoolAlert.show(
         context: context,
         type: CoolAlertType.error,
-        title: "حدث خطأ",
+        title: errorKey.tr,
         text: Get.find<StorageService>().activeLocale == SupportedLocales.english?reponse?.msg??"":reponse?.msgAr??"",
       );
     }
@@ -194,7 +193,7 @@ class ProfileController extends GetxController{
       context: context,
       type: CoolAlertType.confirm,
       title: "",
-      text: 'تسجيل الخروج من الحساب',
+      text: warningLogOut.tr,
       textTextStyle: const TextStyle(
           fontFamily: fontFamilyName,
           color: kBlueColor,
@@ -208,8 +207,8 @@ class ProfileController extends GetxController{
       onCancelBtnTap:(){
         indexDeleteAccount = 1;
       },
-      confirmBtnText: 'الخروج من الحساب',
-      cancelBtnText: 'مسح الحساب',
+      confirmBtnText: logOut.tr,
+      cancelBtnText: deleteAcc.tr,
       confirmBtnColor: Colors.white,
       cancelBtnTextStyle:   const TextStyle(
           fontFamily: fontFamilyName,
@@ -231,19 +230,19 @@ deleteAccount(context){
   CoolAlert.show(
       context: context,
       type: CoolAlertType.warning,
-      title: "تحذير",
+      title: warningKey.tr,
       titleTextStyle: const TextStyle(
           fontFamily: fontFamilyName,
           color: kBlueColor,
           fontWeight: FontWeight.w700,
           fontSize: 15),
-      text: "مسح الحساب سوف يترتب عليه خساره جميع البينات المسجله وايضا خساره النقاط المكتسبة",
+      text: warningDeleteAcc.tr,
       textTextStyle: const TextStyle(
           fontFamily: fontFamilyName,
           color: kBlueColor,
           fontWeight: FontWeight.w700,
           fontSize: 15),
-      confirmBtnText: "استكمال المسح",
+      confirmBtnText: contDeleteAcc.tr,
     confirmBtnColor: Colors.white,
     confirmBtnTextStyle:  const TextStyle(
         fontFamily: fontFamilyName,
@@ -251,7 +250,7 @@ deleteAccount(context){
         fontWeight: FontWeight.w600,
         fontSize: 15),
     onConfirmBtnTap: () async {
-      if(await BiomatricsAuthService.authenticateUser("مسح الحساب")) {
+      if(await BiomatricsAuthService.authenticateUser(deleteAcc.tr)) {
         ResponseModel? reponse = await AuthServices.deleteAccount(Get.find<StorageService>().getId);
         if(reponse?.msg == "succeeded"){
 
@@ -260,7 +259,7 @@ deleteAccount(context){
           CoolAlert.show(
             context: context,
             type: CoolAlertType.error,
-            title: "حدث خطأ",
+            title:errorKey ,
             text: Get.find<StorageService>().activeLocale == SupportedLocales.english?reponse?.msg??"":reponse?.msgAr??"",
           );
         }
@@ -276,8 +275,8 @@ deleteAccount(context){
       CoolAlert.show(
           context: context,
           type: CoolAlertType.error,
-          title: "حدث خطأ",
-          text: "لا يمكن فتح هذا الرابط"
+          title: errorKey.tr,
+          text: notAvailableLink.tr
       );
 
     }

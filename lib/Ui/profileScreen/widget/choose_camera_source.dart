@@ -54,7 +54,7 @@ class ChooseCameraSource extends StatelessWidget {
                         const Icon(Icons.camera_alt_outlined,size: 20,color: kBlueColor,),                        const SizedBox(width: 10,),
                         Text(cameraSource1.tr,style: const TextStyle(
                             fontSize: 12.0,
-                            fontFamily: 'elmessiri',
+                            fontFamily: fontFamilyName,
                             color: kBlueColor
                         ),),
                       ],

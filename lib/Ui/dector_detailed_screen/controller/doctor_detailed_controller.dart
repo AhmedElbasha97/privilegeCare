@@ -15,7 +15,9 @@ import 'package:privilegecare/Services/favoutite_services.dart';
 import 'package:privilegecare/Services/reviewing_services.dart';
 import 'package:privilegecare/Ui/logInScreen/login_screen.dart';
 import 'package:privilegecare/Ui/signUpScreen/signup_screen.dart';
+import 'package:privilegecare/Utils/localization_services.dart';
 import 'package:privilegecare/Utils/memory.dart';
+import 'package:privilegecare/Utils/translation_key.dart';
 import 'package:share_plus/share_plus.dart';
 
 class DoctorDetailedController extends GetxController{
@@ -53,8 +55,8 @@ class DoctorDetailedController extends GetxController{
       mapType: Platform.isAndroid
           ?MapType.google:MapType.apple,
       coords: Coords(double.parse(doctorData?.locationLat??"0.0"), double.parse(doctorData?.locationLon??"0.0")),
-      title: " موقع الدكتور ${doctorData?.name}",
-      description: " موقع الدكتور ${doctorData?.name}",
+      title: " ${doctorLoc.tr} ${doctorData?.name}",
+      description: " ${doctorLoc.tr} ${doctorData?.name}",
     );
   }
   goToScreen(){
@@ -73,7 +75,7 @@ class DoctorDetailedController extends GetxController{
           .getId, "0");
       if (status?.msg == "succeeded") {
         final snackBar = SnackBar(
-          content: Text(' تم حذف الطبيب $doctorName من قائمة المفضله  '),
+          content: Text(' ${removeDocFromFav1.tr} $doctorName ${removeDocFromFav2.tr}  '),
 
         );
         ScaffoldMessenger.of(context).showSnackBar(snackBar);
@@ -84,8 +86,8 @@ class DoctorDetailedController extends GetxController{
         CoolAlert.show(
             context: context,
             type: CoolAlertType.error,
-            title: "حدث خطأ",
-            text: data?.msg
+            title: errorKey.tr,
+            text: Get.find<StorageService>().activeLocale == SupportedLocales.english?data?.msg:data?.msgAr
         );
       }
     } else {
@@ -96,7 +98,7 @@ class DoctorDetailedController extends GetxController{
           .getId, "1");
       if (status?.msg == "succeeded") {
         final snackBar = SnackBar(
-          content: Text(' تم اضاف الطبيب $doctorName الى قائمة المفضلة '),
+          content: Text("${addDocToFav1.tr} $doctorName ${addDocToFav2.tr}" ),
 
         );
         ScaffoldMessenger.of(context).showSnackBar(snackBar);
@@ -107,8 +109,8 @@ class DoctorDetailedController extends GetxController{
         CoolAlert.show(
             context: context,
             type: CoolAlertType.error,
-            title: "حدث خطأ",
-            text: data?.msg
+            title: errorKey.tr,
+            text: Get.find<StorageService>().activeLocale == SupportedLocales.english?data?.msg:data?.msgAr
         );
       }
     }

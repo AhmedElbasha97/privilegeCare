@@ -8,7 +8,10 @@ import 'package:privilegecare/Models/auth_model.dart';
 import 'package:privilegecare/Services/auth_services.dart';
 import 'package:privilegecare/Ui/HomeScreen/home_screen.dart';
 import 'package:privilegecare/Utils/memory.dart';
+import 'package:privilegecare/Utils/translation_key.dart';
 import 'package:privilegecare/Utils/validator.dart';
+
+import '../../../Utils/localization_services.dart';
 const wrongCode = 'assets/images/wrong_code.png';
 
 class LoginController extends GetxController {
@@ -163,8 +166,8 @@ if(data?.msg == "succeeded"){
   CoolAlert.show(
     context: context,
     type: CoolAlertType.error,
-    title: "حدث خطأ",
-    text: data?.msg
+    title: errorKey.tr,
+    text:Get.find<StorageService>().activeLocale == SupportedLocales.english?data?.msg:data?.msgAr
   );
 }
 }
@@ -185,8 +188,8 @@ if(data?.msg == "succeeded"){
   CoolAlert.show(
     context: context,
     type: CoolAlertType.error,
-    title: "حدث خطأ",
-    text: data?.msg
+    title: errorKey.tr,
+    text:Get.find<StorageService>().activeLocale == SupportedLocales.english?data?.msg:data?.msgAr
   );
 }
 }

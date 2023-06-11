@@ -6,6 +6,7 @@ import 'package:get/get.dart';
 import 'package:privilegecare/Ui/forgetPassword/controller/forget_password_controller.dart';
 import 'package:privilegecare/Utils/colors.dart';
 import 'package:privilegecare/Utils/constant.dart';
+import 'package:privilegecare/Utils/translation_key.dart';
 import 'package:privilegecare/widgets/text_field_widget.dart';
 
 class ForgettingPasswordScreen extends StatelessWidget {
@@ -27,9 +28,9 @@ class ForgettingPasswordScreen extends StatelessWidget {
             Get.back();
           },),
           centerTitle: true,
-          title:  const Text(
-            "نسيت كلمه المرور",
-            style: TextStyle(
+          title:   Text(
+            forgetPassTitle.tr,
+            style: const TextStyle(
                 fontFamily: fontFamilyName,
                 color: kWhiteColor,
                 fontWeight: FontWeight.w800,
@@ -45,10 +46,10 @@ class ForgettingPasswordScreen extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.center,
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
-                const Padding(
-                  padding: EdgeInsets.symmetric(horizontal: 10.0),
-                  child: Text("Enter Your Email",
-                    style: TextStyle(
+                 Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 10.0),
+                  child: Text(signUpTitleEmail.tr,
+                    style: const TextStyle(
                         fontFamily: fontFamilyName,
                         color: kGreenColor,
                         fontWeight: FontWeight.w700,
@@ -61,7 +62,7 @@ class ForgettingPasswordScreen extends StatelessWidget {
                     width: Get.width*0.95,
                     child: CustomInputField(
                       hasIntialValue: true,
-                      labelText: "example@example.com",
+                      labelText: signUpTextEmail.tr,
 
                       textInputAction: TextInputAction.next,
                       keyboardType: TextInputType.emailAddress,

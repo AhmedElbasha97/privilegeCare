@@ -7,6 +7,9 @@ import 'package:privilegecare/Services/reviewing_services.dart';
 import 'package:privilegecare/Ui/reviewiingMessage/widget/reviewing_success_widget.dart';
 import 'package:privilegecare/Utils/memory.dart';
 
+import '../../../Utils/localization_services.dart';
+import '../../../Utils/translation_key.dart';
+
 class ReviewingController extends GetxController{
   final TextEditingController msgController =  TextEditingController();
   double hospitalReview = 0.0;
@@ -43,8 +46,8 @@ addReview(context) async {
       CoolAlert.show(
           context: context,
           type: CoolAlertType.error,
-          title: "حدث خطأ",
-          text: data?.msg
+          title: errorKey.tr,
+          text: Get.find<StorageService>().activeLocale == SupportedLocales.english?data?.msg:data?.msgAr,
       );
     }
 }

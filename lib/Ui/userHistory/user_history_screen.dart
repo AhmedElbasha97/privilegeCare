@@ -1,14 +1,13 @@
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:privilegecare/Ui/userHistory/controller/user_history_controller.dart';
 import 'package:privilegecare/Ui/userHistory/widget/history_cell.dart';
 import 'package:privilegecare/Utils/colors.dart';
 import 'package:privilegecare/Utils/constant.dart';
-import 'package:privilegecare/Utils/localization_services.dart';
-import 'package:privilegecare/Utils/memory.dart';
 import 'package:privilegecare/widgets/loader.dart';
 import 'package:privilegecare/widgets/no_data_widget.dart';
+
+import '../../Utils/translation_key.dart';
 
 class HistoryScreen extends StatelessWidget {
   const HistoryScreen({super.key});
@@ -25,9 +24,9 @@ class HistoryScreen extends StatelessWidget {
             Get.back();
           },),
           centerTitle: false,
-          title:  const Text(
-            "معملاتى",
-            style: TextStyle(
+          title:   Text(
+            historyTitle.tr,
+            style: const TextStyle(
                 fontFamily: fontFamilyName,
                 color: kWhiteColor,
                 fontWeight: FontWeight.w800,
@@ -93,7 +92,7 @@ class HistoryScreen extends StatelessWidget {
                               child: Row(
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 children:  [Text(
-                                    "كشف عيادة",
+                                    historyTag1.tr,
                                     style: TextStyle(
                                         fontFamily:fontFamilyName,
                                         color:controller.homeVisitOrNot == 0? Colors.white:kBlueColor,
@@ -140,7 +139,7 @@ class HistoryScreen extends StatelessWidget {
                                 child: Row(
                                   mainAxisAlignment: MainAxisAlignment.center,
                                   children:  [Text(
-                                      "زيارات منزليه",
+                                      historyTag2.tr,
                                       style: TextStyle(
                                           fontFamily: fontFamilyName,
                                           color:controller.homeVisitOrNot == 1? Colors.white:kBlueColor,
@@ -161,7 +160,7 @@ class HistoryScreen extends StatelessWidget {
                   ),
 
                   controller.hasNoData?
-                  NoDataWidget(text: controller.homeVisitOrNot == 1?"ليس هناك تاريخ سابق للزيارات المنزليه":"ليس هناك تاريخ سابق للكشوفات العياده",imgPath: "assets/images/Insurance-pana.png", refreshedFunc: (){},hasRefreshButtonOrNot: false,)
+                  NoDataWidget(text: controller.homeVisitOrNot == 1? noHistoryDataHome.tr: noHistoryDataHosp.tr,imgPath: "assets/images/Insurance-pana.png", refreshedFunc: (){},hasRefreshButtonOrNot: false,)
                       :Container(
                     width: Get.width,
                     height: Get.height*0.75,

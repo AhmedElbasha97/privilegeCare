@@ -8,6 +8,7 @@ import 'package:privilegecare/Utils/colors.dart';
 import 'package:privilegecare/Utils/constant.dart';
 import 'package:privilegecare/Utils/localization_services.dart';
 import 'package:privilegecare/Utils/memory.dart';
+import 'package:privilegecare/Utils/translation_key.dart';
 
 class SecondReservationScreen extends StatefulWidget {
   final String doctorId;
@@ -52,9 +53,9 @@ class _SecondReservationScreenState extends State<SecondReservationScreen> {
                               },
                               child: const Icon(Icons.arrow_circle_right_outlined,color: kWhiteColor,size: 30,)),
                           const SizedBox(width: 5,),
-                          const Text(
-                            "تأكيد الحجز",
-                            style: TextStyle(
+                           Text(
+                            secondReservationTitle.tr,
+                            style: const TextStyle(
                                 fontFamily: fontFamilyName,
                                 color: kWhiteColor,
                                 fontWeight: FontWeight.w800,
@@ -229,9 +230,9 @@ class _SecondReservationScreenState extends State<SecondReservationScreen> {
                                       const SizedBox(width: 10,),
                                       Container(
                                         width: Get.width*0.55,
-                                        child: const Text(
-                                          "أنا أقوم بالحجز نيابه عن مريض أخر",
-                                          style: TextStyle(
+                                        child:  Text(
+                                          reservationForAnotherOne.tr,
+                                          style: const TextStyle(
                                               fontFamily: fontFamilyName,
                                               color: kBlueColor,
                                               fontWeight: FontWeight.w800,
@@ -242,23 +243,23 @@ class _SecondReservationScreenState extends State<SecondReservationScreen> {
                                   ),
                                   controller.reservationFroAnotherPatient == 0?const SizedBox() :TextFormField(
                                     controller: controller.nameController,
-                                    decoration:  const InputDecoration(
-                                        labelText: "الإسم كامل",
-                                        labelStyle: TextStyle(
+                                    decoration:   InputDecoration(
+                                        labelText: reservationForAnotherOneName.tr,
+                                        labelStyle: const TextStyle(
                                             fontFamily: fontFamilyName,
                                             color: kBlueColor,
                                             fontWeight: FontWeight.w800,
                                             fontSize: 15
                                         ),
-                                        enabledBorder: UnderlineInputBorder(
+                                        enabledBorder: const UnderlineInputBorder(
                                           borderSide: BorderSide(color: Colors.grey,width: 2),
                                           //  when the TextFormField in unfocused
                                         ) ,
-                                        focusedBorder: UnderlineInputBorder(
+                                        focusedBorder: const UnderlineInputBorder(
                                           borderSide: BorderSide(color: kBlueColor,width: 2),
                                           //  when the TextFormField in focused
                                         ) ,
-                                        border: UnderlineInputBorder(
+                                        border: const UnderlineInputBorder(
                                         )
                                     ),
                                     keyboardType: TextInputType.text,
@@ -270,24 +271,24 @@ class _SecondReservationScreenState extends State<SecondReservationScreen> {
                                         width: Get.width*0.4,
                                         child: TextFormField(
                                           controller: controller.phoneController,
-                                          decoration:  const InputDecoration(
-                                              labelText:"رقم الجوال",
+                                          decoration:   InputDecoration(
+                                              labelText:reservationForAnotherOnePhone.tr,
 
-                                              labelStyle: TextStyle(
+                                              labelStyle: const TextStyle(
                                                   fontFamily: fontFamilyName,
                                                   color: kBlueColor,
                                                   fontWeight: FontWeight.w800,
                                                   fontSize: 15
                                               ),
-                                              enabledBorder: UnderlineInputBorder(
+                                              enabledBorder: const UnderlineInputBorder(
                                                 borderSide: BorderSide(color: Colors.grey,width: 2),
                                                 //  when the TextFormField in unfocused
                                               ) ,
-                                              focusedBorder: UnderlineInputBorder(
+                                              focusedBorder: const UnderlineInputBorder(
                                                 borderSide: BorderSide(color: kBlueColor,width: 2),
                                                 //  when the TextFormField in focused
                                               ) ,
-                                              border: UnderlineInputBorder(
+                                              border: const UnderlineInputBorder(
                                               )
                                           ),
                                           keyboardType: TextInputType.phone,
@@ -447,10 +448,10 @@ class _SecondReservationScreenState extends State<SecondReservationScreen> {
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             crossAxisAlignment: CrossAxisAlignment.center,
                             children: [
-                              const Text(
-                                "سعر الكشف",
+                               Text(
+                                reservationPrice.tr,
                                 textAlign: TextAlign.center,
-                                style: TextStyle(
+                                style: const TextStyle(
                                     fontFamily: fontFamilyName,
                                     color: kBlueColor,
                                     fontWeight: FontWeight.w800,
@@ -458,7 +459,7 @@ class _SecondReservationScreenState extends State<SecondReservationScreen> {
                               ),
 
                               Text(
-                                "${controller.doctorData?.amount??0} ريال",
+                                "${controller.doctorData?.amount??0} ${currencyKey.tr}",
                                 textAlign: TextAlign.center,
                                 style: const TextStyle(
                                     fontFamily: fontFamilyName,
@@ -496,7 +497,7 @@ class _SecondReservationScreenState extends State<SecondReservationScreen> {
                     ),
                     child: const Center(
                       child:  Text(
-                        "تأكيد الحجز",
+                        secondReservationBTN,
                         style: TextStyle(
                             fontFamily: fontFamilyName,
                             color: Colors.white,

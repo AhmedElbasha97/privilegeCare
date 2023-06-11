@@ -4,6 +4,7 @@ import 'package:privilegecare/Ui/insurancescreens/controller/insurance_controlle
 import 'package:privilegecare/Ui/insurancescreens/edit_insuranece_data_screen.dart';
 import 'package:privilegecare/Utils/colors.dart';
 import 'package:privilegecare/Utils/constant.dart';
+import 'package:privilegecare/Utils/translation_key.dart';
 import 'package:privilegecare/widgets/loader.dart';
 
 class InsuranceScreen extends StatelessWidget {
@@ -22,9 +23,9 @@ class InsuranceScreen extends StatelessWidget {
               Get.back();
             },),
             centerTitle: true,
-            title:  const Text(
-              "بينات التأمين الصحي",
-              style: TextStyle(
+            title:   Text(
+              insuranceDataTitle.tr,
+              style: const TextStyle(
                   fontFamily: fontFamilyName,
                   color: kWhiteColor,
                   fontWeight: FontWeight.w800,
@@ -42,7 +43,7 @@ class InsuranceScreen extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Image.asset("assets/images/Insurance-pana.png",height: Get.width*0.65,),
-                  const Text("ليس هناك بينات مسجله للتأمين الصحي",style: TextStyle(color: kGreenColor,fontWeight: FontWeight.bold,fontSize: 30),textAlign: TextAlign.center,),
+                   Text(insuranceNoData.tr,style: const TextStyle(color: kGreenColor,fontWeight: FontWeight.bold,fontSize: 30),textAlign: TextAlign.center,),
                   const SizedBox(height: 30,),
                  InkWell(
                     onTap: (){
@@ -62,20 +63,20 @@ class InsuranceScreen extends StatelessWidget {
                           borderRadius: BorderRadius.circular(10),
 
                         ),
-                        child: const Padding(
-                          padding: EdgeInsets.all(5.0),
+                        child:  Padding(
+                          padding: const EdgeInsets.all(5.0),
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children:  [Text(
-                                "اضافه بطاقه التأمين الصحى",
-                                style: TextStyle(
-                                    fontFamily: "elmessiri",
+                                insuranceAddData.tr,
+                                style: const TextStyle(
+                                    fontFamily: fontFamilyName,
                                     color:kGreenColor,
                                     fontWeight: FontWeight.w800,
                                     fontSize: 20)
                             ),
-                              SizedBox(width: 10,),
-                              Icon(Icons.add,color: kGreenColor,)
+                              const SizedBox(width: 10,),
+                              const Icon(Icons.add,color: kGreenColor,)
                             ],
 
                           ),
@@ -114,10 +115,10 @@ class InsuranceScreen extends StatelessWidget {
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                const Padding(
-                                  padding: EdgeInsets.symmetric(horizontal: 10.0),
-                                  child: Text("اسم شركه التأمين:",
-                                    style: TextStyle(
+                                 Padding(
+                                  padding: const EdgeInsets.symmetric(horizontal: 10.0),
+                                  child: Text(insuranceDataCompName.tr,
+                                    style: const TextStyle(
                                         fontFamily: fontFamilyName,
                                         color: kGreenColor,
                                         fontWeight: FontWeight.w700,
@@ -134,10 +135,10 @@ class InsuranceScreen extends StatelessWidget {
                                           fontSize: 20),),
                                   ),
                                 ),
-                                const Padding(
-                                  padding: EdgeInsets.symmetric(horizontal: 10.0),
-                                  child: Text("رقم بطاقة التأمين:",
-                                    style: TextStyle(
+                                 Padding(
+                                  padding: const EdgeInsets.symmetric(horizontal: 10.0),
+                                  child: Text(insuranceDataNum.tr,
+                                    style: const TextStyle(
                                         fontFamily: fontFamilyName,
                                         color: kGreenColor,
                                         fontWeight: FontWeight.w700,
@@ -176,7 +177,7 @@ class InsuranceScreen extends StatelessWidget {
                           color:kBlueColor
                       ),
                       child:  Center(
-                        child:  Text(controller.hasNoData?"اضافه بطاقه التأمين الصحى":"تعديل بينات بطاقه التأمين الصحي",
+                        child:  Text(controller.hasNoData?insuranceAddData.tr:insuranceDataEdit.tr,
                           textAlign: TextAlign.center,
                           style: const TextStyle(
                               fontFamily: fontFamilyName,

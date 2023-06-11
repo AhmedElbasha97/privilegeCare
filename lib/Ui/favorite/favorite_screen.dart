@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:privilegecare/Ui/favorite/widget/favorite_doctor_taps.dart';
 import 'package:privilegecare/Ui/favorite/widget/favourite_hospital_taps.dart';
 import 'package:privilegecare/Utils/colors.dart';
 import 'package:privilegecare/Utils/constant.dart';
+
+import '../../Utils/translation_key.dart';
 
 class FavoriteScreen extends StatelessWidget {
   const FavoriteScreen({Key? key}) : super(key: key);
@@ -16,10 +19,10 @@ class FavoriteScreen extends StatelessWidget {
           body: NestedScrollView(
             headerSliverBuilder: (BuildContext context, bool innerBoxIsScrolled) {
               return <Widget>[
-                 const SliverAppBar(
+                  SliverAppBar(
 
                   backgroundColor: kGreenColor,
-                  title: Text('قائمة المفضلة', style: TextStyle(
+                  title: Text(favTitle.tr, style: const TextStyle(
                       fontFamily: fontFamilyName,
                       color: kWhiteColor,
                       fontWeight: FontWeight.w800,
@@ -31,12 +34,12 @@ class FavoriteScreen extends StatelessWidget {
                     indicatorColor: kBlueColor,
                     indicatorWeight: 10,
                     tabs: [
-                      Tab(child: Text('أطباء', style: TextStyle(
+                      Tab(child: Text(favTap1.tr, style: const TextStyle(
               fontFamily: fontFamilyName,
               color: kWhiteColor,
               fontWeight: FontWeight.w800,
               fontSize: 18))),
-                      Tab(child: Text('مستشفيات',style: TextStyle(
+                      Tab(child: Text(favTap2.tr,style: const TextStyle(
                           fontFamily: fontFamilyName,
                           color: kWhiteColor,
                           fontWeight: FontWeight.w800,

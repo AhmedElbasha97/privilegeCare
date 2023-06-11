@@ -19,6 +19,8 @@ import 'package:privilegecare/Ui/filter/advanced_search_screen.dart';
 import 'package:privilegecare/Utils/localization_services.dart';
 import 'package:privilegecare/Utils/memory.dart';
 
+import '../../../Utils/translation_key.dart';
+
 class FilterController extends GetxController{
   String choosenSearchType = "D";
   String choosenDiscloseType = "0";
@@ -42,7 +44,7 @@ class FilterController extends GetxController{
   List<LevelModel>? levelListData = [];
   List<HospitalListModel>? hospitalListData = [];
   List<DoctorListModel>? doctorsData = [];
-  List<RatingModel> ratingsListData = [RatingModel(title: "نجمة واحده واكثر",id: "1"),RatingModel(title: "نجمتين واحده واكثر",id: "2"),RatingModel(title:"ثلاث نجوم واكثر",id: "3"),RatingModel(title: "اربع نجوم واكثر",id: "4"),RatingModel(title: "خمس نجوم",id: "5")];
+  List<RatingModel> ratingsListData = [RatingModel(title: oneStarRat.tr,id: "1"),RatingModel(title: twoStarRat.tr,id: "2"),RatingModel(title:threeStarRat.tr,id: "3"),RatingModel(title: fourStarRat.tr,id: "4"),RatingModel(title: fiveStarRat.tr,id: "5")];
   int sVal =0;
   int sFal =0;
   RangeValues currentRangeValues = const RangeValues(0,1000);
@@ -99,7 +101,7 @@ class FilterController extends GetxController{
       currentRangeValues = RangeValues(sVal.toDouble(), double.parse(value));
       update();
     }else{
-      endPriceRange.text = "100";
+      endPriceRange.text = "1000";
     }
   }
   addingOrRemovingFromFavorite(String objectId,context,String objectName) async {
@@ -113,7 +115,7 @@ class FilterController extends GetxController{
 
       if (status?.msg == "succeeded") {
         final snackBar = SnackBar(
-          content: Text(' تم حذف الطبيب $objectName من قائمة المفضله  '),
+          content: Text(' ${removeDocFromFav1.tr} $objectName ${removeDocFromFav2.tr}  '),
 
         );
         ScaffoldMessenger.of(context).showSnackBar(snackBar);
@@ -124,8 +126,8 @@ class FilterController extends GetxController{
         CoolAlert.show(
             context: context,
             type: CoolAlertType.error,
-            title: "حدث خطأ",
-            text: data?.msg
+            title: errorKey.tr,
+            text: Get.find<StorageService>().activeLocale == SupportedLocales.english?data?.msg:data?.msgAr
         );
       }
     }
@@ -138,7 +140,7 @@ class FilterController extends GetxController{
 
       if (status?.msg == "succeeded") {
         final snackBar = SnackBar(
-          content: Text(' تم اضاف الطبيب $objectName الى قائمة المفضلة '),
+          content: Text(' ${addDocToFav1.tr} $objectName ${addDocToFav2.tr} '),
 
         );
         ScaffoldMessenger.of(context).showSnackBar(snackBar);
@@ -149,8 +151,8 @@ class FilterController extends GetxController{
         CoolAlert.show(
             context: context,
             type: CoolAlertType.error,
-            title: "حدث خطأ",
-            text: data?.msg
+            title: errorKey.tr,
+            text: Get.find<StorageService>().activeLocale == SupportedLocales.english?data?.msg:data?.msgAr
         );
       }}
 
@@ -164,7 +166,7 @@ class FilterController extends GetxController{
 
         if (status?.msg == "succeeded") {
           final snackBar = SnackBar(
-            content: Text(' تم حذف المستشفى $objectName من قائمة المفضله  '),
+            content: Text(' ${removeHospToFavText1.tr} $objectName ${removeHospToFavText2.tr}  '),
 
           );
 
@@ -176,8 +178,8 @@ class FilterController extends GetxController{
           CoolAlert.show(
               context: context,
               type: CoolAlertType.error,
-              title: "حدث خطأ",
-              text: data?.msg
+              title: errorKey.tr,
+              text: Get.find<StorageService>().activeLocale == SupportedLocales.english?data?.msg:data?.msgAr
           );
         }
       }
@@ -190,7 +192,7 @@ class FilterController extends GetxController{
 
         if (status?.msg == "succeeded") {
           final snackBar = SnackBar(
-            content: Text(' تم اضاف المستشفى $objectName الى قائمة المفضلة '),
+            content: Text(' ${addHospToFavText1.tr} $objectName ${addHospToFavText2.tr} '),
 
           );
           ScaffoldMessenger.of(context).showSnackBar(snackBar);
@@ -201,8 +203,8 @@ class FilterController extends GetxController{
           CoolAlert.show(
               context: context,
               type: CoolAlertType.error,
-              title: "حدث خطأ",
-              text: data?.msg
+              title: errorKey.tr,
+              text: Get.find<StorageService>().activeLocale == SupportedLocales.english?data?.msg:data?.msgAr
           );
         }}
     }

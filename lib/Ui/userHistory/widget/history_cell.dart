@@ -1,6 +1,5 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:cool_alert/cool_alert.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:privilegecare/Models/history_data_model.dart';
@@ -12,6 +11,8 @@ import 'package:privilegecare/Utils/colors.dart';
 import 'package:privilegecare/Utils/constant.dart';
 import 'package:privilegecare/Utils/localization_services.dart';
 import 'package:privilegecare/Utils/memory.dart';
+
+import '../../../Utils/translation_key.dart';
 
 class HistoryCell extends StatelessWidget {
  final  HistoryDataModel? historyData;
@@ -50,7 +51,7 @@ class HistoryCell extends StatelessWidget {
                 child: Row(
                   children: [
                     Text(
-                        controller.detectStatus(historyData?.status??"") == 0?"تم الإلغاء":"تم الإنتهاء",
+                        controller.detectStatus(historyData?.status??"") == 0?visitHasBeenCanceled.tr:visitHasBeenFinished.tr,
                         style:  TextStyle(
                             fontFamily:fontFamilyName,
                             color: controller.detectStatus(historyData?.status??"") == 0?Colors.red:kBlueColor,
@@ -58,9 +59,9 @@ class HistoryCell extends StatelessWidget {
                             fontSize: 15)
                     ),
                     const SizedBox(width: 5,),
-                    const Text(
-                        "كشف عيادة",
-                        style: TextStyle(
+                     Text(
+                        controller.homeVisitOrNot== 0?clinicAnalysis.tr:homeAnalysis.tr,
+                        style: const TextStyle(
                             fontFamily:fontFamilyName,
                             color:kBlueColor,
                             fontWeight: FontWeight.w700,
@@ -175,7 +176,7 @@ class HistoryCell extends StatelessWidget {
                         );
                       },
                     ),
-                    SizedBox(width: 10,),
+                    const SizedBox(width: 10,),
                     Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [

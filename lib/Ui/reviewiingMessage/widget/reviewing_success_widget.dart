@@ -3,6 +3,8 @@ import 'package:get/get.dart';
 import 'package:privilegecare/Utils/colors.dart';
 import 'package:privilegecare/Utils/constant.dart';
 
+import '../../../Utils/translation_key.dart';
+
 
 class ReviewingSuccessWidget extends StatelessWidget {
 
@@ -31,8 +33,8 @@ class ReviewingSuccessWidget extends StatelessWidget {
             Container(
               width: MediaQuery.of(context).size.width * 0.9,
               child: Center(
-                child: const Text("تم رفع التعليق بنجاح",
-                  style: TextStyle(
+                child:  Text(commentSuccess.tr,
+                  style: const TextStyle(
                       height: 1,
                       fontFamily: fontFamilyName,
                       color: kGreenColor,

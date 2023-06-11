@@ -11,6 +11,7 @@ import 'package:privilegecare/Utils/colors.dart';
 import 'package:privilegecare/Utils/constant.dart';
 import 'package:privilegecare/Utils/localization_services.dart';
 import 'package:privilegecare/Utils/memory.dart';
+import 'package:privilegecare/Utils/translation_key.dart';
 import 'package:star_rating/star_rating.dart';
 
 class DoctorCellWidget extends StatefulWidget {
@@ -149,13 +150,13 @@ class _DoctorCellWidgetState extends State<DoctorCellWidget> {
                           ),
                           const SizedBox(height: 5,),
                           widget.doctorData?.visitors == 0?
-                          const Text("ليس هناك تقيم عن هذا الطبيب حتى الان",
+                           Text(noReviewsOnDoc.tr,
                             style: TextStyle(
                                 height: 1,
                                 fontFamily: fontFamilyName,
                                 color: kBlueColor,
                                 fontWeight: FontWeight.w600,
-                                fontSize: 13),) :Text("التقييم العام من ${widget.doctorData?.visitors??0} زائر",
+                                fontSize: 13),) :Text("${reviewsOnDoc1.tr}${widget.doctorData?.visitors??0} ${reviewsOnDoc2.tr}",
                             style: const TextStyle(
                                 height: 1,
                                 fontFamily: fontFamilyName,
@@ -197,7 +198,7 @@ class _DoctorCellWidgetState extends State<DoctorCellWidget> {
                               child: Image.asset("assets/images/new patient.png",fit: BoxFit.fitWidth,),
                             ),
 
-                              const Text("مستمع جيد ",
+                               Text(docAchievement1.tr,
                                 style: TextStyle(
                                     fontFamily: fontFamilyName,
                                     color: kBlueColor,
@@ -232,7 +233,7 @@ class _DoctorCellWidgetState extends State<DoctorCellWidget> {
                               width: 20,
                               child: Image.asset("assets/images/oldPatient.png",fit: BoxFit.fitWidth,),
                             ),
-                              const Text("شرحه مفصل ",
+                               Text(docAchievement2.tr,
                                 style: TextStyle(
                                     fontFamily: fontFamilyName,
                                     color: kBlueColor,
@@ -309,7 +310,7 @@ class _DoctorCellWidgetState extends State<DoctorCellWidget> {
                         child: Image.asset("assets/images/cash.png",fit: BoxFit.fitHeight,),
                       ),
                       const SizedBox(width: 10,),
-                       Text("الكشف :${widget.doctorData?.amount}  ريال",
+                       Text("${reservationPrice1.tr}${widget.doctorData?.amount}${reservationPrice2.tr}ل",
                         style: const TextStyle(
                             fontFamily: fontFamilyName,
                             color: kBlueColor,
@@ -332,7 +333,7 @@ class _DoctorCellWidgetState extends State<DoctorCellWidget> {
                       const SizedBox(width: 10,),
                       Container(
                         width: Get.width*0.45,
-                        child:  Text("مدة الأنتظار:${widget.doctorData?.waiting} دقيقة",
+                        child:  Text("${reservationTime1.tr}${widget.doctorData?.waiting} ${reservationTime1.tr}",
                           textAlign: TextAlign.start,
                           style: const TextStyle(
                               fontFamily: fontFamilyName,
@@ -393,8 +394,8 @@ class _DoctorCellWidgetState extends State<DoctorCellWidget> {
                               ),
                             ],
                           ),
-                          child: const Center(
-                            child: Text("ليس هناك مواعيد متاح حتى الان",
+                          child:  Center(
+                            child: Text(noTimeAvailableDocScreen.tr,
                               style: TextStyle(
                                   fontFamily: fontFamilyName,
                                   color: kWhiteColor,
@@ -455,8 +456,8 @@ class _DoctorCellWidgetState extends State<DoctorCellWidget> {
                                 ),
                               ],
                             ),
-                            child: const Center(
-                              child: Text("احجز الأن",
+                            child:  Center(
+                              child: Text(reservationBTNDocScreen.tr,
                                 style: TextStyle(
                                     fontFamily: fontFamilyName,
                                     color: kWhiteColor,
@@ -483,7 +484,7 @@ class _DoctorCellWidgetState extends State<DoctorCellWidget> {
                             ],
                           ),
                           child:  Center(
-                            child: Text("متاح اليوم من ${widget.doctorData!.schedule?[0].timeFrom} ",
+                            child: Text(" ${availableToDay.tr} ${widget.doctorData!.schedule?[0].timeFrom} ",
                               style: const TextStyle(
                                   fontFamily: fontFamilyName,
                                   color: kWhiteColor,

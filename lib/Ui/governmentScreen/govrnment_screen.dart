@@ -7,6 +7,7 @@ import 'package:privilegecare/Ui/governmentScreen/widget/government_cell_widget.
 import 'package:privilegecare/Ui/governmentScreen/widget/loading_government_widget.dart';
 import 'package:privilegecare/Utils/colors.dart';
 import 'package:privilegecare/Utils/constant.dart';
+import 'package:privilegecare/Utils/translation_key.dart';
 
 
 class GovernmentScreen extends StatelessWidget {
@@ -27,9 +28,9 @@ class GovernmentScreen extends StatelessWidget {
                 Get.back();
               },),
               centerTitle: true,
-              title:  const Text(
-                "أختر المدينة",
-                style: TextStyle(
+              title:   Text(
+                chooseGov.tr,
+                style: const TextStyle(
                     fontFamily: fontFamilyName,
                     color: kWhiteColor,
                     fontWeight: FontWeight.w800,
@@ -44,40 +45,7 @@ class GovernmentScreen extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
                   const SizedBox(height: 20,),
-                  Container(
-                    height: Get.height*0.06,
-                    width: Get.width*0.85,
-                    decoration: BoxDecoration(
-                      color: kWhiteColor,
-                      border: Border.all(color: kGreenColor,width: 2),
-                      borderRadius: BorderRadius.circular(15),
-                      boxShadow: const [
-                        BoxShadow(
-                          offset: Offset(0, 2),
-                          blurRadius: 6,
-                          color: Colors.black12,
-                        ),
-                      ],
-                    ),
-                    child: const Row(
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      children: [
-                        SizedBox(width: 5,),
-                        Icon(
-                          Icons.search_outlined,
-                          color: kGrayColor,
-                          size: 30,),
-                        SizedBox(width: 15,),
-                        Text("أبحث فى كل المدن",
-                          style: TextStyle(
-                              fontFamily: fontFamilyName,
-                              color: kGrayColor,
-                              fontWeight: FontWeight.w700,
-                              fontSize: 15),),
-                      ],
-                    ),
-                  ),
-                  const SizedBox(height: 20,),
+
                   Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 10.0),
                     child: controller.isLoading?const LoadingGovernmentWidget()

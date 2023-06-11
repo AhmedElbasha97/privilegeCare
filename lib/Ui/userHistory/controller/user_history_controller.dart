@@ -1,17 +1,10 @@
-import 'dart:io';
-import 'dart:async';
-import 'package:flutter/foundation.dart';
-import 'package:path_provider/path_provider.dart';
-import 'package:pdf/pdf.dart';
+
 import 'package:pdf/widgets.dart' as pw;
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:get/get.dart';
-import 'package:easy_localization/easy_localization.dart' as localized;
-import 'package:permission_handler/permission_handler.dart';
+
 import 'package:privilegecare/Models/history_data_model.dart';
 import 'package:privilegecare/Services/histotry_services.dart';
-import 'package:privilegecare/Utils/constant.dart';
 import 'package:privilegecare/Utils/memory.dart';
 import 'package:intl/intl.dart';
 import 'package:intl/date_symbol_data_local.dart';

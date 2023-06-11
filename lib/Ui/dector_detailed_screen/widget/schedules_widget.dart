@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:privilegecare/Models/doctor_model.dart';
 import 'package:privilegecare/Utils/colors.dart';
 import 'package:privilegecare/Utils/constant.dart';
+import 'package:privilegecare/Utils/translation_key.dart';
 
 class SchedulesWidget extends StatelessWidget {
   final Schedule? data;
@@ -42,8 +44,8 @@ class SchedulesWidget extends StatelessWidget {
                     fontWeight: FontWeight.w700,
                     fontSize: 10),),
               const SizedBox(height: 5,),
-              const Text("إلى",
-                style: TextStyle(
+               Text(toKey.tr,
+                style: const TextStyle(
                     fontFamily: fontFamilyName,
                     color: kBlueColor,
                     fontWeight: FontWeight.w700,
@@ -60,9 +62,9 @@ class SchedulesWidget extends StatelessWidget {
                 width: 80,
                 height: 27,
                 color: kBlueColor,
-                child: const Center(
-                  child: Text("احجز",
-                    style: TextStyle(
+                child:  Center(
+                  child: Text(reservationBTNDocScreen.tr,
+                    style: const TextStyle(
                         fontFamily: fontFamilyName,
                         color: Colors.white,
                         fontWeight: FontWeight.w700,

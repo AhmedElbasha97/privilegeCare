@@ -10,6 +10,8 @@ import 'package:privilegecare/Utils/colors.dart';
 import 'package:privilegecare/Utils/constant.dart';
 import 'package:privilegecare/widgets/text_field_widget.dart';
 
+import '../../Utils/translation_key.dart';
+
 class LoginScreen extends StatelessWidget {
    const LoginScreen({Key? key}) : super(key: key);
 
@@ -26,9 +28,9 @@ class LoginScreen extends StatelessWidget {
           actions:  [
             TextButton(onPressed: (){
               Get.to(() => const HomeScreen());
-            }, child: const Text(
-             "skip to home >",
-       style: TextStyle(
+            }, child:  Text(
+              skipToHomeBTN.tr,
+       style: const TextStyle(
         fontSize: 18.0,
         fontFamily: fontFamilyName,
         color: kWhiteColor,
@@ -39,9 +41,9 @@ class LoginScreen extends StatelessWidget {
             Get.back();
           },),
           centerTitle: true,
-          title:  const Text(
-            "Sign In",
-            style: TextStyle(
+          title:   Text(
+            signInTitle.tr,
+            style: const TextStyle(
                 fontFamily: fontFamilyName,
                 color: kWhiteColor,
                 fontWeight: FontWeight.w800,
@@ -82,14 +84,14 @@ class LoginScreen extends StatelessWidget {
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.spaceAround,
                       children:  [
-                        const Text("Hello",
-                          style: TextStyle(
+                         Text(signInText1.tr,
+                          style: const TextStyle(
                               fontFamily: fontFamilyName,
                               color: kBlackColor,
                               fontWeight: FontWeight.w700,
                               fontSize: 18),),
-                        const Text("Sign into your account",
-                          style: TextStyle(
+                         Text(signInText2.tr,
+                          style: const TextStyle(
                               fontFamily: fontFamilyName,
                               color: kGrayColor,
                               fontWeight: FontWeight.w700,
@@ -114,7 +116,7 @@ class LoginScreen extends StatelessWidget {
                                 color: kErrorColor,
                               )
                                   : null,
-                              labelText: "Email",
+                              labelText: signInTextEmail.tr,
 
                                hasGreenBorder: true,
                             ),
@@ -128,7 +130,7 @@ class LoginScreen extends StatelessWidget {
                               hasIntialValue: false,
 
                             hasGreenBorder: true,
-                              labelText: "Password",
+                              labelText: signInTextPass.tr,
                               controller: controller.passwordController,
                               validator: controller.validatePassword,
                               isAutoValidate: true,
@@ -154,8 +156,8 @@ class LoginScreen extends StatelessWidget {
                           onTap: (){
                             Get.to(()=>const ForgettingPasswordScreen());
                           },
-                          child: const Text("Forget Your Password",
-                            style: TextStyle(
+                          child:  Text(signInTextForgetPass.tr,
+                            style: const TextStyle(
                                 fontFamily: fontFamilyName,
                                 color: kBlackColor,
                                 fontWeight: FontWeight.w700,
@@ -179,10 +181,10 @@ class LoginScreen extends StatelessWidget {
                                 borderRadius: BorderRadius.circular(20),
                                 color: controller.signingIn?kGrayColor:kBlueColor
                             ),
-                            child: const Center(
-                              child:  Text("Login",
+                            child:  Center(
+                              child:  Text(signInTextBTN.tr,
                                 textAlign: TextAlign.center,
-                                style: TextStyle(
+                                style: const TextStyle(
                                     fontFamily:fontFamilyName,
                                     color: kWhiteColor,
                                     fontWeight: FontWeight.w600,

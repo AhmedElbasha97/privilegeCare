@@ -10,6 +10,7 @@ import 'package:privilegecare/Ui/hospital%20screen/widget/hospital_cell_widget.d
 import 'package:privilegecare/Utils/colors.dart';
 import 'package:privilegecare/Utils/constant.dart';
 import 'package:privilegecare/Utils/memory.dart';
+import 'package:privilegecare/Utils/translation_key.dart';
 import 'package:privilegecare/widgets/bottom_navigation_bar.dart';
 import 'package:privilegecare/widgets/loader.dart';
 import 'package:privilegecare/widgets/no_data_widget.dart';
@@ -46,7 +47,7 @@ class _HospitalScreensState extends State<HospitalScreens> {
               child: SizedBox(
                 height: Get.height,
                 width: Get.width,
-                child:controller.hasNoData?NoDataWidget(refreshedFunc: (){}, text: "ليس هنا مستشفيات مسجله حتى الان", imgPath: "assets/images/No data-rafiki.png", hasRefreshButtonOrNot: false) :Column(
+                child:controller.hasNoData?NoDataWidget(refreshedFunc: (){}, text: noHospData.tr, imgPath: "assets/images/No data-rafiki.png", hasRefreshButtonOrNot: false) :Column(
                   children: [
                     SizedBox(
                       height: Get.height*0.12,
@@ -76,7 +77,7 @@ class _HospitalScreensState extends State<HospitalScreens> {
                     const SizedBox(height: 10,),
                     controller.isLoading?Loader(width: Get.width*0.9,
                       height: Get.height*0.65,):controller.hasNoDataSpecialty?NoDataWidget(width: Get.width*0.9,
-                        height: Get.height*0.65,refreshedFunc: (){}, text: "ليس هنا مستشفيات مسجله لهذا التخصص", imgPath: "assets/images/No data-rafiki.png", hasRefreshButtonOrNot: false):Container(
+                        height: Get.height*0.65,refreshedFunc: (){}, text: noHospDataInSpec.tr, imgPath: "assets/images/No data-rafiki.png", hasRefreshButtonOrNot: false):Container(
                       width: Get.width*0.9,
                       height: Get.height*0.65,
                       child: RawScrollbar(
@@ -96,7 +97,7 @@ class _HospitalScreensState extends State<HospitalScreens> {
                                     context: context,
                                     type: CoolAlertType.confirm,
                                     title: "",
-                                    text: 'لا يمكن اضافه إلى قائمة المفضلة الا عند تسجيل الدخول او انشاء الحساب',
+                                    text: addToFavText.tr,
                                     textTextStyle: const TextStyle(
                                     fontFamily: fontFamilyName,
                                     color: kBlueColor,
@@ -108,8 +109,8 @@ class _HospitalScreensState extends State<HospitalScreens> {
                                     onCancelBtnTap:(){
                                     controller.screenIndex = 2;
                                     },
-                                    confirmBtnText: 'تسجيل الدخول',
-                                    cancelBtnText: 'إنشاء حساب',
+                                      confirmBtnText: signInProfile.tr,
+                                      cancelBtnText: signUpProfile.tr,
                                     confirmBtnColor: Colors.white,
                                     cancelBtnTextStyle:   const TextStyle(
                                     fontFamily: fontFamilyName,

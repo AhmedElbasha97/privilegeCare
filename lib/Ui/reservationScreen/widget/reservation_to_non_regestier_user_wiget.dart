@@ -4,6 +4,7 @@ import 'package:get/get.dart';
 import 'package:privilegecare/Ui/reservationScreen/controller/reservation_controller.dart';
 import 'package:privilegecare/Utils/colors.dart';
 import 'package:privilegecare/Utils/constant.dart';
+import 'package:privilegecare/Utils/translation_key.dart';
 import 'package:privilegecare/widgets/text_field_widget.dart';
 
 class ReservationToNonRegestierUserWidget extends StatelessWidget {
@@ -46,7 +47,7 @@ class ReservationToNonRegestierUserWidget extends StatelessWidget {
                           color: kErrorColor,
                         )
                             : null,
-                        labelText: "الاسم",
+                        labelText: nameKey.tr,
 
                         hasGreenBorder: true,
                       ),
@@ -72,7 +73,7 @@ class ReservationToNonRegestierUserWidget extends StatelessWidget {
                           color: kErrorColor,
                         )
                             : null,
-                        labelText: "رقم الجوال",
+                        labelText:phoneKey.tr,
 
                         hasGreenBorder: true,
                       ),
@@ -96,10 +97,10 @@ class ReservationToNonRegestierUserWidget extends StatelessWidget {
                           borderRadius: BorderRadius.circular(20),
                           color: controller.reservationIsRunning?kGrayColor:kBlueColor
                       ),
-                      child: const Center(
-                        child:  Text("تأكيد الحجز",
+                      child:  Center(
+                        child:  Text(makeReservation.tr,
                           textAlign: TextAlign.center,
-                          style: TextStyle(
+                          style: const TextStyle(
                               fontFamily:fontFamilyName,
                               color: kWhiteColor,
                               fontWeight: FontWeight.w600,

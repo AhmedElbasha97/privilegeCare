@@ -10,6 +10,7 @@ import 'package:privilegecare/Utils/colors.dart';
 import 'package:privilegecare/Utils/constant.dart';
 import 'package:privilegecare/Utils/localization_services.dart';
 import 'package:privilegecare/Utils/memory.dart';
+import 'package:privilegecare/Utils/translation_key.dart';
 import 'package:privilegecare/widgets/loader.dart';
 
 class HospitalCellWidget extends StatefulWidget {
@@ -207,23 +208,23 @@ class _HospitalCellWidgetState extends State<HospitalCellWidget> {
                   ],
                 ),
                 child:  Center(
-                  child: addedToFavoriteOrNot?const Row(
+                  child: addedToFavoriteOrNot? Row(
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: [
-                      Icon(Icons.favorite,color: kWhiteColor,),
-                      Text("مسح من المفضله",
-                        style: TextStyle(
+                      const Icon(Icons.favorite,color: kWhiteColor,),
+                      Text(removeToFavoriteBTN.tr,
+                        style: const TextStyle(
                             fontFamily: fontFamilyName,
                             color: kWhiteColor,
                             fontWeight: FontWeight.w700,
                             fontSize: 14),),
                     ],
-                  ):const Row(
+                  ): Row(
                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       children: [
-                        Icon(Icons.favorite_border_rounded,color: kWhiteColor,),
-                        Text("أضف إلى المفضلة",
-                          style: TextStyle(
+                        const Icon(Icons.favorite_border_rounded,color: kWhiteColor,),
+                        Text(addToFavoriteBTN.tr,
+                          style: const TextStyle(
                               fontFamily: fontFamilyName,
                               color: kWhiteColor,
                               fontWeight: FontWeight.w700,

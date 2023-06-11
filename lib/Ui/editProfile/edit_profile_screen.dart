@@ -4,6 +4,7 @@ import 'package:get/get.dart';
 import 'package:privilegecare/Ui/editProfile/controller/edit_profile_controller.dart';
 import 'package:privilegecare/Utils/colors.dart';
 import 'package:privilegecare/Utils/constant.dart';
+import 'package:privilegecare/Utils/translation_key.dart';
 import 'package:privilegecare/widgets/loader.dart';
 import 'package:privilegecare/widgets/text_field_widget.dart';
 
@@ -22,9 +23,9 @@ class EditProfileScreen extends StatelessWidget {
             Get.back();
           },),
           centerTitle: true,
-          title:  const Text(
-            "تحديث الملف الشخصي",
-            style: TextStyle(
+          title:   Text(
+            editProfileTitle.tr,
+            style: const TextStyle(
                 fontFamily: fontFamilyName,
                 color: kWhiteColor,
                 fontWeight: FontWeight.w800,
@@ -48,10 +49,10 @@ class EditProfileScreen extends StatelessWidget {
                     ),
                   ),
                 ),
-                const Padding(
-                  padding: EdgeInsets.symmetric(horizontal: 10.0),
-                  child: Text("Enter Your Full Name",
-                    style: TextStyle(
+                 Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 10.0),
+                  child: Text(signUpTitleName.tr,
+                    style: const TextStyle(
                         fontFamily: fontFamilyName,
                         color: kGreenColor,
                         fontWeight: FontWeight.w700,
@@ -73,7 +74,7 @@ class EditProfileScreen extends StatelessWidget {
                           child: CustomInputField(
                             textAligning: TextAlign.center,
                             hasIntialValue: true,
-                            labelText: "Last",
+                            labelText: signUpTextName3.tr,
                             textInputAction: TextInputAction.next,
                             keyboardType: TextInputType.name,
 
@@ -101,7 +102,7 @@ class EditProfileScreen extends StatelessWidget {
                           child: CustomInputField(
                             textAligning: TextAlign.center,
                             hasIntialValue: true,
-                            labelText: "Middle",
+                            labelText: signUpTextName2.tr,
                             textInputAction: TextInputAction.next,
 
                             controller:controller.secondNameController,
@@ -128,7 +129,7 @@ class EditProfileScreen extends StatelessWidget {
                           child: CustomInputField(
                             textAligning: TextAlign.center,
                             hasIntialValue: true,
-                            labelText: "First",
+                            labelText: signUpTextName3.tr,
                             textInputAction: TextInputAction.next,
                             keyboardType: TextInputType.name,
 
@@ -152,10 +153,10 @@ class EditProfileScreen extends StatelessWidget {
                   ),
                 ),
                 const SizedBox(height: 5,),
-                const Padding(
-                  padding: EdgeInsets.symmetric(horizontal: 10.0),
-                  child: Text("Enter Your Email",
-                    style: TextStyle(
+                 Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 10.0),
+                  child: Text(signUpTitleEmail.tr,
+                    style: const TextStyle(
                         fontFamily: fontFamilyName,
                         color: kGreenColor,
                         fontWeight: FontWeight.w700,
@@ -168,7 +169,7 @@ class EditProfileScreen extends StatelessWidget {
                     width: Get.width*0.95,
                     child: CustomInputField(
                       hasIntialValue: true,
-                      labelText: "example@example.com",
+                      labelText: signUpTextEmail.tr,
 
                       textInputAction: TextInputAction.next,
                       keyboardType: TextInputType.emailAddress,
@@ -190,10 +191,10 @@ class EditProfileScreen extends StatelessWidget {
                   ),
                 ),
                 const SizedBox(height: 5,),
-                const Padding(
-                  padding: EdgeInsets.symmetric(horizontal: 10.0),
-                  child: Text("Enter Your Phone Number",
-                    style: TextStyle(
+                 Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 10.0),
+                  child: Text(signUpTitlePhone.tr,
+                    style: const TextStyle(
                         fontFamily: fontFamilyName,
                         color: kGreenColor,
                         fontWeight: FontWeight.w700,
@@ -206,7 +207,7 @@ class EditProfileScreen extends StatelessWidget {
                     width: Get.width*0.95,
                     child: CustomInputField(
                       hasIntialValue: true,
-                      labelText: "123-4567-8",
+                      labelText: signUpTextPhone.tr,
                       textInputAction: TextInputAction.next,
                       keyboardType: TextInputType.number,
 
@@ -215,40 +216,40 @@ class EditProfileScreen extends StatelessWidget {
                       validator: controller.validatePhoneNumber,
                       icon: (controller.phoneValidated)
                           ? (controller.phoneState)
-                          ? const Row(
+                          ?  Row(
                         mainAxisSize: MainAxisSize.min,
                         children: [
 
-                          Text("   974+    ", style: TextStyle(
+                          Text("   ${signUpTextPhoneKey.tr}    ", style: const TextStyle(
                             fontSize: 15.0,
                             fontFamily: fontFamilyName,
                             color: kGrayColor,
                           ),),
-                          Icon(Icons.check_rounded,
+                          const Icon(Icons.check_rounded,
                               color: kBlueColor),
-                          SizedBox(width: 5,),
+                          const SizedBox(width: 5,),
                         ],
                       )
-                          : const Row(
+                          :  Row(
                         mainAxisSize: MainAxisSize.min,
                         children: [
 
-                          Text("   974+    ", style: TextStyle(
+                          Text("   ${signUpTextPhoneKey.tr}    ", style: const TextStyle(
                             fontSize: 15.0,
                             fontFamily: fontFamilyName,
                             color: kGrayColor,
                           ),),
-                          Icon(
+                          const Icon(
                             Icons.close_outlined,
                             color: kErrorColor,
-                          ),SizedBox(width: 5,),
+                          ),const SizedBox(width: 5,),
                         ],
                       )
-                          : const Row(
+                          :  Row(
                         mainAxisSize: MainAxisSize.min,
                         children: [
 
-                          Text("   974+    ", style: TextStyle(
+                          Text("   ${signUpTextPhoneKey.tr}    ", style: const TextStyle(
                             fontSize: 15.0,
                             fontFamily: fontFamilyName,
                             color: kGrayColor,
@@ -281,10 +282,10 @@ class EditProfileScreen extends StatelessWidget {
                           borderRadius: BorderRadius.circular(20),
                           color:controller.editProfile?kGrayColor:kBlueColor
                       ),
-                      child: const Center(
-                        child:  Text("تحديث الملف الشخصي",
+                      child:  Center(
+                        child:  Text(editProfileTitle.tr,
                           textAlign: TextAlign.center,
-                          style: TextStyle(
+                          style: const TextStyle(
                               fontFamily: fontFamilyName,
                               color: kWhiteColor,
                               fontWeight: FontWeight.w600,

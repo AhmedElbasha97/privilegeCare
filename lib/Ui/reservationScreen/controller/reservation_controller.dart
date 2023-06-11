@@ -19,6 +19,8 @@ import 'package:privilegecare/Utils/localization_services.dart';
 import 'package:privilegecare/Utils/memory.dart';
 import 'package:privilegecare/Utils/validator.dart';
 
+import '../../../Utils/translation_key.dart';
+
 class ReservationController extends GetxController{
   final formKey = GlobalKey<FormState>();
   final _validatorHelber = ValidatorHelper.instance;
@@ -120,15 +122,15 @@ class ReservationController extends GetxController{
       CoolAlert.show(
           context: context,
           type: CoolAlertType.warning,
-          title: "تحذير",
-          text: "يجب عليك اختيار تاريخ الحجز"
+          title: warningKey.tr,
+          text: mustChooseReservationDate.tr
       );
     }else if(timeText == "--:-"){
       CoolAlert.show(
           context: context,
           type: CoolAlertType.warning,
-          title: "تحذير",
-          text: "يجب عليك ميعاد اختيار ميعاد الحجز"
+          title: warningKey.tr,
+          text: mustChooseReservationTime.tr
       );
     }else{
       Get.to(() =>  SecondReservationScreen(doctorId: doctorId,));
@@ -148,7 +150,7 @@ choosingDate(String scheduleId,String date) async {
 
   appointments = await DoctorServices.getAppointment(scheduleId);
   if(appointments?.length == 0){
-    timeText = "ليس هناك ميعاد متاح فى هذا التاريخ";
+    timeText = noTimeAvailable.tr;
   }
   enableChooseTime = true;
   update();
@@ -210,21 +212,21 @@ choosingDate(String scheduleId,String date) async {
            CoolAlert.show(
                context: context,
                type: CoolAlertType.error,
-               title: "حدث خطأ",
-               text: data?.msg
+               title: errorKey.tr,
+               text: Get.find<StorageService>().activeLocale == SupportedLocales.english?data?.msg:data?.msgAr
            );
          }
        }else{
          CoolAlert.show(
            context: context,
            type: CoolAlertType.warning,
-           title: "تحذير",
+           title: warningKey.tr,
            titleTextStyle: const TextStyle(
                fontFamily: fontFamilyName,
                color: kBlueColor,
                fontWeight: FontWeight.w800,
                fontSize: 15),
-           text: 'يجب كتابه رقم جوال المريض',
+           text: patientPhoneWarning.tr,
            textTextStyle: const TextStyle(
                fontFamily: fontFamilyName,
                color: kBlueColor,
@@ -236,13 +238,13 @@ choosingDate(String scheduleId,String date) async {
        CoolAlert.show(
            context: context,
            type: CoolAlertType.warning,
-           title: "تحذير",
+           title: warningKey.tr,
            titleTextStyle: const TextStyle(
            fontFamily: fontFamilyName,
            color: kBlueColor,
            fontWeight: FontWeight.w800,
            fontSize: 15),
-           text: 'يجب كتابه اسم المريض',
+           text: patientNameWarning.tr,
            textTextStyle: const TextStyle(
            fontFamily: fontFamilyName,
            color: kBlueColor,
@@ -258,7 +260,7 @@ choosingDate(String scheduleId,String date) async {
         context: context,
         type: CoolAlertType.confirm,
         title: "",
-        text: 'سوف تخسر النقاط المكتسبه فى حاله لم تسجل دخولك أو لم تنشاء حساب',
+        text: losePointWarning.tr,
         textTextStyle: const TextStyle(
             fontFamily: fontFamilyName,
             color: kBlueColor,
@@ -270,8 +272,8 @@ choosingDate(String scheduleId,String date) async {
         onCancelBtnTap:(){
           continueWithoutAccount = true;
         },
-        confirmBtnText: 'الذهاب لتسجيل ',
-        cancelBtnText: ' الأستكمال دون حساب ',
+        confirmBtnText: goToReg.tr,
+        cancelBtnText: contWithoutAcc.tr,
         confirmBtnColor: kGreenColor,
         cancelBtnTextStyle:   const TextStyle(
             fontFamily: fontFamilyName,
@@ -315,8 +317,8 @@ choosingDate(String scheduleId,String date) async {
         CoolAlert.show(
             context: context,
             type: CoolAlertType.error,
-            title: "حدث خطأ",
-            text: data?.msg
+            title: errorKey.tr,
+            text: Get.find<StorageService>().activeLocale == SupportedLocales.english?data?.msg:data?.msgAr
         );
       }
 

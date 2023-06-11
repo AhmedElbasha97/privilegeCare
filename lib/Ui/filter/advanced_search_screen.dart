@@ -9,6 +9,7 @@ import 'package:privilegecare/Ui/signUpScreen/signup_screen.dart';
 import 'package:privilegecare/Utils/colors.dart';
 import 'package:privilegecare/Utils/constant.dart';
 import 'package:privilegecare/Utils/memory.dart';
+import 'package:privilegecare/Utils/translation_key.dart';
 import 'package:privilegecare/widgets/bottom_navigation_bar.dart';
 import 'package:privilegecare/widgets/loader.dart';
 import 'package:privilegecare/widgets/no_data_widget.dart';
@@ -46,7 +47,7 @@ class AdvancedSearchScreen extends StatelessWidget {
 
                   controller.isLoading?Loader(height: Get.height*0.65,width: Get.width,):
                   controller.hasNoData?NoDataWidget(refreshedFunc: (){
-                  }, text: controller.choosenSearchType=="D"?"ليس هناك دكتور ينطبق عليه هذه المعلومات":"ليس هناك مستشفى ينطبق عليه هذه المعلومات", imgPath: "assets/images/No data-rafiki.png", hasRefreshButtonOrNot: false,height: Get.height*0.7,):
+                  }, text: controller.choosenSearchType=="D"?noSearchDocData.tr:noSearchHospData.tr, imgPath: "assets/images/No data-rafiki.png", hasRefreshButtonOrNot: false,height: Get.height*0.7,):
                   Container(
                     width: Get.width,
                     height: Get.height*0.7,
@@ -65,7 +66,7 @@ class AdvancedSearchScreen extends StatelessWidget {
                                 context: context,
                                 type: CoolAlertType.confirm,
                                 title: "",
-                                text: 'لا يمكن اضافه إلى قائمة المفضلة الا عند تسجيل الدخول او انشاء الحساب',
+                                text: addToFavText.tr,
                                 textTextStyle: const TextStyle(
                                     fontFamily: fontFamilyName,
                                     color: kBlueColor,
@@ -77,8 +78,8 @@ class AdvancedSearchScreen extends StatelessWidget {
                                 onCancelBtnTap:(){
                                   Get.to(()=> const SignUpScreen());
                                 },
-                                confirmBtnText: 'تسجيل الدخول',
-                                cancelBtnText: 'إنشاء حساب',
+                                confirmBtnText: signInProfile.tr,
+                                cancelBtnText: signUpProfile.tr,
                                 confirmBtnColor: Colors.white,
                                 cancelBtnTextStyle:   const TextStyle(
                                     fontFamily: fontFamilyName,
@@ -105,7 +106,7 @@ class AdvancedSearchScreen extends StatelessWidget {
                             context: context,
                             type: CoolAlertType.confirm,
                             title: "",
-                            text: 'لا يمكن اضافه إلى قائمة المفضلة الا عند تسجيل الدخول او انشاء الحساب',
+                              text: addToFavText.tr,
                             textTextStyle: const TextStyle(
                             fontFamily: fontFamilyName,
                             color: kBlueColor,
@@ -117,8 +118,8 @@ class AdvancedSearchScreen extends StatelessWidget {
                             onCancelBtnTap:(){
                             Get.to(()=> const SignUpScreen());
                             },
-                            confirmBtnText: 'تسجيل الدخول',
-                            cancelBtnText: 'إنشاء حساب',
+                              confirmBtnText: signInProfile.tr,
+                              cancelBtnText: signUpProfile.tr,
                             confirmBtnColor: Colors.white,
                             cancelBtnTextStyle:   const TextStyle(
                             fontFamily: fontFamilyName,

@@ -6,6 +6,9 @@ import 'package:get/get.dart';
 import 'package:in_app_update/in_app_update.dart';
 import 'package:privilegecare/Models/response_model.dart';
 import 'package:privilegecare/Services/auth_services.dart';
+import 'package:privilegecare/Utils/localization_services.dart';
+import 'package:privilegecare/Utils/memory.dart';
+import 'package:privilegecare/Utils/translation_key.dart';
 import 'package:privilegecare/Utils/validator.dart';
 const wrongCode = 'assets/images/wrong_code.png';
 
@@ -123,8 +126,8 @@ class ForgetPasswordController extends GetxController {
         CoolAlert.show(
             context: context,
             type: CoolAlertType.error,
-            title: "حدث خطأ",
-            text: data?.msg
+            title: errorKey.tr,
+            text: Get.find<StorageService>().activeLocale == SupportedLocales.english?data?.msg:data?.msgAr
         );
       }
     }
