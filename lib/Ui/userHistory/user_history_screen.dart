@@ -4,10 +4,13 @@ import 'package:privilegecare/Ui/userHistory/controller/user_history_controller.
 import 'package:privilegecare/Ui/userHistory/widget/history_cell.dart';
 import 'package:privilegecare/Utils/colors.dart';
 import 'package:privilegecare/Utils/constant.dart';
+import 'package:privilegecare/Utils/localization_services.dart';
+import 'package:privilegecare/Utils/memory.dart';
 import 'package:privilegecare/widgets/loader.dart';
 import 'package:privilegecare/widgets/no_data_widget.dart';
 
 import '../../Utils/translation_key.dart';
+import '../../widgets/custom_text_widget.dart';
 
 class HistoryScreen extends StatelessWidget {
   const HistoryScreen({super.key});
@@ -20,11 +23,11 @@ class HistoryScreen extends StatelessWidget {
         appBar: AppBar(
           backgroundColor: kGreenColor,
           leadingWidth: 60,
-          leading: IconButton(icon: const Icon(Icons.arrow_circle_right_outlined,color: kWhiteColor,size: 40,),onPressed: (){
+          leading: IconButton(icon: Get.find<StorageService>().activeLocale == SupportedLocales.english?const Icon(Icons.arrow_circle_left_outlined,color: kWhiteColor,size: 40,):const Icon(Icons.arrow_circle_right_outlined,color: kWhiteColor,size: 40,),onPressed: (){
             Get.back();
           },),
           centerTitle: false,
-          title:   Text(
+          title:   CustomText(
             historyTitle.tr,
             style: const TextStyle(
                 fontFamily: fontFamilyName,
@@ -88,10 +91,10 @@ class HistoryScreen extends StatelessWidget {
 
                             ),
                             child:  Padding(
-                              padding: EdgeInsets.all(5.0),
+                              padding: const EdgeInsets.all(5.0),
                               child: Row(
                                 mainAxisAlignment: MainAxisAlignment.center,
-                                children:  [Text(
+                                children:  [CustomText(
                                     historyTag1.tr,
                                     style: TextStyle(
                                         fontFamily:fontFamilyName,
@@ -138,7 +141,7 @@ class HistoryScreen extends StatelessWidget {
                                 padding: const EdgeInsets.all(5.0),
                                 child: Row(
                                   mainAxisAlignment: MainAxisAlignment.center,
-                                  children:  [Text(
+                                  children:  [CustomText(
                                       historyTag2.tr,
                                       style: TextStyle(
                                           fontFamily: fontFamilyName,

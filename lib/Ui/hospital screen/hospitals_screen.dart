@@ -12,8 +12,11 @@ import 'package:privilegecare/Utils/constant.dart';
 import 'package:privilegecare/Utils/memory.dart';
 import 'package:privilegecare/Utils/translation_key.dart';
 import 'package:privilegecare/widgets/bottom_navigation_bar.dart';
+import 'package:privilegecare/widgets/custom_text_widget.dart';
 import 'package:privilegecare/widgets/loader.dart';
 import 'package:privilegecare/widgets/no_data_widget.dart';
+
+import '../../Utils/localization_services.dart';
 
 class HospitalScreens extends StatefulWidget {
 
@@ -64,7 +67,7 @@ class _HospitalScreensState extends State<HospitalScreens> {
                           scrollDirection: Axis.horizontal,
                           itemCount: controller.specialtyListData?.length,
                           itemBuilder: (BuildContext context, int index) {
-                            return _buildChip(controller.specialtyListData?[index].name??"",controller.selectedIndex==index,
+                            return _buildChip( Get.find<StorageService>().activeLocale == SupportedLocales.english?"${controller.specialtyListData?[index].nameEn??""}":controller.specialtyListData?[index].name??"",controller.selectedIndex==index,
                                     (){
                               controller.selectingTag(index);
                                 },"https://privilegecare.net${controller.specialtyListData?[index].image}"
@@ -173,7 +176,7 @@ Widget _buildChip(String label, bool isSelected,Function onPressed,String imageU
           ),
         ),
       ),
-      label: Text(label,style: TextStyle(
+      label: CustomText(label,style: TextStyle(
           fontFamily: fontFamilyName,
           fontSize: 17,
           fontWeight: FontWeight.w700,

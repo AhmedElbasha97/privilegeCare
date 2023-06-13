@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:privilegecare/Utils/colors.dart';
 import 'package:privilegecare/Utils/constant.dart';
+import 'package:privilegecare/widgets/custom_text_widget.dart';
 
 class ProfileCellWidget extends StatelessWidget {
   final String profileTextTap;
@@ -39,7 +40,7 @@ class ProfileCellWidget extends StatelessWidget {
                   child: Image.asset(profileIcon,fit: BoxFit.fitHeight,),
                 ),
 
-                Text(profileTextTap,
+                CustomText(profileTextTap,
                   style: const TextStyle(
                       fontFamily: fontFamilyName,
                       color: kBlueColor,

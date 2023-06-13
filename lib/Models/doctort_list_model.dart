@@ -19,6 +19,7 @@ class DoctorListModel {
   int? listen;
   int? explain;
   int? point;
+  double? doctorRate;
   String? level;
   String? levelEn;
   String? specialist;
@@ -38,6 +39,7 @@ class DoctorListModel {
     this.locationLon,
     this.locationLat,
     this.details,
+    this.doctorRate,
     this.listen,
     this.explain,
     this.point,
@@ -68,6 +70,8 @@ class DoctorListModel {
     levelEn: json["level_en"],
     specialist: json["specialist"],
     specialistEn: json["specialist_en"],
+    doctorRate: double.parse("${json["doctor_rate"]}"),
+
     visitors: json["visitors"],
     schedule: json["schedule"] == null ? [] : List<Schedule>.from(json["schedule"]!.map((x) => Schedule.fromJson(x))),
   );

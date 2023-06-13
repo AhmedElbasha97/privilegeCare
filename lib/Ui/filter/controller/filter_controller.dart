@@ -20,6 +20,7 @@ import 'package:privilegecare/Utils/localization_services.dart';
 import 'package:privilegecare/Utils/memory.dart';
 
 import '../../../Utils/translation_key.dart';
+import '../../../widgets/custom_text_widget.dart';
 
 class FilterController extends GetxController{
   String choosenSearchType = "D";
@@ -115,7 +116,7 @@ class FilterController extends GetxController{
 
       if (status?.msg == "succeeded") {
         final snackBar = SnackBar(
-          content: Text(' ${removeDocFromFav1.tr} $objectName ${removeDocFromFav2.tr}  '),
+          content: CustomText(' ${removeDocFromFav1.tr} $objectName ${removeDocFromFav2.tr}  '),
 
         );
         ScaffoldMessenger.of(context).showSnackBar(snackBar);
@@ -140,7 +141,7 @@ class FilterController extends GetxController{
 
       if (status?.msg == "succeeded") {
         final snackBar = SnackBar(
-          content: Text(' ${addDocToFav1.tr} $objectName ${addDocToFav2.tr} '),
+          content: CustomText(' ${addDocToFav1.tr} $objectName ${addDocToFav2.tr} '),
 
         );
         ScaffoldMessenger.of(context).showSnackBar(snackBar);
@@ -166,7 +167,7 @@ class FilterController extends GetxController{
 
         if (status?.msg == "succeeded") {
           final snackBar = SnackBar(
-            content: Text(' ${removeHospToFavText1.tr} $objectName ${removeHospToFavText2.tr}  '),
+            content: CustomText(' ${removeHospToFavText1.tr} $objectName ${removeHospToFavText2.tr}  '),
 
           );
 
@@ -192,7 +193,7 @@ class FilterController extends GetxController{
 
         if (status?.msg == "succeeded") {
           final snackBar = SnackBar(
-            content: Text(' ${addHospToFavText1.tr} $objectName ${addHospToFavText2.tr} '),
+            content: CustomText(' ${addHospToFavText1.tr} $objectName ${addHospToFavText2.tr} '),
 
           );
           ScaffoldMessenger.of(context).showSnackBar(snackBar);

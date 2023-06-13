@@ -6,6 +6,7 @@ import 'package:privilegecare/Ui/signUpScreen/controller/signup_controller.dart'
 import 'package:privilegecare/Utils/colors.dart';
 import 'package:privilegecare/Utils/constant.dart';
 import 'package:privilegecare/Utils/translation_key.dart';
+import 'package:privilegecare/widgets/custom_text_widget.dart';
 import 'package:privilegecare/widgets/text_field_widget.dart';
 
 class SignUpDialogue extends StatelessWidget {
@@ -39,7 +40,7 @@ class SignUpDialogue extends StatelessWidget {
                   ),
                    Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 10.0),
-                    child: Text(signUpTitleName.tr,
+                    child: CustomText(signUpTitleName.tr,
                       style: const TextStyle(
                           fontFamily: fontFamilyName,
                           color: kGreenColor,
@@ -143,7 +144,7 @@ class SignUpDialogue extends StatelessWidget {
                   const SizedBox(height: 5,),
                    Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 10.0),
-                    child: Text(signUpTitleEmail.tr,
+                    child: CustomText(signUpTitleEmail.tr,
                       style: const TextStyle(
                           fontFamily: fontFamilyName,
                           color: kGreenColor,
@@ -181,7 +182,7 @@ class SignUpDialogue extends StatelessWidget {
                   const SizedBox(height: 5,),
                    Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 10.0),
-                    child: Text(signUpTitlePhone.tr,
+                    child: CustomText(signUpTitlePhone.tr,
                       style: const TextStyle(
                           fontFamily: fontFamilyName,
                           color: kGreenColor,
@@ -208,7 +209,7 @@ class SignUpDialogue extends StatelessWidget {
                           mainAxisSize: MainAxisSize.min,
                           children: [
 
-                            Text("   ${signUpTextPhoneKey.tr}    ", style: const TextStyle(
+                            CustomText("   ${signUpTextPhoneKey.tr}    ", style: const TextStyle(
                               fontSize: 15.0,
                               fontFamily: fontFamilyName,
                               color: kGrayColor,
@@ -222,7 +223,7 @@ class SignUpDialogue extends StatelessWidget {
                           mainAxisSize: MainAxisSize.min,
                           children: [
 
-                            Text("   ${signUpTextPhoneKey.tr}    ", style: const TextStyle(
+                            CustomText("   ${signUpTextPhoneKey.tr}    ", style: const TextStyle(
                               fontSize: 15.0,
                               fontFamily: fontFamilyName,
                               color: kGrayColor,
@@ -237,7 +238,7 @@ class SignUpDialogue extends StatelessWidget {
                           mainAxisSize: MainAxisSize.min,
                           children: [
 
-                            Text("   ${signUpTextPhoneKey.tr}    ", style: const TextStyle(
+                            CustomText("   ${signUpTextPhoneKey.tr}    ", style: const TextStyle(
                               fontSize: 15.0,
                               fontFamily: fontFamilyName,
                               color: kGrayColor,
@@ -251,7 +252,7 @@ class SignUpDialogue extends StatelessWidget {
                   const SizedBox(height: 5,),
                    Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 10.0),
-                    child: Text(signUpTitlePass.tr,
+                    child: CustomText(signUpTitlePass.tr,
                       style: const TextStyle(
                           fontFamily: fontFamilyName,
                           color: kGreenColor,
@@ -292,7 +293,7 @@ class SignUpDialogue extends StatelessWidget {
                   const SizedBox(height: 5,),
                    Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 10.0),
-                    child: Text(signUpTitleConfirmPass.tr,
+                    child: CustomText(signUpTitleConfirmPass.tr,
                       style: const TextStyle(
                           fontFamily: fontFamilyName,
                           color: kGreenColor,
@@ -353,7 +354,7 @@ class SignUpDialogue extends StatelessWidget {
                             color:controller.signingUp?kGrayColor:kBlueColor
                         ),
                         child:  Center(
-                          child:  Text(signUpBTN.tr,
+                          child:  CustomText(signUpBTN.tr,
                             textAlign: TextAlign.center,
                             style: const TextStyle(
                                 fontFamily: fontFamilyName,
@@ -378,7 +379,7 @@ class SignUpDialogue extends StatelessWidget {
                               const LoginDialogue(),
                             );
                           },
-                          child:  Text(signUpText2.tr,
+                          child:  CustomText(signUpText2.tr,
                             textAlign: TextAlign.center,
                             style: const TextStyle(
                                 fontFamily: fontFamilyName,
@@ -386,7 +387,7 @@ class SignUpDialogue extends StatelessWidget {
                                 fontWeight: FontWeight.w600,
                                 fontSize: 15),),
                         ),
-                         Text(signUpText1.tr,
+                        CustomText(signUpText1.tr,
                           textAlign: TextAlign.center,
                           style: const TextStyle(
                               fontFamily:fontFamilyName,

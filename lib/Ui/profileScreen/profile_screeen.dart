@@ -12,6 +12,7 @@ import 'package:privilegecare/Utils/colors.dart';
 import 'package:privilegecare/Utils/constant.dart';
 import 'package:privilegecare/Utils/translation_key.dart';
 import 'package:privilegecare/widgets/bottom_navigation_bar.dart';
+import 'package:privilegecare/widgets/custom_text_widget.dart';
 import 'package:privilegecare/widgets/loader.dart';
 
 class ProfileScreen extends StatefulWidget {
@@ -206,7 +207,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                 mainAxisAlignment: MainAxisAlignment.end,
                                 children: [
                                   const Icon(Icons.person,size: 18,color: kBlueColor,),
-                                  Text(controller.data?.name??"",
+                                  CustomText(controller.data?.name??"",
                                     style: const TextStyle(
 
                                         fontFamily: fontFamilyName,
@@ -226,7 +227,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
 
                                 children: [
                                   const Icon(Icons.phone,size: 18,color: kBlueColor,),
-                                  Text("${
+                                  CustomText("${
                                       controller.data?.phone??0
                                   }",
                                     style: const TextStyle(
@@ -246,7 +247,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                 mainAxisAlignment: MainAxisAlignment.end,
                                 children: [
                                   const Icon(Icons.email,size: 18,color: kBlueColor,),
-                                  Text(controller.data?.email??"",
+                                  CustomText(controller.data?.email??"",
                                     style: const TextStyle(
 
                                         fontFamily: fontFamilyName,
@@ -297,7 +298,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       Image.asset("assets/images/Sign in-pana.png",height: Get.width*0.65,),
-                       Text(notRegisterUserProfile.tr,style: const TextStyle(color: kGreenColor,fontWeight: FontWeight.bold,fontSize: 30),textAlign: TextAlign.center,),
+                      CustomText(notRegisterUserProfile.tr,style: const TextStyle(color: kGreenColor,fontWeight: FontWeight.bold,fontSize: 30),textAlign: TextAlign.center,),
                       const SizedBox(height: 30,),
                       Column(
                         children: [
@@ -321,7 +322,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                   padding: const EdgeInsets.all(5.0),
                                   child: Row(
                                     mainAxisAlignment: MainAxisAlignment.center,
-                                    children:  [ Text(
+                                    children:  [ CustomText(
                                         signUpProfile.tr,
                                         style: const TextStyle(
                                             fontFamily: fontFamilyName,
@@ -362,7 +363,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                   padding: const EdgeInsets.all(5.0),
                                   child: Row(
                                     mainAxisAlignment: MainAxisAlignment.center,
-                                    children:  [ Text(
+                                    children:  [ CustomText(
                                         signInProfile.tr,
                                         style: const TextStyle(
                                             fontFamily: fontFamilyName,

@@ -6,7 +6,10 @@ import 'package:get/get.dart';
 import 'package:privilegecare/Ui/forgetPassword/controller/forget_password_controller.dart';
 import 'package:privilegecare/Utils/colors.dart';
 import 'package:privilegecare/Utils/constant.dart';
+import 'package:privilegecare/Utils/localization_services.dart';
+import 'package:privilegecare/Utils/memory.dart';
 import 'package:privilegecare/Utils/translation_key.dart';
+import 'package:privilegecare/widgets/custom_text_widget.dart';
 import 'package:privilegecare/widgets/text_field_widget.dart';
 
 class ForgettingPasswordScreen extends StatelessWidget {
@@ -24,11 +27,11 @@ class ForgettingPasswordScreen extends StatelessWidget {
           backgroundColor: kGreenColor,
 
 
-          leading: IconButton(icon: const Icon(Icons.arrow_circle_right_outlined,color: kWhiteColor,size: 40,),onPressed: (){
+          leading: IconButton(icon: Get.find<StorageService>().activeLocale == SupportedLocales.english?const Icon(Icons.arrow_circle_left_outlined,color: kWhiteColor,size: 40,):const Icon(Icons.arrow_circle_right_outlined,color: kWhiteColor,size: 40,),onPressed: (){
             Get.back();
           },),
           centerTitle: true,
-          title:   Text(
+          title:   CustomText(
             forgetPassTitle.tr,
             style: const TextStyle(
                 fontFamily: fontFamilyName,
@@ -48,7 +51,7 @@ class ForgettingPasswordScreen extends StatelessWidget {
               children: [
                  Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 10.0),
-                  child: Text(signUpTitleEmail.tr,
+                  child: CustomText(signUpTitleEmail.tr,
                     style: const TextStyle(
                         fontFamily: fontFamilyName,
                         color: kGreenColor,
@@ -103,10 +106,10 @@ class ForgettingPasswordScreen extends StatelessWidget {
                           borderRadius: BorderRadius.circular(20),
                           color:controller.forgettingPassword?kGrayColor:kBlueColor
                       ),
-                      child: const Center(
-                        child:  Text("Sign Up",
+                      child:  Center(
+                        child:  CustomText(forgetPassTitle.tr,
                           textAlign: TextAlign.center,
-                          style: TextStyle(
+                          style: const TextStyle(
                               fontFamily: fontFamilyName,
                               color: kWhiteColor,
                               fontWeight: FontWeight.w600,

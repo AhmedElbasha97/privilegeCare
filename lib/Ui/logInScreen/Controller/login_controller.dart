@@ -163,6 +163,8 @@ if(data?.msg == "succeeded"){
   await Get.find<StorageService>().saveAccountId("${data?.info?.id??0}");
   Get.off(const HomeScreen());
 }else{
+  signingIn = false;
+  update();
   CoolAlert.show(
     context: context,
     type: CoolAlertType.error,
@@ -185,6 +187,8 @@ if(data?.msg == "succeeded"){
   await Get.find<StorageService>().saveAccountId("${data?.info?.id??0}");
   Get.back();Get.back();
 }else{
+  signingIn = false;
+  update();
   CoolAlert.show(
     context: context,
     type: CoolAlertType.error,

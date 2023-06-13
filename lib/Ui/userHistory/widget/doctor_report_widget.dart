@@ -1,4 +1,3 @@
-import 'package:cool_alert/cool_alert.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:privilegecare/Models/history_data_model.dart';

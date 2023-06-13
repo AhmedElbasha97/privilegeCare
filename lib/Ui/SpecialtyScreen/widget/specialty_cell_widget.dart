@@ -5,6 +5,7 @@ import 'package:get/get.dart';
 import 'package:privilegecare/Ui/doctorsScreen/doctors_screen.dart';
 import 'package:privilegecare/Utils/colors.dart';
 import 'package:privilegecare/Utils/constant.dart';
+import 'package:privilegecare/widgets/custom_text_widget.dart';
 
 class SpecialtyCellWidget extends StatelessWidget {
   const SpecialtyCellWidget({Key? key, required this.title, required this.imageUrl, required this.specialistId}) : super(key: key);
@@ -33,7 +34,7 @@ class SpecialtyCellWidget extends StatelessWidget {
                     width:30,
                     child: Image.network(imageUrl,fit: BoxFit.fitWidth,),
                   ),const SizedBox(width: 10,),
-                  Text(title,
+                  CustomText(title,
                     style: const TextStyle(
                         fontFamily: fontFamilyName,
                         color: kBlueColor,

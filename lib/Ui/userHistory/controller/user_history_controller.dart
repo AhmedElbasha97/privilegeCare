@@ -1,4 +1,6 @@
 
+// ignore_for_file: depend_on_referenced_packages, prefer_is_empty
+
 import 'package:pdf/widgets.dart' as pw;
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';

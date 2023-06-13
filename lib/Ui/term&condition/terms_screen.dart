@@ -2,6 +2,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_html/flutter_html.dart';
 import 'package:get/get.dart';
+import 'package:privilegecare/widgets/custom_text_widget.dart';
 import 'package:privilegecare/widgets/loader.dart';
 import 'package:privilegecare/Ui/term&condition/controller/term_and_condition_controller.dart';
 import 'package:privilegecare/Utils/colors.dart';
@@ -23,7 +24,7 @@ class TermsScreen extends StatelessWidget {
         appBar: AppBar(
           iconTheme:  const IconThemeData(color: Colors.white),
           backgroundColor:kGreenColor ,
-          leading: IconButton(icon: const Icon(Icons.arrow_circle_right_outlined,color: kWhiteColor,size: 40,),onPressed: (){
+          leading: IconButton(icon: Get.find<StorageService>().activeLocale == SupportedLocales.english?const Icon(Icons.arrow_circle_left_outlined,color: kWhiteColor,size: 40,):const Icon(Icons.arrow_circle_right_outlined,color: kWhiteColor,size: 40,),onPressed: (){
             Get.back();
           },),
         ),
@@ -34,7 +35,7 @@ class TermsScreen extends StatelessWidget {
             Center(
               child: Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 10.0),
-                child: Text(Get.find<StorageService>().activeLocale == SupportedLocales.english?controller.termsData?.titleEn??"":controller.termsData?.title??"",
+                child: CustomText(Get.find<StorageService>().activeLocale == SupportedLocales.english?controller.termsData?.titleEn??"":controller.termsData?.title??"",
                   style: const TextStyle(
                       fontFamily: fontFamilyName,
 

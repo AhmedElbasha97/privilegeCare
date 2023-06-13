@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:privilegecare/Utils/colors.dart';
 import 'package:privilegecare/Utils/constant.dart';
 import 'package:privilegecare/Utils/translation_key.dart';
+import 'package:privilegecare/widgets/custom_text_widget.dart';
 
 
 class ChooseCameraSource extends StatelessWidget {
@@ -52,7 +53,7 @@ class ChooseCameraSource extends StatelessWidget {
                     child:Row(
                       children: <Widget>[
                         const Icon(Icons.camera_alt_outlined,size: 20,color: kBlueColor,),                        const SizedBox(width: 10,),
-                        Text(cameraSource1.tr,style: const TextStyle(
+                        CustomText(cameraSource1.tr,style: const TextStyle(
                             fontSize: 12.0,
                             fontFamily: fontFamilyName,
                             color: kBlueColor
@@ -78,7 +79,7 @@ class ChooseCameraSource extends StatelessWidget {
                       children: <Widget>[
                         const Icon(Icons.photo,size: 20,color: kBlueColor,),
                         const SizedBox(width: 10,),
-                         Text(cameraSource2.tr,style: const TextStyle(
+                        CustomText(cameraSource2.tr,style: const TextStyle(
                             fontSize: 12.0,
                             fontFamily: fontFamilyName,
                             fontWeight: FontWeight.w600,

@@ -9,6 +9,7 @@ import 'package:privilegecare/Utils/colors.dart';
 import 'package:privilegecare/Utils/constant.dart';
 import 'package:privilegecare/Utils/localization_services.dart';
 import 'package:privilegecare/Utils/memory.dart';
+import 'package:privilegecare/widgets/custom_text_widget.dart';
 import 'package:privilegecare/widgets/loader.dart';
 
 class PrivacyPolicyScreen extends StatelessWidget {
@@ -21,7 +22,7 @@ class PrivacyPolicyScreen extends StatelessWidget {
       builder: (PrivacyPolicyController controller) =>
           Scaffold(
             appBar: AppBar(
-              leading: IconButton(icon: const Icon(Icons.arrow_circle_right_outlined,color: kWhiteColor,size: 40,),onPressed: (){
+              leading: IconButton(icon: Get.find<StorageService>().activeLocale == SupportedLocales.english?const Icon(Icons.arrow_circle_left_outlined,color: kWhiteColor,size: 40,):const Icon(Icons.arrow_circle_right_outlined,color: kWhiteColor,size: 40,),onPressed: (){
                 Get.back();
               },),
               iconTheme:  const IconThemeData(color: Colors.white),
@@ -35,7 +36,7 @@ class PrivacyPolicyScreen extends StatelessWidget {
                 Center(
                   child: Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 10.0),
-                    child: Text(Get.find<StorageService>().activeLocale == SupportedLocales.english?controller.privacyData?.titleEn??"":controller.privacyData?.title??"",
+                    child: CustomText(Get.find<StorageService>().activeLocale == SupportedLocales.english?controller.privacyData?.titleEn??"":controller.privacyData?.title??"",
                       style: const TextStyle(
                           fontFamily: fontFamilyName,
 

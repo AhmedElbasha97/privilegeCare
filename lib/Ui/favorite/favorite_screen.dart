@@ -4,6 +4,7 @@ import 'package:privilegecare/Ui/favorite/widget/favorite_doctor_taps.dart';
 import 'package:privilegecare/Ui/favorite/widget/favourite_hospital_taps.dart';
 import 'package:privilegecare/Utils/colors.dart';
 import 'package:privilegecare/Utils/constant.dart';
+import 'package:privilegecare/widgets/custom_text_widget.dart';
 
 import '../../Utils/translation_key.dart';
 
@@ -22,7 +23,7 @@ class FavoriteScreen extends StatelessWidget {
                   SliverAppBar(
 
                   backgroundColor: kGreenColor,
-                  title: Text(favTitle.tr, style: const TextStyle(
+                  title: CustomText(favTitle.tr, style: const TextStyle(
                       fontFamily: fontFamilyName,
                       color: kWhiteColor,
                       fontWeight: FontWeight.w800,
@@ -34,12 +35,12 @@ class FavoriteScreen extends StatelessWidget {
                     indicatorColor: kBlueColor,
                     indicatorWeight: 10,
                     tabs: [
-                      Tab(child: Text(favTap1.tr, style: const TextStyle(
+                      Tab(child: CustomText(favTap1.tr, style: const TextStyle(
               fontFamily: fontFamilyName,
               color: kWhiteColor,
               fontWeight: FontWeight.w800,
               fontSize: 18))),
-                      Tab(child: Text(favTap2.tr,style: const TextStyle(
+                      Tab(child: CustomText(favTap2.tr,style: const TextStyle(
                           fontFamily: fontFamilyName,
                           color: kWhiteColor,
                           fontWeight: FontWeight.w800,

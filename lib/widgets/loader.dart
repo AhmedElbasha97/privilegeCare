@@ -3,6 +3,8 @@ import 'package:flutter_animate/flutter_animate.dart';
 import 'package:get/get.dart';
 import 'package:privilegecare/Utils/colors.dart';
 import 'package:privilegecare/Utils/constant.dart';
+import 'package:privilegecare/Utils/translation_key.dart';
+import 'package:privilegecare/widgets/custom_text_widget.dart';
 
 
 class Loader extends StatelessWidget {
@@ -43,9 +45,9 @@ final double width;
               children: [
 
 
-                const Text(
-                  "تحميل",
-                  style: TextStyle(
+                 CustomText(
+                  loadingKey.tr,
+                  style: const TextStyle(
                     fontFamily: fontFamilyName,
                     fontWeight: FontWeight.w800,
                     fontSize: 20,

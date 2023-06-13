@@ -11,6 +11,7 @@ import 'package:privilegecare/Utils/colors.dart';
 import 'package:privilegecare/Utils/constant.dart';
 import 'package:privilegecare/Utils/localization_services.dart';
 import 'package:privilegecare/Utils/memory.dart';
+import 'package:privilegecare/widgets/custom_text_widget.dart';
 
 import '../../../Utils/translation_key.dart';
 
@@ -50,7 +51,7 @@ class HistoryCell extends StatelessWidget {
                 padding: const EdgeInsets.all(8.0),
                 child: Row(
                   children: [
-                    Text(
+                    CustomText(
                         controller.detectStatus(historyData?.status??"") == 0?visitHasBeenCanceled.tr:visitHasBeenFinished.tr,
                         style:  TextStyle(
                             fontFamily:fontFamilyName,
@@ -59,7 +60,7 @@ class HistoryCell extends StatelessWidget {
                             fontSize: 15)
                     ),
                     const SizedBox(width: 5,),
-                     Text(
+                    CustomText(
                         controller.homeVisitOrNot== 0?clinicAnalysis.tr:homeAnalysis.tr,
                         style: const TextStyle(
                             fontFamily:fontFamilyName,
@@ -68,7 +69,7 @@ class HistoryCell extends StatelessWidget {
                             fontSize: 15)
                     ),
                     const SizedBox(width: 5,),
-                    Text(
+                    CustomText(
                         controller.returnDateAndTime("${historyData?.date??""}"),
                         style: const TextStyle(
                             fontFamily:fontFamilyName,
@@ -77,7 +78,7 @@ class HistoryCell extends StatelessWidget {
                             fontSize: 15)
                     ),
                     const SizedBox(width: 5,),
-                    Text(
+                    CustomText(
                         controller.historyData?[0].time??"",
                         style: const TextStyle(
                             fontFamily:fontFamilyName,
@@ -197,14 +198,14 @@ class HistoryCell extends StatelessWidget {
                               fontWeight: FontWeight.w700,
                               fontSize: 15),),
                         const SizedBox(height: 5,),
-                        historyData?.point == 0?const Text("لم يتم اكتساب نقاط عن هذه الزياره",
-                          style: TextStyle(
+                        historyData?.point == 0? CustomText(noPointEarned.tr,
+                          style: const TextStyle(
                               height: 1,
                               fontFamily: fontFamilyName,
                               color: kBlueColor,
                               fontWeight: FontWeight.w700,
                               fontSize: 15),):
-                        Text("النقاط المكتسبه: ${ historyData?.point} نقطه",
+                        CustomText("${pointEarnedText1.tr} ${ historyData?.point} ${pointEarnedText1.tr}",
                           style: const TextStyle(
                               height: 1,
                               fontFamily: fontFamilyName,
@@ -245,14 +246,14 @@ class HistoryCell extends StatelessWidget {
                         borderRadius: BorderRadius.circular(10),
 
                       ),
-                      child: const Padding(
-                        padding: EdgeInsets.all(5.0),
+                      child:  Padding(
+                        padding: const EdgeInsets.all(5.0),
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.center,
-                          children:  [ Icon(Icons.refresh,color: kBlueColor,),
-                            Text(
-                                "أعاده حجز",
-                                style: TextStyle(
+                          children:  [ const Icon(Icons.refresh,color: kBlueColor,),
+                            CustomText(
+                                reReservationBTN.tr,
+                                style: const TextStyle(
                                     fontFamily: fontFamilyName,
                                     color:kBlueColor,
                                     fontWeight: FontWeight.w600,
@@ -293,14 +294,14 @@ class HistoryCell extends StatelessWidget {
                         borderRadius: BorderRadius.circular(10),
 
                       ),
-                      child: const Padding(
-                        padding: EdgeInsets.all(5.0),
+                      child:  Padding(
+                        padding: const EdgeInsets.all(5.0),
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.center,
-                          children:  [ Icon(Icons.receipt,color: kBlueColor,),
-                            Text(
-                                "تقرير طبى",
-                                style: TextStyle(
+                          children:  [ const Icon(Icons.receipt,color: kBlueColor,),
+                            CustomText(
+                                showDoctorReportBTN.tr,
+                                style: const TextStyle(
                                     fontFamily: fontFamilyName,
                                     color:kBlueColor,
                                     fontWeight: FontWeight.w600,
@@ -319,7 +320,7 @@ class HistoryCell extends StatelessWidget {
                         CoolAlert.show(
                             context: context,
                             type: CoolAlertType.warning,
-                            title: "لقد تم اضافه تعليق بالفعل عن الزياره اذا تريد حذف التعليق او تعديله يمكنك التواصل مع إدارة التطبيق",
+                            title: reviewWarning.tr,
 
                         );
                       }else {
@@ -350,14 +351,14 @@ class HistoryCell extends StatelessWidget {
                         borderRadius: BorderRadius.circular(10),
 
                       ),
-                      child: const Padding(
-                        padding: EdgeInsets.all(5.0),
+                      child:  Padding(
+                        padding: const EdgeInsets.all(5.0),
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.center,
-                          children:  [ Icon(Icons.star,color: kBlueColor,),
-                            Text(
-                                "تقيم",
-                                style: TextStyle(
+                          children:  [ const Icon(Icons.star,color: kBlueColor,),
+                            CustomText(
+                                reviewVisitBTN.tr,
+                                style: const TextStyle(
                                     fontFamily: fontFamilyName,
                                     color:kBlueColor,
                                     fontWeight: FontWeight.w600,

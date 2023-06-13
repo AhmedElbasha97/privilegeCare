@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:privilegecare/Services/connection_service.dart';
 import 'package:privilegecare/Ui/splash_screen/splash_screen.dart';
 import 'package:privilegecare/Utils/colors.dart';
 import 'package:privilegecare/Utils/localization_services.dart';
@@ -15,6 +16,7 @@ Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Get.putAsync(() => StorageService.init(), permanent: true);
   Get.put(LocalizationService.init(), permanent: true);
+  await Get.putAsync(() => ConnectionService.init(), permanent: true);
   SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(
     systemNavigationBarColor: kGreenColor, // navigation bar color
     statusBarColor: kBlueColor, // status bar color
@@ -38,7 +40,6 @@ class _MyAppState extends State<MyApp> {
 
       theme: ThemeData(
       appBarTheme: const AppBarTheme(
-
       systemOverlayStyle: SystemUiOverlayStyle( //<-- SEE HERE
         // Status bar color
         statusBarColor: kBlueColor,
@@ -56,7 +57,7 @@ class _MyAppState extends State<MyApp> {
         GlobalWidgetsLocalizations.delegate,
         GlobalCupertinoLocalizations.delegate,
       ],
-      title: 'Flutter Demo',
+
       debugShowCheckedModeBanner: false,
       home: const SplashScreen(),
 

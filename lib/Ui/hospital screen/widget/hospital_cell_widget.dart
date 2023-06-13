@@ -11,6 +11,7 @@ import 'package:privilegecare/Utils/constant.dart';
 import 'package:privilegecare/Utils/localization_services.dart';
 import 'package:privilegecare/Utils/memory.dart';
 import 'package:privilegecare/Utils/translation_key.dart';
+import 'package:privilegecare/widgets/custom_text_widget.dart';
 import 'package:privilegecare/widgets/loader.dart';
 
 class HospitalCellWidget extends StatefulWidget {
@@ -110,7 +111,7 @@ class _HospitalCellWidgetState extends State<HospitalCellWidget> {
               width: Get.width,
               child:  Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 10.0),
-                child: Text(Get.find<StorageService>().activeLocale == SupportedLocales.english?widget.hospitalData?.name??"":widget.hospitalData?.name??"",
+                child: CustomText(Get.find<StorageService>().activeLocale == SupportedLocales.english?widget.hospitalData?.name??"":widget.hospitalData?.name??"",
                   style: const TextStyle(
                       fontFamily: fontFamilyName,
 
@@ -124,7 +125,7 @@ class _HospitalCellWidgetState extends State<HospitalCellWidget> {
               width: Get.width,
               child:  Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 10.0),
-                child: Text(widget.hospitalData?.details??"",
+                child: CustomText(widget.hospitalData?.details??"",
 
                   style: const TextStyle(
                       fontFamily: fontFamilyName,
@@ -147,7 +148,7 @@ class _HospitalCellWidgetState extends State<HospitalCellWidget> {
                   const SizedBox(width: 10,),
                   Container(
                     width: Get.width*0.6,
-                    child:  Text(Get.find<StorageService>().activeLocale == SupportedLocales.english?widget.hospitalData?.areaEn??"":widget.hospitalData?.area??"",
+                    child:  CustomText(Get.find<StorageService>().activeLocale == SupportedLocales.english?widget.hospitalData?.areaEn??"":widget.hospitalData?.area??"",
                       style: const TextStyle(
                           fontFamily:fontFamilyName,
                           color: kBlueColor,
@@ -176,7 +177,7 @@ class _HospitalCellWidgetState extends State<HospitalCellWidget> {
                   const SizedBox(width: 10,),
                   Container(
                     width: Get.width*0.18,
-                    child: Text(widget.hospitalData?.phone??"",
+                    child: CustomText(widget.hospitalData?.phone??"",
                       textAlign: TextAlign.start,
                       style: const TextStyle(
                           fontFamily: fontFamilyName,
@@ -194,7 +195,7 @@ class _HospitalCellWidgetState extends State<HospitalCellWidget> {
                 checkHospitalAddedOrNot("${widget.hospitalData?.id??""}");
               },
               child: Container(
-                width: Get.width*0.4,
+                width: Get.width*0.5,
                 height: Get.height*0.04,
                 decoration: BoxDecoration(
                   color: kBlueColor,
@@ -212,7 +213,7 @@ class _HospitalCellWidgetState extends State<HospitalCellWidget> {
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: [
                       const Icon(Icons.favorite,color: kWhiteColor,),
-                      Text(removeToFavoriteBTN.tr,
+                      CustomText(removeToFavoriteBTN.tr,
                         style: const TextStyle(
                             fontFamily: fontFamilyName,
                             color: kWhiteColor,
@@ -223,7 +224,7 @@ class _HospitalCellWidgetState extends State<HospitalCellWidget> {
                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       children: [
                         const Icon(Icons.favorite_border_rounded,color: kWhiteColor,),
-                        Text(addToFavoriteBTN.tr,
+                        CustomText(addToFavoriteBTN.tr,
                           style: const TextStyle(
                               fontFamily: fontFamilyName,
                               color: kWhiteColor,

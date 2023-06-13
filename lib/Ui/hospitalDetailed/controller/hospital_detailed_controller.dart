@@ -19,6 +19,7 @@ import 'package:privilegecare/Ui/signUpScreen/signup_screen.dart';
 import 'package:privilegecare/Utils/localization_services.dart';
 import 'package:privilegecare/Utils/memory.dart';
 import 'package:privilegecare/Utils/translation_key.dart';
+import 'package:privilegecare/widgets/custom_text_widget.dart';
 import 'package:share_plus/share_plus.dart';
 
 class HospitalDetailedController extends GetxController{
@@ -97,7 +98,7 @@ addingOrRemovingFromFavorite(String hospitalId,context,String hospitalName) asyn
         .getId, "0");
     if (status?.msg == "succeeded") {
       final snackBar = SnackBar(
-        content: Text(' ${removeHospToFavText1.tr} $hospitalName ${removeHospToFavText2.tr}  '),
+        content: CustomText(' ${removeHospToFavText1.tr} $hospitalName ${removeHospToFavText2.tr}  '),
 
       );
       ScaffoldMessenger.of(context).showSnackBar(snackBar);
@@ -120,7 +121,7 @@ addingOrRemovingFromFavorite(String hospitalId,context,String hospitalName) asyn
         .getId, "1");
     if (status?.msg == "succeeded") {
       final snackBar = SnackBar(
-        content: Text(' ${addHospToFavText1.tr} $hospitalName ${addHospToFavText2.tr} '),
+        content: CustomText(' ${addHospToFavText1.tr} $hospitalName ${addHospToFavText2.tr} '),
 
       );
       ScaffoldMessenger.of(context).showSnackBar(snackBar);

@@ -270,6 +270,8 @@ bool signingUp = false ;
         await Get.find<StorageService>().saveAccountId("${data?.info?.id??0}");
         Get.off(const HomeScreen());
       }else{
+        signingUp = false;
+        update();
         CoolAlert.show(
             context: context,
             type: CoolAlertType.error,
@@ -298,6 +300,8 @@ bool signingUp = false ;
         Get.back();
         Get.back();
       }else{
+        signingUp = false;
+        update();
         CoolAlert.show(
             context: context,
             type: CoolAlertType.error,

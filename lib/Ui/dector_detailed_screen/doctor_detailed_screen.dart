@@ -15,6 +15,7 @@ import 'package:privilegecare/Utils/localization_services.dart';
 import 'package:privilegecare/Utils/memory.dart';
 import 'package:privilegecare/Utils/translation_key.dart';
 import 'package:privilegecare/widgets/bottom_navigation_bar.dart';
+import 'package:privilegecare/widgets/custom_text_widget.dart';
 import 'package:privilegecare/widgets/loader.dart';
 import 'package:star_rating/star_rating.dart';
 
@@ -30,11 +31,11 @@ class DoctorDetailedScreen extends StatelessWidget {
         appBar: AppBar(
           backgroundColor: kGreenColor,
           leadingWidth: 60,
-          leading: IconButton(icon: const Icon(Icons.arrow_circle_right_outlined,color: kWhiteColor,size: 40,),onPressed: (){
+          leading: IconButton(icon: Get.find<StorageService>().activeLocale == SupportedLocales.english?const Icon(Icons.arrow_circle_left_outlined,color: kWhiteColor,size: 40,):const Icon(Icons.arrow_circle_right_outlined,color: kWhiteColor,size: 40,),onPressed: (){
             Get.back();
           },),
           centerTitle: true,
-          title:   Text(
+          title:   CustomText(
             doctorDetailedTitle.tr,
             style: const TextStyle(
                 fontFamily: fontFamilyName,
@@ -210,7 +211,7 @@ class DoctorDetailedScreen extends StatelessWidget {
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   mainAxisSize: MainAxisSize.max,
                                   children: [
-                                     Text(Get.find<StorageService>().activeLocale == SupportedLocales.english?controller.doctorData?.nameEn??"":controller.doctorData?.name??"",
+                                    CustomText(Get.find<StorageService>().activeLocale == SupportedLocales.english?controller.doctorData?.nameEn??"":controller.doctorData?.name??"",
 
                                       style: const TextStyle(
                                           height: 1,
@@ -219,7 +220,7 @@ class DoctorDetailedScreen extends StatelessWidget {
                                           fontWeight: FontWeight.w700,
                                           fontSize: 18),),
                                     const SizedBox(height: 5,),
-                                     Text(Get.find<StorageService>().activeLocale == SupportedLocales.english?controller.doctorData?.specialistEn??"":controller.doctorData?.specialist??"",
+                                    CustomText(Get.find<StorageService>().activeLocale == SupportedLocales.english?controller.doctorData?.specialistEn??"":controller.doctorData?.specialist??"",
                                       style: const TextStyle(
                                           height: 1,
                                           fontFamily: fontFamilyName,
@@ -240,14 +241,14 @@ class DoctorDetailedScreen extends StatelessWidget {
                                     ),
                                     const SizedBox(height: 5,),
                                     controller.doctorData?.visitors == 0?
-                                     Text(noReviewsOnDoc.tr,
+                                    CustomText(noReviewsOnDoc.tr,
                                       style: const TextStyle(
                                           height: 1,
                                           fontFamily: fontFamilyName,
                                           color: kBlueColor,
                                           fontWeight: FontWeight.w700,
                                           fontSize: 14),) :
-                                     Text("${reviewsOnDoc1.tr}${controller.doctorData?.visitors??0} ${reviewsOnDoc2.tr}",
+                                    CustomText("${reviewsOnDoc1.tr}${controller.doctorData?.visitors??0} ${reviewsOnDoc2.tr}",
                                       style: const TextStyle(
                                           height: 1,
                                           fontFamily: fontFamilyName,
@@ -305,7 +306,7 @@ class DoctorDetailedScreen extends StatelessWidget {
                                     children: [
                                       Container(
                                         width: Get.width*0.2,
-                                        child: Text("${controller.doctorData?.waiting??0} ${waitingTimeDocDetailedScreenText1.tr}",
+                                        child: CustomText("${controller.doctorData?.waiting??0} ${waitingTimeDocDetailedScreenText1.tr}",
                                           textAlign: TextAlign.start,
                                           style: const TextStyle(
                                               fontFamily: fontFamilyName,
@@ -313,7 +314,7 @@ class DoctorDetailedScreen extends StatelessWidget {
                                               fontWeight: FontWeight.w700,
                                               fontSize: 15),),
                                       ),
-                                       Text(waitingTimeDocDetailedScreenText2.tr,
+                                      CustomText(waitingTimeDocDetailedScreenText2.tr,
                                         style: const TextStyle(
                                             fontFamily: fontFamilyName,
                                             color: kBlueColor,
@@ -340,7 +341,7 @@ class DoctorDetailedScreen extends StatelessWidget {
                                     children: [
                                       Container(
                                         width: Get.width*0.2,
-                                        child: Text("${controller.doctorData?.amount??0}${priceDocDetailedScreenText1.tr}",
+                                        child: CustomText("${controller.doctorData?.amount??0}${priceDocDetailedScreenText1.tr}",
                                           textAlign: TextAlign.start,
                                           style: const TextStyle(
                                               fontFamily: fontFamilyName,
@@ -348,7 +349,7 @@ class DoctorDetailedScreen extends StatelessWidget {
                                               fontWeight: FontWeight.w700,
                                               fontSize: 15),),
                                       ),
-                                       Text(priceDocDetailedScreenText2.tr,
+                                      CustomText(priceDocDetailedScreenText2.tr,
                                         style: const TextStyle(
                                             fontFamily:fontFamilyName,
                                             color: kBlueColor,
@@ -412,7 +413,7 @@ class DoctorDetailedScreen extends StatelessWidget {
                                     children: [
                                       Container(
                                         width: Get.width*0.45,
-                                        child: Text(controller.doctorData?.hosp??"",
+                                        child: CustomText(controller.doctorData?.hosp??"",
                                           textAlign: TextAlign.start,
                                           style: const TextStyle(
                                               fontFamily: fontFamilyName,
@@ -424,7 +425,7 @@ class DoctorDetailedScreen extends StatelessWidget {
                                         onTap: (){
                                           controller.showDoctorLocation();
                                         },
-                                        child:  Text(showOnGoogleMap.tr,
+                                        child:  CustomText(showOnGoogleMap.tr,
                                           style: const TextStyle(
                                               fontFamily: fontFamilyName,
                                               color: kBlueColor,
@@ -479,7 +480,7 @@ class DoctorDetailedScreen extends StatelessWidget {
                               const SizedBox(width: 10,),
                               Container(
                                 width: Get.width*0.18,
-                                child:  Text(controller.doctorData?.phone??"",
+                                child:  CustomText(controller.doctorData?.phone??"",
                                   textAlign: TextAlign.start,
                                   style: const TextStyle(
                                       fontFamily: fontFamilyName,
@@ -521,7 +522,9 @@ class DoctorDetailedScreen extends StatelessWidget {
                     child: Row(
                     children: [
                     Image.asset("assets/images/noVideo.png",height: Get.width*0.23,),
-                     Text(noVideo.tr,style: const TextStyle(color: kGreenColor,fontWeight: FontWeight.bold,fontSize: 18),textAlign: TextAlign.center,),
+                      Container(
+                          width: Get.width*0.5,
+                          child: CustomText(noVideo.tr,style: const TextStyle(color: kGreenColor,fontWeight: FontWeight.bold,fontSize: 18),textAlign: TextAlign.center,)),
                     ],
                     ),
                     ),
@@ -548,7 +551,10 @@ class DoctorDetailedScreen extends StatelessWidget {
                           child: Row(
                             children: [
                               Image.asset("assets/images/Time management-rafiki.png",height: Get.width*0.23,),
-                               Text(noTimeDocDetailedScreen.tr,style: const TextStyle(color: kGreenColor,fontWeight: FontWeight.bold,fontSize: 18),textAlign: TextAlign.center,),
+                              Container(
+
+                                    width: Get.width*0.5,
+                                  child: CustomText(noTimeDocDetailedScreen.tr,style: const TextStyle(color: kGreenColor,fontWeight: FontWeight.bold,fontSize: 18),textAlign: TextAlign.center,)),
                             ],
                           ),
                         ),
@@ -557,7 +563,7 @@ class DoctorDetailedScreen extends StatelessWidget {
                         children:  [
                           const SizedBox(height: 10,),
                           Center(
-                           child:  Text(timeDocDetailedScreenText1.tr,
+                           child:  CustomText(timeDocDetailedScreenText1.tr,
                              style: const TextStyle(
                                  fontFamily: fontFamilyName,
                                  color: kBlueColor,
@@ -592,7 +598,7 @@ class DoctorDetailedScreen extends StatelessWidget {
                           ),
                           const SizedBox(height: 10,),
                            Center(
-                            child:  Text(timeDocDetailedScreenText2.tr,
+                            child:  CustomText(timeDocDetailedScreenText2.tr,
                               style: const TextStyle(
                                   fontFamily: fontFamilyName,
                                   color: kBlueColor,
@@ -641,7 +647,13 @@ class DoctorDetailedScreen extends StatelessWidget {
                                       crossAxisAlignment: CrossAxisAlignment.end,
                                       mainAxisSize: MainAxisSize.min,
                                       children: [
-                                        Text("${pointDocDetailedScreenText1.tr}${controller.doctorData?.point??0}${pointDocDetailedScreenText2.tr}",
+                                        controller.doctorData?.point == 0? CustomText(noPointEarned.tr,
+                                          style: const TextStyle(
+                                              height: 1,
+                                              fontFamily: fontFamilyName,
+                                              color: kBlueColor,
+                                              fontWeight: FontWeight.w700,
+                                              fontSize: 15),):CustomText("${pointDocDetailedScreenText1.tr}${controller.doctorData?.point??0}${pointDocDetailedScreenText2.tr}",
                                           style: const TextStyle(
                                               fontFamily: fontFamilyName,
                                               color: kBlueColor,
@@ -694,7 +706,7 @@ class DoctorDetailedScreen extends StatelessWidget {
                                     child: Image.asset("assets/images/Star.png",fit: BoxFit.fitHeight,),
                                   ),
                                     const SizedBox(width: 5,),
-                                     Text("5/${controller.doctorData?.hospRate??0} ${placeReview.tr}",
+                                    CustomText("5/${controller.doctorData?.hospRate??0} ${placeReview.tr}",
                                       style: const TextStyle(
                                           fontFamily: fontFamilyName,
                                           color: kBlueColor,
@@ -712,7 +724,7 @@ class DoctorDetailedScreen extends StatelessWidget {
                                     child: Image.asset("assets/images/Star.png",fit: BoxFit.fitHeight,),
                                   ),
                                     const SizedBox(width: 5,),
-                                     Text("5/${controller.doctorData?.doctorRate??0}${doctorReview.tr}",
+                                    CustomText("5/${controller.doctorData?.doctorRate??0}${doctorReview.tr}",
                                       style: const TextStyle(
                                           fontFamily: fontFamilyName,
                                           color: kBlueColor,
@@ -767,7 +779,7 @@ class DoctorDetailedScreen extends StatelessWidget {
                                       crossAxisAlignment: CrossAxisAlignment.start,
                                       mainAxisSize: MainAxisSize.min,
                                       children:  [
-                                         Text(doctorInformation.tr,
+                                        CustomText(doctorInformation.tr,
                                           style: const TextStyle(
                                               fontFamily: fontFamilyName,
                                               color: kBlueColor,
@@ -775,7 +787,7 @@ class DoctorDetailedScreen extends StatelessWidget {
                                               fontSize: 15),),
                                         Container(
                                           width: Get.width*0.7,
-                                          child:  Text(controller.doctorData?.details??"",
+                                          child:  CustomText(controller.doctorData?.details??"",
                                             textAlign: TextAlign.start,
                                             style: const TextStyle(
                                                 fontFamily: fontFamilyName,
@@ -823,8 +835,8 @@ class DoctorDetailedScreen extends StatelessWidget {
                           Container(
                             width: Get.width,
                             child:  Padding(
-                              padding: const EdgeInsets.fromLTRB(0,0,30,0),
-                              child: Text(doctorReviewsTitle.tr,
+                              padding: const EdgeInsets.fromLTRB(30,0,30,0),
+                              child: CustomText(doctorReviewsTitle.tr,
                                 textAlign: TextAlign.start,
                                 style: const TextStyle(
                                     fontFamily: fontFamilyName,
@@ -837,13 +849,13 @@ class DoctorDetailedScreen extends StatelessWidget {
                           Container(
                             width: Get.width,
                             child:   controller.doctorData?.visitors == 0?
-                             Text(noReviewsOnDoc.tr,
+                            CustomText(noReviewsOnDoc.tr,
                               textAlign: TextAlign.center,
                               style: const TextStyle(
                                   fontFamily: fontFamilyName,
                                   color: kGreenColor,
                                   fontWeight: FontWeight.w700,
-                                  fontSize: 15),) :Text("${reviewsOnDoc1.tr}${controller.doctorData?.visitors??0} ${reviewsOnDoc2.tr}",
+                                  fontSize: 15),) :CustomText("${reviewsOnDoc1.tr}${controller.doctorData?.visitors??0} ${reviewsOnDoc2.tr}",
                               textAlign: TextAlign.center,
                               style: const TextStyle(
                                   fontFamily: fontFamilyName,
@@ -886,7 +898,7 @@ class DoctorDetailedScreen extends StatelessWidget {
                                         },
                                       ),
                                       const SizedBox(height: 10,),
-                                       Text(doctorReview.tr,
+                                      CustomText(doctorReview.tr,
                                         style: const TextStyle(
                                             fontFamily: fontFamilyName,
                                             color: kBlueColor,
@@ -925,7 +937,7 @@ class DoctorDetailedScreen extends StatelessWidget {
                                         },
                                       ),
                                       const SizedBox(height: 10,),
-                                       Text(placeReview.tr,
+                                      CustomText(placeReview.tr,
                                         style: const TextStyle(
                                             fontFamily: fontFamilyName,
                                             color: kBlueColor,
@@ -946,7 +958,7 @@ class DoctorDetailedScreen extends StatelessWidget {
                           children: [
 
                           Image.asset("assets/images/noReviews.png",height: Get.width*0.23,),
-                           Text(noReviews.tr,style: const TextStyle(color: kGreenColor,fontWeight: FontWeight.bold,fontSize: 18),textAlign: TextAlign.center,),
+                            CustomText(noReviews.tr,style: const TextStyle(color: kGreenColor,fontWeight: FontWeight.bold,fontSize: 18),textAlign: TextAlign.center,),
                         ],):Column(
                           children: controller.comments!.map((e){
                             return CommentWidget(data: e);

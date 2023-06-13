@@ -4,6 +4,7 @@ import 'package:privilegecare/Models/doctor_model.dart';
 import 'package:privilegecare/Utils/colors.dart';
 import 'package:privilegecare/Utils/constant.dart';
 import 'package:privilegecare/Utils/translation_key.dart';
+import 'package:privilegecare/widgets/custom_text_widget.dart';
 
 class SchedulesWidget extends StatelessWidget {
   final Schedule? data;
@@ -28,7 +29,7 @@ class SchedulesWidget extends StatelessWidget {
                 height: 30,
                 color: kBlueColor,
                 child:  Center(
-                  child: Text(data?.date??"",
+                  child: CustomText(data?.date??"",
                     style: const TextStyle(
                         fontFamily: fontFamilyName,
                         color: Colors.white,
@@ -37,21 +38,21 @@ class SchedulesWidget extends StatelessWidget {
                 ),
               ),
               const SizedBox(height: 5,),
-               Text(data?.timeFrom??"",
+              CustomText(data?.timeFrom??"",
                 style: const TextStyle(
                     fontFamily: fontFamilyName,
                     color: kBlueColor,
                     fontWeight: FontWeight.w700,
                     fontSize: 10),),
               const SizedBox(height: 5,),
-               Text(toKey.tr,
+              CustomText(toKey.tr,
                 style: const TextStyle(
                     fontFamily: fontFamilyName,
                     color: kBlueColor,
                     fontWeight: FontWeight.w700,
                     fontSize: 10),),
               const SizedBox(height: 5,),
-               Text(data?.timeTo??"",
+              CustomText(data?.timeTo??"",
                 style: const TextStyle(
                     fontFamily: fontFamilyName,
                     color: kBlueColor,

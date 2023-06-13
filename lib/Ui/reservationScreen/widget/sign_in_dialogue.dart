@@ -4,6 +4,7 @@ import 'package:get/get.dart';
 import 'package:privilegecare/Ui/logInScreen/Controller/login_controller.dart';
 import 'package:privilegecare/Utils/colors.dart';
 import 'package:privilegecare/Utils/constant.dart';
+import 'package:privilegecare/widgets/custom_text_widget.dart';
 import 'package:privilegecare/widgets/text_field_widget.dart';
 
 
@@ -26,13 +27,13 @@ class LoginDialogue extends StatelessWidget {
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children:  [
-                  const Text("Hello",
+                  const CustomText("Hello",
                     style: TextStyle(
                         fontFamily: fontFamilyName,
                         color: kBlackColor,
                         fontWeight: FontWeight.w700,
                         fontSize: 18),),
-                  const Text("Sign into your account",
+                  const CustomText("Sign into your account",
                     style: TextStyle(
                         fontFamily: fontFamilyName,
                         color: kGrayColor,
@@ -114,7 +115,7 @@ class LoginDialogue extends StatelessWidget {
                           color: controller.signingIn?kGrayColor:kBlueColor
                       ),
                       child: const Center(
-                        child:  Text("Login",
+                        child:  CustomText("Login",
                           textAlign: TextAlign.center,
                           style: TextStyle(
                               fontFamily:fontFamilyName,

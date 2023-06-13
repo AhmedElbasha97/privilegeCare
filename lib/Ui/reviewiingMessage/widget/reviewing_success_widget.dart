@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:privilegecare/Utils/colors.dart';
 import 'package:privilegecare/Utils/constant.dart';
+import 'package:privilegecare/widgets/custom_text_widget.dart';
 
 import '../../../Utils/translation_key.dart';
 
@@ -30,10 +31,10 @@ class ReviewingSuccessWidget extends StatelessWidget {
             SizedBox(
               height: Get.height*0.03,
             ),
-            Container(
+            SizedBox(
               width: MediaQuery.of(context).size.width * 0.9,
               child: Center(
-                child:  Text(commentSuccess.tr,
+                child:  CustomText(commentSuccess.tr,
                   style: const TextStyle(
                       height: 1,
                       fontFamily: fontFamilyName,

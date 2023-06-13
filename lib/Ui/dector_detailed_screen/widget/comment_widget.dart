@@ -6,6 +6,8 @@ import 'package:intl/intl.dart';
 import 'package:privilegecare/Models/comment_model.dart';
 import 'package:privilegecare/Utils/colors.dart';
 import 'package:privilegecare/Utils/constant.dart';
+import 'package:privilegecare/Utils/translation_key.dart';
+import 'package:privilegecare/widgets/custom_text_widget.dart';
 import 'package:star_rating/star_rating.dart';
 
 
@@ -35,8 +37,8 @@ class CommentWidget extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
               const SizedBox(width: 20,),
-              const Text("التقييم الدكتور",
-                style: TextStyle(
+               CustomText(doctorRating.tr,
+                style: const TextStyle(
                     fontFamily: fontFamilyName,
                     color: kBlueColor,
                     fontWeight: FontWeight.w700,
@@ -60,7 +62,7 @@ class CommentWidget extends StatelessWidget {
             padding: const EdgeInsets.symmetric(horizontal: 20),
             child: Container(
               width: Get.width*0.9,
-              child:  Text(data.review??"",
+              child:  CustomText(data.review??"",
                 textAlign: TextAlign.start,
                 style: const TextStyle(
                     fontFamily: fontFamilyName,
@@ -76,7 +78,7 @@ class CommentWidget extends StatelessWidget {
               child:  Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text(data.name??"",
+                  CustomText(data.name??"",
                     textAlign: TextAlign.start,
                     style: const TextStyle(
                         fontFamily: fontFamilyName,
@@ -84,7 +86,7 @@ class CommentWidget extends StatelessWidget {
                         fontWeight: FontWeight.w700,
                         fontSize: 15),),
                   const SizedBox(height: 10,),
-                  Text(returnDateAndTime(data.datetime??""),
+                  CustomText(returnDateAndTime(data.datetime??""),
                     textAlign: TextAlign.start,
                     style: const TextStyle(
                         fontFamily: fontFamilyName,

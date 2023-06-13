@@ -14,6 +14,7 @@ import 'package:privilegecare/Utils/constant.dart';
 import 'package:privilegecare/Utils/localization_services.dart';
 import 'package:privilegecare/Utils/memory.dart';
 import 'package:privilegecare/widgets/bottom_navigation_bar.dart';
+import 'package:privilegecare/widgets/custom_text_widget.dart';
 
 import '../../Utils/translation_key.dart';
 
@@ -76,12 +77,9 @@ class SpecialtyScreen extends StatelessWidget {
                           ),
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.start,
-                            children:  [ SizedBox(width: 5,), Icon(
-                              Icons.arrow_circle_right_outlined,
-                              color: kWhiteColor,
-                              size: 40,),
+                            children:  [ SizedBox(width: 5,), Get.find<StorageService>().activeLocale == SupportedLocales.english?const Icon(Icons.arrow_circle_left_outlined,color: kWhiteColor,size: 40,):const Icon(Icons.arrow_circle_right_outlined,color: kWhiteColor,size: 40,),
                               SizedBox(width: 70,),
-                              Text(searchForDoctor.tr,
+                              CustomText(searchForDoctor.tr,
                               style: TextStyle(
                                   fontFamily: fontFamilyName,
 
@@ -123,7 +121,7 @@ class SpecialtyScreen extends StatelessWidget {
                                 color: kGrayColor,
                                 size: 30,),
                               SizedBox(width: 15,),
-                              Text(searchWithDoctorName.tr,
+                              CustomText(searchWithDoctorName.tr,
                               style: TextStyle(
                                   fontFamily: fontFamilyName,
 

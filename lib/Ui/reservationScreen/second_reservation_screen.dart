@@ -9,6 +9,7 @@ import 'package:privilegecare/Utils/constant.dart';
 import 'package:privilegecare/Utils/localization_services.dart';
 import 'package:privilegecare/Utils/memory.dart';
 import 'package:privilegecare/Utils/translation_key.dart';
+import 'package:privilegecare/widgets/custom_text_widget.dart';
 
 class SecondReservationScreen extends StatefulWidget {
   final String doctorId;
@@ -53,7 +54,7 @@ class _SecondReservationScreenState extends State<SecondReservationScreen> {
                               },
                               child: const Icon(Icons.arrow_circle_right_outlined,color: kWhiteColor,size: 30,)),
                           const SizedBox(width: 5,),
-                           Text(
+                          CustomText(
                             secondReservationTitle.tr,
                             style: const TextStyle(
                                 fontFamily: fontFamilyName,
@@ -77,7 +78,7 @@ class _SecondReservationScreenState extends State<SecondReservationScreen> {
                             color: kBlueColor,
                           ),
                           child: const Center(
-                            child:  Text(
+                            child:  CustomText(
                               "2/2",
                               style: TextStyle(
                                   fontFamily: fontFamilyName,
@@ -230,7 +231,7 @@ class _SecondReservationScreenState extends State<SecondReservationScreen> {
                                       const SizedBox(width: 10,),
                                       Container(
                                         width: Get.width*0.55,
-                                        child:  Text(
+                                        child:  CustomText(
                                           reservationForAnotherOne.tr,
                                           style: const TextStyle(
                                               fontFamily: fontFamilyName,
@@ -326,7 +327,7 @@ class _SecondReservationScreenState extends State<SecondReservationScreen> {
                             child:  Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                Text(
+                                CustomText(
                                   controller.timeText,
                                   style: const TextStyle(
                                       fontFamily: fontFamilyName,
@@ -334,7 +335,7 @@ class _SecondReservationScreenState extends State<SecondReservationScreen> {
                                       fontWeight: FontWeight.w800,
                                       fontSize: 15),
                                 ),
-                                Text(
+                                CustomText(
                                   controller.dateText,
                                   style: const TextStyle(
                                       fontFamily: fontFamilyName,
@@ -379,7 +380,7 @@ class _SecondReservationScreenState extends State<SecondReservationScreen> {
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
 
-                                Text(
+                                CustomText(
                                   "برج الكرامة",
                                   style: TextStyle(
                                       fontFamily: fontFamilyName,
@@ -448,7 +449,7 @@ class _SecondReservationScreenState extends State<SecondReservationScreen> {
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             crossAxisAlignment: CrossAxisAlignment.center,
                             children: [
-                               Text(
+                              CustomText(
                                 reservationPrice.tr,
                                 textAlign: TextAlign.center,
                                 style: const TextStyle(
@@ -458,7 +459,7 @@ class _SecondReservationScreenState extends State<SecondReservationScreen> {
                                     fontSize: 18),
                               ),
 
-                              Text(
+                              CustomText(
                                 "${controller.doctorData?.amount??0} ${currencyKey.tr}",
                                 textAlign: TextAlign.center,
                                 style: const TextStyle(
@@ -496,7 +497,7 @@ class _SecondReservationScreenState extends State<SecondReservationScreen> {
                       borderRadius: BorderRadius.circular(15),
                     ),
                     child: const Center(
-                      child:  Text(
+                      child:  CustomText(
                         secondReservationBTN,
                         style: TextStyle(
                             fontFamily: fontFamilyName,

@@ -4,6 +4,7 @@ import 'package:get/get.dart';
 import 'package:privilegecare/Ui/reviewiingMessage/controller/reviewing_controller.dart';
 import 'package:privilegecare/Utils/colors.dart';
 import 'package:privilegecare/Utils/constant.dart';
+import 'package:privilegecare/widgets/custom_text_widget.dart';
 import 'package:star_rating/star_rating.dart';
 
 import '../../Utils/translation_key.dart';
@@ -27,7 +28,7 @@ class ReviewingMessageWidget extends StatelessWidget {
               children:  [
                 Row(
                   children: [
-                     Text(hospRating.tr,
+                    CustomText(hospRating.tr,
                       style: const TextStyle(
                           fontFamily: fontFamilyName,
                           color: kGreenColor,
@@ -50,7 +51,7 @@ class ReviewingMessageWidget extends StatelessWidget {
                 const SizedBox(height: 10,),
                 Row(
                   children: [
-                     Text(doctorRating.tr,
+                    CustomText(doctorRating.tr,
                       style: const TextStyle(
                           fontFamily: fontFamilyName,
                           color: kGreenColor,
@@ -137,7 +138,7 @@ class ReviewingMessageWidget extends StatelessWidget {
                         padding: const EdgeInsets.all(5.0),
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.center,
-                          children:  [Text(
+                          children:  [CustomText(
                               addReview.tr,
                               style: const TextStyle(
                                   fontFamily:fontFamilyName,

@@ -15,6 +15,7 @@ import 'package:privilegecare/Utils/localization_services.dart';
 import 'package:privilegecare/Utils/memory.dart';
 import 'package:privilegecare/Utils/translation_key.dart';
 import 'package:privilegecare/widgets/bottom_navigation_bar.dart';
+import 'package:privilegecare/widgets/custom_text_widget.dart';
 import 'package:privilegecare/widgets/loader.dart';
 import 'package:star_rating/star_rating.dart';
 
@@ -30,11 +31,11 @@ class HospitalDetailedScreen extends StatelessWidget {
         appBar: AppBar(
           backgroundColor: kGreenColor,
           leadingWidth: 60,
-          leading: IconButton(icon: const Icon(Icons.arrow_circle_right_outlined,color: kWhiteColor,size: 40,),onPressed: (){
+          leading: IconButton(icon: Get.find<StorageService>().activeLocale == SupportedLocales.english?const Icon(Icons.arrow_circle_left_outlined,color: kWhiteColor,size: 40,):const Icon(Icons.arrow_circle_right_outlined,color: kWhiteColor,size: 40,),onPressed: (){
             Get.back();
           },),
           centerTitle: false,
-          title:   Text(
+          title:   CustomText(
             hospDetailsTitle.tr,
             style: const TextStyle(
                 fontFamily: fontFamilyName,
@@ -253,7 +254,7 @@ class HospitalDetailedScreen extends StatelessWidget {
                   const SizedBox(height: 20,),
                    Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 10.0),
-                    child: Text(Get.find<StorageService>().activeLocale == SupportedLocales.english?controller.hospitalData?.nameEn??"":controller.hospitalData?.name??"",
+                    child: CustomText(Get.find<StorageService>().activeLocale == SupportedLocales.english?controller.hospitalData?.nameEn??"":controller.hospitalData?.name??"",
                       style: const TextStyle(
                           fontFamily: fontFamilyName,
 
@@ -297,7 +298,7 @@ class HospitalDetailedScreen extends StatelessWidget {
                                       fontWeight: FontWeight.w700,
                                       fontSize: 13),),
                                 const SizedBox(height: 5,),
-                                Text("${controller.hospitalData?.specCount??0} ${hospCategoryText2.tr}",
+                                CustomText("${controller.hospitalData?.specCount??0} ${hospCategoryText2.tr}",
                                   style: const TextStyle(
                                       fontFamily: fontFamilyName,
 
@@ -318,7 +319,7 @@ class HospitalDetailedScreen extends StatelessWidget {
                             const SizedBox(width: 5,),
                              Column(
                               children: [
-                                 Text(hospCategoryTitle1.tr,
+                                CustomText(hospCategoryTitle1.tr,
                                   style: const TextStyle(
                                       fontFamily: fontFamilyName,
 
@@ -326,7 +327,7 @@ class HospitalDetailedScreen extends StatelessWidget {
                                       fontWeight: FontWeight.w700,
                                       fontSize: 13),),
                                 const SizedBox(height: 5,),
-                                Text("${controller.hospitalData?.doctors??0} ${hospCategoryText1.tr}",
+                                CustomText("${controller.hospitalData?.doctors??0} ${hospCategoryText1.tr}",
                                   style: const TextStyle(
                                       fontFamily: fontFamilyName,
 
@@ -357,7 +358,7 @@ class HospitalDetailedScreen extends StatelessWidget {
                           const SizedBox(width: 5,),
                           Column(
                             children: [
-                              Text(hospCategoryTitle2.tr,
+                              CustomText(hospCategoryTitle2.tr,
                                 style: const TextStyle(
                                     fontFamily: fontFamilyName,
 
@@ -365,7 +366,7 @@ class HospitalDetailedScreen extends StatelessWidget {
                                     fontWeight: FontWeight.w700,
                                     fontSize: 13),),
                               const SizedBox(height: 5,),
-                              Text("${controller.hospitalData?.specCount??0} ${hospCategoryText2.tr}",
+                              CustomText("${controller.hospitalData?.specCount??0} ${hospCategoryText2.tr}",
                                 style: const TextStyle(
                                     fontFamily: fontFamilyName,
 
@@ -387,7 +388,7 @@ class HospitalDetailedScreen extends StatelessWidget {
                             const SizedBox(width: 5,),
                             Column(
                               children: [
-                                Text(hospCategoryTitle1.tr,
+                                CustomText(hospCategoryTitle1.tr,
                                   style: const TextStyle(
                                       fontFamily: fontFamilyName,
 
@@ -395,7 +396,7 @@ class HospitalDetailedScreen extends StatelessWidget {
                                       fontWeight: FontWeight.w700,
                                       fontSize: 13),),
                                 const SizedBox(height: 5,),
-                                Text("${controller.hospitalData?.doctors??0} ${hospCategoryText1.tr}",
+                                CustomText("${controller.hospitalData?.doctors??0} ${hospCategoryText1.tr}",
                                   style: const TextStyle(
                                       fontFamily: fontFamilyName,
 
@@ -418,7 +419,7 @@ class HospitalDetailedScreen extends StatelessWidget {
                              Column(
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: [
-                                Text(hospCategoryTitle3.tr,
+                                CustomText(hospCategoryTitle3.tr,
                                   style: const TextStyle(
                                       fontFamily: fontFamilyName,
 
@@ -442,7 +443,7 @@ class HospitalDetailedScreen extends StatelessWidget {
                              Column(
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: [
-                                Text(hospCategoryTitle4.tr,
+                                CustomText(hospCategoryTitle4.tr,
                                   style: const TextStyle(
                                       fontFamily: fontFamilyName,
 
@@ -472,7 +473,7 @@ class HospitalDetailedScreen extends StatelessWidget {
                             const SizedBox(width: 5,),
                             Column(
                               children: [
-                                Text(hospCategoryTitle2.tr,
+                                CustomText(hospCategoryTitle2.tr,
                                   style: const TextStyle(
                                       fontFamily: fontFamilyName,
 
@@ -480,7 +481,7 @@ class HospitalDetailedScreen extends StatelessWidget {
                                       fontWeight: FontWeight.w700,
                                       fontSize: 13),),
                                 const SizedBox(height: 5,),
-                                Text("${controller.hospitalData?.specCount??0} ${hospCategoryText2.tr}",
+                                CustomText("${controller.hospitalData?.specCount??0} ${hospCategoryText2.tr}",
                                   style: const TextStyle(
                                       fontFamily: fontFamilyName,
 
@@ -501,7 +502,7 @@ class HospitalDetailedScreen extends StatelessWidget {
                             const SizedBox(width: 5,),
                             Column(
                               children: [
-                                Text(hospCategoryTitle1.tr,
+                                CustomText(hospCategoryTitle1.tr,
                                   style: const TextStyle(
                                       fontFamily: fontFamilyName,
 
@@ -509,7 +510,7 @@ class HospitalDetailedScreen extends StatelessWidget {
                                       fontWeight: FontWeight.w700,
                                       fontSize: 13),),
                                 const SizedBox(height: 5,),
-                                Text("${controller.hospitalData?.doctors??0} ${hospCategoryText1.tr}",
+                                CustomText("${controller.hospitalData?.doctors??0} ${hospCategoryText1.tr}",
                                   style: const TextStyle(
                                       fontFamily: fontFamilyName,
 
@@ -531,7 +532,7 @@ class HospitalDetailedScreen extends StatelessWidget {
                             Column(
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: [
-                                Text(hospCategoryTitle3.tr,
+                                CustomText(hospCategoryTitle3.tr,
                                   style: const TextStyle(
                                       fontFamily: fontFamilyName,
 
@@ -563,7 +564,7 @@ class HospitalDetailedScreen extends StatelessWidget {
                             const SizedBox(width: 5,),
                             Column(
                               children: [
-                                Text(hospCategoryTitle2.tr,
+                                CustomText(hospCategoryTitle2.tr,
                                   style: const TextStyle(
                                       fontFamily: fontFamilyName,
 
@@ -571,7 +572,7 @@ class HospitalDetailedScreen extends StatelessWidget {
                                       fontWeight: FontWeight.w700,
                                       fontSize: 13),),
                                 const SizedBox(height: 5,),
-                                Text("${controller.hospitalData?.specCount??0} ${hospCategoryText2.tr}",
+                                CustomText("${controller.hospitalData?.specCount??0} ${hospCategoryText2.tr}",
                                   style: const TextStyle(
                                       fontFamily: fontFamilyName,
 
@@ -592,7 +593,7 @@ class HospitalDetailedScreen extends StatelessWidget {
                             const SizedBox(width: 5,),
                             Column(
                               children: [
-                                Text(hospCategoryTitle1.tr,
+                                CustomText(hospCategoryTitle1.tr,
                                   style: const TextStyle(
                                       fontFamily: fontFamilyName,
 
@@ -600,7 +601,7 @@ class HospitalDetailedScreen extends StatelessWidget {
                                       fontWeight: FontWeight.w700,
                                       fontSize: 13),),
                                 const SizedBox(height: 5,),
-                                Text("${controller.hospitalData?.doctors??0} ${hospCategoryText1.tr}",
+                                CustomText("${controller.hospitalData?.doctors??0} ${hospCategoryText1.tr}",
                                   style: const TextStyle(
                                       fontFamily: fontFamilyName,
 
@@ -623,7 +624,7 @@ class HospitalDetailedScreen extends StatelessWidget {
                             Column(
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: [
-                                Text(hospCategoryTitle3.tr,
+                                CustomText(hospCategoryTitle3.tr,
                                   style: const TextStyle(
                                       fontFamily: fontFamilyName,
 
@@ -768,7 +769,7 @@ class HospitalDetailedScreen extends StatelessWidget {
                     width: Get.width,
                     child:    Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 10.0),
-                      child: Text(aboutHospKey.tr,
+                      child: CustomText(aboutHospKey.tr,
                         style: const TextStyle(
                             fontFamily: fontFamilyName,
 
@@ -782,7 +783,7 @@ class HospitalDetailedScreen extends StatelessWidget {
                     width: Get.width,
                     child:   Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 10.0),
-                      child: Text(controller.hospitalData?.details??"",
+                      child: CustomText(controller.hospitalData?.details??"",
 
                         style: const TextStyle(
                             fontFamily: fontFamilyName,
@@ -805,7 +806,7 @@ class HospitalDetailedScreen extends StatelessWidget {
                         const SizedBox(width: 10,),
                         Container(
                           width: Get.width*0.6,
-                          child:   Text(controller.hospitalData?.address??"",
+                          child:   CustomText(controller.hospitalData?.address??"",
                             style: const TextStyle(
                                 fontFamily:fontFamilyName,
                                 color: kBlueColor,
@@ -913,7 +914,7 @@ class HospitalDetailedScreen extends StatelessWidget {
                     },
                     child:  Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 10.0),
-                      child: Text(moreDetailsHosp.tr,
+                      child: CustomText(moreDetailsHosp.tr,
                         style: const TextStyle(
                             fontFamily: fontFamilyName,
                             color: kGreenColor,
@@ -931,7 +932,7 @@ class HospitalDetailedScreen extends StatelessWidget {
                         },
                         child:  Padding(
                           padding: const EdgeInsets.symmetric(horizontal: 10.0),
-                          child: Text(hospCategoryTitle1.tr,
+                          child: CustomText(hospCategoryTitle1.tr,
                             style: TextStyle(
                                 fontFamily: fontFamilyName,
 
@@ -946,7 +947,7 @@ class HospitalDetailedScreen extends StatelessWidget {
                         },
                         child: Padding(
                           padding: const EdgeInsets.symmetric(horizontal: 10.0),
-                          child: Text(hospCategoryTitle3.tr,
+                          child: CustomText(hospCategoryTitle3.tr,
                             style: TextStyle(
                                 fontFamily: fontFamilyName,
                                 color:  controller.currentActivePage==1?kBlueColor:kGreenColor,
@@ -960,7 +961,7 @@ class HospitalDetailedScreen extends StatelessWidget {
                         },
                         child: Padding(
                           padding: const EdgeInsets.symmetric(horizontal: 10.0),
-                          child: Text(hospCategoryTitle4.tr,
+                          child: CustomText(hospCategoryTitle4.tr,
                             style: TextStyle(
                                 fontFamily: fontFamilyName,
                                 color:  controller.currentActivePage==2?kBlueColor:kGreenColor,
@@ -996,7 +997,7 @@ class HospitalDetailedScreen extends StatelessWidget {
                                       Image.asset("assets/images/Doctors-rafiki.png",height: Get.width*0.23,),
                                       Container(
                                         width: Get.width*0.5,
-                                          child:  Text(noDoctorDataHosp.tr,style: const TextStyle(color: kGreenColor,fontWeight: FontWeight.bold,fontSize: 18),textAlign: TextAlign.center,)),
+                                          child:  CustomText(noDoctorDataHosp.tr,style: const TextStyle(color: kGreenColor,fontWeight: FontWeight.bold,fontSize: 18),textAlign: TextAlign.center,)),
                                     ],
                                   ),
                                 ),
@@ -1049,7 +1050,7 @@ class HospitalDetailedScreen extends StatelessWidget {
                                 },
                               ),
                               const SizedBox(height: 5),
-                               Text( Get.find<StorageService>().activeLocale == SupportedLocales.english?controller.doctorsData![index].nameEn!:controller.doctorsData![index].name!,
+                              CustomText( Get.find<StorageService>().activeLocale == SupportedLocales.english?controller.doctorsData![index].nameEn!:controller.doctorsData![index].name!,
 
                                 style: const TextStyle(
                                     height: 1,
@@ -1058,7 +1059,7 @@ class HospitalDetailedScreen extends StatelessWidget {
                                     fontWeight: FontWeight.w600,
                                     fontSize: 12),),
                               const SizedBox(height: 5,),
-                               Text(Get.find<StorageService>().activeLocale == SupportedLocales.english?controller.doctorsData![index].specialistEn!:controller.doctorsData![index].specialist!,
+                              CustomText(Get.find<StorageService>().activeLocale == SupportedLocales.english?controller.doctorsData![index].specialistEn!:controller.doctorsData![index].specialist!,
                                 style: const TextStyle(
                                     height: 1,
                                     fontFamily: fontFamilyName,
@@ -1074,7 +1075,7 @@ class HospitalDetailedScreen extends StatelessWidget {
                       Center(
                         child: Padding(
                           padding: const EdgeInsets.symmetric(horizontal: 10.0),
-                          child: Text(Get.find<StorageService>().activeLocale == SupportedLocales.english?controller.lapData?.titleEn??"":controller.lapData?.title??"",
+                          child: CustomText(Get.find<StorageService>().activeLocale == SupportedLocales.english?controller.lapData?.titleEn??"":controller.lapData?.title??"",
                             style: const TextStyle(
                                 fontFamily: fontFamilyName,
 
@@ -1102,7 +1103,7 @@ class HospitalDetailedScreen extends StatelessWidget {
                       Center(
                         child: Padding(
                           padding: const EdgeInsets.symmetric(horizontal: 10.0),
-                          child: Text(Get.find<StorageService>().activeLocale == SupportedLocales.english?controller.xrayData?.titleEn??"":controller.xrayData?.title??"",
+                          child: CustomText(Get.find<StorageService>().activeLocale == SupportedLocales.english?controller.xrayData?.titleEn??"":controller.xrayData?.title??"",
                             style: const TextStyle(
                                 fontFamily: fontFamilyName,
 

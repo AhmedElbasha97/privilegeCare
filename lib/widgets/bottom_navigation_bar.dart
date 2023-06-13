@@ -10,6 +10,7 @@ import 'package:privilegecare/Ui/hospital%20screen/hospitals_screen.dart';
 import 'package:privilegecare/Ui/profileScreen/profile_screeen.dart';
 import 'package:privilegecare/Utils/colors.dart';
 import 'package:privilegecare/Utils/constant.dart';
+import 'package:privilegecare/Utils/translation_key.dart';
 
 class BottomNavigationBarWidget extends StatefulWidget {
   final int selectedTap;
@@ -79,9 +80,10 @@ class _BottomNavigationBarWidgetState extends State<BottomNavigationBarWidget> {
             "assets/icons/profileIcon.png",
               width: 30,
             ),
-          title: const Text('الحساب الشخصى',
+          title: Text(bottomBarItem1.tr,
+            textScaleFactor: 1.0,
             textAlign: TextAlign.center,
-            style: TextStyle(
+            style: const TextStyle(
                 fontFamily: fontFamilyName,
                 color: kGreenColor,
                 height: 1,
@@ -95,8 +97,9 @@ class _BottomNavigationBarWidgetState extends State<BottomNavigationBarWidget> {
             "assets/icons/doctorIcon.png",
             width: 30,
           ),
-          title: const Text('الأطباء',
-            style: TextStyle(
+          title: Text(bottomBarItem2.tr,
+            textScaleFactor: 1.0,
+            style: const TextStyle(
                 fontFamily: fontFamilyName,
                 color: kGreenColor,
                 fontWeight: FontWeight.w700,
@@ -108,9 +111,10 @@ class _BottomNavigationBarWidgetState extends State<BottomNavigationBarWidget> {
             "assets/icons/homeIcon.png",
             width: 30,
           ),
-          title: const Text('الصفحة الرئيسية',
+          title: Text(bottomBarItem3.tr,
+            textScaleFactor: 1.0,
             textAlign: TextAlign.center,
-            style: TextStyle(
+            style: const TextStyle(
                 fontFamily: fontFamilyName,
                 color: kGreenColor,
                 height: 1,
@@ -122,8 +126,9 @@ class _BottomNavigationBarWidgetState extends State<BottomNavigationBarWidget> {
             "assets/icons/hospitalIcons.png",
             width: 30,
           ),
-          title: const Text('مستشفى',
-            style: TextStyle(
+          title:  Text(bottomBarItem4.tr,
+            textScaleFactor: 1.0,
+            style: const TextStyle(
                 fontFamily: fontFamilyName,
                 color: kGreenColor,
                 fontWeight: FontWeight.w700,
@@ -135,9 +140,10 @@ class _BottomNavigationBarWidgetState extends State<BottomNavigationBarWidget> {
             "assets/icons/settingsIcons.png",
             width: 30,
           ),
-          title: const Text('البحث المتقدم',
+          title:  Text(bottomBarItem5.tr,
+            textScaleFactor: 1.0,
             textAlign: TextAlign.center,
-            style: TextStyle(
+            style: const TextStyle(
                 fontFamily: fontFamilyName,
                 color: kGreenColor,
                 height: 1,

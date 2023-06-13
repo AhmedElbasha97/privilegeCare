@@ -23,6 +23,7 @@ import 'package:privilegecare/Utils/constant.dart';
 import 'package:privilegecare/Utils/localization_services.dart';
 import 'package:privilegecare/Utils/memory.dart';
 import 'package:privilegecare/Utils/translation_key.dart';
+import 'package:privilegecare/widgets/language_dialog_widget.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class ProfileController extends GetxController{
@@ -92,7 +93,10 @@ class ProfileController extends GetxController{
       }
       break;
       case 6:{
-
+        showDialog(context: context,
+          builder: (context) =>
+              const LanguageDialog(),
+        );
       }
       break;
       case 7:{
@@ -103,15 +107,12 @@ class ProfileController extends GetxController{
         Get.to(()=>const TermsScreen());
       }
       break;
-      case 9:{
 
-      }
-      break;
-      case 10:{
+      case 9:{
         rateMyApp();
       }
       break;
-      case 11:{
+      case 10:{
         signingOut(context);
       }
       break;
@@ -201,7 +202,7 @@ class ProfileController extends GetxController{
           fontSize: 15),
       onConfirmBtnTap: (){
         Get.find<StorageService>().loggingOut();
-        Get.to(()=>const WelcomeScreen());
+        Get.off(()=>const WelcomeScreen());
 
       },
       onCancelBtnTap:(){

@@ -8,6 +8,7 @@ import 'package:privilegecare/Utils/colors.dart';
 import 'package:privilegecare/Utils/constant.dart';
 import 'package:privilegecare/Utils/localization_services.dart';
 import 'package:privilegecare/Utils/memory.dart';
+import 'package:privilegecare/widgets/custom_text_widget.dart';
 import 'package:privilegecare/widgets/loader.dart';
 
 class HelpScreen extends StatelessWidget {
@@ -20,7 +21,7 @@ class HelpScreen extends StatelessWidget {
       builder: (HelpController controller) =>
           Scaffold(
             appBar: AppBar(
-              leading: IconButton(icon: const Icon(Icons.arrow_circle_right_outlined,color: kWhiteColor,size: 40,),onPressed: (){
+              leading: IconButton(icon: Get.find<StorageService>().activeLocale == SupportedLocales.english?const Icon(Icons.arrow_circle_left_outlined,color: kWhiteColor,size: 40,):const Icon(Icons.arrow_circle_right_outlined,color: kWhiteColor,size: 40,),onPressed: (){
                 Get.back();
               },),
               iconTheme:  const IconThemeData(color: Colors.white),
@@ -34,7 +35,7 @@ class HelpScreen extends StatelessWidget {
                 Center(
                   child: Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 10.0),
-                    child: Text(Get.find<StorageService>().activeLocale == SupportedLocales.english?controller.helpData?.titleEn??"":controller.helpData?.title??"",
+                    child: CustomText(Get.find<StorageService>().activeLocale == SupportedLocales.english?controller.helpData?.titleEn??"":controller.helpData?.title??"",
                       style: const TextStyle(
                           fontFamily: fontFamilyName,
 

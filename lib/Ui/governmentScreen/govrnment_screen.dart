@@ -7,7 +7,11 @@ import 'package:privilegecare/Ui/governmentScreen/widget/government_cell_widget.
 import 'package:privilegecare/Ui/governmentScreen/widget/loading_government_widget.dart';
 import 'package:privilegecare/Utils/colors.dart';
 import 'package:privilegecare/Utils/constant.dart';
+import 'package:privilegecare/Utils/localization_services.dart';
+import 'package:privilegecare/Utils/memory.dart';
 import 'package:privilegecare/Utils/translation_key.dart';
+
+import '../../widgets/custom_text_widget.dart';
 
 
 class GovernmentScreen extends StatelessWidget {
@@ -24,11 +28,11 @@ class GovernmentScreen extends StatelessWidget {
             appBar:AppBar(
               backgroundColor: kGreenColor,
               leadingWidth: 60,
-              leading: IconButton(icon: const Icon(Icons.arrow_circle_right_outlined,color: kWhiteColor,size: 40,),onPressed: (){
+              leading: IconButton(icon: Get.find<StorageService>().activeLocale == SupportedLocales.english?const Icon(Icons.arrow_circle_left_outlined,color: kWhiteColor,size: 40,):const Icon(Icons.arrow_circle_right_outlined,color: kWhiteColor,size: 40,),onPressed: (){
                 Get.back();
               },),
               centerTitle: true,
-              title:   Text(
+              title:   CustomText(
                 chooseGov.tr,
                 style: const TextStyle(
                     fontFamily: fontFamilyName,

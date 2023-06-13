@@ -4,7 +4,10 @@ import 'package:get/get.dart';
 import 'package:privilegecare/Ui/editProfile/controller/edit_profile_controller.dart';
 import 'package:privilegecare/Utils/colors.dart';
 import 'package:privilegecare/Utils/constant.dart';
+import 'package:privilegecare/Utils/localization_services.dart';
+import 'package:privilegecare/Utils/memory.dart';
 import 'package:privilegecare/Utils/translation_key.dart';
+import 'package:privilegecare/widgets/custom_text_widget.dart';
 import 'package:privilegecare/widgets/loader.dart';
 import 'package:privilegecare/widgets/text_field_widget.dart';
 
@@ -19,11 +22,11 @@ class EditProfileScreen extends StatelessWidget {
         appBar:AppBar(
           backgroundColor: kGreenColor,
           leadingWidth: 60,
-          leading: IconButton(icon: const Icon(Icons.arrow_circle_right_outlined,color: kWhiteColor,size: 40,),onPressed: (){
+          leading: IconButton(icon: Get.find<StorageService>().activeLocale == SupportedLocales.english?const Icon(Icons.arrow_circle_left_outlined,color: kWhiteColor,size: 40,):const Icon(Icons.arrow_circle_right_outlined,color: kWhiteColor,size: 40,),onPressed: (){
             Get.back();
           },),
           centerTitle: true,
-          title:   Text(
+          title:   CustomText(
             editProfileTitle.tr,
             style: const TextStyle(
                 fontFamily: fontFamilyName,
@@ -51,7 +54,7 @@ class EditProfileScreen extends StatelessWidget {
                 ),
                  Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 10.0),
-                  child: Text(signUpTitleName.tr,
+                  child: CustomText(signUpTitleName.tr,
                     style: const TextStyle(
                         fontFamily: fontFamilyName,
                         color: kGreenColor,
@@ -155,7 +158,7 @@ class EditProfileScreen extends StatelessWidget {
                 const SizedBox(height: 5,),
                  Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 10.0),
-                  child: Text(signUpTitleEmail.tr,
+                  child: CustomText(signUpTitleEmail.tr,
                     style: const TextStyle(
                         fontFamily: fontFamilyName,
                         color: kGreenColor,
@@ -193,7 +196,7 @@ class EditProfileScreen extends StatelessWidget {
                 const SizedBox(height: 5,),
                  Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 10.0),
-                  child: Text(signUpTitlePhone.tr,
+                  child: CustomText(signUpTitlePhone.tr,
                     style: const TextStyle(
                         fontFamily: fontFamilyName,
                         color: kGreenColor,
@@ -220,7 +223,7 @@ class EditProfileScreen extends StatelessWidget {
                         mainAxisSize: MainAxisSize.min,
                         children: [
 
-                          Text("   ${signUpTextPhoneKey.tr}    ", style: const TextStyle(
+                          CustomText("   ${signUpTextPhoneKey.tr}    ", style: const TextStyle(
                             fontSize: 15.0,
                             fontFamily: fontFamilyName,
                             color: kGrayColor,
@@ -234,7 +237,7 @@ class EditProfileScreen extends StatelessWidget {
                         mainAxisSize: MainAxisSize.min,
                         children: [
 
-                          Text("   ${signUpTextPhoneKey.tr}    ", style: const TextStyle(
+                          CustomText("   ${signUpTextPhoneKey.tr}    ", style: const TextStyle(
                             fontSize: 15.0,
                             fontFamily: fontFamilyName,
                             color: kGrayColor,
@@ -249,7 +252,7 @@ class EditProfileScreen extends StatelessWidget {
                         mainAxisSize: MainAxisSize.min,
                         children: [
 
-                          Text("   ${signUpTextPhoneKey.tr}    ", style: const TextStyle(
+                          CustomText("   ${signUpTextPhoneKey.tr}    ", style: const TextStyle(
                             fontSize: 15.0,
                             fontFamily: fontFamilyName,
                             color: kGrayColor,
@@ -283,7 +286,7 @@ class EditProfileScreen extends StatelessWidget {
                           color:controller.editProfile?kGrayColor:kBlueColor
                       ),
                       child:  Center(
-                        child:  Text(editProfileTitle.tr,
+                        child:  CustomText(editProfileTitle.tr,
                           textAlign: TextAlign.center,
                           style: const TextStyle(
                               fontFamily: fontFamilyName,

@@ -5,10 +5,14 @@ import 'package:get/get.dart';
 import 'package:privilegecare/Ui/HomeScreen/home_screen.dart';
 import 'package:privilegecare/Ui/logInScreen/login_screen.dart';
 import 'package:privilegecare/Ui/signUpScreen/signup_screen.dart';
+import 'package:privilegecare/Ui/splash_screen/splash_screen.dart';
 import 'package:privilegecare/Utils/colors.dart';
 import 'package:privilegecare/Utils/constant.dart';
+import 'package:privilegecare/Utils/localization_services.dart';
+import 'package:privilegecare/widgets/custom_text_widget.dart';
 
 import '../../Utils/translation_key.dart';
+import '../../widgets/language_dialog_widget.dart';
 
 class WelcomeScreen extends StatelessWidget {
   const WelcomeScreen({Key? key}) : super(key: key);
@@ -31,22 +35,35 @@ class WelcomeScreen extends StatelessWidget {
             ),
               Column(
               children: [
-                Text(welcomeText.tr,
+                CustomText(welcomeText.tr,
                   style: const TextStyle(
 
                       fontFamily: fontFamilyName,
                       color: kBlueColor,
                       fontWeight: FontWeight.w700,
                       fontSize: 25),),
-                Text("${welcomeText1.tr} \n ${welcomeText2.tr}",
+                CustomText("${welcomeText1.tr} \n ${welcomeText2.tr}",
                   textAlign: TextAlign.center,
-                  style: TextStyle(
+                  style: const TextStyle(
 
                       fontFamily:fontFamilyName,
                       color: kBlackColor,
                       fontWeight: FontWeight.w700,
                       fontSize: 18),),
+                InkWell(
+                  onTap: (){
+                    Get.find<LocalizationService>().toggleLocale();
 
+                    Get.offAll(const WelcomeScreen());
+                  },
+                  child:  CustomText(languageWelcomeBTN.tr,
+                    textAlign: TextAlign.center,
+                    style: const TextStyle(
+                        fontFamily: fontFamilyName,
+                        color: kBlueColor,
+                        fontWeight: FontWeight.w700,
+                        fontSize: 17),),
+                ),
               ],
             ),
             Container(
@@ -67,7 +84,7 @@ class WelcomeScreen extends StatelessWidget {
                       color: kBlueColor
                     ),
                     child:  Center(
-                      child:  Text(welcomeBTN1.tr,
+                      child:  CustomText(welcomeBTN1.tr,
                         textAlign: TextAlign.center,
                         style: const TextStyle(
                             fontFamily: fontFamilyName,
@@ -89,7 +106,7 @@ class WelcomeScreen extends StatelessWidget {
                       color: kBlueColor
                     ),
                     child:  Center(
-                      child:  Text(welcomeBTN2.tr,
+                      child:  CustomText(welcomeBTN2.tr,
                         textAlign: TextAlign.center,
                         style: const TextStyle(
                             fontFamily: fontFamilyName,
@@ -105,9 +122,9 @@ class WelcomeScreen extends StatelessWidget {
               onTap: (){
                 Get.to(()=>const HomeScreen());
               },
-              child: const Text("< skip to home",
+              child:  CustomText(skipToHomeBTN.tr,
                 textAlign: TextAlign.center,
-                style: TextStyle(
+                style: const TextStyle(
                     fontFamily: fontFamilyName,
                     color: kBlueColor,
                     fontWeight: FontWeight.w700,

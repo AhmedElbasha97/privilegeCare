@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:privilegecare/Utils/colors.dart';
 import 'package:privilegecare/Utils/translation_key.dart';
+import 'package:privilegecare/widgets/custom_text_widget.dart';
 
 
 class NoDataWidget extends StatelessWidget {
@@ -28,7 +29,7 @@ class NoDataWidget extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Image.asset(imgPath,height: Get.width*0.65,),
-             Text(text,style: const TextStyle(color: kGreenColor,fontWeight: FontWeight.bold,fontSize: 30),textAlign: TextAlign.center,),
+            CustomText(text,style: const TextStyle(color: kGreenColor,fontWeight: FontWeight.bold,fontSize: 30),textAlign: TextAlign.center,),
             const SizedBox(height: 30,),
             hasRefreshButtonOrNot?InkWell(
               onTap: (){refreshedFunc();},
@@ -50,7 +51,7 @@ class NoDataWidget extends StatelessWidget {
                     padding: const EdgeInsets.all(5.0),
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.center,
-                      children:  [Text(
+                      children:  [CustomText(
                           refreshKey.tr,
                           style: const TextStyle(
                               fontFamily: "elmessiri",

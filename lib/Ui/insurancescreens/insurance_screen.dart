@@ -4,8 +4,12 @@ import 'package:privilegecare/Ui/insurancescreens/controller/insurance_controlle
 import 'package:privilegecare/Ui/insurancescreens/edit_insuranece_data_screen.dart';
 import 'package:privilegecare/Utils/colors.dart';
 import 'package:privilegecare/Utils/constant.dart';
+import 'package:privilegecare/Utils/memory.dart';
 import 'package:privilegecare/Utils/translation_key.dart';
+import 'package:privilegecare/widgets/custom_text_widget.dart';
 import 'package:privilegecare/widgets/loader.dart';
+
+import '../../Utils/localization_services.dart';
 
 class InsuranceScreen extends StatelessWidget {
   const InsuranceScreen({Key? key}) : super(key: key);
@@ -19,11 +23,11 @@ class InsuranceScreen extends StatelessWidget {
           appBar: AppBar(
             backgroundColor: kGreenColor,
             leadingWidth: 60,
-            leading: IconButton(icon: const Icon(Icons.arrow_circle_right_outlined,color: kWhiteColor,size: 40,),onPressed: (){
+            leading: IconButton(icon: Get.find<StorageService>().activeLocale == SupportedLocales.english?const Icon(Icons.arrow_circle_left_outlined,color: kWhiteColor,size: 40,):const Icon(Icons.arrow_circle_right_outlined,color: kWhiteColor,size: 40,),onPressed: (){
               Get.back();
             },),
             centerTitle: true,
-            title:   Text(
+            title:   CustomText(
               insuranceDataTitle.tr,
               style: const TextStyle(
                   fontFamily: fontFamilyName,
@@ -43,7 +47,7 @@ class InsuranceScreen extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Image.asset("assets/images/Insurance-pana.png",height: Get.width*0.65,),
-                   Text(insuranceNoData.tr,style: const TextStyle(color: kGreenColor,fontWeight: FontWeight.bold,fontSize: 30),textAlign: TextAlign.center,),
+                  CustomText(insuranceNoData.tr,style: const TextStyle(color: kGreenColor,fontWeight: FontWeight.bold,fontSize: 30),textAlign: TextAlign.center,),
                   const SizedBox(height: 30,),
                  InkWell(
                     onTap: (){
@@ -67,7 +71,7 @@ class InsuranceScreen extends StatelessWidget {
                           padding: const EdgeInsets.all(5.0),
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.center,
-                            children:  [Text(
+                            children:  [CustomText(
                                 insuranceAddData.tr,
                                 style: const TextStyle(
                                     fontFamily: fontFamilyName,
@@ -127,7 +131,7 @@ class InsuranceScreen extends StatelessWidget {
                                 Center(
                                   child:  Padding(
                                     padding: const EdgeInsets.symmetric(horizontal: 10.0),
-                                    child: Text(controller.healthInsuranceData?.insurance??"",
+                                    child: CustomText(controller.healthInsuranceData?.insurance??"",
                                       style: const TextStyle(
                                           fontFamily: fontFamilyName,
                                           color: kBlueColor,
@@ -137,7 +141,7 @@ class InsuranceScreen extends StatelessWidget {
                                 ),
                                  Padding(
                                   padding: const EdgeInsets.symmetric(horizontal: 10.0),
-                                  child: Text(insuranceDataNum.tr,
+                                  child: CustomText(insuranceDataNum.tr,
                                     style: const TextStyle(
                                         fontFamily: fontFamilyName,
                                         color: kGreenColor,
@@ -147,7 +151,7 @@ class InsuranceScreen extends StatelessWidget {
                                 Center(
                                   child:  Padding(
                                     padding: const EdgeInsets.symmetric(horizontal: 10.0),
-                                    child: Text(controller.healthInsuranceData?.card??"",
+                                    child: CustomText(controller.healthInsuranceData?.card??"",
                                       style: const TextStyle(
                                           fontFamily: fontFamilyName,
                                           color: kBlueColor,
@@ -177,7 +181,7 @@ class InsuranceScreen extends StatelessWidget {
                           color:kBlueColor
                       ),
                       child:  Center(
-                        child:  Text(controller.hasNoData?insuranceAddData.tr:insuranceDataEdit.tr,
+                        child:  CustomText(controller.hasNoData?insuranceAddData.tr:insuranceDataEdit.tr,
                           textAlign: TextAlign.center,
                           style: const TextStyle(
                               fontFamily: fontFamilyName,

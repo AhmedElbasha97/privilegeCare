@@ -10,6 +10,7 @@ import 'package:privilegecare/Services/favoutite_services.dart';
 import 'package:privilegecare/Utils/localization_services.dart';
 import 'package:privilegecare/Utils/memory.dart';
 import 'package:privilegecare/Utils/translation_key.dart';
+import 'package:privilegecare/widgets/custom_text_widget.dart';
 
 class FavoriteDoctorsController extends GetxController{
   bool isLoading = true;
@@ -47,7 +48,7 @@ class FavoriteDoctorsController extends GetxController{
           update();
       if (status?.msg == "succeeded") {
         final snackBar = SnackBar(
-          content: Text(' ${removeDocFromFav1.tr} $doctorName ${removeDocFromFav2.tr}  '),
+          content: CustomText(' ${removeDocFromFav1.tr} $doctorName ${removeDocFromFav2.tr}  '),
 
         );
         ScaffoldMessenger.of(context).showSnackBar(snackBar);

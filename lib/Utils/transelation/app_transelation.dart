@@ -167,11 +167,11 @@ class AppTranslations extends Translations {
       removeDocFromFav1: "Doctor Removed",
       removeDocFromFav2: "From Favourites",
       editProfileTitle:"Update Profile",
-      oneStarRat: "One Star and More",
-      twoStarRat: "Two Stars, One or More",
-      threeStarRat: "Three Stars and More",
-      fourStarRat: "Four Stars and More",
-      fiveStarRat: "Five Stars",
+      oneStarRat: "1 Star and More",
+      twoStarRat: "2 Stars, One or More",
+      threeStarRat: "3 Stars and More",
+      fourStarRat: "4 Stars and More",
+      fiveStarRat: "5 Stars",
       addDocToFav1: "Doctor added",
       addDocToFav2: "To Favorites",
       noSearchHospData: "There is no doctor for whom this information applies",
@@ -245,7 +245,17 @@ class AppTranslations extends Translations {
       logOut: 'Log out of account',
       warningLogOut: 'Log out of account',
       warningDeleteAcc: "Deleting the account will result in the loss of all registered data as well as the loss of the points gained",
-      contDeleteAcc:"Complete Deleting"
+      contDeleteAcc:"Complete Deleting",
+      bottomBarItem1: "Account",
+      bottomBarItem2: "Doctors",
+      bottomBarItem3: "Home",
+      bottomBarItem4: "Hospital",
+      bottomBarItem5: "Advanced Search",
+      languageDialogueEN: " English ",
+      languageDialogueAR: " Arabic ",
+      languageDialogueCL: "Choose Language",
+      languageDialogueBTN:"Change Language",
+      languageWelcomeBTN:"تغير اللغه إلى اللغة العربية"
 
     },
     "ar": {
@@ -494,7 +504,17 @@ class AppTranslations extends Translations {
       logOut:  'الخروج من الحساب',
       warningLogOut:  'تسجيل الخروج من الحساب',
       warningDeleteAcc:  "مسح الحساب سوف يترتب عليه خساره جميع البينات المسجله وايضا خساره النقاط المكتسبة",
-      contDeleteAcc:"استكمال المسح"
+      contDeleteAcc:"استكمال المسح",
+      bottomBarItem1: "الحساب الشخصى",
+      bottomBarItem2: "الأطباء",
+      bottomBarItem3: "الصفحة الرئيسية",
+      bottomBarItem4: "مستشفى",
+      bottomBarItem5: "البحث المتقدم",
+      languageDialogueEN: " الإنجليزية ",
+      languageDialogueAR: " العربية ",
+      languageDialogueCL: "إختر اللغة",
+      languageDialogueBTN:"تغير اللغة",
+      languageWelcomeBTN:"change language to english"
 
 
 

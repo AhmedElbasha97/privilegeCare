@@ -8,6 +8,9 @@ import 'package:privilegecare/Ui/forgetPassword/forget_password_screen.dart';
 import 'package:privilegecare/Ui/logInScreen/Controller/login_controller.dart';
 import 'package:privilegecare/Utils/colors.dart';
 import 'package:privilegecare/Utils/constant.dart';
+import 'package:privilegecare/Utils/localization_services.dart';
+import 'package:privilegecare/Utils/memory.dart';
+import 'package:privilegecare/widgets/custom_text_widget.dart';
 import 'package:privilegecare/widgets/text_field_widget.dart';
 
 import '../../Utils/translation_key.dart';
@@ -28,20 +31,20 @@ class LoginScreen extends StatelessWidget {
           actions:  [
             TextButton(onPressed: (){
               Get.to(() => const HomeScreen());
-            }, child:  Text(
+            }, child:  CustomText(
               skipToHomeBTN.tr,
        style: const TextStyle(
-        fontSize: 18.0,
+        fontSize: 10.0,
         fontFamily: fontFamilyName,
         color: kWhiteColor,
       ),
             )),
           ],
-          leading: IconButton(icon: const Icon(Icons.arrow_circle_right_outlined,color: kWhiteColor,size: 40,),onPressed: (){
+          leading: IconButton(icon: Get.find<StorageService>().activeLocale == SupportedLocales.english?const Icon(Icons.arrow_circle_left_outlined,color: kWhiteColor,size: 40,):const Icon(Icons.arrow_circle_right_outlined,color: kWhiteColor,size: 40,),onPressed: (){
             Get.back();
           },),
           centerTitle: true,
-          title:   Text(
+          title:   CustomText(
             signInTitle.tr,
             style: const TextStyle(
                 fontFamily: fontFamilyName,
@@ -84,13 +87,13 @@ class LoginScreen extends StatelessWidget {
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.spaceAround,
                       children:  [
-                         Text(signInText1.tr,
+                        CustomText(signInText1.tr,
                           style: const TextStyle(
                               fontFamily: fontFamilyName,
                               color: kBlackColor,
                               fontWeight: FontWeight.w700,
                               fontSize: 18),),
-                         Text(signInText2.tr,
+                        CustomText(signInText2.tr,
                           style: const TextStyle(
                               fontFamily: fontFamilyName,
                               color: kGrayColor,
@@ -115,7 +118,7 @@ class LoginScreen extends StatelessWidget {
                                 Icons.close_outlined,
                                 color: kErrorColor,
                               )
-                                  : null,
+                                  : const SizedBox(width: 10,),
                               labelText: signInTextEmail.tr,
 
                                hasGreenBorder: true,
@@ -182,7 +185,7 @@ class LoginScreen extends StatelessWidget {
                                 color: controller.signingIn?kGrayColor:kBlueColor
                             ),
                             child:  Center(
-                              child:  Text(signInTextBTN.tr,
+                              child:  CustomText(signInTextBTN.tr,
                                 textAlign: TextAlign.center,
                                 style: const TextStyle(
                                     fontFamily:fontFamilyName,

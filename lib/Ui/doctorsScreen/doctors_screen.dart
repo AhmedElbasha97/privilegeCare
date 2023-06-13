@@ -9,9 +9,11 @@ import 'package:privilegecare/Ui/governmentScreen/govrnment_screen.dart';
 
 import 'package:privilegecare/Utils/colors.dart';
 import 'package:privilegecare/Utils/constant.dart';
+import 'package:privilegecare/Utils/localization_services.dart';
 import 'package:privilegecare/Utils/memory.dart';
 import 'package:privilegecare/Utils/translation_key.dart';
 import 'package:privilegecare/widgets/bottom_navigation_bar.dart';
+import 'package:privilegecare/widgets/custom_text_widget.dart';
 import 'package:privilegecare/widgets/loader.dart';
 import 'package:privilegecare/widgets/no_data_widget.dart';
 
@@ -67,10 +69,7 @@ class DoctorScreen extends StatelessWidget {
                         crossAxisAlignment: CrossAxisAlignment.center,
                         children:  [
                           const SizedBox(width: 5,),
-                          const Icon(
-                            Icons.arrow_circle_right_outlined,
-                            color: kWhiteColor,
-                            size: 30,),
+                          Get.find<StorageService>().activeLocale == SupportedLocales.english?const Icon(Icons.arrow_circle_left_outlined,color: kWhiteColor,size: 30,):const Icon(Icons.arrow_circle_right_outlined,color: kWhiteColor,size: 30,),
                           const SizedBox(width: 90,),
                           Column(
                             mainAxisAlignment: MainAxisAlignment.center,
@@ -82,7 +81,7 @@ class DoctorScreen extends StatelessWidget {
                                   children: [
 
 
-                                    Text(allAreaKey.tr,
+                                    CustomText(allAreaKey.tr,
                                       style: const TextStyle(
                                           fontFamily: fontFamilyName,
                                           color: kWhiteColor,
@@ -132,6 +131,7 @@ class DoctorScreen extends StatelessWidget {
 
                           hintText: searchWithDoctorName.tr,
                           hintStyle: const TextStyle(
+
                               fontFamily: fontFamilyName,
                               color: kGrayColor,
                               fontWeight: FontWeight.w700,

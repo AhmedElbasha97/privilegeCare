@@ -26,8 +26,8 @@ class DoctorProfile {
   String? specialist;
   String? specialistEn;
   int? visitors;
-  int? doctorRate;
-  int? hospRate;
+  double? doctorRate;
+  double? hospRate;
   List<Schedule>? schedule;
 
   DoctorProfile({
@@ -79,8 +79,8 @@ class DoctorProfile {
     specialist: json["specialist"],
     specialistEn: json["specialist_en"],
     visitors: json["visitors"],
-    doctorRate: json["doctor_rate"],
-    hospRate: json["hosp_rate"],
+    doctorRate: double.parse("${json["doctor_rate"]}"),
+    hospRate: double.parse("${json["hosp_rate"]}"),
     schedule: json["schedule"] == null ? [] : List<Schedule>.from(json["schedule"]!.map((x) => x)),
   );
 

@@ -18,6 +18,7 @@ import 'package:privilegecare/Ui/signUpScreen/signup_screen.dart';
 import 'package:privilegecare/Utils/localization_services.dart';
 import 'package:privilegecare/Utils/memory.dart';
 import 'package:privilegecare/Utils/translation_key.dart';
+import 'package:privilegecare/widgets/custom_text_widget.dart';
 import 'package:share_plus/share_plus.dart';
 
 class DoctorDetailedController extends GetxController{
@@ -75,7 +76,7 @@ class DoctorDetailedController extends GetxController{
           .getId, "0");
       if (status?.msg == "succeeded") {
         final snackBar = SnackBar(
-          content: Text(' ${removeDocFromFav1.tr} $doctorName ${removeDocFromFav2.tr}  '),
+          content: CustomText(' ${removeDocFromFav1.tr} $doctorName ${removeDocFromFav2.tr}  '),
 
         );
         ScaffoldMessenger.of(context).showSnackBar(snackBar);
@@ -98,7 +99,7 @@ class DoctorDetailedController extends GetxController{
           .getId, "1");
       if (status?.msg == "succeeded") {
         final snackBar = SnackBar(
-          content: Text("${addDocToFav1.tr} $doctorName ${addDocToFav2.tr}" ),
+          content: CustomText("${addDocToFav1.tr} $doctorName ${addDocToFav2.tr}" ),
 
         );
         ScaffoldMessenger.of(context).showSnackBar(snackBar);

@@ -11,6 +11,7 @@ import 'package:privilegecare/Utils/localization_services.dart';
 import 'package:privilegecare/Utils/memory.dart';
 import 'package:privilegecare/Utils/translation_key.dart';
 import 'package:privilegecare/widgets/bottom_navigation_bar.dart';
+import 'package:privilegecare/widgets/custom_text_widget.dart';
 import 'package:star_rating/star_rating.dart';
 
 class FilterScreen extends StatelessWidget {
@@ -39,7 +40,7 @@ class FilterScreen extends StatelessWidget {
               ),
 
               centerTitle: true,
-              title:   Text(
+              title:   CustomText(
                 advancedSearchTitle.tr,
                 style: const TextStyle(
                     fontFamily: fontFamilyName,
@@ -63,7 +64,7 @@ class FilterScreen extends StatelessWidget {
                         padding: const EdgeInsets.symmetric(horizontal: 10.0),
                         child: Container(
                           width: Get.width,
-                          child:  Text(searchTypeTitle.tr,
+                          child:  CustomText(searchTypeTitle.tr,
                             textAlign: TextAlign.start,
                             style: const TextStyle(
                                 fontFamily: fontFamilyName,
@@ -128,7 +129,7 @@ class FilterScreen extends StatelessWidget {
                                     ),
                                   ),
                                   const SizedBox(width: 10,),
-                                   Text(
+                                  CustomText(
                                     searchType2.tr,
                                     style: const TextStyle(
                                         fontFamily: fontFamilyName,
@@ -160,7 +161,7 @@ class FilterScreen extends StatelessWidget {
                         padding: const EdgeInsets.symmetric(horizontal: 10.0),
                         child: SizedBox(
                           width: Get.width,
-                          child:  Text(searchAreaTitle.tr,
+                          child:  CustomText(searchAreaTitle.tr,
                             textAlign: TextAlign.start,
                             style: const TextStyle(
                                 fontFamily: fontFamilyName,
@@ -201,7 +202,7 @@ class FilterScreen extends StatelessWidget {
                               children: [
 
 
-                                 Text(
+                                CustomText(
                                   loadingKey.tr,
                                   style: const TextStyle(
                                     fontFamily: fontFamilyName,
@@ -247,7 +248,7 @@ class FilterScreen extends StatelessWidget {
                                   width: Get.width,
                                   child: Column(
                                     children: [
-                                      Text(
+                                      CustomText(
                                         Get.find<StorageService>().activeLocale == SupportedLocales.english?e.nameEn??"":e.name??"",
                                         style: const TextStyle(
                                             color: kBlueColor,
@@ -283,7 +284,7 @@ class FilterScreen extends StatelessWidget {
                               child:  controller.placeName==""? Row(
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 children: [
-                                  Text(
+                                  CustomText(
                                     searchAreaText1.tr,
                                     style: const TextStyle(
                                         fontFamily: fontFamilyName,
@@ -298,7 +299,7 @@ class FilterScreen extends StatelessWidget {
                               ):Row(
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 children: [
-                                   Text(
+                                  CustomText(
                                     searchAreaText2.tr,
                                     style: const TextStyle(
                                         fontFamily: fontFamilyName,
@@ -312,7 +313,7 @@ class FilterScreen extends StatelessWidget {
                                     child: Column(
                                       mainAxisAlignment: MainAxisAlignment.center,
                                       children: [
-                                        Text(
+                                        CustomText(
                                           controller.placeName,
                                           style: const TextStyle(
                                               fontFamily: fontFamilyName,
@@ -396,7 +397,7 @@ class FilterScreen extends StatelessWidget {
                               children: [
 
 
-                                 Text(
+                                CustomText(
                                   loadingKey.tr,
                                   style: const TextStyle(
                                     fontFamily: fontFamilyName,
@@ -449,7 +450,7 @@ class FilterScreen extends StatelessWidget {
                                             width:30,
                                             child: Image.network("https://privilegecare.net${e.image}",fit: BoxFit.fitWidth,),
                                           ),const SizedBox(width: 10,),
-                                          Text(
+                                          CustomText(
                                             Get.find<StorageService>().activeLocale == SupportedLocales.english?e.nameEn??"":e.name??"",
                                             style: const TextStyle(
                                                 color: kBlueColor,
@@ -487,7 +488,7 @@ class FilterScreen extends StatelessWidget {
                               child:  controller.specialtyName==""? Row(
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 children: [
-                                   Text(
+                                  CustomText(
                                     searchSpecText1.tr,
                                     style: const TextStyle(
                                         fontFamily: fontFamilyName,
@@ -506,7 +507,7 @@ class FilterScreen extends StatelessWidget {
                               ):Row(
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 children: [
-                                   Text(
+                                  CustomText(
                                     searchSpecText2.tr,
                                     style: const TextStyle(
                                         fontFamily: fontFamilyName,
@@ -611,7 +612,7 @@ class FilterScreen extends StatelessWidget {
                               children: [
 
 
-                                 Text(
+                                CustomText(
                                    loadingKey.tr,
                                   style: const TextStyle(
                                     fontFamily: fontFamilyName,
@@ -657,7 +658,7 @@ class FilterScreen extends StatelessWidget {
                                   width: Get.width,
                                   child: Column(
                                     children: [
-                                      Text(
+                                      CustomText(
                                         Get.find<StorageService>().activeLocale == SupportedLocales.english?e.nameEn??"":e.name??"",
                                         style: const TextStyle(
                                             color: kBlueColor,
@@ -693,7 +694,7 @@ class FilterScreen extends StatelessWidget {
                               child:  controller.levelName==""? Row(
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 children: [
-                                   Text(
+                                  CustomText(
                                     searchLevelText1.tr,
                                     style: const TextStyle(
                                         fontFamily: fontFamilyName,
@@ -712,7 +713,7 @@ class FilterScreen extends StatelessWidget {
                               ):Row(
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 children: [
-                                   Text(
+                                  CustomText(
                                      searchLevelText2.tr,
                                     style: const TextStyle(
                                         fontFamily: fontFamilyName,
@@ -726,7 +727,7 @@ class FilterScreen extends StatelessWidget {
                                     child: Column(
                                       mainAxisAlignment: MainAxisAlignment.center,
                                       children: [
-                                        Text(controller.levelName,
+                                        CustomText(controller.levelName,
                                           style: const TextStyle(
                                               fontFamily: fontFamilyName,
                                               color: kBlueColor,
@@ -767,7 +768,7 @@ class FilterScreen extends StatelessWidget {
                         padding: const EdgeInsets.symmetric(horizontal: 10.0),
                         child: Container(
                           width: Get.width,
-                          child:  Text(searchPriceTitle.tr,
+                          child:  CustomText(searchPriceTitle.tr,
                             textAlign: TextAlign.start,
                             style: const TextStyle(
                                 fontFamily: fontFamilyName,
@@ -939,7 +940,7 @@ class FilterScreen extends StatelessWidget {
                         padding: const EdgeInsets.symmetric(horizontal: 10.0),
                         child: Container(
                           width: Get.width,
-                          child:  Text(searchRateTitle.tr,
+                          child:  CustomText(searchRateTitle.tr,
                             textAlign: TextAlign.start,
                             style: const TextStyle(
                                 fontFamily: fontFamilyName,
@@ -1020,7 +1021,7 @@ class FilterScreen extends StatelessWidget {
                               child:  controller.ratingName==""? Row(
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 children: [
-                                   Text(
+                                  CustomText(
                                     searchRateText1.tr,
                                     style: const TextStyle(
                                         fontFamily: fontFamilyName,
@@ -1055,7 +1056,7 @@ class FilterScreen extends StatelessWidget {
                                       children: [
                                         Row(
                                           children: [
-                                            Text(
+                                            CustomText(
                                               controller.ratingName,
                                               style: const TextStyle(
                                                   fontFamily: fontFamilyName,
@@ -1112,7 +1113,7 @@ class FilterScreen extends StatelessWidget {
                         padding: const EdgeInsets.symmetric(horizontal: 10.0),
                         child: Container(
                           width: Get.width,
-                          child:  Text(searchReservationTypeTitle.tr,
+                          child:  CustomText(searchReservationTypeTitle.tr,
                             textAlign: TextAlign.start,
                             style: const TextStyle(
                                 fontFamily: fontFamilyName,
@@ -1147,7 +1148,7 @@ class FilterScreen extends StatelessWidget {
                                     ),
                                   ),
                                   const SizedBox(width: 10,),
-                                   Text(
+                                  CustomText(
                                      searchReservationTypeText1.tr,
                                     style: const TextStyle(
                                         fontFamily: fontFamilyName,
@@ -1177,7 +1178,7 @@ class FilterScreen extends StatelessWidget {
                                     ),
                                   ),
                                   const SizedBox(width: 10,),
-                                   Text(
+                                  CustomText(
                                     searchReservationTypeText2.tr,
                                     style: const TextStyle(
                                         fontFamily: fontFamilyName,
@@ -1219,7 +1220,7 @@ class FilterScreen extends StatelessWidget {
                               borderRadius: BorderRadius.circular(15),
                             ),
                             child:  Center(
-                              child:  Text(
+                              child:  CustomText(
                                 advancedSearchBTN.tr,
                                 style: const TextStyle(
                                     fontFamily: fontFamilyName,

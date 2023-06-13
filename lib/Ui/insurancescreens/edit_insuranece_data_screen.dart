@@ -5,6 +5,7 @@ import 'package:privilegecare/Ui/insurancescreens/controller/insurance_controlle
 import 'package:privilegecare/Utils/colors.dart';
 import 'package:privilegecare/Utils/constant.dart';
 import 'package:privilegecare/Utils/translation_key.dart';
+import 'package:privilegecare/widgets/custom_text_widget.dart';
 import 'package:privilegecare/widgets/text_field_widget.dart';
 
 class  EditInsuranceDataScreen extends StatelessWidget {
@@ -21,7 +22,7 @@ class  EditInsuranceDataScreen extends StatelessWidget {
         Get.back();
       },),
       centerTitle: true,
-      title:   Text(
+      title:   CustomText(
         addingNewCard?insuranceAddData.tr:insuranceDataEdit.tr,
         style: const TextStyle(
             fontFamily: fontFamilyName,
@@ -53,7 +54,7 @@ class  EditInsuranceDataScreen extends StatelessWidget {
                           children:[
                              Padding(
                               padding: const EdgeInsets.symmetric(horizontal: 10.0),
-                              child: Text(insuranceDataEditNameTitle.tr,
+                              child: CustomText(insuranceDataEditNameTitle.tr,
                                 style: const TextStyle(
                                     fontFamily: fontFamilyName,
                                     color: kGreenColor,
@@ -102,7 +103,7 @@ class  EditInsuranceDataScreen extends StatelessWidget {
                             const SizedBox(height: 5,),
                              Padding(
                               padding: const EdgeInsets.symmetric(horizontal: 10.0),
-                              child: Text(insuranceDataEditNumTitle.tr,
+                              child: CustomText(insuranceDataEditNumTitle.tr,
                                 style: const TextStyle(
                                     fontFamily: fontFamilyName,
                                     color: kGreenColor,
@@ -159,7 +160,7 @@ class  EditInsuranceDataScreen extends StatelessWidget {
                                 color:controller.editingInsuranceCard?kGrayColor:kBlueColor
                             ),
                             child:  Center(
-                              child:  Text(addingNewCard?insuranceAddData.tr:insuranceDataEdit.tr,
+                              child:  CustomText(addingNewCard?insuranceAddData.tr:insuranceDataEdit.tr,
                                 textAlign: TextAlign.center,
                                 style: const TextStyle(
                                     fontFamily: fontFamilyName,

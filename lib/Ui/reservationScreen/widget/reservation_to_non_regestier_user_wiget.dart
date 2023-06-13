@@ -5,6 +5,7 @@ import 'package:privilegecare/Ui/reservationScreen/controller/reservation_contro
 import 'package:privilegecare/Utils/colors.dart';
 import 'package:privilegecare/Utils/constant.dart';
 import 'package:privilegecare/Utils/translation_key.dart';
+import 'package:privilegecare/widgets/custom_text_widget.dart';
 import 'package:privilegecare/widgets/text_field_widget.dart';
 
 class ReservationToNonRegestierUserWidget extends StatelessWidget {
@@ -98,7 +99,7 @@ class ReservationToNonRegestierUserWidget extends StatelessWidget {
                           color: controller.reservationIsRunning?kGrayColor:kBlueColor
                       ),
                       child:  Center(
-                        child:  Text(makeReservation.tr,
+                        child:  CustomText(makeReservation.tr,
                           textAlign: TextAlign.center,
                           style: const TextStyle(
                               fontFamily:fontFamilyName,

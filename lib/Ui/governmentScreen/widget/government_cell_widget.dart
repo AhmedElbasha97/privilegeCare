@@ -7,6 +7,8 @@ import 'package:privilegecare/Utils/constant.dart';
 import 'package:privilegecare/Utils/localization_services.dart';
 import 'package:privilegecare/Utils/memory.dart';
 
+import '../../../widgets/custom_text_widget.dart';
+
 class GovernmentCellWidget extends StatelessWidget {
   final GovernmentModel? government;
   final String specialistId;
@@ -39,7 +41,7 @@ class GovernmentCellWidget extends StatelessWidget {
           children:  [
             const SizedBox(width: 5,),
 
-            Text(Get.find<StorageService>().activeLocale == SupportedLocales.english?(government?.nameEn??""):(government?.name??""),
+            CustomText(Get.find<StorageService>().activeLocale == SupportedLocales.english?(government?.nameEn??""):(government?.name??""),
               style: const TextStyle(
                   fontFamily: fontFamilyName,
                   color: kGrayColor,

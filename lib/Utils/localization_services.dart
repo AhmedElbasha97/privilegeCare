@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+
 import 'package:privilegecare/Utils/memory.dart';
 
 class SupportedLocales {
-  static List<Locale> all = [const Locale("en"), const Locale("ar")];
+  static List<Locale> all = [Locale("en"), Locale("ar")];
 
-  static Locale english = const Locale("en");
-  static Locale arabic = const Locale("ar");
+  static Locale english = Locale("en");
+  static Locale arabic = Locale("ar");
 }
 
 class LocalizationService extends GetxService {
@@ -24,7 +25,7 @@ class LocalizationService extends GetxService {
 
   void toggleLocale() {
     final Locale newLocale =
-    Get.find<StorageService>().activeLocale == SupportedLocales.english
+    Get.find<StorageService>().activeLocale == SupportedLocales.arabic
         ? SupportedLocales.english
         : SupportedLocales.arabic;
     //in storage
