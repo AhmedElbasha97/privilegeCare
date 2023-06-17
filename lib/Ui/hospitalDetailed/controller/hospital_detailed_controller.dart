@@ -10,6 +10,7 @@ import 'package:get/get.dart';
 import 'package:map_launcher/map_launcher.dart';
 import 'package:privilegecare/Models/doctort_list_model.dart';
 import 'package:privilegecare/Models/hospital_detailed_model.dart';
+import 'package:privilegecare/Models/hospital_doctor_model.dart';
 import 'package:privilegecare/Models/privacy_policy_model.dart';
 import 'package:privilegecare/Models/response_model.dart';
 import 'package:privilegecare/Services/favoutite_services.dart';
@@ -34,7 +35,7 @@ late HospitalDetailedModel? hospitalData;
 bool hospitalAddedOrNot = false;
 int screenIndex = 3;
 final String hospitalId;
-List<DoctorListModel>? doctorsData = [];
+List<HospitalDoctorData>? doctorsData = [];
 
   HospitalDetailedController(this.hospitalId);
 @override

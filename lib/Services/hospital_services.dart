@@ -1,5 +1,6 @@
 import 'package:privilegecare/Models/doctort_list_model.dart';
 import 'package:privilegecare/Models/hospital_detailed_model.dart';
+import 'package:privilegecare/Models/hospital_doctor_model.dart';
 import 'package:privilegecare/Models/hospital_list_model.dart';
 import 'package:privilegecare/Models/privacy_policy_model.dart';
 import 'package:privilegecare/Utils/api_service.dart';
@@ -49,14 +50,14 @@ class HospitalServices{
     }
     return null;
   }
-  static Future<List<DoctorListModel>?> getDoctorsInThisHospital(String hospitalId) async {
-    List<DoctorListModel>? doctorsList = [];
+  static Future<List<HospitalDoctorData>?> getDoctorsInThisHospital(String hospitalId) async {
+    List<HospitalDoctorData>? doctorsList = [];
     var data = await api.request(Services.doctorsInTheHospitalEndPoint, "POST",queryParamters: {
       "hospital_id":hospitalId,
     });
     if (data != null) {
       for (var doctor in data){
-        doctorsList.add(DoctorListModel.fromJson(doctor));
+        doctorsList.add(HospitalDoctorData.fromJson(doctor));
       }
       return doctorsList;
     }
