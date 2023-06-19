@@ -7,6 +7,7 @@ import 'package:cool_alert/cool_alert.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_html/flutter_html.dart';
 import 'package:get/get.dart';
+import 'package:privilegecare/Ui/dector_detailed_screen/doctor_detailed_screen.dart';
 import 'package:privilegecare/Ui/hospitalDetailed/controller/hospital_detailed_controller.dart';
 
 import 'package:privilegecare/Utils/colors.dart';
@@ -838,8 +839,8 @@ class HospitalDetailedScreen extends StatelessWidget {
                         ),
                           const SizedBox(width: 10,),
                           Container(
-                            width: Get.width*0.18,
-                            child:  Text(controller.hospitalData?.phone??"",
+                            width:  Get.width*0.4,
+                            child:  CustomText(controller.hospitalData?.phone??"",
                               textAlign: TextAlign.start,
                               style: const TextStyle(
                                   fontFamily: fontFamilyName,
@@ -1009,64 +1010,69 @@ class HospitalDetailedScreen extends StatelessWidget {
                       itemCount: controller.doctorsData?.length,
                       controller: controller.sController,
                       itemBuilder: (_,index){
-                        return   Padding(
-                          padding:  EdgeInsets.symmetric(horizontal: Get.width*0.03),
-                          child: Column(
-                            children: [
-                              CachedNetworkImage(
-                                fit: BoxFit.cover,
-                                imageUrl: "https://privilegecare.net${controller.doctorsData?[index].image??""}",
-                                imageBuilder: ((context, image){
-                                  return  Container(
-                                      height: 80,
-                                      width: 80,
-                                      decoration: BoxDecoration(
-                                        image: DecorationImage(
-                                          image: image,
-                                          fit: BoxFit.cover,
-                                        ),
+                        return   InkWell(
+                            onTap: (){
+                              Get.to( DoctorDetailedScreen(doctorId: "${controller.doctorsData?[index].id??0}",));
+                            },
+                          child: Padding(
+                            padding:  EdgeInsets.symmetric(horizontal: Get.width*0.03),
+                            child: Column(
+                              children: [
+                                CachedNetworkImage(
+                                  fit: BoxFit.cover,
+                                  imageUrl: "https://privilegecare.net${controller.doctorsData?[index].image??""}",
+                                  imageBuilder: ((context, image){
+                                    return  Container(
+                                        height: 80,
+                                        width: 80,
+                                        decoration: BoxDecoration(
+                                          image: DecorationImage(
+                                            image: image,
+                                            fit: BoxFit.cover,
+                                          ),
 
 
-                                      )
-                                  );
-                                }),
-                                placeholder: (context, image){
-                                  return  const Center(child: CircularProgressIndicator(color: kBlueColor,));
-                                },
-                                errorWidget: (context, url, error){
-                                  return Container(
-                                      height: 80,
-                                      width: 80,
+                                        )
+                                    );
+                                  }),
+                                  placeholder: (context, image){
+                                    return  const Center(child: CircularProgressIndicator(color: kBlueColor,));
+                                  },
+                                  errorWidget: (context, url, error){
+                                    return Container(
+                                        height: 80,
+                                        width: 80,
 
-                                      decoration: const BoxDecoration(
-                                        image: DecorationImage(
-                                          image: AssetImage("assets/images/doctor.png"),
-                                          fit: BoxFit.fill,
-                                        ),
+                                        decoration: const BoxDecoration(
+                                          image: DecorationImage(
+                                            image: AssetImage("assets/images/doctor.png"),
+                                            fit: BoxFit.fill,
+                                          ),
 
 
-                                      )
-                                  );
-                                },
-                              ),
-                              const SizedBox(height: 5),
-                              CustomText( Get.find<StorageService>().activeLocale == SupportedLocales.english?controller.doctorsData![index].nameEn!:controller.doctorsData![index].name!,
+                                        )
+                                    );
+                                  },
+                                ),
+                                const SizedBox(height: 5),
+                                CustomText( Get.find<StorageService>().activeLocale == SupportedLocales.english?controller.doctorsData![index].nameEn!:controller.doctorsData![index].name!,
 
-                                style: const TextStyle(
-                                    height: 1,
-                                    fontFamily:fontFamilyName,
-                                    color: kBlueColor,
-                                    fontWeight: FontWeight.w600,
-                                    fontSize: 12),),
-                              const SizedBox(height: 5,),
-                              CustomText(Get.find<StorageService>().activeLocale == SupportedLocales.english?controller.doctorsData![index].specialistEn!:controller.doctorsData![index].specialist!,
-                                style: const TextStyle(
-                                    height: 1,
-                                    fontFamily: fontFamilyName,
-                                    color: kBlueColor,
-                                    fontWeight: FontWeight.w600,
-                                    fontSize: 12),),
-                            ],
+                                  style: const TextStyle(
+                                      height: 1,
+                                      fontFamily:fontFamilyName,
+                                      color: kBlueColor,
+                                      fontWeight: FontWeight.w600,
+                                      fontSize: 12),),
+                                const SizedBox(height: 5,),
+                                CustomText(Get.find<StorageService>().activeLocale == SupportedLocales.english?controller.doctorsData![index].specialistEn!:controller.doctorsData![index].specialist!,
+                                  style: const TextStyle(
+                                      height: 1,
+                                      fontFamily: fontFamilyName,
+                                      color: kBlueColor,
+                                      fontWeight: FontWeight.w600,
+                                      fontSize: 12),),
+                              ],
+                            ),
                           ),
                         );
                       }

@@ -176,7 +176,7 @@ class _HospitalCellWidgetState extends State<HospitalCellWidget> {
                 ),
                   const SizedBox(width: 10,),
                   Container(
-                    width: Get.width*0.18,
+                    width: Get.width*0.4,
                     child: CustomText(widget.hospitalData?.phone??"",
                       textAlign: TextAlign.start,
                       style: const TextStyle(

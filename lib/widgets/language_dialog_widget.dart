@@ -4,6 +4,7 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:privilegecare/Ui/profileScreen/controller/profile_controller.dart';
 import 'package:privilegecare/Ui/profileScreen/profile_screeen.dart';
 import 'package:privilegecare/Utils/colors.dart';
 import 'package:privilegecare/Utils/constant.dart';
@@ -26,6 +27,7 @@ class _LanguageDialogState extends State<LanguageDialog> {
   StreamController<String> controller3 = StreamController<String>.broadcast();
   int groupValue =
       Get.find<StorageService>().activeLocale.languageCode == 'ar' ? 0 : 1;
+  final gController = Get.put(ProfileController());
 
   @override
   Widget build(BuildContext context) {
@@ -113,7 +115,8 @@ class _LanguageDialogState extends State<LanguageDialog> {
                 controller.add(languageDialogueEN.tr);
                 controller1.add(languageDialogueAR.tr);
                 controller3.add(languageDialogueCL.tr);
-                Get.offAll(const ProfileScreen());
+                gController.getData();
+                Get.offAll(const ProfileScreen() );
               },
               child: Container(
                 width: Get.width*0.4,

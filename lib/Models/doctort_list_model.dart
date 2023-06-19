@@ -70,7 +70,7 @@ class DoctorListModel {
     levelEn: json["level_en"],
     specialist: json["specialist"],
     specialistEn: json["specialist_en"],
-    doctorRate: double.parse("${json["doctor_rate"]}"),
+    doctorRate: double.parse("${json["doctor_rate"]??0}"),
     visitors: json["visitors"],
     schedule: json["schedule"] == null ? [] : List<Schedule>.from(json["schedule"]!.map((x) => Schedule.fromJson(x))),
   );

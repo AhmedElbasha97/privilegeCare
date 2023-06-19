@@ -5,6 +5,7 @@ import 'package:get/get.dart';
 import 'package:privilegecare/Models/profile_model.dart';
 import 'package:privilegecare/Models/response_model.dart';
 import 'package:privilegecare/Services/auth_services.dart';
+import 'package:privilegecare/Ui/profileScreen/controller/profile_controller.dart';
 import 'package:privilegecare/Ui/profileScreen/profile_screeen.dart';
 import 'package:privilegecare/Utils/localization_services.dart';
 import 'package:privilegecare/Utils/memory.dart';
@@ -23,6 +24,7 @@ class EditProfileController extends GetxController{
   late TextEditingController passwordController;
   late TextEditingController reTypePasswordController;
   late TextEditingController emailController;
+  final gController = Get.put(ProfileController());
   bool firstNameValidated = false;
   bool secondNameValidated = false;
   bool lastNameValidated = false;
@@ -228,7 +230,7 @@ class EditProfileController extends GetxController{
     if(emailController.text == data!.email){
       fifthChecker = true;
     }
-    if(firstChecker&&secondChecker&&thirdChecker&&forthChecker&&fifthChecker){
+    if(firstChecker||secondChecker||thirdChecker||forthChecker||fifthChecker){
       return true;
     }
     return false ;
@@ -250,7 +252,7 @@ class EditProfileController extends GetxController{
 
       );
       if(data?.msg == "succeeded"){
-
+        gController.getData();
         Get.off(const ProfileScreen());
       }else{
         CoolAlert.show(

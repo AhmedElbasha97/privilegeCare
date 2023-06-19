@@ -28,7 +28,7 @@ class DoctorProfile {
   int? visitors;
   double? doctorRate;
   double? hospRate;
-  List<Schedule>? schedule;
+  List<Schedule?>? schedule;
 
   DoctorProfile({
     this.id,
@@ -81,7 +81,7 @@ class DoctorProfile {
     visitors: json["visitors"],
     doctorRate: double.parse("${json["doctor_rate"]}"),
     hospRate: double.parse("${json["hosp_rate"]}"),
-    schedule: json["schedule"] == null ? [] : List<Schedule>.from(json["schedule"]!.map((x) => x)),
+    schedule: json["schedule"] == null ? [] : List<Schedule>.from(json["schedule"]!.map((x) => Schedule.fromJson(x))),
   );
 
   Map<String, dynamic> toJson() => {
@@ -108,7 +108,8 @@ class DoctorProfile {
     "visitors": visitors,
     "doctor_rate": doctorRate,
     "hosp_rate": hospRate,
-    "schedule": schedule == null ? [] : List<Schedule>.from(schedule!.map((x) => x)),
+    "schedule": schedule == null ? [] : List<dynamic>.from(schedule!.map((x) => x?.toJson())),
+
   };
 }
 

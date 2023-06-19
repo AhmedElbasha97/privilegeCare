@@ -5,6 +5,8 @@ import 'package:get/get.dart';
 import 'package:privilegecare/Ui/reservationScreen/controller/reservation_controller.dart';
 import 'package:privilegecare/Utils/colors.dart';
 import 'package:privilegecare/Utils/constant.dart';
+import 'package:privilegecare/Utils/localization_services.dart';
+import 'package:privilegecare/Utils/memory.dart';
 import 'package:privilegecare/Utils/translation_key.dart';
 import 'package:privilegecare/widgets/custom_text_widget.dart';
 import 'package:privilegecare/widgets/loader.dart';
@@ -44,7 +46,7 @@ class ReservationScreen extends StatelessWidget {
                            onTap: (){
                              Get.back();
                            },
-                             child: const Icon(Icons.arrow_circle_right_outlined,color: kWhiteColor,size: 30,)),
+                             child: Get.find<StorageService>().activeLocale == SupportedLocales.english?const Icon(Icons.arrow_circle_left_outlined,color: kWhiteColor,size: 30,):const Icon(Icons.arrow_circle_right_outlined,color: kWhiteColor,size: 30,)),
                            const SizedBox(width: 5,),
                             CustomText(
                               firstReservationTitle.tr,
@@ -58,7 +60,28 @@ class ReservationScreen extends StatelessWidget {
                          ],
                        ),
                      ),
-                     Positioned(
+                     Get.find<StorageService>().activeLocale == SupportedLocales.english?Positioned(
+                         top: 15,
+                         right: 13,
+                         child: Container(
+                           width: Get.width*0.1,
+                           height: Get.height*0.05,
+
+                           decoration: BoxDecoration(
+                             borderRadius: BorderRadius.circular(25),
+                             color: kBlueColor,
+                           ),
+                           child: const Center(
+                             child:  CustomText(
+                               "1/2",
+                               style: TextStyle(
+                                   fontFamily: fontFamilyName,
+                                   color: kWhiteColor,
+                                   fontWeight: FontWeight.w800,
+                                   fontSize: 18),
+                             ),
+                           ),
+                         )):Positioned(
                        top: 15,
                          left: 13,
                          child: Container(

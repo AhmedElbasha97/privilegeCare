@@ -52,8 +52,7 @@ class _SecondReservationScreenState extends State<SecondReservationScreen> {
                               onTap: (){
                                 Get.back();
                               },
-                              child: const Icon(Icons.arrow_circle_right_outlined,color: kWhiteColor,size: 30,)),
-                          const SizedBox(width: 5,),
+                              child: Get.find<StorageService>().activeLocale == SupportedLocales.english?const Icon(Icons.arrow_circle_left_outlined,color: kWhiteColor,size: 30,):const Icon(Icons.arrow_circle_right_outlined,color: kWhiteColor,size: 30,)),                          const SizedBox(width: 5,),
                           CustomText(
                             secondReservationTitle.tr,
                             style: const TextStyle(
@@ -66,7 +65,28 @@ class _SecondReservationScreenState extends State<SecondReservationScreen> {
                         ],
                       ),
                     ),
-                    Positioned(
+                    Get.find<StorageService>().activeLocale == SupportedLocales.english?Positioned(
+                        top: 15,
+                        right: 13,
+                        child: Container(
+                          width: Get.width*0.1,
+                          height: Get.height*0.05,
+
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(25),
+                            color: kBlueColor,
+                          ),
+                          child: const Center(
+                            child:  CustomText(
+                              "2/2",
+                              style: TextStyle(
+                                  fontFamily: fontFamilyName,
+                                  color: kWhiteColor,
+                                  fontWeight: FontWeight.w800,
+                                  fontSize: 18),
+                            ),
+                          ),
+                        )):Positioned(
                         top: 15,
                         left: 13,
                         child: Container(
@@ -120,7 +140,7 @@ class _SecondReservationScreenState extends State<SecondReservationScreen> {
                          width: Get.width*0.7,
                          child: Padding(
                            padding:  EdgeInsets.fromLTRB(0, Get.height*0.028, 0, 0),
-                           child:  Text(
+                           child:  CustomText(
                              Get.find<StorageService>().activeLocale == SupportedLocales.english?controller.doctorData?.name??"":controller.doctorData?.nameEn??"",
                              textAlign: TextAlign.center,
                              style: const TextStyle(
@@ -490,16 +510,16 @@ class _SecondReservationScreenState extends State<SecondReservationScreen> {
 
                   },
                   child: Container(
-                    width: Get.width*0.5,
+                    width: Get.width*0.6,
                     height: Get.height*0.07,
                     decoration: BoxDecoration(
                       color: kBlueColor,
                       borderRadius: BorderRadius.circular(15),
                     ),
-                    child: const Center(
+                    child:  Center(
                       child:  CustomText(
-                        secondReservationBTN,
-                        style: TextStyle(
+                        secondReservationBTN.tr,
+                        style: const TextStyle(
                             fontFamily: fontFamilyName,
                             color: Colors.white,
                             fontWeight: FontWeight.w800,

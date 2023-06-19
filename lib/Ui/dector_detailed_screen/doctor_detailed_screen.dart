@@ -479,7 +479,7 @@ class DoctorDetailedScreen extends StatelessWidget {
                               ),
                               const SizedBox(width: 10,),
                               Container(
-                                width: Get.width*0.18,
+                                width: Get.width*0.4,
                                 child:  CustomText(controller.doctorData?.phone??"",
                                   textAlign: TextAlign.start,
                                   style: const TextStyle(

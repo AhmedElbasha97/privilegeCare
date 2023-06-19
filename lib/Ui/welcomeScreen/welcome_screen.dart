@@ -5,14 +5,12 @@ import 'package:get/get.dart';
 import 'package:privilegecare/Ui/HomeScreen/home_screen.dart';
 import 'package:privilegecare/Ui/logInScreen/login_screen.dart';
 import 'package:privilegecare/Ui/signUpScreen/signup_screen.dart';
-import 'package:privilegecare/Ui/splash_screen/splash_screen.dart';
 import 'package:privilegecare/Utils/colors.dart';
 import 'package:privilegecare/Utils/constant.dart';
 import 'package:privilegecare/Utils/localization_services.dart';
 import 'package:privilegecare/widgets/custom_text_widget.dart';
 
 import '../../Utils/translation_key.dart';
-import '../../widgets/language_dialog_widget.dart';
 
 class WelcomeScreen extends StatelessWidget {
   const WelcomeScreen({Key? key}) : super(key: key);

@@ -8,7 +8,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_phone_direct_caller/flutter_phone_direct_caller.dart';
 import 'package:get/get.dart';
 import 'package:map_launcher/map_launcher.dart';
-import 'package:privilegecare/Models/doctort_list_model.dart';
 import 'package:privilegecare/Models/hospital_detailed_model.dart';
 import 'package:privilegecare/Models/hospital_doctor_model.dart';
 import 'package:privilegecare/Models/privacy_policy_model.dart';

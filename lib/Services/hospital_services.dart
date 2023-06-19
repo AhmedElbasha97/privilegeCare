@@ -1,4 +1,3 @@
-import 'package:privilegecare/Models/doctort_list_model.dart';
 import 'package:privilegecare/Models/hospital_detailed_model.dart';
 import 'package:privilegecare/Models/hospital_doctor_model.dart';
 import 'package:privilegecare/Models/hospital_list_model.dart';

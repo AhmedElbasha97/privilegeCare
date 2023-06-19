@@ -28,6 +28,7 @@ import 'package:url_launcher/url_launcher.dart';
 
 class ProfileController extends GetxController{
   String? chatLink = "";
+
   bool isLoading = true;
   late ProfileModel? data;
   int indexDeleteAccount = 2;
@@ -48,17 +49,7 @@ class ProfileController extends GetxController{
     "signOutIcon"
   ];
   List<String> title =[
-    profileTag1.tr,
-    profileTag2.tr,
-    profileTag3.tr,
-    profileTag4.tr,
-    profileTag5.tr,
-    profileTag6.tr,
-    profileTag7.tr,
-    profileTag8.tr,
-    profileTag9.tr,
-    profileTag10.tr,
-    profileTag11.tr,
+
   ];
   bool userIsSigned = true;
   @override
@@ -147,7 +138,21 @@ class ProfileController extends GetxController{
     isLoading = true;
     update();
    chatLink = await AppInfoServices().getChatLink();
+    title = [
+      profileTag1.tr,
+      profileTag2.tr,
+      profileTag3.tr,
+      profileTag4.tr,
+      profileTag5.tr,
+      profileTag6.tr,
+      profileTag7.tr,
+      profileTag8.tr,
+      profileTag9.tr,
+      profileTag10.tr,
+      profileTag11.tr,
+    ];
    data = await AuthServices.getUserData( Get.find<StorageService>().getId);
+
    isLoading = false;
    update();
   }

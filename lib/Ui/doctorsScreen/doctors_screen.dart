@@ -164,7 +164,7 @@ class DoctorScreen extends StatelessWidget {
                       :Container(
 
                     width: Get.width,
-                    height: Get.height*0.65,
+                    height: Get.height*0.68-kBottomNavigationBarHeight,
                     color: kLightGrayColor,
                     child: RawScrollbar(
                       thumbColor: kBlueColor,

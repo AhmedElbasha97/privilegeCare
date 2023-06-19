@@ -61,7 +61,7 @@ class AuthServices{
     }
     return null;
   }
-  static Future<ResponseModel?> editAccountData (String name,String email,String phone,String userId,) async {
+  static Future<ResponseModel?> editAccountData (String userId,String name,String email,String phone) async {
     var data = await api.request(Services.editAccountDataEndPoint, "POST",queryParamters: {
       "member_id":userId,
       "name":name,
@@ -76,13 +76,17 @@ class AuthServices{
     return null;
   }
   static Future<ResponseModel?> editAccountDataWithImage (String name,String email,String phone,String userId,XFile?  img) async {
+    var formData = FormData.fromMap({
+      "image":img?.path==null?null:await MultipartFile.fromFile(img?.path??""),
+    });
     var data = await api.request(Services.editAccountDataEndPoint, "POST",queryParamters: {
       "member_id":userId,
       "name":name,
       "email":email,
       "phone":phone,
-      "image":img?.path==null?null:await MultipartFile.fromFile(img?.path??"")
-    });
+
+
+    },data: formData);
     if (data != null) {
       return ResponseModel.fromJson(data);
     }

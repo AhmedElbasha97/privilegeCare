@@ -5,6 +5,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart' hide Response, FormData;
 import 'package:pretty_dio_logger/pretty_dio_logger.dart';
 import 'package:privilegecare/Utils/translation_key.dart';
+import 'package:privilegecare/widgets/custom_text_widget.dart';
 
 class ApiService extends GetxService {
   static final ApiService _apiUtil = ApiService._();
@@ -68,7 +69,7 @@ class ApiService extends GetxService {
       if (errorDialog == null && errorMessage == null) {
         await Get.defaultDialog(
           title: error.tr,
-          content: Text(error.tr),
+          content: CustomText(error.tr),
           middleText: "",
         );
       }

@@ -213,7 +213,7 @@ class _DoctorCellWidgetState extends State<DoctorCellWidget> {
                       widget.doctorData?.explain==0?const SizedBox(height: 10,):Padding(
                         padding: const EdgeInsets.all(3.0),
                         child: Container(
-                          width: Get.width*0.35,
+
                           height: Get.height*0.04,
                           decoration: BoxDecoration(
                             color: Colors.white,
@@ -226,23 +226,26 @@ class _DoctorCellWidgetState extends State<DoctorCellWidget> {
                               ),
                             ],
                           ),
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              SizedBox(
-                              height: 20,
-                              width: 20,
-                              child: Image.asset("assets/images/oldPatient.png",fit: BoxFit.fitWidth,),
+                          child: Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                SizedBox(
+                                height: 20,
+                                width: 20,
+                                child: Image.asset("assets/images/oldPatient.png",fit: BoxFit.fitWidth,),
+                              ),
+                                CustomText(docAchievement2.tr,
+                                  style: TextStyle(
+                                      fontFamily: fontFamilyName,
+                                      color: kBlueColor,
+                                      fontWeight: FontWeight.w600,
+                                      fontSize: 14),),
+
+
+                              ],
                             ),
-                              CustomText(docAchievement2.tr,
-                                style: TextStyle(
-                                    fontFamily: fontFamilyName,
-                                    color: kBlueColor,
-                                    fontWeight: FontWeight.w600,
-                                    fontSize: 14),),
-
-
-                            ],
                           ),
                         ),
                       ),
@@ -260,7 +263,7 @@ class _DoctorCellWidgetState extends State<DoctorCellWidget> {
                       const SizedBox(width: 10,),
                       Container(
                         width: Get.width*0.65,
-                        child:  Text(Get.find<StorageService>().activeLocale == SupportedLocales.english?widget.doctorData?.levelEn??"":widget.doctorData?.level??"",
+                        child:  CustomText(Get.find<StorageService>().activeLocale == SupportedLocales.english?widget.doctorData?.levelEn??"":widget.doctorData?.level??"",
                           style: const TextStyle(
                               fontFamily: fontFamilyName,
                               color: kBlueColor,
@@ -285,7 +288,7 @@ class _DoctorCellWidgetState extends State<DoctorCellWidget> {
                       const SizedBox(width: 10,),
                       Container(
                         width: Get.width*0.6,
-                        child:  Text(widget.doctorData?.hosp??"",
+                        child:  CustomText(widget.doctorData?.hosp??"",
                           style: const TextStyle(
                               fontFamily: fontFamilyName,
                               color: kBlueColor,
@@ -334,7 +337,7 @@ class _DoctorCellWidgetState extends State<DoctorCellWidget> {
                       const SizedBox(width: 10,),
                       Container(
                         width: Get.width*0.7,
-                        child:  Text("${reservationTime1.tr}${widget.doctorData?.waiting} ${reservationTime2.tr}",
+                        child:  CustomText("${reservationTime1.tr}${widget.doctorData?.waiting} ${reservationTime2.tr}",
                           textAlign: TextAlign.start,
                           style: const TextStyle(
                               fontFamily: fontFamilyName,
@@ -360,8 +363,8 @@ class _DoctorCellWidgetState extends State<DoctorCellWidget> {
                       ),
                       const SizedBox(width: 10,),
                       Container(
-                        width: Get.width*0.18,
-                        child:  Text(widget.doctorData?.phone??"",
+                        width: Get.width*0.4,
+                        child:  CustomText(widget.doctorData?.phone??"",
                           textAlign: TextAlign.start,
                           style: const TextStyle(
                               fontFamily: fontFamilyName,
@@ -396,7 +399,7 @@ class _DoctorCellWidgetState extends State<DoctorCellWidget> {
                             ],
                           ),
                           child:  Center(
-                            child: Text(noTimeAvailableDocScreen.tr,
+                            child: CustomText(noTimeAvailableDocScreen.tr,
                               style: TextStyle(
                                   fontFamily: fontFamilyName,
                                   color: kWhiteColor,
@@ -472,7 +475,7 @@ class _DoctorCellWidgetState extends State<DoctorCellWidget> {
                         padding: const EdgeInsets.all(8.0),
                         child: Container(
                           width: Get.width*0.4,
-                          height: Get.height*0.04,
+
                           decoration: BoxDecoration(
                             color: kBlueColor,
                             borderRadius: BorderRadius.circular(10),
@@ -484,13 +487,17 @@ class _DoctorCellWidgetState extends State<DoctorCellWidget> {
                               ),
                             ],
                           ),
-                          child:  Center(
-                            child: CustomText(" ${availableToDay.tr} ${widget.doctorData!.schedule?[0].timeFrom} ",
-                              style: const TextStyle(
-                                  fontFamily: fontFamilyName,
-                                  color: kWhiteColor,
-                                  fontWeight: FontWeight.w700,
-                                  fontSize: 14),),
+                          child:  Padding(
+                            padding: const EdgeInsets.symmetric(vertical: 7.0),
+                            child: Center(
+                              child: CustomText(" ${availableToDay.tr} ${widget.doctorData!.schedule?[0].timeFrom} ",
+                                textAlign: TextAlign.center,
+                                style: const TextStyle(
+                                    fontFamily: fontFamilyName,
+                                    color: kWhiteColor,
+                                    fontWeight: FontWeight.w700,
+                                    fontSize: 14),),
+                            ),
                           ),
                         ),
                       ),
