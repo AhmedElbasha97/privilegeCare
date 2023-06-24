@@ -1,6 +1,7 @@
 // ignore_for_file: sized_box_for_whitespace
 
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:double_back_to_close_app/double_back_to_close_app.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:privilegecare/Ui/SpecialtyScreen/specialty_screen.dart';
@@ -27,22 +28,24 @@ class _ProfileScreenState extends State<ProfileScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return WillPopScope(
-      onWillPop: () async => false,
-      child: SafeArea(
-        child:  GetBuilder<ProfileController>(
-          init: ProfileController(),
-          builder: (controller) =>SizedBox.expand(
-            child: GestureDetector(
-              onPanUpdate: (details) {
-                // Swiping in right direction.
-                if (details.delta.dx > 0) {
-                  Get.to(()=> SpecialtyScreen());
-                }
-              },
-              child: Scaffold(
-                bottomNavigationBar: const BottomNavigationBarWidget(selectedTap: 0,),
-                body:controller.userIsSigned?controller.isLoading?const Loader(): SizedBox(
+    return SafeArea(
+      child:  GetBuilder<ProfileController>(
+        init: ProfileController(),
+        builder: (controller) =>SizedBox.expand(
+          child: GestureDetector(
+            onPanUpdate: (details) {
+              // Swiping in right direction.
+              if (details.delta.dx > 0) {
+                Get.to(()=> SpecialtyScreen());
+              }
+            },
+            child: Scaffold(
+              bottomNavigationBar: const BottomNavigationBarWidget(selectedTap: 0,),
+              body:DoubleBackToCloseApp(
+                snackBar: const SnackBar(
+                  content: CustomText('Tap back again to leave'),
+                ),
+                child: controller.userIsSigned?controller.isLoading?const Loader(): SizedBox(
                   height: Get.height,
                   width: Get.width,
                   child: Column(

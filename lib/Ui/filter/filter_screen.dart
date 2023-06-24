@@ -1,5 +1,6 @@
 // ignore_for_file: sized_box_for_whitespace
 
+import 'package:double_back_to_close_app/double_back_to_close_app.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:get/get.dart';
@@ -31,29 +32,31 @@ class FilterScreen extends StatelessWidget {
               Get.to(()=>const HospitalScreens());
             }
           },
-          child: WillPopScope(
-            onWillPop: () async => false,
-            child: Scaffold(
-              bottomNavigationBar: const BottomNavigationBarWidget(selectedTap: 4,),
-              appBar: AppBar(
-                backgroundColor: kGreenColor,
-                leading: IconButton(
-                  icon:   const Icon(Icons.baby_changing_station,color: kGreenColor,), onPressed: () {  },
-                ),
-
-                centerTitle: true,
-                title:   CustomText(
-                  advancedSearchTitle.tr,
-                  style: const TextStyle(
-                      fontFamily: fontFamilyName,
-                      color: kWhiteColor,
-                      fontWeight: FontWeight.w700,
-                      fontSize: 15),
-                ),
-
-
+          child: Scaffold(
+            bottomNavigationBar: const BottomNavigationBarWidget(selectedTap: 4,),
+            appBar: AppBar(
+              backgroundColor: kGreenColor,
+              leading: IconButton(
+                icon:   const Icon(Icons.baby_changing_station,color: kGreenColor,), onPressed: () {  },
               ),
-                body: SingleChildScrollView(
+
+              centerTitle: true,
+              title:   CustomText(
+                advancedSearchTitle.tr,
+                style: const TextStyle(
+                    fontFamily: fontFamilyName,
+                    color: kWhiteColor,
+                    fontWeight: FontWeight.w700,
+                    fontSize: 15),
+              ),
+
+
+            ),
+              body: DoubleBackToCloseApp(
+                snackBar: const SnackBar(
+                  content: CustomText('Tap back again to leave'),
+                ),
+                child: SingleChildScrollView(
                   child: Container(
                     width: Get.width,
                     child:  Column(
@@ -1235,10 +1238,10 @@ class FilterScreen extends StatelessWidget {
                           ),
                         )
                       ],
-            ),
+          ),
                   ),
-                )
-            ),
+                ),
+              )
           ),
         ),
       ),

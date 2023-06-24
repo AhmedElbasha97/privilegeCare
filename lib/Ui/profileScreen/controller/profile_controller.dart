@@ -32,6 +32,8 @@ class ProfileController extends GetxController{
   bool isLoading = true;
   late ProfileModel? data;
   int indexDeleteAccount = 2;
+  int logOutIndex = 2;
+  int deletingAccIndex = 2;
   final ImagePicker _picker = ImagePicker();
   XFile? image;
   List<String> icons = [
@@ -195,6 +197,9 @@ class ProfileController extends GetxController{
   }
 
   signingOut(context){
+     indexDeleteAccount = 2;
+     logOutIndex = 2;
+
     CoolAlert.show(
       context: context,
       type: CoolAlertType.confirm,
@@ -206,8 +211,7 @@ class ProfileController extends GetxController{
           fontWeight: FontWeight.w800,
           fontSize: 15),
       onConfirmBtnTap: (){
-        Get.find<StorageService>().loggingOut();
-        Get.off(()=>const WelcomeScreen());
+        logOutIndex = 1;
 
       },
       onCancelBtnTap:(){
@@ -230,9 +234,15 @@ class ProfileController extends GetxController{
       if(indexDeleteAccount == 1){
         deleteAccount(context);
       }
+      if(logOutIndex == 1){
+        Get.find<StorageService>().loggingOut();
+        Get.off(()=>const WelcomeScreen());
+      }
     });
   }
 deleteAccount(context){
+
+   deletingAccIndex = 2;
   CoolAlert.show(
       context: context,
       type: CoolAlertType.warning,
@@ -256,23 +266,31 @@ deleteAccount(context){
         fontWeight: FontWeight.w600,
         fontSize: 15),
     onConfirmBtnTap: () async {
-      if(await BiomatricsAuthService.authenticateUser(deleteAcc.tr)) {
-        ResponseModel? reponse = await AuthServices.deleteAccount(Get.find<StorageService>().getId);
-        if(reponse?.msg == "succeeded"){
-
-          Get.to(()=>const WelcomeScreen());
-        }else{
-          CoolAlert.show(
-            context: context,
-            type: CoolAlertType.error,
-            title:errorKey ,
-            text: Get.find<StorageService>().activeLocale == SupportedLocales.english?reponse?.msg??"":reponse?.msgAr??"",
-          );
-        }
-      }
+      deletingAccIndex =1;
 
     },
+  ).then((value) async {
+    if(deletingAccIndex == 1){
+     await deletingAccount(context);
+    }
+  });
+}
+deletingAccount(context) async {
+  if(await BiomatricsAuthService.authenticateUser(deleteAcc.tr)) {
+  ResponseModel? reponse = await AuthServices.deleteAccount(Get.find<StorageService>().getId);
+  if(reponse?.msg == "succeeded"){
+
+  Get.to(()=>const WelcomeScreen());
+  }else{
+  CoolAlert.show(
+  context: context,
+  type: CoolAlertType.error,
+  title:errorKey ,
+  text: Get.find<StorageService>().activeLocale == SupportedLocales.english?reponse?.msg??"":reponse?.msgAr??"",
   );
+  }
+  }
+
 }
 
   launchURL(context,link) async {

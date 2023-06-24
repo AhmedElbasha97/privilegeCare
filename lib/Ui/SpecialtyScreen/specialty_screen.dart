@@ -1,5 +1,6 @@
 // ignore_for_file: must_be_immutable, prefer_const_constructors, sized_box_for_whitespace
 
+import 'package:double_back_to_close_app/double_back_to_close_app.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:privilegecare/Ui/HomeScreen/home_screen.dart';
@@ -41,11 +42,13 @@ class SpecialtyScreen extends StatelessWidget {
                 Get.to(()=>ProfileScreen());
               }
             },
-            child: WillPopScope(
-              onWillPop: () async => false,
-              child: Scaffold(
-                bottomNavigationBar: const BottomNavigationBarWidget(selectedTap: 1,),
-                body: RawScrollbar(
+            child: Scaffold(
+              bottomNavigationBar: const BottomNavigationBarWidget(selectedTap: 1,),
+              body: DoubleBackToCloseApp(
+                snackBar: const SnackBar(
+                  content: CustomText('Tap back again to leave'),
+                ),
+                child: RawScrollbar(
                     thumbColor: kBlueColor,
                     radius: const Radius.circular(20),
                     thickness: 5,

@@ -38,16 +38,7 @@ class _MyAppState extends State<MyApp> {
     return GetMaterialApp(
       translations: AppTranslations(),
 
-      theme: ThemeData(
-      appBarTheme: const AppBarTheme(
-      systemOverlayStyle: SystemUiOverlayStyle( //<-- SEE HERE
-        // Status bar color
-        statusBarColor: kBlueColor,
-        statusBarIconBrightness: Brightness.dark,
-        statusBarBrightness: Brightness.light,
-      ),
-    ),
-    ),
+
 
       locale:  Get.find<LocalizationService>().activeLocale,
       supportedLocales: SupportedLocales.all,

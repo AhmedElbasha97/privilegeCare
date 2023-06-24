@@ -3,6 +3,7 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:carousel_slider/carousel_options.dart';
 import 'package:carousel_slider/carousel_slider.dart';
+import 'package:double_back_to_close_app/double_back_to_close_app.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:get/get.dart';
@@ -55,47 +56,49 @@ class _HomeScreenState extends State<HomeScreen> {
   }
   @override
   Widget build(BuildContext context) {
-    return WillPopScope(
-      onWillPop: () async => false,
-      child: SafeArea(
+    return SafeArea(
 
-        child: GetBuilder<HomeController>(
-          init: HomeController(),
-          builder: (controller) => Scaffold(
-            appBar: PreferredSize(
-              preferredSize: Size.fromHeight(Get.height*0.1),
-              child: AnimatedContainer(
-                height: _isAppbar ?  Get.height*0.09 : 0.0,
-                duration: const Duration(milliseconds: 200),
-                child: AppBar(
-                  leading: IconButton(icon: const Icon(Icons.info_outline,color: kBlueColor,size: 35,),onPressed: (){
-                    Get.to(()=>const HelpScreen());
+      child: GetBuilder<HomeController>(
+        init: HomeController(),
+        builder: (controller) => Scaffold(
+          appBar: PreferredSize(
+            preferredSize: Size.fromHeight(Get.height*0.1),
+            child: AnimatedContainer(
+              height: _isAppbar ?  Get.height*0.09 : 0.0,
+              duration: const Duration(milliseconds: 200),
+              child: AppBar(
+                leading: IconButton(icon: const Icon(Icons.info_outline,color: kBlueColor,size: 35,),onPressed: (){
+                  Get.to(()=>const HelpScreen());
+                },),
+                actions: [
+                  IconButton(icon: const Icon(Icons.search_outlined,color: kBlueColor,size: 35,),onPressed: (){
+
+                      Get.to(()=>const DoctorScreen(specialistId: "0"));
+
                   },),
-                  actions: [
-                    IconButton(icon: const Icon(Icons.search_outlined,color: kBlueColor,size: 35,),onPressed: (){
-
-                        Get.to(()=>const DoctorScreen(specialistId: "0"));
-
-                    },),
-                    IconButton(icon: const Icon(Icons.notifications_none,color: kBlueColor,size: 35,),onPressed: (){
-                    },),
-                    ],
-                  backgroundColor: Colors.white,
-                  toolbarHeight: Get.height*0.1,
-                  flexibleSpace: SizedBox(
-                    height: Get.height*0.1,
-                    width: Get.width*0.3,
-                    child: Padding(
-                      padding: const EdgeInsets.fromLTRB(0,10.0,0,5),
-                      child: Image.asset("assets/images/horizontalLogo.png",fit: BoxFit.fitHeight,),
-                    ),
+                  IconButton(icon: const Icon(Icons.notifications_none,color: kBlueColor,size: 35,),onPressed: (){
+                  },),
+                  ],
+                backgroundColor: Colors.white,
+                toolbarHeight: Get.height*0.1,
+                flexibleSpace: SizedBox(
+                  height: Get.height*0.1,
+                  width: Get.width*0.3,
+                  child: Padding(
+                    padding: const EdgeInsets.fromLTRB(0,10.0,0,5),
+                    child: Image.asset("assets/images/horizontalLogo.png",fit: BoxFit.fitHeight,),
                   ),
                 ),
               ),
             ),
-            bottomNavigationBar: const BottomNavigationBarWidget(selectedTap: 2,),
-            backgroundColor: kWhiteColor,
-            body: SizedBox.expand(
+          ),
+          bottomNavigationBar: const BottomNavigationBarWidget(selectedTap: 2,),
+          backgroundColor: kWhiteColor,
+          body: DoubleBackToCloseApp(
+            snackBar: const SnackBar(
+              content: CustomText('Tap back again to leave'),
+            ),
+            child: SizedBox.expand(
               child: GestureDetector(
               onPanUpdate: (details) {
               // Swiping in right direction.
@@ -532,10 +535,10 @@ class _HomeScreenState extends State<HomeScreen> {
                 ),
               ),
             ),
-          ),
         ),
-      )
+          ),
       ),
+    )
     );
   }
 }
