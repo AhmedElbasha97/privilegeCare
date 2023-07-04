@@ -268,7 +268,7 @@ bool signingUp = false ;
       );
       if(data?.msg == "succeeded"){
         await Get.find<StorageService>().saveAccountId("${data?.info?.id??0}");
-        Get.off(const HomeScreen());
+        Get.offAll(const HomeScreen());
       }else{
         signingUp = false;
         update();

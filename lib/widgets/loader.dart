@@ -50,7 +50,7 @@ final double width;
                   style: const TextStyle(
                     fontFamily: fontFamilyName,
                     fontWeight: FontWeight.w800,
-                    fontSize: 20,
+                    fontSize: 15,
                     color: kGreenColor,
                     height: 1,
                     letterSpacing: -1,

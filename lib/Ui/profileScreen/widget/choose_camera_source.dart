@@ -67,7 +67,7 @@ class ChooseCameraSource extends StatelessWidget {
                 onTap: (){openGallery();},
                 child: Container(
                   width: Get.width*0.8,
-                  height: 70,
+                  height: 60,
                   decoration: const BoxDecoration(
                       border: Border(
                           bottom: BorderSide(color: kBlueColor,width: 1)

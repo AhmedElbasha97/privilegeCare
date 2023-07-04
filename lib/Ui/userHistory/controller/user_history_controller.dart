@@ -26,14 +26,16 @@ class UserHistoryController extends GetxController{
   }
 
   getData() async {
+    hasNoData = false;
     historyData = await HistoryServices.getHistoryData(Get
         .find<StorageService>()
         .getId, "$homeVisitOrNot");
     await initializeDateFormatting("ar_SA", null);
     if(historyData?.length == 0||historyData==[]){
-      hasNoData = false;
+      hasNoData = true;
     }
     isLoading = false;
+    print(hasNoData);
     update();
   }
   detectStatus(String index){

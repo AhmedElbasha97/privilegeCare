@@ -207,7 +207,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                              crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               Container(
-                                height: Get.height*0.02,
+                                height: Get.height*0.025,
                                 child: Row(
                                   mainAxisAlignment: MainAxisAlignment.end,
                                   children: [
@@ -225,7 +225,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                               ),
                               const SizedBox(height: 5,),
                               Container(
-                                height: Get.height*0.02,
+                                height: Get.height*0.025,
 
                                 child: Row(
                                   mainAxisAlignment: MainAxisAlignment.end,
@@ -247,7 +247,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                               ),
                               const SizedBox(height: 5,),
                               Container(
-                                height: Get.height*0.02,
+                                height: Get.height*0.025,
                                 child: Row(
                                   mainAxisAlignment: MainAxisAlignment.end,
                                   children: [

@@ -581,7 +581,7 @@ class DoctorDetailedScreen extends StatelessWidget {
                               },),
                                 Container(
                                   height: 130,
-                                  width: Get.width*0.7,
+                                  width: Get.width*0.68,
                                 child: ListView.builder(
                                   scrollDirection: Axis.horizontal,
                                   itemCount: controller.doctorData?.schedule?.length??0,
@@ -676,7 +676,7 @@ class DoctorDetailedScreen extends StatelessWidget {
                   ),
                 ),
                 Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 8.0,vertical: 7.0),
+                  padding: const EdgeInsets.symmetric(horizontal: 5.0,vertical: 7.0),
                   child: SizedBox(
                     child: DecoratedBox(
                       decoration: const BoxDecoration(

@@ -3,6 +3,8 @@
 import 'package:cool_alert/cool_alert.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
+import 'package:geocoding/geocoding.dart';
+import 'package:geolocator/geolocator.dart';
 import 'package:get/get.dart';
 import 'package:privilegecare/Models/doctor_reservation_model.dart';
 import 'package:privilegecare/Models/response_model.dart';
@@ -27,6 +29,7 @@ class ReservationController extends GetxController{
  late DoctorReservationData? doctorData;
   bool decideToSignIn = false;
   String dateText = "xx/xx/xxxx";
+  String address = "";
   String timeText = "--:-";
   String selectedTime = "";
   int choosenGender = 3;
@@ -61,8 +64,22 @@ class ReservationController extends GetxController{
     phoneWidgetController = TextEditingController();
     getData();
   }
+  Future<void> _getAddressFromLatLng(double lat,double long) async {
+    await placemarkFromCoordinates(lat,long)
+        .then((List<Placemark> placemarks) {
+      Placemark place = placemarks[0];
+
+        address =
+        "${place.street},${place.subAdministrativeArea},${place.subLocality},${place.country}"
+        ;
+    }).catchError((e) {
+      debugPrint(e);
+    });
+  }
+
   getData() async {
     doctorData = await DoctorServices.getDoctorReservationData(doctorId);
+    _getAddressFromLatLng(double.parse(doctorData?.locationLat??""),double.parse(doctorData?.locationLon??""));
     isLoading = false;
     update();
   }

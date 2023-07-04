@@ -163,7 +163,7 @@ class HistoryScreen extends StatelessWidget {
                   ),
 
                   controller.hasNoData?
-                  NoDataWidget(text: controller.homeVisitOrNot == 1? noHistoryDataHome.tr: noHistoryDataHosp.tr,imgPath: "assets/images/Insurance-pana.png", refreshedFunc: (){},hasRefreshButtonOrNot: false,)
+                  NoDataWidget(text: controller.homeVisitOrNot == 1? noHistoryDataHome.tr: noHistoryDataHosp.tr,imgPath: "assets/images/Insurance-pana.png", refreshedFunc: (){},hasRefreshButtonOrNot: false,height: Get.height*0.7,)
                       :Container(
                     width: Get.width,
                     height: Get.height*0.75,

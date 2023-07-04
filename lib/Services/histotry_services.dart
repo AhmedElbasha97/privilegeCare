@@ -7,7 +7,7 @@ class HistoryServices{
   static Future<List<HistoryDataModel>?> getHistoryData(String memberId,String homeVisit) async {
     List<HistoryDataModel>? historyList = [];
     var data = await api.request(Services.getHistoryDataEndPoint, "POST",queryParamters: {
-      "member_id":"1",
+      "member_id":memberId,
       "home_visit":homeVisit
     });
     if (data != null) {

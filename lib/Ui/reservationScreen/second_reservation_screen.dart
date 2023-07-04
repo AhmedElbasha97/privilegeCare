@@ -1,5 +1,6 @@
 // ignore_for_file: sized_box_for_whitespace
 
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:cool_alert/cool_alert.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -155,35 +156,105 @@ class _SecondReservationScreenState extends State<SecondReservationScreen> {
                    ),
                    Positioned(
                      left: Get.width*0.4,
-                     child: Container(
-                       height: Get.height*0.11,
-                       width: Get.width*0.2,
-                       padding: const EdgeInsets.all(1),
-                       decoration: BoxDecoration(
-                         border: Border.all(color: kBlueColor,width: 2),
-                         borderRadius: BorderRadius.circular(15),
-                       ),
-                       child: Container(
-                         height: Get.height*0.12,
-                         width: Get.width*0.2,
-                         padding: const EdgeInsets.all(1),
-                         decoration: BoxDecoration(
-                           border: Border.all(color: kGreenColor,width: 2),
-                           borderRadius: BorderRadius.circular(15),
-                         ),
-                         child: Container(
+                     child: CachedNetworkImage(
+                       fit: BoxFit.cover,
+                       imageUrl: "https://privilegecare.net${controller.doctorData?.image??""}",
+                       imageBuilder: ((context, image){
+                         return  Container(
                            height: Get.height*0.12,
                            width: Get.width*0.2,
+                           padding: const EdgeInsets.all(1),
                            decoration: BoxDecoration(
-                             color: kBlueColor,
-
+                             border: Border.all(color: kBlueColor,width: 2),
                              borderRadius: BorderRadius.circular(15),
                            ),
-                           child: const Center(
-                             child: Icon(Icons.camera_alt_outlined,size: 40,color: Colors.white,),
+                           child: Container(
+                             height: Get.height*0.12,
+                             width: Get.width*0.2,
+                             padding: const EdgeInsets.all(1),
+                             decoration: BoxDecoration(
+                               border: Border.all(color: kGreenColor,width: 2),
+                               borderRadius: BorderRadius.circular(15),
+                             ),
+                             child: Container(
+                               height: Get.height*0.12,
+                               width: Get.width*0.2,
+                               decoration: BoxDecoration(
+                                 color: kBlueColor,
+                                 image: DecorationImage(
+                                   image: image,
+                                   fit: BoxFit.cover,
+                                 ),
+
+                                 borderRadius: BorderRadius.circular(15),
+                               ),
+
+                             ),
                            ),
-                         ),
-                       ),
+                         );
+
+                       }),
+                       placeholder: (context, image){
+                         return  Container(
+                           height: Get.height*0.12,
+                           width: Get.width*0.2,
+                           padding: const EdgeInsets.all(1),
+                           decoration: BoxDecoration(
+                             border: Border.all(color: kBlueColor,width: 2),
+                             borderRadius: BorderRadius.circular(15),
+                           ),
+                           child: Container(
+                             height: Get.height*0.12,
+                             width: Get.width*0.2,
+                             padding: const EdgeInsets.all(1),
+                             decoration: BoxDecoration(
+                               border: Border.all(color: kGreenColor,width: 2),
+                               borderRadius: BorderRadius.circular(15),
+                             ),
+                             child: Container(
+                                 height: Get.height*0.12,
+                                 width: Get.width*0.2,
+                                 decoration: BoxDecoration(
+                                   color: kBlueColor,
+                                   borderRadius: BorderRadius.circular(15),
+                                 ),
+                                 child:const Center(child: CircularProgressIndicator(color: kBlueColor,))
+                             ),
+                           ),
+                         );
+                       },
+                       errorWidget: (context, url, error){
+                         return Container(
+                           height: Get.height*0.12,
+                           width: Get.width*0.2,
+                           padding: const EdgeInsets.all(1),
+                           decoration: BoxDecoration(
+                             border: Border.all(color: kBlueColor,width: 2),
+                             borderRadius: BorderRadius.circular(15),
+                           ),
+                           child: Container(
+                             height: Get.height*0.12,
+                             width: Get.width*0.2,
+                             padding: const EdgeInsets.all(1),
+                             decoration: BoxDecoration(
+                               border: Border.all(color: kGreenColor,width: 2),
+                               borderRadius: BorderRadius.circular(15),
+                             ),
+                             child: Container(
+                               height: Get.height*0.12,
+                               width: Get.width*0.2,
+                               decoration: BoxDecoration(
+                                 color: kBlueColor,
+
+                                 borderRadius: BorderRadius.circular(15),
+                               ),
+                               child: const Center(
+                                 child: Icon(Icons.camera_alt_outlined,size: 40,color: Colors.white,),
+                               ),
+                             ),
+                           ),
+                         );
+                       },
                      ),
                    ),
                  ],
@@ -396,13 +467,13 @@ class _SecondReservationScreenState extends State<SecondReservationScreen> {
                                 ),
                               ),
                             ),
-                            child: const Column(
+                            child:  Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
 
                                 CustomText(
-                                  "برج الكرامة",
-                                  style: TextStyle(
+                                  controller.address??"لا يوجد عنوان حاليا",
+                                  style: const TextStyle(
                                       fontFamily: fontFamilyName,
                                       color: kBlueColor,
                                       fontWeight: FontWeight.w800,

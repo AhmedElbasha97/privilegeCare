@@ -25,7 +25,7 @@ class SpecialtyLoaderWidget extends StatelessWidget {
                 onTap: (){
                 },
                 child: SizedBox(
-                  height: Get.height*0.088,
+                  height: Get.height*0.1,
                   width: Get.width,
                   child:  Column(
                     children: [

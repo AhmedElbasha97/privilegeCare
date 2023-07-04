@@ -379,7 +379,8 @@ class _DoctorCellWidgetState extends State<DoctorCellWidget> {
 
                     ],
                   ),
-                  widget.doctorData?.schedule?.length == 0?Row(
+                  widget.doctorData?.schedule?.length == 0?
+                  Row(
                     children: [
 
                       Padding(
@@ -438,7 +439,8 @@ class _DoctorCellWidgetState extends State<DoctorCellWidget> {
                       ),
 
                     ],
-                  ):Row(
+                  ):
+                  Row(
                     children: [
                       Padding(
                         padding: const EdgeInsets.all(5.0),
@@ -447,7 +449,7 @@ class _DoctorCellWidgetState extends State<DoctorCellWidget> {
                             Get.to(()=>  ReservationScreen(doctorId: "${widget.doctorData?.id??0}",));
                           },
                           child: Container(
-                            width: Get.width*0.27,
+                            width: Get.width*0.25,
                             height: Get.height*0.04,
                             decoration: BoxDecoration(
                               color: kGreenColor,

@@ -140,7 +140,7 @@ class ReservationScreen extends StatelessWidget {
                       const SizedBox(height: 10,),
                       Container(
                         width: Get.width*0.6,
-                        height: Get.height*0.05,
+                        height: Get.height*0.06,
                         child:  Column(
                           children: [
                             Row(

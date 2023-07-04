@@ -38,12 +38,13 @@ class ReservationSuccessWidget extends StatelessWidget {
               width: MediaQuery.of(context).size.width * 0.9,
               child: Center(
                 child:  CustomText("${reservationSuccess1.tr}$doctorName ${reservationSuccess2.tr} ",
+                  textAlign: TextAlign.center,
                   style: const TextStyle(
                       height: 1,
                       fontFamily: fontFamilyName,
                       color: kGreenColor,
                       fontWeight: FontWeight.w700,
-                      fontSize: 30),),
+                      fontSize: 20),),
               ),
             ),
 
