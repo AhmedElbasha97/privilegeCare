@@ -233,21 +233,33 @@ class ReservationScreen extends StatelessWidget {
 
                               child: Container(
                                 width: Get.width*0.4,
-                                height: Get.height*0.04,
+                                height: Get.height*0.05,
                                 child:  Column(
                                   children: [
                                     Row(
                                       mainAxisAlignment: MainAxisAlignment.center,
                                       children: [
-                                        CustomText(
-                                          controller.timeText,
+                                        controller.appointments?.length == 0?Container(
+                                          width:Get.width*0.3,
+                                          child: CustomText(
+                                            controller.timeText,
+                                            textAlign: TextAlign.center ,
+                                            style: const TextStyle(
+                                                fontFamily: fontFamilyName,
+                                                color: kBlueColor,
+                                                fontWeight: FontWeight.w800,
+                                                fontSize: 12),
+                                          ),
+                                        ): CustomText(
+                                            controller.timeText,
+                                            textAlign: TextAlign.center ,
+                                            style: const TextStyle(
+                                                fontFamily: fontFamilyName,
+                                                color: kBlueColor,
+                                                fontWeight: FontWeight.w800,
+                                                fontSize: 18),
+                                          ),
 
-                                          style: const TextStyle(
-                                              fontFamily: fontFamilyName,
-                                              color: kBlueColor,
-                                              fontWeight: FontWeight.w800,
-                                              fontSize: 18),
-                                        ),
                                         const Icon(Icons.arrow_downward,color: kBlueColor,size: 16,),
                                       ],
                                     ),

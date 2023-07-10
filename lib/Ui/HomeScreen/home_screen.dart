@@ -205,7 +205,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                   },
                                   child: Container(
                                     width: 100,
-                                    height: 120 ,
+                                    height: 130 ,
                                     child: Column(
                                       mainAxisSize: MainAxisSize.max,
                                       children: [
@@ -263,7 +263,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                               fontFamily: fontFamilyName,
                                               color: kBlueColor,
                                               fontWeight: FontWeight.w600,
-                                              fontSize: 12),),
+                                              fontSize: 11),),
                                       ],
                                     ),
                                   ),

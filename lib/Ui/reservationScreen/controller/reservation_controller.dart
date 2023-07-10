@@ -164,7 +164,7 @@ choosingDate(String scheduleId,String date) async {
   dateText = date;
   this.scheduleId = scheduleId;
   update();
-
+  timeText = "--:-";
   appointments = await DoctorServices.getAppointment(scheduleId);
   if(appointments?.length == 0){
     timeText = noTimeAvailable.tr;
