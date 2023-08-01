@@ -117,7 +117,7 @@ class _HospitalCellWidgetState extends State<HospitalCellWidget> {
 
                       color: kBlueColor,
                       fontWeight: FontWeight.w800,
-                      fontSize: 20),),
+                      fontSize: 18),),
               ),
             ),
             const SizedBox(height: 10,),

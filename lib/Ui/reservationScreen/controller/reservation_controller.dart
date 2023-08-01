@@ -4,7 +4,6 @@ import 'package:cool_alert/cool_alert.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:geocoding/geocoding.dart';
-import 'package:geolocator/geolocator.dart';
 import 'package:get/get.dart';
 import 'package:privilegecare/Models/doctor_reservation_model.dart';
 import 'package:privilegecare/Models/response_model.dart';
@@ -25,6 +24,7 @@ import '../../../Utils/translation_key.dart';
 
 class ReservationController extends GetxController{
   final formKey = GlobalKey<FormState>();
+
   final _validatorHelber = ValidatorHelper.instance;
  late DoctorReservationData? doctorData;
   bool decideToSignIn = false;
@@ -105,6 +105,7 @@ class ReservationController extends GetxController{
   }
 
   String? validatePhoneNumber(String? phoneNumber) {
+
     var validateName = _validatorHelber.validatePhoneNumberField(phoneNumber);
     if (validateName == null && phoneNumber != "") {
       phoneState = true;

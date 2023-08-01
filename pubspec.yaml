@@ -62,7 +62,6 @@ dependencies:
   easy_localization: ^3.0.2
   double_back_to_close_app: ^2.1.0
   geocoding: ^2.1.0
-  geolocator: ^9.0.2
 
 
 
