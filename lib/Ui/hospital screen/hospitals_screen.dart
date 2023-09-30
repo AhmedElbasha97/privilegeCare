@@ -93,7 +93,7 @@ class _HospitalScreensState extends State<HospitalScreens> {
                           child: RawScrollbar(
                             thumbColor: kBlueColor,
                             radius: const Radius.circular(20),
-                            thickness: 5,
+                            thickness: 1,
                             child: ListView.builder(
                               itemCount:controller.hospitalListData?.length,
 

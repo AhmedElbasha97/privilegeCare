@@ -480,7 +480,7 @@ class _SecondReservationScreenState extends State<SecondReservationScreen> {
                                       fontSize: 15),
                                 ),
                                 const SizedBox(height: 10,),
-                                Divider(
+                                const Divider(
                                   color: kGreenColor,
                                   height: 1,
                                   thickness: 2,

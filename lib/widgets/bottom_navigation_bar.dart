@@ -35,7 +35,7 @@ class _BottomNavigationBarWidgetState extends State<BottomNavigationBarWidget> {
 
         switch(index){
           case 0:{
-            Get.to(()=>const HomeScreen());
+            Get.to(()=>const ProfileScreen());
             setState(() {
               _selectedIndex = index;
             });
@@ -43,7 +43,7 @@ class _BottomNavigationBarWidgetState extends State<BottomNavigationBarWidget> {
           break;
           case 1:{
 
-            Get.to(()=>const HomeScreen());
+            Get.to(()=> SpecialtyScreen());
             setState(() {
               _selectedIndex = index;
             });
@@ -57,7 +57,7 @@ class _BottomNavigationBarWidgetState extends State<BottomNavigationBarWidget> {
           }
           break;
           case 3:{
-            Get.to(()=>const HomeScreen());
+            Get.to(()=>const HospitalScreens());
             setState(() {
               _selectedIndex = index;
             });

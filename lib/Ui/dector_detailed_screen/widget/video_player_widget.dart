@@ -153,11 +153,11 @@ class _VideoPlayerWidgetState extends State<VideoPlayerWidget> {
               )):const SizedBox(),
           showController?Positioned(
               bottom: 10,
-              child: Padding(
+              child:  Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: Container(
                   height: 50,
-                  width: Get.width*0.9,
+                  width: Get.width*0.87,
                   decoration:  BoxDecoration(
                     color: Colors.black.withOpacity(0.50),
                     borderRadius: const BorderRadius.all(Radius.circular(20)),
@@ -198,7 +198,7 @@ class _VideoPlayerWidgetState extends State<VideoPlayerWidget> {
                         }, icon: const Icon(Icons.fast_rewind,color: kWhiteColor,)),
 
                         Container(
-                          width: Get.width*0.2,
+                          width: Get.width*0.1,
                           height: 10,
                           child:ClipRRect(
                             borderRadius: BorderRadius.circular(3.0),

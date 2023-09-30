@@ -72,7 +72,7 @@ class _DoctorCellWidgetState extends State<DoctorCellWidget> {
               ],
             ),
             child: Padding(
-              padding: const EdgeInsets.all(15.0),
+              padding: const EdgeInsets.fromLTRB(10,15.0,10,15.0),
               child: Column(
                 children: [
                   Row(
@@ -115,7 +115,7 @@ class _DoctorCellWidgetState extends State<DoctorCellWidget> {
                           );
                         },
                       ),
-                      const SizedBox(width: 10,),
+                      const SizedBox(width: 5,),
                       Column(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         crossAxisAlignment: CrossAxisAlignment.start,
@@ -178,10 +178,10 @@ class _DoctorCellWidgetState extends State<DoctorCellWidget> {
                         padding: const EdgeInsets.all(3.0),
                         child: Container(
                           width: Get.width*0.35,
-                          height: Get.height*0.04,
+                          height: Get.height*0.05,
                           decoration: BoxDecoration(
                             color: Colors.white,
-                            borderRadius: BorderRadius.circular(15),
+                            borderRadius: BorderRadius.circular(10),
                             boxShadow: const [
                               BoxShadow(
                                 offset: Offset(0, 2),
@@ -214,7 +214,7 @@ class _DoctorCellWidgetState extends State<DoctorCellWidget> {
                         padding: const EdgeInsets.all(3.0),
                         child: Container(
 
-                          height: Get.height*0.04,
+                          height: Get.height*0.05,
                           decoration: BoxDecoration(
                             color: Colors.white,
                             borderRadius: BorderRadius.circular(10),
@@ -240,7 +240,7 @@ class _DoctorCellWidgetState extends State<DoctorCellWidget> {
                                   style: TextStyle(
                                       fontFamily: fontFamilyName,
                                       color: kBlueColor,
-                                      fontWeight: FontWeight.w600,
+                                      fontWeight: FontWeight.w700,
                                       fontSize: 14),),
 
 

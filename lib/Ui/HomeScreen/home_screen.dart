@@ -98,444 +98,448 @@ class _HomeScreenState extends State<HomeScreen> {
             snackBar: const SnackBar(
               content: CustomText('Tap back again to leave'),
             ),
-            child: SizedBox.expand(
-              child: GestureDetector(
-              onPanUpdate: (details) {
-              // Swiping in right direction.
-              if (details.delta.dx > 0) {
-                Get.to(()=>const HospitalScreens());
-              }
+            child: GestureDetector(
+            onPanUpdate: (details) {
+            // Swiping in right direction.
+            if (details.delta.dx > 0) {
+              Get.to(()=>const HospitalScreens());
+            }
 
-              // Swiping in left direction.
-              if (details.delta.dx < 0) {
-                Get.to(()=>SpecialtyScreen());
-              }
-              },
-              child: RawScrollbar(
-                thumbColor: kBlueColor,
-                radius: const Radius.circular(20),
-                thickness: 5,
-                child: SingleChildScrollView(
-                  controller: _scrollController,
-                  child: Padding(
-                    padding: const EdgeInsets.all(10.0),
-                    child: Column(
-                      children: [
-                        const SizedBox(height: 10,),
-                        controller.slideShowLoading?Loader(width: MediaQuery.of(context).size.width,height: 150.0):
-                        CarouselSlider(
-                          options:  CarouselOptions(
-                              height: Get.height*0.19,
-                              aspectRatio: 2.0,
-                              enlargeCenterPage: false,
-                              viewportFraction: 1,
-                              autoPlay: true),
-
-                          items: controller.secondSliderData?.map((i) {
-                            return Builder(
-                              builder: (BuildContext context) {
-                                return  InkWell(
-                                  onTap: (){
-                                    controller.launchURL(context,i.link??"");
-                                  },
-                                  child: CachedNetworkImage(
-                                    fit: BoxFit.cover,
-                                    imageUrl: "https://privilegecare.net${i.image}",
-                                    imageBuilder: ((context, image){
-                                      return  Container(
-                                          width: MediaQuery.of(context).size.width,
-                                          margin: const EdgeInsets.symmetric(horizontal: 5.0),
-                                          decoration: BoxDecoration(
-                                              image: DecorationImage(
-                                                image: image,
-                                                fit: BoxFit.fill,
-                                              ),
-                                              borderRadius:
-                                              const BorderRadius.all(Radius.circular(15))
-
-                                          )
-                                      );
-                                    }),
-                                    placeholder: (context, image){
-                                      return  Padding(
-                                        padding:  const EdgeInsets.all(5),
-                                        child: Container(
-                                            decoration: const BoxDecoration(
-                                                borderRadius:
-                                                BorderRadius.all(Radius.circular(15))
-                                            ),
-                                            child: Loader(width: MediaQuery.of(context).size.width,height: 150.0)),
-                                      );
-                                    },
-                                    errorWidget: (context, url, error){
-                                      return Container(
-                                          width: MediaQuery.of(context).size.width,
-
-                                          height: Get.height*0.2,
-                                          margin: const EdgeInsets.symmetric(horizontal: 5.0),
-                                          decoration: const BoxDecoration(
-                                              image: DecorationImage(
-                                                image: AssetImage("assets/images/no_data_slideShow.png"),
-                                                fit: BoxFit.fill,
-                                              ),
-                                              borderRadius:
-                                              BorderRadius.all(Radius.circular(15))
-
-                                          )
-                                      );
-                                    },
-                                  ),
-                                );
-                              },
-                            );
-                          }).toList(),
-                        ),
-                        const SizedBox(height: 10,),
-                        controller.doctorData?.length ==0 ?const SizedBox():GridView.count(
-                            crossAxisCount: controller.doctorData!.length-1 < 3?controller.doctorData?.length??0-1:3,
-                            crossAxisSpacing: 4.0,
-                            shrinkWrap: true,
-                            physics: const NeverScrollableScrollPhysics(),
-                            mainAxisSpacing: 8.0,
-                            children: List.generate(controller.doctorData?.length??0, (index) {
-                              return Center(
-                                child:  InkWell(
-                                  onTap: (){
-                                    Get.to(DoctorDetailedScreen(doctorId: "${controller.doctorData?[index].id??0}"));
-                                  },
-                                  child: Container(
-                                    width: 100,
-                                    height: 130 ,
-                                    child: Column(
-                                      mainAxisSize: MainAxisSize.max,
-                                      children: [
-                                        CachedNetworkImage(
-                                          fit: BoxFit.cover,
-                                          imageUrl: "https://privilegecare.net${controller.doctorData?[index].image??""}",
-                                          imageBuilder: ((context, image){
-                                            return  Container(
-                                                height: 80,
-                                                width: 80,
-                                                decoration: BoxDecoration(
-                                                  image: DecorationImage(
-                                                    image: image,
-                                                    fit: BoxFit.cover,
-                                                  ),
-
-
-                                                )
-                                            );
-                                          }),
-                                          placeholder: (context, image){
-                                            return  const Center(child: CircularProgressIndicator(color: kBlueColor,));
-                                          },
-                                          errorWidget: (context, url, error){
-                                            return Container(
-                                                height: 80,
-                                                width: 80,
-
-                                                decoration: const BoxDecoration(
-                                                  image: DecorationImage(
-                                                    image: AssetImage("assets/images/doctor.png"),
-                                                    fit: BoxFit.fill,
-                                                  ),
-
-
-                                                )
-                                            );
-                                          },
-                                        ),
-                                        const SizedBox(height: 5),
-                                        CustomText( controller.doctorData?[index].name??"",
-
-                                          style: const TextStyle(
-                                              height: 1,
-                                              fontFamily: fontFamilyName,
-                                              color: kBlueColor,
-                                              fontWeight: FontWeight.w600,
-                                              fontSize: 12),),
-                                        const SizedBox(height: 5,),
-                                        CustomText(controller.doctorData?[index].specialist??"",
-
-                                          style: const TextStyle(
-                                              height: 1,
-
-                                              fontFamily: fontFamilyName,
-                                              color: kBlueColor,
-                                              fontWeight: FontWeight.w600,
-                                              fontSize: 11),),
-                                      ],
-                                    ),
-                                  ),
-                                ),
-                              );
-                            }
-                            )
-                        ),
-
-                        const SizedBox(height: 20,),
-                        InkWell(
-                          onTap: (){
-                            Get.to(()=>const DoctorScreen(specialistId: "5"));
-                          },
-                          child:  CustomText(showMoreDoctorsHome.tr,
-                            style: const TextStyle(
-                                height: 1,
-                                fontFamily: fontFamilyName,
-                                color: kBlueColor,
-                                fontWeight: FontWeight.w700,
-                                fontSize: 18),),
-                        ),
-                        const SizedBox(height: 18,),
-                        controller.slideShowLoading?Loader(width: MediaQuery.of(context).size.width,height: 150.0):
-                        CarouselSlider(
-                          options:  CarouselOptions(
+            // Swiping in left direction.
+            if (details.delta.dx < 0) {
+              Get.to(()=>SpecialtyScreen());
+            }
+            },
+            child: RawScrollbar(
+              thumbColor: kBlueColor,
+              radius: const Radius.circular(20),
+              thickness: 5,
+              child: SingleChildScrollView(
+                controller: _scrollController,
+                child: Padding(
+                  padding: const EdgeInsets.all(10.0),
+                  child: Column(
+                    children: [
+                      const SizedBox(height: 10,),
+                      controller.slideShowLoading?Loader(width: MediaQuery.of(context).size.width,height: 150.0):
+                      CarouselSlider(
+                        options:  CarouselOptions(
                             height: Get.height*0.19,
                             aspectRatio: 2.0,
                             enlargeCenterPage: false,
                             viewportFraction: 1,
                             autoPlay: true),
 
-                          items: controller.sliderData?.map((i) {
-                            return Builder(
-                              builder: (BuildContext context) {
-                                return  InkWell(
-                                  onTap: (){
-                                    controller.launchURL(context,i.link??"");
-                                  },
-                                  child: CachedNetworkImage(
-                                    fit: BoxFit.cover,
-                                    imageUrl: "https://privilegecare.net${i.image}",
-                                    imageBuilder: ((context, image){
-                                      return  Container(
-                                          width: MediaQuery.of(context).size.width,
-                                          margin: const EdgeInsets.symmetric(horizontal: 5.0),
-                                          decoration: BoxDecoration(
-                                              image: DecorationImage(
-                                                image: image,
-                                                fit: BoxFit.fill,
-                                              ),
-                                              borderRadius:
-                                              const BorderRadius.all(Radius.circular(15))
-
-                                          )
-                                      );
-                                    }),
-                                    placeholder: (context, image){
-                                      return  Padding(
-                                        padding:  const EdgeInsets.all(5),
-                                        child: Container(
-                                            decoration: const BoxDecoration(
-                                                borderRadius:
-                                                BorderRadius.all(Radius.circular(15))
+                        items: controller.secondSliderData?.map((i) {
+                          return Builder(
+                            builder: (BuildContext context) {
+                              return  InkWell(
+                                onTap: (){
+                                  controller.launchURL(context,i.link??"");
+                                },
+                                child: CachedNetworkImage(
+                                  fit: BoxFit.cover,
+                                  imageUrl: "https://privilegecare.net${i.image}",
+                                  imageBuilder: ((context, image){
+                                    return  Container(
+                                        width: MediaQuery.of(context).size.width,
+                                        margin: const EdgeInsets.symmetric(horizontal: 5.0),
+                                        decoration: BoxDecoration(
+                                            image: DecorationImage(
+                                              image: image,
+                                              fit: BoxFit.fill,
                                             ),
-                                            child: Loader(width: MediaQuery.of(context).size.width,height: 150.0)),
-                                      );
-                                    },
-                                    errorWidget: (context, url, error){
-                                      return Container(
-                                          width: MediaQuery.of(context).size.width,
+                                            borderRadius:
+                                            const BorderRadius.all(Radius.circular(15))
 
-                                          height: Get.height*0.2,
-                                          margin: const EdgeInsets.symmetric(horizontal: 5.0),
+                                        )
+                                    );
+                                  }),
+                                  placeholder: (context, image){
+                                    return  Padding(
+                                      padding:  const EdgeInsets.all(5),
+                                      child: Container(
                                           decoration: const BoxDecoration(
-                                              image: DecorationImage(
-                                                image: AssetImage("assets/images/no_data_slideShow.png"),
-                                                fit: BoxFit.fill,
-                                              ),
                                               borderRadius:
                                               BorderRadius.all(Radius.circular(15))
+                                          ),
+                                          child: Loader(width: MediaQuery.of(context).size.width,height: 150.0)),
+                                    );
+                                  },
+                                  errorWidget: (context, url, error){
+                                    return Container(
+                                        width: MediaQuery.of(context).size.width,
 
-                                          )
-                                      );
-                                    },
-                                  ),
-                                );
-                              },
-                            );
-                          }).toList(),
-                        ),
-                        const SizedBox(height: 10,),
-                        const Divider(
-                          color: kGreenColor,
-                          height: 1,
-                          thickness: 1,
-                          endIndent: 20,
-                          indent: 20,
-                        ),
-                        const SizedBox(height: 20,),
-                        Container(
+                                        height: Get.height*0.2,
+                                        margin: const EdgeInsets.symmetric(horizontal: 5.0),
+                                        decoration: const BoxDecoration(
+                                            image: DecorationImage(
+                                              image: AssetImage("assets/images/no_data_slideShow.png"),
+                                              fit: BoxFit.fill,
+                                            ),
+                                            borderRadius:
+                                            BorderRadius.all(Radius.circular(15))
 
-                          width: Get.width*0.95,
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(15),
-                            border: Border.all(color: kBlueColor,width: 1),
-                            color: Colors.white,
+                                        )
+                                    );
+                                  },
+                                ),
+                              );
+                            },
+                          );
+                        }).toList(),
+                      ),
+                      const SizedBox(height: 10,),
+                      controller.doctorData?.length ==0 ?const SizedBox():
+                      GridView.builder(
+                          gridDelegate:  SliverGridDelegateWithFixedCrossAxisCount(
+                              crossAxisCount: controller.doctorData!.length-1 < 3?controller.doctorData?.length??0-1:3,
+                              crossAxisSpacing: 4.0,
+                              mainAxisSpacing: 8.0,
+                            childAspectRatio: MediaQuery.of(context).size.width /(MediaQuery.of(context).size.height / 1.8),
                           ),
-                          child: Padding(
-                            padding: const EdgeInsets.all(8.0),
-                            child: controller.hospitalSlideShowLoading?Loader(width: MediaQuery.of(context).size.width,height: 150.0):controller.hospitalBanner?.length==0?Center(
-                              child: Container(
-                                height: 130,
-                                width: Get.width*0.75,
-                                child: Row(
-                                  children: [
-                                    Image.asset("assets/images/Hospital building-rafiki.png",height: Get.width*0.23,),
-                                    CustomText(noHospAvailableHome.tr,style: const TextStyle(color: kGreenColor,fontWeight: FontWeight.bold,fontSize: 18),textAlign: TextAlign.center,),
-                                  ],
+
+                          shrinkWrap: true,
+                          physics: const NeverScrollableScrollPhysics(),
+                          itemCount: controller.doctorData?.length,
+                          itemBuilder: (BuildContext context, int index) {
+                            return Center(
+                              child:  InkWell(
+                                onTap: (){
+                                  Get.to(DoctorDetailedScreen(doctorId: "${controller.doctorData?[index].id??0}"));
+                                },
+                                child: Container(
+                                  width: 100,
+
+                                  child: Column(
+
+                                    children: [
+                                      CachedNetworkImage(
+                                        fit: BoxFit.cover,
+                                        imageUrl: "https://privilegecare.net${controller.doctorData?[index].image??""}",
+                                        imageBuilder: ((context, image){
+                                          return  Container(
+                                              height: 80,
+                                              width: 80,
+                                              decoration: BoxDecoration(
+                                                image: DecorationImage(
+                                                  image: image,
+                                                  fit: BoxFit.cover,
+                                                ),
+
+
+                                              )
+                                          );
+                                        }),
+                                        placeholder: (context, image){
+                                          return  const Center(child: CircularProgressIndicator(color: kBlueColor,));
+                                        },
+                                        errorWidget: (context, url, error){
+                                          return Container(
+                                              height: 80,
+                                              width: 80,
+
+                                              decoration: const BoxDecoration(
+                                                image: DecorationImage(
+                                                  image: AssetImage("assets/images/doctor.png"),
+                                                  fit: BoxFit.fill,
+                                                ),
+
+
+                                              )
+                                          );
+                                        },
+                                      ),
+                                      const SizedBox(height: 5),
+                                      CustomText( controller.doctorData?[index].name??"",
+
+                                        style: const TextStyle(
+                                            height: 1,
+                                            fontFamily: fontFamilyName,
+                                            color: kBlueColor,
+                                            fontWeight: FontWeight.w600,
+                                            fontSize: 12),),
+                                      const SizedBox(height: 5,),
+                                      CustomText(controller.doctorData?[index].specialist??"",
+
+                                        style: const TextStyle(
+                                            height: 1,
+
+                                            fontFamily: fontFamilyName,
+                                            color: kBlueColor,
+                                            fontWeight: FontWeight.w600,
+                                            fontSize: 11),),
+                                    ],
+                                  ),
                                 ),
                               ),
-                            ):Column(
-                              children: controller.hospitalBanner!.map((e){
-                                return  Padding(
-                                  padding: const EdgeInsets.symmetric(vertical: 10.0),
-                                  child: InkWell(
-                                    onTap: (){
-                                      Get.to(()=>HospitalDetailedScreen(hospitalId: "${e.id}"));
-                                    },
-                                    child: Column(
-                                      children: [
-                                        SizedBox(
-                                          width:Get.width*0.8,
-                                          child:  Row(
-                                            crossAxisAlignment: CrossAxisAlignment.start,
-                                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                            children: [
-                                              Column(
-                                                crossAxisAlignment: CrossAxisAlignment.start,
-                                                children: [
-                                                  CustomText(
-                                                    Get.find<StorageService>().activeLocale == SupportedLocales.english?e.nameEn??"":e.name??"",
+                            );
+                          },
 
-                                                    style: const TextStyle(
-                                                        height: 1,
-                                                        fontFamily: fontFamilyName,
-                                                        color: kBlueColor,
-                                                        fontWeight: FontWeight.w700,
-                                                        fontSize: 15),),
-                                                  const SizedBox(height: 5,),
-                                                  CustomText(
-                                                    hospInfo.tr,
+                      ),
 
-                                                    style: const TextStyle(
-                                                        height: 1,
-                                                        fontFamily: fontFamilyName,
-                                                        color: kBlueColor,
-                                                        fontWeight: FontWeight.w600,
-                                                        fontSize: 15),),
-                                                ],
-                                              ),
-                                              CustomText(moreInfoHosp.tr,
+                      const SizedBox(height: 20,),
+                      InkWell(
+                        onTap: (){
+                          Get.to(()=>const DoctorScreen(specialistId: "5"));
+                        },
+                        child:  CustomText(showMoreDoctorsHome.tr,
+                          style: const TextStyle(
+                              height: 1,
+                              fontFamily: fontFamilyName,
+                              color: kBlueColor,
+                              fontWeight: FontWeight.w700,
+                              fontSize: 18),),
+                      ),
+                      const SizedBox(height: 18,),
+                      controller.slideShowLoading?Loader(width: MediaQuery.of(context).size.width,height: 150.0):
+                      CarouselSlider(
+                        options:  CarouselOptions(
+                          height: Get.height*0.19,
+                          aspectRatio: 2.0,
+                          enlargeCenterPage: false,
+                          viewportFraction: 1,
+                          autoPlay: true),
 
-                                                style: const TextStyle(
-                                                    height: 1,
-                                                    fontFamily: fontFamilyName,
-                                                    color: kBlueColor,
-                                                    fontWeight: FontWeight.w600,
-                                                    fontSize: 15),),
-                                            ],
+                        items: controller.sliderData?.map((i) {
+                          return Builder(
+                            builder: (BuildContext context) {
+                              return  InkWell(
+                                onTap: (){
+                                  controller.launchURL(context,i.link??"");
+                                },
+                                child: CachedNetworkImage(
+                                  fit: BoxFit.cover,
+                                  imageUrl: "https://privilegecare.net${i.image}",
+                                  imageBuilder: ((context, image){
+                                    return  Container(
+                                        width: MediaQuery.of(context).size.width,
+                                        margin: const EdgeInsets.symmetric(horizontal: 5.0),
+                                        decoration: BoxDecoration(
+                                            image: DecorationImage(
+                                              image: image,
+                                              fit: BoxFit.fill,
+                                            ),
+                                            borderRadius:
+                                            const BorderRadius.all(Radius.circular(15))
+
+                                        )
+                                    );
+                                  }),
+                                  placeholder: (context, image){
+                                    return  Padding(
+                                      padding:  const EdgeInsets.all(5),
+                                      child: Container(
+                                          decoration: const BoxDecoration(
+                                              borderRadius:
+                                              BorderRadius.all(Radius.circular(15))
                                           ),
+                                          child: Loader(width: MediaQuery.of(context).size.width,height: 150.0)),
+                                    );
+                                  },
+                                  errorWidget: (context, url, error){
+                                    return Container(
+                                        width: MediaQuery.of(context).size.width,
+
+                                        height: Get.height*0.2,
+                                        margin: const EdgeInsets.symmetric(horizontal: 5.0),
+                                        decoration: const BoxDecoration(
+                                            image: DecorationImage(
+                                              image: AssetImage("assets/images/no_data_slideShow.png"),
+                                              fit: BoxFit.fill,
+                                            ),
+                                            borderRadius:
+                                            BorderRadius.all(Radius.circular(15))
+
+                                        )
+                                    );
+                                  },
+                                ),
+                              );
+                            },
+                          );
+                        }).toList(),
+                      ),
+                      const SizedBox(height: 10,),
+                      const Divider(
+                        color: kGreenColor,
+                        height: 1,
+                        thickness: 1,
+                        endIndent: 20,
+                        indent: 20,
+                      ),
+                      const SizedBox(height: 20,),
+                      Container(
+
+                        width: Get.width*0.95,
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(15),
+                          border: Border.all(color: kBlueColor,width: 1),
+                          color: Colors.white,
+                        ),
+                        child: Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: controller.hospitalSlideShowLoading?Loader(width: MediaQuery.of(context).size.width,height: 150.0):controller.hospitalBanner?.length==0?Center(
+                            child: Container(
+                              height: 130,
+                              width: Get.width*0.75,
+                              child: Row(
+                                children: [
+                                  Image.asset("assets/images/Hospital building-rafiki.png",height: Get.width*0.23,),
+                                  CustomText(noHospAvailableHome.tr,style: const TextStyle(color: kGreenColor,fontWeight: FontWeight.bold,fontSize: 18),textAlign: TextAlign.center,),
+                                ],
+                              ),
+                            ),
+                          ):Column(
+                            children: controller.hospitalBanner!.map((e){
+                              return  Padding(
+                                padding: const EdgeInsets.symmetric(vertical: 10.0),
+                                child: InkWell(
+                                  onTap: (){
+                                    Get.to(()=>HospitalDetailedScreen(hospitalId: "${e.id}"));
+                                  },
+                                  child: Column(
+                                    children: [
+                                      SizedBox(
+                                        width:Get.width*0.8,
+                                        child:  Row(
+                                          crossAxisAlignment: CrossAxisAlignment.start,
+                                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                          children: [
+                                            Column(
+                                              crossAxisAlignment: CrossAxisAlignment.start,
+                                              children: [
+                                                CustomText(
+                                                  Get.find<StorageService>().activeLocale == SupportedLocales.english?e.nameEn??"":e.name??"",
+
+                                                  style: const TextStyle(
+                                                      height: 1,
+                                                      fontFamily: fontFamilyName,
+                                                      color: kBlueColor,
+                                                      fontWeight: FontWeight.w700,
+                                                      fontSize: 15),),
+                                                const SizedBox(height: 5,),
+                                                CustomText(
+                                                  hospInfo.tr,
+
+                                                  style: const TextStyle(
+                                                      height: 1,
+                                                      fontFamily: fontFamilyName,
+                                                      color: kBlueColor,
+                                                      fontWeight: FontWeight.w600,
+                                                      fontSize: 15),),
+                                              ],
+                                            ),
+                                            CustomText(moreInfoHosp.tr,
+
+                                              style: const TextStyle(
+                                                  height: 1,
+                                                  fontFamily: fontFamilyName,
+                                                  color: kBlueColor,
+                                                  fontWeight: FontWeight.w600,
+                                                  fontSize: 15),),
+                                          ],
                                         ),
-                                        const SizedBox(height: 10,),
-                                        e.image?.length==0?Container(
-                                    width: Get.width*0.9,
-                                    height: Get.height*0.2,
-                                    margin: const EdgeInsets.symmetric(horizontal: 5.0),
-                                    decoration: const BoxDecoration(
-                                    image: DecorationImage(
-                                    image: AssetImage("assets/images/no_data_slideShow.png"),
-                                    fit: BoxFit.fill,
-                                    ),
-                                    borderRadius:
-                                    BorderRadius.all(Radius.circular(15))
+                                      ),
+                                      const SizedBox(height: 10,),
+                                      e.image?.length==0?Container(
+                                  width: Get.width*0.9,
+                                  height: Get.height*0.2,
+                                  margin: const EdgeInsets.symmetric(horizontal: 5.0),
+                                  decoration: const BoxDecoration(
+                                  image: DecorationImage(
+                                  image: AssetImage("assets/images/no_data_slideShow.png"),
+                                  fit: BoxFit.fill,
+                                  ),
+                                  borderRadius:
+                                  BorderRadius.all(Radius.circular(15))
 
-                                    )
-                                    ):
-                                        CarouselSlider(
-                                          options:  CarouselOptions(
-                                              height: Get.height*0.19,
-                                              aspectRatio: 2.0,
-                                              enlargeCenterPage: false,
-                                              viewportFraction: 1,
-                                              autoPlay: true),
+                                  )
+                                  ):
+                                      CarouselSlider(
+                                        options:  CarouselOptions(
+                                            height: Get.height*0.19,
+                                            aspectRatio: 2.0,
+                                            enlargeCenterPage: false,
+                                            viewportFraction: 1,
+                                            autoPlay: true),
 
-                                          items: e.image?.map((i) {
-                                            return Builder(
-                                              builder: (BuildContext context) {
-                                                return  CachedNetworkImage(
-                                                  fit: BoxFit.cover,
-                                                  imageUrl: "https://privilegecare.net$i",
-                                                  imageBuilder: ((context, image){
-                                                    return  Container(
-                                                        width: MediaQuery.of(context).size.width,
-                                                        margin: const EdgeInsets.symmetric(horizontal: 5.0),
-                                                        decoration: BoxDecoration(
-                                                            image: DecorationImage(
-                                                              image: image,
-                                                              fit: BoxFit.fill,
-                                                            ),
-                                                            borderRadius:
-                                                            const BorderRadius.all(Radius.circular(15))
-
-                                                        )
-                                                    );
-                                                  }),
-                                                  placeholder: (context, image){
-                                                    return  Padding(
-                                                      padding:  const EdgeInsets.all(5),
-                                                      child: Container(
-                                                          decoration: const BoxDecoration(
-                                                              borderRadius:
-                                                              BorderRadius.all(Radius.circular(15))
+                                        items: e.image?.map((i) {
+                                          return Builder(
+                                            builder: (BuildContext context) {
+                                              return  CachedNetworkImage(
+                                                fit: BoxFit.cover,
+                                                imageUrl: "https://privilegecare.net$i",
+                                                imageBuilder: ((context, image){
+                                                  return  Container(
+                                                      width: MediaQuery.of(context).size.width,
+                                                      margin: const EdgeInsets.symmetric(horizontal: 5.0),
+                                                      decoration: BoxDecoration(
+                                                          image: DecorationImage(
+                                                            image: image,
+                                                            fit: BoxFit.fill,
                                                           ),
-                                                          child: Loader(width: MediaQuery.of(context).size.width,height: 150.0)),
-                                                    );
-                                                  },
-                                                  errorWidget: (context, url, error){
-                                                    return Container(
-                                                        width: MediaQuery.of(context).size.width,
+                                                          borderRadius:
+                                                          const BorderRadius.all(Radius.circular(15))
 
-                                                        height: Get.height*0.2,
-                                                        margin: const EdgeInsets.symmetric(horizontal: 5.0),
+                                                      )
+                                                  );
+                                                }),
+                                                placeholder: (context, image){
+                                                  return  Padding(
+                                                    padding:  const EdgeInsets.all(5),
+                                                    child: Container(
                                                         decoration: const BoxDecoration(
-                                                            image: DecorationImage(
-                                                              image: AssetImage("assets/images/no_data_slideShow.png"),
-                                                              fit: BoxFit.fill,
-                                                            ),
                                                             borderRadius:
                                                             BorderRadius.all(Radius.circular(15))
+                                                        ),
+                                                        child: Loader(width: MediaQuery.of(context).size.width,height: 150.0)),
+                                                  );
+                                                },
+                                                errorWidget: (context, url, error){
+                                                  return Container(
+                                                      width: MediaQuery.of(context).size.width,
 
-                                                        )
-                                                    );
-                                                  },
-                                                );
-                                              },
-                                            );
-                                          }).toList(),
-                                        ),
-                                        const SizedBox(height: 15,),
-                                        const Divider(
-                                          color: kGreenColor,
-                                          height: 1,
-                                          thickness: 1,
-                                          endIndent: 20,
-                                          indent: 20,
-                                        ),
-                                      ],
-                                    ),
+                                                      height: Get.height*0.2,
+                                                      margin: const EdgeInsets.symmetric(horizontal: 5.0),
+                                                      decoration: const BoxDecoration(
+                                                          image: DecorationImage(
+                                                            image: AssetImage("assets/images/no_data_slideShow.png"),
+                                                            fit: BoxFit.fill,
+                                                          ),
+                                                          borderRadius:
+                                                          BorderRadius.all(Radius.circular(15))
+
+                                                      )
+                                                  );
+                                                },
+                                              );
+                                            },
+                                          );
+                                        }).toList(),
+                                      ),
+                                      const SizedBox(height: 15,),
+                                      const Divider(
+                                        color: kGreenColor,
+                                        height: 1,
+                                        thickness: 1,
+                                        endIndent: 20,
+                                        indent: 20,
+                                      ),
+                                    ],
                                   ),
-                                );
-                              }).toList()
-                            ),
+                                ),
+                              );
+                            }).toList()
                           ),
                         ),
-                      ],
-                    ),
+                      ),
+                    ],
                   ),
                 ),
               ),
             ),
-        ),
+            ),
           ),
       ),
     )

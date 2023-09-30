@@ -19,7 +19,7 @@ class Services {
   static String advancedSearchEndPoint = "search";//post
   static String homeDoctorsEndPoint = "6doctors";//post
   static String homeBannersEndPoint = "slider";//post
-   static String secondHomeBannersEndPoint = "slider_app";//post
+  static String secondHomeBannersEndPoint = "slider_app";//post
   static String hospitalBannersEndPoint = "hospital_banner";//post
   static String hospitalListEndPoint = "specialist_hospital";//post
   static String commentsDoctorsProfileEndPoint = "review";//post

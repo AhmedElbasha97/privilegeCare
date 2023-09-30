@@ -267,7 +267,7 @@ bool signingUp = false ;
         reTypePasswordController.text
       );
       if(data?.msg == "succeeded"){
-        await Get.find<StorageService>().saveAccountId("${data?.info?.id??0}");
+         Get.find<StorageService>().saveAccountId("${data?.info?.id??0}");
         Get.offAll(const HomeScreen());
       }else{
         signingUp = false;
