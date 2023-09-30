@@ -33,7 +33,7 @@ dependencies:
   getwidget: ^3.1.1
   flutter_localization: ^0.1.11
   cool_alert: ^2.0.1
-  cached_network_image: ^3.2.3
+  cached_network_image: ^3.3.0
   get: ^4.6.5
   dio: ^5.1.2
   carousel_slider: ^4.2.1
