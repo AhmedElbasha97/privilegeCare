@@ -5,6 +5,8 @@ import 'package:privilegecare/Ui/reservationScreen/widget/sign_in_dialogue.dart'
 import 'package:privilegecare/Ui/signUpScreen/controller/signup_controller.dart';
 import 'package:privilegecare/Utils/colors.dart';
 import 'package:privilegecare/Utils/constant.dart';
+import 'package:privilegecare/Utils/localization_services.dart';
+import 'package:privilegecare/Utils/memory.dart';
 import 'package:privilegecare/Utils/translation_key.dart';
 import 'package:privilegecare/widgets/custom_text_widget.dart';
 import 'package:privilegecare/widgets/text_field_widget.dart';
@@ -61,7 +63,8 @@ class SignUpDialogue extends StatelessWidget {
                             height: Get.height*0.09,
                             width: Get.width*0.95,
                             child: CustomInputField(
-                              textAligning: TextAlign.center,
+                              textAligning: Get.find<StorageService>().activeLocale == SupportedLocales.english?TextAlign.left:TextAlign.right,
+
                               hasIntialValue: true,
                               labelText: signUpTextName1.tr,
                               textInputAction: TextInputAction.next,
@@ -89,7 +92,7 @@ class SignUpDialogue extends StatelessWidget {
                             height: Get.height*0.09,
                             width: Get.width*0.95,
                             child: CustomInputField(
-                              textAligning: TextAlign.center,
+                              textAligning: Get.find<StorageService>().activeLocale == SupportedLocales.english?TextAlign.left:TextAlign.right,
                               hasIntialValue: true,
                               labelText:signUpTextName2.tr,
                               textInputAction: TextInputAction.next,
@@ -116,7 +119,7 @@ class SignUpDialogue extends StatelessWidget {
                             height: Get.height*0.09,
                             width: Get.width*0.95,
                             child: CustomInputField(
-                              textAligning: TextAlign.center,
+                              textAligning: Get.find<StorageService>().activeLocale == SupportedLocales.english?TextAlign.left:TextAlign.right,
                               hasIntialValue: true,
                               labelText: signUpTextName3.tr,
                               textInputAction: TextInputAction.next,
@@ -159,6 +162,7 @@ class SignUpDialogue extends StatelessWidget {
                       child: CustomInputField(
                         hasIntialValue: true,
                         labelText: signUpTextEmail.tr,
+                        textAligning: Get.find<StorageService>().activeLocale == SupportedLocales.english?TextAlign.left:TextAlign.right,
 
                         textInputAction: TextInputAction.next,
                         keyboardType: TextInputType.emailAddress,
@@ -199,6 +203,7 @@ class SignUpDialogue extends StatelessWidget {
                         labelText: signUpTextPhone.tr,
                         textInputAction: TextInputAction.next,
                         keyboardType: TextInputType.number,
+                        textAligning: Get.find<StorageService>().activeLocale == SupportedLocales.english?TextAlign.left:TextAlign.right,
 
                         controller:controller.phoneController,
                         onchange: controller.onPhoneNumberUpdate,
@@ -267,6 +272,8 @@ class SignUpDialogue extends StatelessWidget {
                       width: Get.width*0.95,
                       child: CustomInputField(
                           hasIntialValue: true,
+                          textAligning: Get.find<StorageService>().activeLocale == SupportedLocales.english?TextAlign.left:TextAlign.right,
+
                           labelText:  "**********************",
                           textInputAction: TextInputAction.next,
                           keyboardType: TextInputType.visiblePassword,
@@ -308,6 +315,7 @@ class SignUpDialogue extends StatelessWidget {
                       child: CustomInputField(
                           hasIntialValue: true,
                           labelText:  "**********************",
+                          textAligning: Get.find<StorageService>().activeLocale == SupportedLocales.english?TextAlign.left:TextAlign.right,
 
                           textInputAction: TextInputAction.done,
                           keyboardType: TextInputType.visiblePassword,

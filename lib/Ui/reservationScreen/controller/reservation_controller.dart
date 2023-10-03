@@ -199,8 +199,11 @@ choosingDate(String scheduleId,String date) async {
       type: FileType.custom,
       allowedExtensions: ['pdf', 'doc'],
     );
+
     if (result == null) return;
+
     pickedFile = result;
+    print(pickedFile?.count??0);
     choosenFileIndex = "1";
     update();
   }

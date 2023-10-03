@@ -1,8 +1,12 @@
 // ignore_for_file: must_be_immutable, prefer_typing_uninitialized_variables
 
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:privilegecare/Utils/colors.dart';
 import 'package:privilegecare/Utils/constant.dart';
+import 'package:privilegecare/Utils/memory.dart';
+
+import '../Utils/localization_services.dart';
 
 class CustomInputField extends StatelessWidget {
   CustomInputField(
@@ -47,6 +51,7 @@ class CustomInputField extends StatelessWidget {
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
     return hasIntialValue?TextFormField(
+
       textAlign: textAligning,
       enableSuggestions: false,
       autocorrect: false,
@@ -60,7 +65,7 @@ class CustomInputField extends StatelessWidget {
       cursorColor: hasGreenBorder?kGreenColor:kBlueColor,
       obscureText: obsecure,
       decoration: InputDecoration(
-        contentPadding: const EdgeInsets.only(right: 10),
+        contentPadding: Get.find<StorageService>().activeLocale == SupportedLocales.english?const EdgeInsets.only(left: 10):const EdgeInsets.only(right: 10),
         helperText: "",
         fillColor: kLightGrayColor,
         filled: false,

@@ -64,6 +64,7 @@ appBar:  AppBar(
                       width: Get.width*0.95,
                       child: CustomInputField(
                           hasIntialValue: true,
+                          textAligning: Get.find<StorageService>().activeLocale == SupportedLocales.english?TextAlign.left:TextAlign.right,
                           labelText:  "**********************",
                           textInputAction: TextInputAction.next,
                           keyboardType: TextInputType.visiblePassword,
@@ -109,6 +110,7 @@ appBar:  AppBar(
                           textInputAction: TextInputAction.done,
                           keyboardType: TextInputType.visiblePassword,
                           hasGreenBorder: false,
+                          textAligning: Get.find<StorageService>().activeLocale == SupportedLocales.english?TextAlign.left:TextAlign.right,
 
                           controller: controller.reTypePasswordController,
                           validator: controller.validateReTypePassword,

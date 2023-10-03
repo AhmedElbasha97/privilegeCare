@@ -23,6 +23,7 @@ class SchedulesWidget extends StatelessWidget {
             border: Border.all(color: kBlueColor,width: 1.0),
           ),
           child: Column(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Container(
                 width: 80,

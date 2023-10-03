@@ -31,8 +31,8 @@ class DoctorReservationData {
     nameEn: json["name_en"],
     amount: json["amount"],
     image: json["image"],
-    locationLon: json["location_lon"],
-    locationLat: json["location_lat"],
+    locationLon: "${json["location_lon"]}",
+    locationLat: "${json["location_lat"]}",
     schedule: json["schedule"] == null ? [] : List<Schedule>.from(json["schedule"]!.map((x) => Schedule.fromJson(x))),
   );
 

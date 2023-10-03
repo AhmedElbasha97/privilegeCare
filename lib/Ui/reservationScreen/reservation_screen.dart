@@ -21,11 +21,10 @@ class ReservationScreen extends StatelessWidget {
     Scaffold(
       body: GetBuilder<ReservationController>(
         init: ReservationController(doctorId),
-        builder: (controller) => SingleChildScrollView(
-          physics: const NeverScrollableScrollPhysics(),
-          child:controller.isLoading?const Loader() : Container(
-            width: Get.width,
-            height: Get.height,
+        builder: (controller) => controller.isLoading?const Loader() :
+
+          SingleChildScrollView(
+
             child: Column(
               children: [
                  Stack(
@@ -485,7 +484,7 @@ class ReservationScreen extends StatelessWidget {
 
 
                                     cursorColor: kBlueColor,
-                                    textInputAction: TextInputAction.search,
+                                    textInputAction: TextInputAction.done,
                                     style:  const TextStyle(
                                       fontSize: 15.0,
                                       fontFamily: fontFamilyName,
@@ -547,7 +546,7 @@ class ReservationScreen extends StatelessWidget {
                                     border: Border.all(color: kBlueColor,width: 1)
                                   ),
                                   child:  Center(
-                                    child: controller.choosenFileIndex == "2"? Text(
+                                    child: controller.choosenFileIndex == "1"? Text(
                                       controller.pickedFile?.files[0].name??"",
                                       style: const TextStyle(
                                           fontFamily: fontFamilyName,
@@ -609,7 +608,7 @@ class ReservationScreen extends StatelessWidget {
               ],
             ),
           ),
-        ),
+
       ),
     ));
   }

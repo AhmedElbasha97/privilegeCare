@@ -68,88 +68,81 @@ class EditProfileScreen extends StatelessWidget {
                   width: Get.width,
                   height: Get.height*0.09,
                   child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceAround,
                     children: [
-                      Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 10.0),
-                        child: SizedBox(
-                          height: Get.height*0.09,
-                          width: Get.width*0.28,
-                          child: CustomInputField(
-                            textAligning: TextAlign.center,
-                            hasIntialValue: true,
-                            labelText: signUpTextName3.tr,
-                            textInputAction: TextInputAction.next,
-                            keyboardType: TextInputType.name,
+                      SizedBox(
+                        height: Get.height*0.09,
+                        width: Get.width*0.28,
+                        child: CustomInputField(
 
-                            controller:controller.lastNameController,
-                            onchange: controller.onLastNameUpdate,
-                            validator: controller.validateLastName,
-                            icon: (controller.lastNameValidated)
-                                ? (controller.lastNameState)
-                                ? const Icon(Icons.check_rounded,
-                                color: kBlueColor)
-                                : const Icon(
-                              Icons.close_outlined,
-                              color: kErrorColor,
-                            )
-                                : null,
-                            hasGreenBorder: false,
-                          ),
+                          textAligning: TextAlign.center,
+                          hasIntialValue: true,
+                          labelText: signUpTextName3.tr,
+                          textInputAction: TextInputAction.next,
+                          keyboardType: TextInputType.name,
+
+                          controller:controller.lastNameController,
+                          onchange: controller.onLastNameUpdate,
+                          validator: controller.validateLastName,
+                          icon: (controller.lastNameValidated)
+                              ? (controller.lastNameState)
+                              ? const Icon(Icons.check_rounded,
+                              color: kBlueColor)
+                              : const Icon(
+                            Icons.close_outlined,
+                            color: kErrorColor,
+                          )
+                              : null,
+                          hasGreenBorder: false,
                         ),
                       ),
-                      Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 10.0),
-                        child: SizedBox(
-                          height: Get.height*0.09,
-                          width: Get.width*0.28,
-                          child: CustomInputField(
-                            textAligning: TextAlign.center,
-                            hasIntialValue: true,
-                            labelText: signUpTextName2.tr,
-                            textInputAction: TextInputAction.next,
+                      SizedBox(
+                        height: Get.height*0.09,
+                        width: Get.width*0.28,
+                        child: CustomInputField(
+                          textAligning: TextAlign.center,
+                          hasIntialValue: true,
+                          labelText: signUpTextName2.tr,
+                          textInputAction: TextInputAction.next,
 
-                            controller:controller.secondNameController,
-                            onchange: controller.onSecondNameUpdate,
-                            validator: controller.validateSecondName,
-                            icon: (controller.secondNameValidated)
-                                ? (controller.secondNameState)
-                                ? const Icon(Icons.check_rounded,
-                                color: kBlueColor)
-                                : const Icon(
-                              Icons.close_outlined,
-                              color: kErrorColor,
-                            )
-                                : null,
-                            hasGreenBorder: false,
-                          ),
+                          controller:controller.secondNameController,
+                          onchange: controller.onSecondNameUpdate,
+                          validator: controller.validateSecondName,
+                          icon: (controller.secondNameValidated)
+                              ? (controller.secondNameState)
+                              ? const Icon(Icons.check_rounded,
+                              color: kBlueColor)
+                              : const Icon(
+                            Icons.close_outlined,
+                            color: kErrorColor,
+                          )
+                              : null,
+                          hasGreenBorder: false,
                         ),
                       ),
-                      Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 10.0),
-                        child: SizedBox(
-                          height: Get.height*0.09,
-                          width: Get.width*0.28,
-                          child: CustomInputField(
-                            textAligning: TextAlign.center,
-                            hasIntialValue: true,
-                            labelText: signUpTextName3.tr,
-                            textInputAction: TextInputAction.next,
-                            keyboardType: TextInputType.name,
+                      SizedBox(
+                        height: Get.height*0.09,
+                        width: Get.width*0.28,
+                        child: CustomInputField(
+                          textAligning: TextAlign.center,
+                          hasIntialValue: true,
+                          labelText: signUpTextName3.tr,
+                          textInputAction: TextInputAction.next,
+                          keyboardType: TextInputType.name,
 
-                            controller:controller.firstNameController,
-                            onchange: controller.onFirstNameUpdate,
-                            validator: controller.validateFirstName,
-                            icon: (controller.firstNameValidated)
-                                ? (controller.firstNameState)
-                                ? const Icon(Icons.check_rounded,
-                                color: kBlueColor)
-                                : const Icon(
-                              Icons.close_outlined,
-                              color: kErrorColor,
-                            )
-                                : null,
-                            hasGreenBorder: false,
-                          ),
+                          controller:controller.firstNameController,
+                          onchange: controller.onFirstNameUpdate,
+                          validator: controller.validateFirstName,
+                          icon: (controller.firstNameValidated)
+                              ? (controller.firstNameState)
+                              ? const Icon(Icons.check_rounded,
+                              color: kBlueColor)
+                              : const Icon(
+                            Icons.close_outlined,
+                            color: kErrorColor,
+                          )
+                              : null,
+                          hasGreenBorder: false,
                         ),
                       ),
                     ],
@@ -173,6 +166,7 @@ class EditProfileScreen extends StatelessWidget {
                     child: CustomInputField(
                       hasIntialValue: true,
                       labelText: signUpTextEmail.tr,
+                      textAligning: Get.find<StorageService>().activeLocale == SupportedLocales.english?TextAlign.left:TextAlign.right,
 
                       textInputAction: TextInputAction.next,
                       keyboardType: TextInputType.emailAddress,
@@ -213,7 +207,7 @@ class EditProfileScreen extends StatelessWidget {
                       labelText: signUpTextPhone.tr,
                       textInputAction: TextInputAction.next,
                       keyboardType: TextInputType.number,
-
+                      textAligning: Get.find<StorageService>().activeLocale == SupportedLocales.english?TextAlign.left:TextAlign.right,
                       controller:controller.phoneController,
                       onchange: controller.onPhoneNumberUpdate,
                       validator: controller.validatePhoneNumber,

@@ -4,8 +4,11 @@ import 'package:get/get.dart';
 import 'package:privilegecare/Ui/logInScreen/Controller/login_controller.dart';
 import 'package:privilegecare/Utils/colors.dart';
 import 'package:privilegecare/Utils/constant.dart';
+import 'package:privilegecare/Utils/memory.dart';
 import 'package:privilegecare/widgets/custom_text_widget.dart';
 import 'package:privilegecare/widgets/text_field_widget.dart';
+
+import '../../../Utils/localization_services.dart';
 
 
 class LoginDialogue extends StatelessWidget {
@@ -44,6 +47,8 @@ class LoginDialogue extends StatelessWidget {
                     child: SizedBox(
                       height: 80,
                       child: CustomInputField(
+                        textAligning: Get.find<StorageService>().activeLocale == SupportedLocales.english?TextAlign.left:TextAlign.right,
+
                         hasIntialValue: false,
                         textInputAction: TextInputAction.next,
                         keyboardType: TextInputType.emailAddress,
@@ -71,6 +76,7 @@ class LoginDialogue extends StatelessWidget {
                       height:  80,
                       child: CustomInputField(
                           hasIntialValue: false,
+                          textAligning: Get.find<StorageService>().activeLocale == SupportedLocales.english?TextAlign.left:TextAlign.right,
 
                           hasGreenBorder: true,
                           labelText: "Password",

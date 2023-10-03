@@ -20,9 +20,11 @@ import 'package:privilegecare/Utils/memory.dart';
 import 'package:privilegecare/Utils/translation_key.dart';
 import 'package:privilegecare/widgets/custom_text_widget.dart';
 import 'package:share_plus/share_plus.dart';
+import 'package:video_player/video_player.dart';
 
 class DoctorDetailedController extends GetxController{
   late DoctorProfile? doctorData;
+  late  VideoPlayerController videoPlayerController;
   List<CommentModel>? comments = [];
   final ScrollController sController = ScrollController();
   bool isLoading = true;
@@ -41,9 +43,18 @@ class DoctorDetailedController extends GetxController{
     doctorData = await DoctorServices.getDoctorProfiles(doctorId);
     doctorAddedOrNot = await checkDoctorAddedOrNot(doctorId);
     comments = await ReviewingServices.getDoctorsInThisSpecialist(doctorId);
+    if(doctorData?.video != "0"){
+      videoPlayerController =
+       VideoPlayerController.network('https://privilegecare.net/${doctorData?.video??""}')
+        ..initialize().then((_) {
+          print("hi from video controller");
+         update();
+    });
+            }
     if(comments?.length==0||comments==[]){
       commentHasNodData = true;
     }
+
     isLoading = false;
     update();
   }

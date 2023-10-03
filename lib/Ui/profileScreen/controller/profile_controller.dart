@@ -114,12 +114,14 @@ class ProfileController extends GetxController{
 
   }
    rateMyApp() async {
+       final InAppReview inAppReview = InAppReview.instance;
+       if (await inAppReview.isAvailable()) {
+         inAppReview.openStoreListing(
+           appStoreId: 'com.sync.privilegecare',
+           microsoftStoreId: '...',
+         );
+       }
 
-     final InAppReview inAppReview = InAppReview.instance;
-
-     if (await inAppReview.isAvailable()) {
-     inAppReview.requestReview();
-     }
    }
   goToChangePass() async {
     if(await BiomatricsAuthService.authenticateUser(changePassScreenTitle.tr)) {

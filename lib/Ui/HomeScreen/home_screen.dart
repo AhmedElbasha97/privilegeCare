@@ -215,8 +215,8 @@ class _HomeScreenState extends State<HomeScreen> {
 
                                     children: [
                                       CachedNetworkImage(
-                                        fit: BoxFit.cover,
-                                        imageUrl: "https://privilegecare.net${controller.doctorData?[index].image??""}",
+                                  fit: BoxFit.fitHeight,
+                                      imageUrl: "https://privilegecare.net${controller.doctorData?[index].image??""}",
                                         imageBuilder: ((context, image){
                                           return  Container(
                                               height: 80,
@@ -309,7 +309,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                   controller.launchURL(context,i.link??"");
                                 },
                                 child: CachedNetworkImage(
-                                  fit: BoxFit.cover,
+                                  fit: BoxFit.fitHeight,
                                   imageUrl: "https://privilegecare.net${i.image}",
                                   imageBuilder: ((context, image){
                                     return  Container(
@@ -468,7 +468,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                           return Builder(
                                             builder: (BuildContext context) {
                                               return  CachedNetworkImage(
-                                                fit: BoxFit.cover,
+                                                fit: BoxFit.fitHeight,
                                                 imageUrl: "https://privilegecare.net$i",
                                                 imageBuilder: ((context, image){
                                                   return  Container(
@@ -477,7 +477,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                                       decoration: BoxDecoration(
                                                           image: DecorationImage(
                                                             image: image,
-                                                            fit: BoxFit.fill,
+                                                            fit: BoxFit.fitHeight,
                                                           ),
                                                           borderRadius:
                                                           const BorderRadius.all(Radius.circular(15))

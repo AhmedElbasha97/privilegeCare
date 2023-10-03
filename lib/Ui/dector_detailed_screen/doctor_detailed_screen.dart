@@ -33,6 +33,7 @@ class DoctorDetailedScreen extends StatelessWidget {
           leadingWidth: 60,
           leading: IconButton(icon: Get.find<StorageService>().activeLocale == SupportedLocales.english?const Icon(Icons.arrow_circle_left_outlined,color: kWhiteColor,size: 40,):const Icon(Icons.arrow_circle_right_outlined,color: kWhiteColor,size: 40,),onPressed: (){
             Get.back();
+            Get.delete<DoctorDetailedController>();
           },),
           centerTitle: true,
           title:   CustomText(
@@ -528,7 +529,7 @@ class DoctorDetailedScreen extends StatelessWidget {
                     ],
                     ),
                     ),
-                    )))): VideoPlayerWidget(videoPlayer: 'https://privilegecare.net/${controller.doctorData?.video??""}',),
+                    )))): VideoPlayerWidget(videoPlayer: 'https://privilegecare.net/${controller.doctorData?.video??""}', videoPlayerController: controller.videoPlayerController,),
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 8.0,vertical: 7.0),
                   child: SizedBox(
@@ -573,7 +574,9 @@ class DoctorDetailedScreen extends StatelessWidget {
                           const SizedBox(height: 10,),
                           InkWell(
                             onTap: (){
+                              controller.videoPlayerController.pause();
                               Get.to(  ReservationScreen(doctorId: "${controller.doctorData?.id??0}",));
+
                             },
                             child: Row(
                               mainAxisAlignment: MainAxisAlignment.center,

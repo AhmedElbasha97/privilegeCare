@@ -104,7 +104,9 @@ class LoginScreen extends StatelessWidget {
                           child: SizedBox(
                             height: 80,
                             child: CustomInputField(
-                             hasIntialValue: false,
+                              textAligning: Get.find<StorageService>().activeLocale == SupportedLocales.english?TextAlign.left:TextAlign.right,
+
+                              hasIntialValue: false,
                               textInputAction: TextInputAction.next,
                               keyboardType: TextInputType.emailAddress,
                               controller: controller.emailController,
@@ -131,6 +133,7 @@ class LoginScreen extends StatelessWidget {
                             height:  80,
                             child: CustomInputField(
                               hasIntialValue: false,
+                                textAligning: Get.find<StorageService>().activeLocale == SupportedLocales.english?TextAlign.left:TextAlign.right,
 
                             hasGreenBorder: true,
                               labelText: signInTextPass.tr,
