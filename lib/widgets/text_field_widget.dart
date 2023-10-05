@@ -27,7 +27,7 @@ class CustomInputField extends StatelessWidget {
         required this.hasGreenBorder,
         required this.hasIntialValue,
         this.suffixText = " ",
-        this.textAligning = TextAlign.right})
+        this.textAligning = TextAlign.right, this.prefixText = const SizedBox()})
       : super(key: key);
   final String labelText;
   final icon;
@@ -45,6 +45,7 @@ class CustomInputField extends StatelessWidget {
   final bool hasGreenBorder;
   final bool hasIntialValue;
   final String? suffixText;
+  final  Widget prefixText;
   final TextAlign textAligning;
 
   @override
@@ -78,6 +79,7 @@ class CustomInputField extends StatelessWidget {
         ),
         suffixIcon: icon,
         suffixText: suffixText,
+        prefix: prefixText,
         suffixStyle: const TextStyle(
         fontSize: 15.0,
         fontFamily: fontFamilyName,

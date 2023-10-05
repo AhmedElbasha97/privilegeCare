@@ -47,8 +47,8 @@ class HospitalListModel {
     areaEn: json["area_en"],
     image: json["image"] == null ? [] : List<String>.from(json["image"]!.map((x) => x)),
     mapImage: json["map_image"],
-    locationLon: json["location_lon"],
-    locationLat: json["location_lat"],
+    locationLon:"${ json["location_lon"]}",
+    locationLat: "${json["location_lat"]}",
   );
 
   Map<String, dynamic> toJson() => {

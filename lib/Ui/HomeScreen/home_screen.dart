@@ -281,7 +281,7 @@ class _HomeScreenState extends State<HomeScreen> {
                       const SizedBox(height: 20,),
                       InkWell(
                         onTap: (){
-                          Get.to(()=>const DoctorScreen(specialistId: "5"));
+                          Get.to(()=>const DoctorScreen(specialistId: "0"));
                         },
                         child:  CustomText(showMoreDoctorsHome.tr,
                           style: const TextStyle(

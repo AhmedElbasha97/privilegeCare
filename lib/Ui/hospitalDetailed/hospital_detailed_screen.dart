@@ -1004,7 +1004,7 @@ class HospitalDetailedScreen extends StatelessWidget {
                                 ),
                               )))):
                   Container(
-                    height: Get.height*0.15,
+                    height: Get.height*0.17,
                       child: ListView.builder(
                         scrollDirection: Axis.horizontal,
                       itemCount: controller.doctorsData?.length,
