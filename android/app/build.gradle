@@ -22,6 +22,9 @@ if (flutterVersionName == null) {
 }
 
 apply plugin: 'com.android.application'
+// START: FlutterFire Configuration
+apply plugin: 'com.google.gms.google-services'
+// END: FlutterFire Configuration
 apply plugin: 'kotlin-android'
 apply from: "$flutterRoot/packages/flutter_tools/gradle/flutter.gradle"
 def keystoreProperties = new Properties()
@@ -51,7 +54,7 @@ android {
         applicationId "com.syncQatar.privilegecare"
         // You can update the following values to match your application needs.
         // For more info22rmation, see: https://docs.flutter.dev/deployment/android#reviewing-the-gradle-build-configuration.
-        minSdkVersion 19
+        minSdkVersion 21
         targetSdkVersion flutter.targetSdkVersion
         versionCode flutterVersionCode.toInteger()
         versionName flutterVersionName
@@ -78,6 +81,23 @@ flutter {
 }
 
 dependencies {
-    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
+    dependencies {
+        // ...
+        // Import the Firebase BoM
+        implementation platform('com.google.firebase:firebase-bom:30.1.0')
+
+        // When using the BoM, you don't specify versions in Firebase library dependencies
+
+        // Declare the dependency for the Firebase SDK for Google Analytics
+        implementation 'com.google.firebase:firebase-analytics-ktx'
+
+        // Declare the dependencies for any other desired Firebase products
+        // For example, declare the dependencies for Firebase Authentication and Cloud Firestore
+        implementation 'com.google.firebase:firebase-auth-ktx'
+        implementation 'com.google.firebase:firebase-firestore-ktx'
+    }
     implementation 'androidx.multidex:multidex:2.0.1'
+    implementation 'com.google.firebase:firebase-messaging:23.2.1'
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
+
 }

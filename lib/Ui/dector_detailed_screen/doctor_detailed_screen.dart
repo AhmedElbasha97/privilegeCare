@@ -176,7 +176,7 @@ class DoctorDetailedScreen extends StatelessWidget {
                                   imageBuilder: ((context, image){
                                     return  Container(
                                         height: 80,
-                                        width: 80,
+                                        width: 70,
                                         decoration: BoxDecoration(
                                           image: DecorationImage(
                                             image: image,
@@ -574,7 +574,9 @@ class DoctorDetailedScreen extends StatelessWidget {
                           const SizedBox(height: 10,),
                           InkWell(
                             onTap: (){
-                              controller.videoPlayerController.pause();
+                              if(controller.doctorData?.video != "0") {
+                                controller.videoPlayerController.pause();
+                              }
                               Get.to(  ReservationScreen(doctorId: "${controller.doctorData?.id??0}",));
 
                             },

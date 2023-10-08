@@ -1,5 +1,6 @@
 
 import 'package:dio/dio.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:privilegecare/Models/auth_model.dart';
 import 'package:privilegecare/Models/profile_model.dart';
@@ -21,10 +22,15 @@ class AuthServices{
     return null;
   }
   static Future<AuthModel?> logIn (String email,String password) async {
-    var data = await api.request(Services.logInEndPoint, "POST",queryParamters: {
-      "email":email,
-      "password":password,
+    var data;
+    await FirebaseMessaging.instance.getToken().then((token) async {
+      data = await api.request(Services.logInEndPoint, "POST",queryParamters: {
+        "email":email,
+        "password":password,
+        "token":token,
+      });
     });
+
     if (data != null) {
       return AuthModel.fromJson(data);
     }
@@ -49,13 +55,19 @@ class AuthServices{
     return null;
   }
    static Future<AuthModel?> signUp (String name,String email,String phone,String password,String password2) async {
-    var data = await api.request(Services.signUpEndPoint, "POST",queryParamters: {
-      "name":name,
-      "email":email,
-      "phone":phone,
-      "password":password,
-      "password2":password2
-    });
+     var data;
+     await FirebaseMessaging.instance.getToken().then((token) async {
+       data = await api.request(Services.signUpEndPoint, "POST",queryParamters: {
+       "name":name,
+       "email":email,
+       "phone":phone,
+       "password":password,
+       "password2":password2,
+         "token":token
+     });
+
+     });
+
     if (data != null) {
       return AuthModel.fromJson(data);
     }

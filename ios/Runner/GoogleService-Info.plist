@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>API_KEY</key>
+	<string>AIzaSyBoxhtSgExjTwHNY06pXkmSan0DHOEj2mM</string>
+	<key>GCM_SENDER_ID</key>
+	<string>1002526021133</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>com.syncQatar.privilegecare</string>
+	<key>PROJECT_ID</key>
+	<string>privilegecare-7537a</string>
+	<key>STORAGE_BUCKET</key>
+	<string>privilegecare-7537a.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:1002526021133:ios:8b9eecb82eaa1fe34b2744</string>
+	<key>DATABASE_URL</key>
+	<string>https://privilegecare-7537a-default-rtdb.firebaseio.com</string>
+</dict>
+</plist>
