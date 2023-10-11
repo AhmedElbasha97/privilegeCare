@@ -255,7 +255,7 @@ class FilterController extends GetxController{
     }else{
      hospitalListData = await HospitalServices.advancedSearchForDoctorsWithArea(choosenSearchType, specialtyId, placeId,);
      searchIsLoading = false;
-     if(doctorsData?.length == 0||doctorsData == []){
+     if(hospitalListData?.length == 0||hospitalListData == []){
        hasNoData = true;
      }
      update();
