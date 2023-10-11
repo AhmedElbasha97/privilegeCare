@@ -14,10 +14,12 @@ import 'package:privilegecare/Ui/doctorsScreen/doctors_screen.dart';
 import 'package:privilegecare/Ui/helpScreen/help_screen.dart';
 import 'package:privilegecare/Ui/hospital%20screen/hospitals_screen.dart';
 import 'package:privilegecare/Ui/hospitalDetailed/hospital_detailed_screen.dart';
+import 'package:privilegecare/Ui/notifictionHistory/notification_history_screen.dart';
 import 'package:privilegecare/Utils/colors.dart';
 import 'package:privilegecare/Utils/constant.dart';
 import 'package:privilegecare/Utils/localization_services.dart';
 import 'package:privilegecare/Utils/memory.dart';
+import 'package:privilegecare/Utils/services.dart';
 import 'package:privilegecare/Utils/translation_key.dart';
 import 'package:privilegecare/widgets/bottom_navigation_bar.dart';
 import 'package:privilegecare/widgets/custom_text_widget.dart';
@@ -77,6 +79,7 @@ class _HomeScreenState extends State<HomeScreen> {
 
                   },),
                   IconButton(icon: const Icon(Icons.notifications_none,color: kBlueColor,size: 35,),onPressed: (){
+                    Get.to(()=>const NotificationHistory());
                   },),
                   ],
                 backgroundColor: Colors.white,
@@ -139,7 +142,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                 },
                                 child: CachedNetworkImage(
                                   fit: BoxFit.cover,
-                                  imageUrl: "https://privilegecare.net${i.image}",
+                                  imageUrl: "${Services.baseUrl}${i.image}",
                                   imageBuilder: ((context, image){
                                     return  Container(
                                         width: MediaQuery.of(context).size.width,
@@ -216,7 +219,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                     children: [
                                       CachedNetworkImage(
                                   fit: BoxFit.fitHeight,
-                                      imageUrl: "https://privilegecare.net${controller.doctorData?[index].image??""}",
+                                      imageUrl: "${Services.baseUrl}${controller.doctorData?[index].image??""}",
                                         imageBuilder: ((context, image){
                                           return  Container(
                                               height: 80,
@@ -310,7 +313,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                 },
                                 child: CachedNetworkImage(
                                   fit: BoxFit.fitHeight,
-                                  imageUrl: "https://privilegecare.net${i.image}",
+                                  imageUrl: "${Services.baseUrl}${i.image}",
                                   imageBuilder: ((context, image){
                                     return  Container(
                                         width: MediaQuery.of(context).size.width,
@@ -469,7 +472,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                             builder: (BuildContext context) {
                                               return  CachedNetworkImage(
                                                 fit: BoxFit.fitHeight,
-                                                imageUrl: "https://privilegecare.net$i",
+                                                imageUrl: "${Services.baseUrl}$i",
                                                 imageBuilder: ((context, image){
                                                   return  Container(
                                                       width: MediaQuery.of(context).size.width,

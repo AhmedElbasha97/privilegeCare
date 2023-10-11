@@ -10,6 +10,7 @@ import 'package:privilegecare/Utils/colors.dart';
 import 'package:privilegecare/Utils/constant.dart';
 import 'package:privilegecare/Utils/localization_services.dart';
 import 'package:privilegecare/Utils/memory.dart';
+import 'package:privilegecare/Utils/services.dart';
 import 'package:privilegecare/Utils/translation_key.dart';
 import 'package:privilegecare/widgets/custom_text_widget.dart';
 import 'package:privilegecare/widgets/loader.dart';
@@ -60,7 +61,7 @@ class _HospitalCellWidgetState extends State<HospitalCellWidget> {
           children: [
             CachedNetworkImage(
               fit: BoxFit.cover,
-              imageUrl: "https://privilegecare.net${widget.hospitalData?.image?.length==0?"":widget.hospitalData?.image?[0]??""}",
+              imageUrl: "${Services.baseUrl}${widget.hospitalData?.image?.length==0?"":widget.hospitalData?.image?[0]??""}",
               imageBuilder: ((context, image){
                 return  Container(
                     height: Get.height*0.12,

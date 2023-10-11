@@ -1,6 +1,7 @@
 
 
 class Services {
+   static String baseUrl = "https://new.privilegecare.net";
   static String logInEndPoint = "login"; //Post
   static String deleteAccountEndPoint = "member_delete"; //Post
   static String signUpEndPoint = "signup";//Post
@@ -22,6 +23,9 @@ class Services {
   static String secondHomeBannersEndPoint = "slider_app";//post
   static String hospitalBannersEndPoint = "hospital_banner";//post
   static String hospitalListEndPoint = "specialist_hospital";//post
+
+  static String notificationHistoryListEndPoint = "notification";//post
+    static String notificationDetailsListEndPoint = "notification/view";//post
   static String commentsDoctorsProfileEndPoint = "review";//post
   static String addOrRemoveDoctorsFromFavourite = "favorite/new";// post
   static String addOrRemoveHospitalFromFavourite = "hfavorite/new";//post

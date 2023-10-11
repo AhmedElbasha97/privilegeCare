@@ -14,6 +14,7 @@ import 'package:privilegecare/Utils/colors.dart';
 import 'package:privilegecare/Utils/constant.dart';
 import 'package:privilegecare/Utils/localization_services.dart';
 import 'package:privilegecare/Utils/memory.dart';
+import 'package:privilegecare/Utils/services.dart';
 import 'package:privilegecare/Utils/translation_key.dart';
 import 'package:privilegecare/widgets/bottom_navigation_bar.dart';
 import 'package:privilegecare/widgets/custom_text_widget.dart';
@@ -159,7 +160,7 @@ class HospitalDetailedScreen extends StatelessWidget {
                   const SizedBox(height: 20,),
               controller.hospitalData?.image?.length!=0? CachedNetworkImage(
                     fit: BoxFit.cover,
-                    imageUrl: "https://privilegecare.net${controller.hospitalData?.image?[0]??""}",
+                    imageUrl: "${Services.baseUrl}${controller.hospitalData?.image?[0]??""}",
                     imageBuilder: ((context, image){
                       return   Container(
                         height: Get.height*0.11,
@@ -648,7 +649,7 @@ class HospitalDetailedScreen extends StatelessWidget {
                     itemBuilder: (context, index, realIdx){
                       return CachedNetworkImage(
                         fit: BoxFit.cover,
-                        imageUrl: "https://privilegecare.net${controller.hospitalData?.image?[index]??""}",
+                        imageUrl: "${Services.baseUrl}${controller.hospitalData?.image?[index]??""}",
                         imageBuilder: ((context, image){
                           return  Stack(
                             children: [
@@ -855,7 +856,7 @@ class HospitalDetailedScreen extends StatelessWidget {
                   const SizedBox(height: 10,),
                   CachedNetworkImage(
                     fit: BoxFit.cover,
-                    imageUrl: "https://privilegecare.net${controller.hospitalData?.mapImage??""}",
+                    imageUrl: "${Services.baseUrl}${controller.hospitalData?.mapImage??""}",
                     imageBuilder: ((context, image){
                       return  Container(
                         width: Get.width*0.9,
@@ -1020,7 +1021,7 @@ class HospitalDetailedScreen extends StatelessWidget {
                               children: [
                                 CachedNetworkImage(
                                   fit: BoxFit.cover,
-                                  imageUrl: "https://privilegecare.net${controller.doctorsData?[index].image??""}",
+                                  imageUrl: "${Services.baseUrl}${controller.doctorsData?[index].image??""}",
                                   imageBuilder: ((context, image){
                                     return  Container(
                                         height: 80,

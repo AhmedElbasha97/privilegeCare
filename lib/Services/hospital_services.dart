@@ -20,14 +20,14 @@ class HospitalServices{
     }
     return null;
   }
-  static Future<List<HospitalListModel>?> advancedSearchForDoctorsWithArea(String searchType,String specialtyId,String areaId,String levelId,String startPrice,String endPrice,String homeVisit) async {
+  static Future<List<HospitalListModel>?> advancedSearchForDoctorsWithArea(String searchType,String specialtyId,String areaId,) async {
     List<HospitalListModel>? hospitalsList = [];
+    print(Services.advancedSearchEndPoint+   "type:${searchType},spec:${specialtyId},area:${areaId},");
     var data = await api.request(Services.advancedSearchEndPoint, "POST",queryParamters: {
       "type":searchType,
       "spec":specialtyId,
       "area":areaId,
-      "price_from":startPrice,
-      "price_to":endPrice,
+
 
     });
     if (data != null) {

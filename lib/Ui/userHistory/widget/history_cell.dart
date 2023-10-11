@@ -11,6 +11,7 @@ import 'package:privilegecare/Utils/colors.dart';
 import 'package:privilegecare/Utils/constant.dart';
 import 'package:privilegecare/Utils/localization_services.dart';
 import 'package:privilegecare/Utils/memory.dart';
+import 'package:privilegecare/Utils/services.dart';
 import 'package:privilegecare/widgets/custom_text_widget.dart';
 
 import '../../../Utils/translation_key.dart';
@@ -95,7 +96,7 @@ class HistoryCell extends StatelessWidget {
                   children: [
                     CachedNetworkImage(
                       fit: BoxFit.cover,
-                      imageUrl: "https://privilegecare.net${historyData?.image??""}",
+                      imageUrl: "${Services.baseUrl}${historyData?.image??""}",
                       imageBuilder: ((context, image){
                         return   Container(
                           height: Get.height*0.1,

@@ -14,6 +14,7 @@ import 'package:privilegecare/Utils/colors.dart';
 import 'package:privilegecare/Utils/constant.dart';
 import 'package:privilegecare/Utils/localization_services.dart';
 import 'package:privilegecare/Utils/memory.dart';
+import 'package:privilegecare/Utils/services.dart';
 import 'package:privilegecare/widgets/bottom_navigation_bar.dart';
 import 'package:privilegecare/widgets/custom_text_widget.dart';
 
@@ -162,7 +163,7 @@ class SpecialtyScreen extends StatelessWidget {
                                   width: Get.width,
                                   child: Column(
                                     children: controller.mostChosenSpecialtyListData!.map((e){
-                                      return SpecialtyCellWidget(title: Get.find<StorageService>().activeLocale == SupportedLocales.english?(e.nameEn??""):(e.name??""),imageUrl: "https://privilegecare.net${e.image}", specialistId: "${e.id}", );
+                                      return SpecialtyCellWidget(title: Get.find<StorageService>().activeLocale == SupportedLocales.english?(e.nameEn??""):(e.name??""),imageUrl: "${Services.baseUrl}${e.image}", specialistId: "${e.id}", );
                                     }).toList() ,
                                   )
                                 )
@@ -191,7 +192,7 @@ class SpecialtyScreen extends StatelessWidget {
                                     width: Get.width,
                                     child: Column(
                                       children: controller.specialtyListData!.map((e){
-                                        return SpecialtyCellWidget(title: Get.find<StorageService>().activeLocale == SupportedLocales.english?(e.nameEn??""):(e.name??""),imageUrl: "https://privilegecare.net${e.image}",specialistId: "${e.id}" );
+                                        return SpecialtyCellWidget(title: Get.find<StorageService>().activeLocale == SupportedLocales.english?(e.nameEn??""):(e.name??""),imageUrl: "${Services.baseUrl}${e.image}",specialistId: "${e.id}" );
                                       }).toList() ,
                                     )
                                 )

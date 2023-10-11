@@ -13,6 +13,7 @@ import 'package:privilegecare/Utils/colors.dart';
 import 'package:privilegecare/Utils/constant.dart';
 import 'package:privilegecare/Utils/localization_services.dart';
 import 'package:privilegecare/Utils/memory.dart';
+import 'package:privilegecare/Utils/services.dart';
 import 'package:privilegecare/Utils/translation_key.dart';
 import 'package:privilegecare/widgets/bottom_navigation_bar.dart';
 import 'package:privilegecare/widgets/custom_text_widget.dart';
@@ -33,6 +34,7 @@ class DoctorDetailedScreen extends StatelessWidget {
           leadingWidth: 60,
           leading: IconButton(icon: Get.find<StorageService>().activeLocale == SupportedLocales.english?const Icon(Icons.arrow_circle_left_outlined,color: kWhiteColor,size: 40,):const Icon(Icons.arrow_circle_right_outlined,color: kWhiteColor,size: 40,),onPressed: (){
             Get.back();
+
             Get.delete<DoctorDetailedController>();
           },),
           centerTitle: true,
@@ -172,7 +174,7 @@ class DoctorDetailedScreen extends StatelessWidget {
                               children: [
                                 CachedNetworkImage(
                                   fit: BoxFit.cover,
-                                  imageUrl: "https://privilegecare.net${controller.doctorData?.image??""}",
+                                  imageUrl: "${Services.baseUrl}${controller.doctorData?.image??""}",
                                   imageBuilder: ((context, image){
                                     return  Container(
                                         height: 80,
@@ -529,7 +531,7 @@ class DoctorDetailedScreen extends StatelessWidget {
                     ],
                     ),
                     ),
-                    )))): VideoPlayerWidget(videoPlayer: 'https://privilegecare.net/${controller.doctorData?.video??""}', videoPlayerController: controller.videoPlayerController,),
+                    )))): VideoPlayerWidget(videoPlayer: '${Services.baseUrl}/${controller.doctorData?.video??""}', videoPlayerController: controller.videoPlayerController,),
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 8.0,vertical: 7.0),
                   child: SizedBox(

@@ -130,6 +130,7 @@ class DoctorServices {
   }
   static Future<List<DoctorListModel>?> advancedSearchForDoctorsWithArea(String searchType,String? specialtyId,String? areaId,String? levelId,String? startPrice,String? endPrice,String homeVisit) async {
     List<DoctorListModel>? doctorsList = [];
+    print(Services.advancedSearchEndPoint+   "type:${searchType},spec:${specialtyId},area:${areaId},level:${levelId},price_from:${startPrice},price_to:${endPrice},home_visit:${homeVisit},");
     var data = await api.request(Services.advancedSearchEndPoint, "POST",queryParamters: {
       "type":searchType,
       "spec":specialtyId,

@@ -11,6 +11,7 @@ import 'package:privilegecare/Ui/hospital%20screen/widget/hospital_cell_widget.d
 import 'package:privilegecare/Utils/colors.dart';
 import 'package:privilegecare/Utils/constant.dart';
 import 'package:privilegecare/Utils/memory.dart';
+import 'package:privilegecare/Utils/services.dart';
 import 'package:privilegecare/Utils/translation_key.dart';
 import 'package:privilegecare/widgets/bottom_navigation_bar.dart';
 import 'package:privilegecare/widgets/custom_text_widget.dart';
@@ -77,7 +78,7 @@ class _HospitalScreensState extends State<HospitalScreens> {
                                 return _buildChip( Get.find<StorageService>().activeLocale == SupportedLocales.english?"${controller.specialtyListData?[index].nameEn??""}":controller.specialtyListData?[index].name??"",controller.selectedIndex==index,
                                         (){
                                   controller.selectingTag(index);
-                                    },"https://privilegecare.net${controller.specialtyListData?[index].image}"
+                                    },"${Services.baseUrl}${controller.specialtyListData?[index].image}"
                                 );
                               },
                             ),

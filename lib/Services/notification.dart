@@ -3,6 +3,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:get/get.dart';
+import 'package:privilegecare/Ui/notifictionHistory/notification_history_screen.dart';
 
 class PushNotificationService {
 
@@ -11,7 +12,7 @@ class PushNotificationService {
     FirebaseMessaging.instance.requestPermission();
 
     FirebaseMessaging.onMessageOpenedApp.listen((RemoteMessage message) {
-
+      Get.to(()=>const NotificationHistory());
 
     });
     await enableIOSNotifications();
@@ -25,7 +26,7 @@ class PushNotificationService {
         .resolvePlatformSpecificImplementation<
         AndroidFlutterLocalNotificationsPlugin>()
         ?.createNotificationChannel(channel);
-    var androidSettings = const AndroidInitializationSettings('app_icon.png');
+    var androidSettings = const AndroidInitializationSettings('@mipmap/ic_launcher');
     var iOSSettings =  const DarwinInitializationSettings(
       requestSoundPermission: true,
       requestBadgePermission: true,
@@ -34,7 +35,7 @@ class PushNotificationService {
     var initSetttings =
     InitializationSettings(android: androidSettings, iOS: iOSSettings);
     flutterLocalNotificationsPlugin.initialize(initSetttings,onDidReceiveNotificationResponse:  (message) async {
-
+      Get.to(()=>const NotificationHistory());
     }
         );
 

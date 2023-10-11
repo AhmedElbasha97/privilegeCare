@@ -27,7 +27,7 @@ import 'package:privilegecare/widgets/language_dialog_widget.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class ProfileController extends GetxController{
-  String? chatLink = "";
+  String? chatLink = "https://tawk.to/chat/6524f1e0eb150b3fb99fe35e/1hcc51loq";
 
   bool isLoading = true;
   late ProfileModel? data;

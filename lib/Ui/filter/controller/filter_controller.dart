@@ -18,6 +18,7 @@ import 'package:privilegecare/Services/specialist_services.dart';
 import 'package:privilegecare/Ui/filter/advanced_search_screen.dart';
 import 'package:privilegecare/Utils/localization_services.dart';
 import 'package:privilegecare/Utils/memory.dart';
+import 'package:privilegecare/Utils/services.dart';
 
 import '../../../Utils/translation_key.dart';
 import '../../../widgets/custom_text_widget.dart';
@@ -59,6 +60,9 @@ class FilterController extends GetxController{
     endPriceRange.text = "1000";
     getData();
   }
+  @override
+
+
   getData() async{
     governmentData = await GovernmentServices.getGovernments();
     specialtyListData = await SpecialistServices.getAllSpecialist();
@@ -84,7 +88,7 @@ class FilterController extends GetxController{
   choosingSpecialty(SpecialistModel chosenSpecialty){
     specialtyName = (Get.find<StorageService>().activeLocale == SupportedLocales.english?chosenSpecialty.nameEn:chosenSpecialty.name)!;
     specialtyId = "${chosenSpecialty.id}";
-    specialtyImageURl =  "https://privilegecare.net${chosenSpecialty.image}";
+    specialtyImageURl =  "${Services.baseUrl}${chosenSpecialty.image}";
     update();
   }
   changeStartPrice(String value){
@@ -249,7 +253,7 @@ class FilterController extends GetxController{
     update();
     Get.to(()=>const AdvancedSearchScreen());
     }else{
-     hospitalListData = await HospitalServices.advancedSearchForDoctorsWithArea(choosenSearchType, specialtyId, placeId, levelId, "$sVal", "$sFal", choosenDiscloseType);
+     hospitalListData = await HospitalServices.advancedSearchForDoctorsWithArea(choosenSearchType, specialtyId, placeId,);
      searchIsLoading = false;
      if(doctorsData?.length == 0||doctorsData == []){
        hasNoData = true;

@@ -19,7 +19,7 @@ class ApiService extends GetxService {
   Dio dio = Dio();
 
   void init() {
-    dio.options.baseUrl = "https://privilegecare.net/api/";
+    dio.options.baseUrl = "https://new.privilegecare.net/api/";
     dio.options.connectTimeout = const Duration(milliseconds: 600000) ;
     dio.options.receiveTimeout =  const Duration(milliseconds: 600000) ;
     dio.interceptors.add(PrettyDioLogger(

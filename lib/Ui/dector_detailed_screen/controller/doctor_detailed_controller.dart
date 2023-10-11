@@ -17,6 +17,7 @@ import 'package:privilegecare/Ui/logInScreen/login_screen.dart';
 import 'package:privilegecare/Ui/signUpScreen/signup_screen.dart';
 import 'package:privilegecare/Utils/localization_services.dart';
 import 'package:privilegecare/Utils/memory.dart';
+import 'package:privilegecare/Utils/services.dart';
 import 'package:privilegecare/Utils/translation_key.dart';
 import 'package:privilegecare/widgets/custom_text_widget.dart';
 import 'package:share_plus/share_plus.dart';
@@ -45,7 +46,7 @@ class DoctorDetailedController extends GetxController{
     comments = await ReviewingServices.getDoctorsInThisSpecialist(doctorId);
     if(doctorData?.video != "0"){
       videoPlayerController =
-       VideoPlayerController.network('https://privilegecare.net/${doctorData?.video??""}')
+       VideoPlayerController.network('${Services.baseUrl}${doctorData?.video??""}')
         ..initialize().then((_) {
           print("hi from video controller");
          update();

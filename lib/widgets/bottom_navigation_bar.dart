@@ -5,7 +5,9 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:privilegecare/Ui/HomeScreen/home_screen.dart';
 import 'package:privilegecare/Ui/SpecialtyScreen/specialty_screen.dart';
+import 'package:privilegecare/Ui/filter/controller/filter_controller.dart';
 import 'package:privilegecare/Ui/filter/filter_screen.dart';
+import 'package:privilegecare/Ui/hospital%20screen/controller/hospitall_controller.dart';
 import 'package:privilegecare/Ui/hospital%20screen/hospitals_screen.dart';
 import 'package:privilegecare/Ui/profileScreen/profile_screeen.dart';
 import 'package:privilegecare/Utils/colors.dart';
@@ -32,7 +34,14 @@ class _BottomNavigationBarWidgetState extends State<BottomNavigationBarWidget> {
       iconSize: 30,
       showElevation: false, // use this to remove appBar's elevation
       onItemSelected: (index) {
-
+        bool test4 = Get.isRegistered<FilterController>();
+        if(test4){
+          Get.delete<FilterController>();
+        }
+        bool test3 = Get.isRegistered<HospitalController>();
+        if(test3){
+          Get.delete<HospitalController>();
+        }
         switch(index){
           case 0:{
             Get.to(()=>const ProfileScreen());

@@ -11,6 +11,7 @@ import 'package:privilegecare/Utils/colors.dart';
 import 'package:privilegecare/Utils/constant.dart';
 import 'package:privilegecare/Utils/localization_services.dart';
 import 'package:privilegecare/Utils/memory.dart';
+import 'package:privilegecare/Utils/services.dart';
 import 'package:privilegecare/Utils/translation_key.dart';
 import 'package:privilegecare/widgets/custom_text_widget.dart';
 import 'package:star_rating/star_rating.dart';
@@ -80,7 +81,7 @@ class _DoctorCellWidgetState extends State<DoctorCellWidget> {
                     children: [
                       CachedNetworkImage(
                         fit: BoxFit.cover,
-                        imageUrl: "https://privilegecare.net${widget.doctorData?.image??""}",
+                        imageUrl: "${Services.baseUrl}${widget.doctorData?.image??""}",
                         imageBuilder: ((context, image){
                           return  Container(
                               height: 80,

@@ -11,6 +11,7 @@ import 'package:privilegecare/Ui/profileScreen/widget/profile_cell_widget.dart';
 import 'package:privilegecare/Ui/signUpScreen/signup_screen.dart';
 import 'package:privilegecare/Utils/colors.dart';
 import 'package:privilegecare/Utils/constant.dart';
+import 'package:privilegecare/Utils/services.dart';
 import 'package:privilegecare/Utils/translation_key.dart';
 import 'package:privilegecare/widgets/bottom_navigation_bar.dart';
 import 'package:privilegecare/widgets/custom_text_widget.dart';
@@ -103,7 +104,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                             },
                             child: CachedNetworkImage(
                               fit: BoxFit.cover,
-                              imageUrl: "https://privilegecare.net${controller.data?.image??""}",
+                              imageUrl: "${Services.baseUrl}${controller.data?.image??""}",
                               imageBuilder: ((context, image){
                                 return  Container(
                                   height: Get.height*0.12,

@@ -10,6 +10,7 @@ import 'package:privilegecare/Utils/colors.dart';
 import 'package:privilegecare/Utils/constant.dart';
 import 'package:privilegecare/Utils/localization_services.dart';
 import 'package:privilegecare/Utils/memory.dart';
+import 'package:privilegecare/Utils/services.dart';
 import 'package:privilegecare/Utils/translation_key.dart';
 import 'package:privilegecare/widgets/bottom_navigation_bar.dart';
 import 'package:privilegecare/widgets/custom_text_widget.dart';
@@ -30,6 +31,7 @@ class FilterScreen extends StatelessWidget {
             // Swiping in left direction.
             if (details.delta.dx < 0) {
               Get.to(()=>const HospitalScreens());
+              Get.delete<FilterController>();
             }
           },
           child: Scaffold(
@@ -453,7 +455,7 @@ class FilterScreen extends StatelessWidget {
                                             SizedBox(
                                               height: 30,
                                               width:30,
-                                              child: Image.network("https://privilegecare.net${e.image}",fit: BoxFit.fitWidth,),
+                                              child: Image.network("${Services.baseUrl}${e.image}",fit: BoxFit.fitWidth,),
                                             ),const SizedBox(width: 10,),
                                             CustomText(
                                               Get.find<StorageService>().activeLocale == SupportedLocales.english?e.nameEn??"":e.name??"",
@@ -766,10 +768,10 @@ class FilterScreen extends StatelessWidget {
                           endIndent: 0,
                           indent: 0,
                         ),
-                        const SizedBox(
+                        controller.choosenSearchType != "D"?const SizedBox():const SizedBox(
                           height: 10,
                         ),
-                        Padding(
+                        controller.choosenSearchType != "D"?const SizedBox():Padding(
                           padding: const EdgeInsets.symmetric(horizontal: 10.0),
                           child: Container(
                             width: Get.width,
@@ -783,10 +785,10 @@ class FilterScreen extends StatelessWidget {
                             ),
                           ),
                         ),
-                        const SizedBox(
+                        controller.choosenSearchType != "D"?const SizedBox(): const SizedBox(
                           height: 10,
                         ),
-                        Center(
+                        controller.choosenSearchType != "D"?const SizedBox():Center(
                           child: Container(
                             width: Get.width*0.9,
                             height: Get.height*0.07,
@@ -830,8 +832,8 @@ class FilterScreen extends StatelessWidget {
                             ),
                           ),
                         ),
-                        const SizedBox(height: 10,),
-                        Row(
+                        controller.choosenSearchType != "D"?const SizedBox():const SizedBox(height: 10,),
+                        controller.choosenSearchType != "D"?const SizedBox():Row(
                           mainAxisAlignment: MainAxisAlignment.spaceAround,
                           children: [
                             Container(
@@ -928,10 +930,10 @@ class FilterScreen extends StatelessWidget {
                             ),
                           ],
                         ),
-                        const SizedBox(
+                        controller.choosenSearchType != "D"?const SizedBox():const SizedBox(
                           height: 10,
                         ),
-                        const Divider(
+                        controller.choosenSearchType != "D"?const SizedBox():const Divider(
                           color: kGreenColor,
                           height: 1,
                           thickness: 2,
