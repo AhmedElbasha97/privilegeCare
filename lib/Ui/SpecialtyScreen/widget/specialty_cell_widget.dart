@@ -2,6 +2,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:privilegecare/Ui/doctorsScreen/controller/doctor_list_controller.dart';
 import 'package:privilegecare/Ui/doctorsScreen/doctors_screen.dart';
 import 'package:privilegecare/Utils/colors.dart';
 import 'package:privilegecare/Utils/constant.dart';
@@ -16,6 +17,10 @@ class SpecialtyCellWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return InkWell(
       onTap: (){
+        bool test4 = Get.isRegistered<DoctorListController>();
+        if(test4){
+          Get.delete<DoctorListController>();
+        }
         Get.to(DoctorScreen(specialistId: specialistId,));
       },
       child: Container(

@@ -10,6 +10,7 @@ import 'package:get/get.dart';
 import 'package:privilegecare/Ui/HomeScreen/controller/home_controller.dart';
 import 'package:privilegecare/Ui/SpecialtyScreen/specialty_screen.dart';
 import 'package:privilegecare/Ui/dector_detailed_screen/doctor_detailed_screen.dart';
+import 'package:privilegecare/Ui/doctorsScreen/controller/doctor_list_controller.dart';
 import 'package:privilegecare/Ui/doctorsScreen/doctors_screen.dart';
 import 'package:privilegecare/Ui/helpScreen/help_screen.dart';
 import 'package:privilegecare/Ui/hospital%20screen/hospitals_screen.dart';
@@ -284,6 +285,10 @@ class _HomeScreenState extends State<HomeScreen> {
                       const SizedBox(height: 20,),
                       InkWell(
                         onTap: (){
+                          bool test4 = Get.isRegistered<DoctorListController>();
+                          if(test4){
+                            Get.delete<DoctorListController>();
+                          }
                           Get.to(()=>const DoctorScreen(specialistId: "0"));
                         },
                         child:  CustomText(showMoreDoctorsHome.tr,
