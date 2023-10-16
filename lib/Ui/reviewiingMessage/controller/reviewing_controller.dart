@@ -25,6 +25,11 @@ class ReviewingController extends GetxController{
     doctorReview = docReview;
     update();
   }
+  @override
+  void dispose(){
+    super.dispose();
+    Get.delete<ReviewingController>();
+  }
 addReview(context) async {
   addingReview = true;
   update();

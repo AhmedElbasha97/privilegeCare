@@ -12,6 +12,11 @@ void onInit() {
   super.onInit();
   getData();
 }
+@override
+void dispose(){
+  super.dispose();
+  Get.delete<GovernmentController>();
+}
 getData() async{
   governmentData = await GovernmentServices.getGovernments();
   isLoading = false;

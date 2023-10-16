@@ -33,11 +33,14 @@ class DoctorScreen extends StatelessWidget {
         body: GetBuilder<DoctorListController>(
           init: DoctorListController(specialistId,areaId,searchName),
           builder: (controller) => RawScrollbar(
+
+            controller: controller.sController,
             thumbColor: kBlueColor,
             radius: const Radius.circular(20),
             thickness: 5,
             child: SingleChildScrollView(
-              controller: controller.sController,
+
+
               child: Column(
                 children: [
 
@@ -214,8 +217,8 @@ class DoctorScreen extends StatelessWidget {
                             }else{
                               controller.addingOrRemovingFromFavorite(
                                   "${controller.doctorsData?[index].id}",
-                                  context,
-                                  controller.doctorsData?[index].name ?? "");
+                                  context,Get.find<StorageService>().activeLocale == SupportedLocales.english?"${controller.doctorsData?[index].nameEn ?? ""}":controller.doctorsData?[index].name ?? ""
+                                  );
 
                             }},);
                         },

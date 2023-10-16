@@ -60,8 +60,12 @@ class FilterController extends GetxController{
     endPriceRange.text = "1000";
     getData();
   }
-  @override
 
+  @override
+  void dispose(){
+    super.dispose();
+    Get.delete<FilterController>();
+  }
 
   getData() async{
     governmentData = await GovernmentServices.getGovernments();

@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:privilegecare/Models/hospital_list_model.dart';
 import 'package:privilegecare/Services/favoutite_services.dart';
+import 'package:privilegecare/Ui/hospitalDetailed/controller/hospital_detailed_controller.dart';
 import 'package:privilegecare/Ui/hospitalDetailed/hospital_detailed_screen.dart';
 import 'package:privilegecare/Utils/colors.dart';
 import 'package:privilegecare/Utils/constant.dart';
@@ -50,7 +51,12 @@ class _HospitalCellWidgetState extends State<HospitalCellWidget> {
   @override
   Widget build(BuildContext context) {
     return    InkWell(
+
       onTap: (){
+        bool test = Get.isRegistered<HospitalDetailedController>();
+        if(test){
+          Get.delete<HospitalDetailedController>();
+        }
         Get.to(()=>HospitalDetailedScreen(hospitalId: "${widget.hospitalData?.id??0}"));
 
       },
@@ -112,7 +118,7 @@ class _HospitalCellWidgetState extends State<HospitalCellWidget> {
               width: Get.width,
               child:  Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 10.0),
-                child: CustomText(Get.find<StorageService>().activeLocale == SupportedLocales.english?widget.hospitalData?.name??"":widget.hospitalData?.name??"",
+                child: CustomText(Get.find<StorageService>().activeLocale == SupportedLocales.english?widget.hospitalData?.nameEn??"":widget.hospitalData?.name??"",
                   style: const TextStyle(
                       fontFamily: fontFamilyName,
 
@@ -126,7 +132,7 @@ class _HospitalCellWidgetState extends State<HospitalCellWidget> {
               width: Get.width,
               child:  Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 10.0),
-                child: CustomText(widget.hospitalData?.details??"",
+                child: CustomText(Get.find<StorageService>().activeLocale == SupportedLocales.english?widget.hospitalData?.detailsEn??"":widget.hospitalData?.details??"",
 
                   style: const TextStyle(
                       fontFamily: fontFamilyName,

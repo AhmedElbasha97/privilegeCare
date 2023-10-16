@@ -492,7 +492,8 @@ class FilterScreen extends StatelessWidget {
                                   border: Border.all(color: kBlueColor,width: 1)
                               ),
                               child:   Center(
-                                child:  controller.specialtyName==""? Row(
+                                child:  controller.specialtyName==""?
+                                Row(
                                   mainAxisAlignment: MainAxisAlignment.center,
                                   children: [
                                     CustomText(
@@ -511,7 +512,8 @@ class FilterScreen extends StatelessWidget {
                                     ),
 
                                   ],
-                                ):Row(
+                                ):
+                                Row(
                                   mainAxisAlignment: MainAxisAlignment.center,
                                   children: [
                                     CustomText(

@@ -12,7 +12,11 @@ class HelpController extends GetxController{
     super.onInit();
     getData();
   }
-
+  @override
+  void dispose(){
+    super.dispose();
+    Get.delete<HelpController>();
+  }
   getData() async {
     helpData = await AppInfoServices.getHelpData();
     loading = false;

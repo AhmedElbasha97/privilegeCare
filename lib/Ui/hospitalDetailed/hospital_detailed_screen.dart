@@ -344,7 +344,9 @@ class HospitalDetailedScreen extends StatelessWidget {
 
                       ],
                     ),
-                  ):controller.hospitalData?.lab==1 && controller.hospitalData?.xray == 1?
+                  ):
+                      //this if the hospital activate all categories
+                  controller.hospitalData?.lab==1 && controller.hospitalData?.xray == 1?
                   Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 10.0),
                     child: Row(
@@ -379,7 +381,7 @@ class HospitalDetailedScreen extends StatelessWidget {
                           )
                         ],
                       ),
-                        const SizedBox(width: 5,),
+                        const SizedBox(width: 3,),
                         Row(
                           children: [
                             SizedBox(
@@ -409,7 +411,7 @@ class HospitalDetailedScreen extends StatelessWidget {
                             )
                           ],
                         ),
-                        const SizedBox(width: 5,),
+                        const SizedBox(width: 3,),
                         Row(
                           children: [
                             SizedBox(
@@ -433,7 +435,7 @@ class HospitalDetailedScreen extends StatelessWidget {
                             )
                           ],
                         ),
-                        const SizedBox(width: 5,),
+                        const SizedBox(width: 3,),
                         Row(
                           children: [
                             SizedBox(
@@ -441,17 +443,20 @@ class HospitalDetailedScreen extends StatelessWidget {
                               width: 27,
                               child: Image.asset("assets/icons/rays_icons.png",fit: BoxFit.fitHeight,),
                             ),
-                            const SizedBox(width: 5,),
+                            const SizedBox(width: 3,),
                              Column(
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: [
-                                CustomText(hospCategoryTitle4.tr,
-                                  style: const TextStyle(
-                                      fontFamily: fontFamilyName,
+                                Container(
 
-                                      color: kBlueColor,
-                                      fontWeight: FontWeight.w800,
-                                      fontSize: 13),),
+                                  child: CustomText(hospCategoryTitle4.tr,
+                                    style: const TextStyle(
+                                        fontFamily: fontFamilyName,
+
+                                        color: kBlueColor,
+                                        fontWeight: FontWeight.w800,
+                                        fontSize: 13),),
+                                ),
 
                               ],
                             )
@@ -459,7 +464,9 @@ class HospitalDetailedScreen extends StatelessWidget {
                         ),
                       ],
                     ),
-                  ):controller.hospitalData?.lab==1?
+                  ):
+                  //this if the hospital activate lap categories
+                  controller.hospitalData?.lab==1?
                   Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 10.0),
                     child: Row(
@@ -641,7 +648,8 @@ class HospitalDetailedScreen extends StatelessWidget {
 
                       ],
                     ),
-                  ):const SizedBox(),
+                  ):
+                  const SizedBox(),
                   const SizedBox(height: 20,),
                   controller.hospitalData?.image?.length!=0?CarouselSlider.builder(
                     carouselController: controller.cController,
@@ -752,7 +760,8 @@ class HospitalDetailedScreen extends StatelessWidget {
                         viewportFraction: 1,
 
                         autoPlay: true),
-                  ):Container(
+                  ):
+                  Container(
                       width: Get.width*0.9,
                       height: Get.height*0.2,
                       margin: const EdgeInsets.symmetric(horizontal: 5.0),
@@ -1057,7 +1066,7 @@ class HospitalDetailedScreen extends StatelessWidget {
                                 ),
                                 const SizedBox(height: 5),
                                 CustomText( Get.find<StorageService>().activeLocale == SupportedLocales.english?controller.doctorsData![index].nameEn!:controller.doctorsData![index].name!,
-
+                                  textAlign: TextAlign.center,
                                   style: const TextStyle(
                                       height: 1,
                                       fontFamily:fontFamilyName,
@@ -1066,6 +1075,7 @@ class HospitalDetailedScreen extends StatelessWidget {
                                       fontSize: 12),),
                                 const SizedBox(height: 5,),
                                 CustomText(Get.find<StorageService>().activeLocale == SupportedLocales.english?controller.doctorsData![index].specialistEn!:controller.doctorsData![index].specialist!,
+                                  textAlign: TextAlign.center,
                                   style: const TextStyle(
                                       height: 1,
                                       fontFamily: fontFamilyName,

@@ -115,6 +115,7 @@ const profileTag8 = "Profile_Tag_8";
 const profileTag9 = "Profile_Tag_9";
 const profileTag10 = "Profile_Tag_10";
 const profileTag11 = "Profile_Tag_11";
+const profileTag12 = "Profile_Tag_12";
 const signInTitle = "Sign_In_Title";
 const signInText1 = "Sign_In_Text_1";
 const signInText2 = "Sign_In_Text_2";

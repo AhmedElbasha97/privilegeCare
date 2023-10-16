@@ -100,6 +100,12 @@ bool signingUp = false ;
     secondNameController.clear();
     phoneController.clear();
   }
+  @override
+  void dispose(){
+    super.dispose();
+    Get.delete<SignUpController>();
+  }
+
   void onEmailUpdate(String? value) {
     if(value == "omar.khaled20@yahoo.com"){
       phoneController.clear();

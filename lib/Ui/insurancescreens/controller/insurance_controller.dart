@@ -34,6 +34,11 @@ class InsuranceController extends GetxController{
     getData();
     super.onInit();
   }
+  @override
+  void dispose(){
+    super.dispose();
+    Get.delete<InsuranceController>();
+  }
   void onCompanyNameUpdate(String? value) {
     if (value == "") {
       companyNameState = false;

@@ -12,6 +12,11 @@ class SpecialtyController extends GetxController{
     super.onInit();
     getData();
   }
+  @override
+  void dispose(){
+    super.dispose();
+    Get.delete<SpecialtyController>();
+  }
   getData() async{
     specialtyListData = await SpecialistServices.getAllSpecialist();
     mostChosenSpecialtyListData = await SpecialistServices.getMostChosenSpecialist();

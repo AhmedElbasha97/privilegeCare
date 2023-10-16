@@ -25,13 +25,18 @@ class HospitalController extends GetxController{
  int selectedIndex = 0;
  bool hasNoData = false;
  bool hasNoDataSpecialty = false;
-
+  final ScrollController sController = ScrollController();
 
   @override
   void onInit() {
     // TODO: implement onInit
     super.onInit();
     getData();
+  }
+  @override
+  void dispose(){
+    super.dispose();
+    Get.delete<HospitalController>();
   }
   goToScreen(){
     if(screenIndex == 1){
@@ -54,7 +59,7 @@ class HospitalController extends GetxController{
 
         );
         ScaffoldMessenger.of(context).showSnackBar(snackBar);
-        Future.delayed(const Duration(milliseconds: 7000), () {
+        Future.delayed(const Duration(milliseconds: 700), () {
           update();});
       } else {
         var data;
@@ -78,7 +83,7 @@ class HospitalController extends GetxController{
 
         );
         ScaffoldMessenger.of(context).showSnackBar(snackBar);
-        Future.delayed(const Duration(milliseconds: 7000), () {
+        Future.delayed(const Duration(milliseconds: 700), () {
           update();});
       } else {
         var data;

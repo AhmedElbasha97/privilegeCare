@@ -20,7 +20,11 @@ class FavoriteHospitalController extends GetxController{
     super.onInit();
     getData();
   }
-
+  @override
+  void dispose(){
+    super.dispose();
+    Get.delete<FavoriteHospitalController>();
+  }
   getData() async {
     isLoading = true;
     update();

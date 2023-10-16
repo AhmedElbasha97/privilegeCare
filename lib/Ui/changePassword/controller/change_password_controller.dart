@@ -61,7 +61,11 @@ class ChangePasswordController extends GetxController{
 
     super.onClose();
   }
-
+  @override
+  void dispose(){
+    super.dispose();
+    Get.delete<ChangePasswordController>();
+  }
   void clear() {
     passwordController.clear();
     reTypePasswordController.clear();

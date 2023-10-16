@@ -92,10 +92,12 @@ class _HospitalScreensState extends State<HospitalScreens> {
                           width: Get.width*0.9,
                           height: Get.height*0.65,
                           child: RawScrollbar(
+                            controller: controller.sController,
                             thumbColor: kBlueColor,
                             radius: const Radius.circular(20),
                             thickness: 1,
                             child: ListView.builder(
+                              controller: controller.sController,
                               itemCount:controller.hospitalListData?.length,
 
                               itemBuilder: (_,index){
@@ -142,7 +144,7 @@ class _HospitalScreensState extends State<HospitalScreens> {
                                         controller.addingOrRemovingFromFavorite(
                                         "${controller.hospitalListData?[index].id}",
                                         context,
-                                        controller.hospitalListData?[index].name ?? "");
+                                            Get.find<StorageService>().activeLocale == SupportedLocales.english?"${controller.hospitalListData?[index].nameEn ?? ""}":controller.hospitalListData?[index].name ?? "");
 
                                   }
                                   }),

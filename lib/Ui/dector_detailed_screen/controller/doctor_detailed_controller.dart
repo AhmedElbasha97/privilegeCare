@@ -40,6 +40,11 @@ class DoctorDetailedController extends GetxController{
     // TODO: implement onInit
     super.onInit();
   }
+  @override
+  void dispose(){
+    super.dispose();
+    Get.delete<DoctorDetailedController>();
+  }
   getData() async {
     doctorData = await DoctorServices.getDoctorProfiles(doctorId);
     doctorAddedOrNot = await checkDoctorAddedOrNot(doctorId);

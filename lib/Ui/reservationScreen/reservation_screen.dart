@@ -363,7 +363,7 @@ class ReservationScreen extends StatelessWidget {
                               ],
                             ),
                             Container(
-                              width: Get.width*0.4,
+                              width: Get.width*0.42,
                               height: Get.height*0.08,
                               child:  Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,

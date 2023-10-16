@@ -20,6 +20,7 @@ class BiomatricsAuthService {
     //if device supports biometrics and user has enabled biometrics, then authenticate.
     if (isBiometricSupported && canCheckBiometrics) {
       try {
+
         isAuthenticated = await _localAuthentication.authenticate(
 
             localizedReason: Platform.isAndroid
@@ -27,7 +28,20 @@ class BiomatricsAuthService {
       } on PlatformException catch (e) {
         print(e);
       }
+    }else{
+      try {
+
+        isAuthenticated = await _localAuthentication.authenticate(
+
+          localizedReason: Platform.isAndroid
+              ?'يجب فحص بصمت اصبع كى تستطيع $reason':"$reasonيجب فحص بصمت وجهك كى تستطيع ",options: AuthenticationOptions(
+          biometricOnly: false,
+        ));
+      } on PlatformException catch (e) {
+        print(e);
+      }
     }
+
     return isAuthenticated;
   }
   }

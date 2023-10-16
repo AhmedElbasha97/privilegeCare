@@ -8,6 +8,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:get/get.dart';
 import 'package:privilegecare/Ui/HomeScreen/controller/home_controller.dart';
+import 'package:privilegecare/Ui/HomeScreen/widget/doctor_home_widget.dart';
+import 'package:privilegecare/Ui/HomeScreen/widget/hospitals_banners_widget.dart';
 import 'package:privilegecare/Ui/SpecialtyScreen/specialty_screen.dart';
 import 'package:privilegecare/Ui/dector_detailed_screen/doctor_detailed_screen.dart';
 import 'package:privilegecare/Ui/doctorsScreen/controller/doctor_list_controller.dart';
@@ -125,6 +127,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   child: Column(
                     children: [
                       const SizedBox(height: 10,),
+                      //1st carousel slider
                       controller.slideShowLoading?Loader(width: MediaQuery.of(context).size.width,height: 150.0):
                       CarouselSlider(
                         options:  CarouselOptions(
@@ -194,6 +197,7 @@ class _HomeScreenState extends State<HomeScreen> {
                         }).toList(),
                       ),
                       const SizedBox(height: 10,),
+                      //gridView of the doctors
                       controller.doctorData?.length ==0 ?const SizedBox():
                       GridView.builder(
                           gridDelegate:  SliverGridDelegateWithFixedCrossAxisCount(
@@ -207,77 +211,7 @@ class _HomeScreenState extends State<HomeScreen> {
                           physics: const NeverScrollableScrollPhysics(),
                           itemCount: controller.doctorData?.length,
                           itemBuilder: (BuildContext context, int index) {
-                            return Center(
-                              child:  InkWell(
-                                onTap: (){
-                                  Get.to(DoctorDetailedScreen(doctorId: "${controller.doctorData?[index].id??0}"));
-                                },
-                                child: Container(
-                                  width: 100,
-
-                                  child: Column(
-
-                                    children: [
-                                      CachedNetworkImage(
-                                  fit: BoxFit.fitHeight,
-                                      imageUrl: "${Services.baseUrl}${controller.doctorData?[index].image??""}",
-                                        imageBuilder: ((context, image){
-                                          return  Container(
-                                              height: 80,
-                                              width: 80,
-                                              decoration: BoxDecoration(
-                                                image: DecorationImage(
-                                                  image: image,
-                                                  fit: BoxFit.cover,
-                                                ),
-
-
-                                              )
-                                          );
-                                        }),
-                                        placeholder: (context, image){
-                                          return  const Center(child: CircularProgressIndicator(color: kBlueColor,));
-                                        },
-                                        errorWidget: (context, url, error){
-                                          return Container(
-                                              height: 80,
-                                              width: 80,
-
-                                              decoration: const BoxDecoration(
-                                                image: DecorationImage(
-                                                  image: AssetImage("assets/images/doctor.png"),
-                                                  fit: BoxFit.fill,
-                                                ),
-
-
-                                              )
-                                          );
-                                        },
-                                      ),
-                                      const SizedBox(height: 5),
-                                      CustomText( controller.doctorData?[index].name??"",
-
-                                        style: const TextStyle(
-                                            height: 1,
-                                            fontFamily: fontFamilyName,
-                                            color: kBlueColor,
-                                            fontWeight: FontWeight.w600,
-                                            fontSize: 12),),
-                                      const SizedBox(height: 5,),
-                                      CustomText(controller.doctorData?[index].specialist??"",
-
-                                        style: const TextStyle(
-                                            height: 1,
-
-                                            fontFamily: fontFamilyName,
-                                            color: kBlueColor,
-                                            fontWeight: FontWeight.w600,
-                                            fontSize: 11),),
-                                    ],
-                                  ),
-                                ),
-                              ),
-                            );
+                            return DoctorHomeWidget(doctorData: controller.doctorData?[index],);
                           },
 
                       ),
@@ -400,144 +334,7 @@ class _HomeScreenState extends State<HomeScreen> {
                             ),
                           ):Column(
                             children: controller.hospitalBanner!.map((e){
-                              return  Padding(
-                                padding: const EdgeInsets.symmetric(vertical: 10.0),
-                                child: InkWell(
-                                  onTap: (){
-                                    Get.to(()=>HospitalDetailedScreen(hospitalId: "${e.id}"));
-                                  },
-                                  child: Column(
-                                    children: [
-                                      SizedBox(
-                                        width:Get.width*0.8,
-                                        child:  Row(
-                                          crossAxisAlignment: CrossAxisAlignment.start,
-                                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                          children: [
-                                            Column(
-                                              crossAxisAlignment: CrossAxisAlignment.start,
-                                              children: [
-                                                CustomText(
-                                                  Get.find<StorageService>().activeLocale == SupportedLocales.english?e.nameEn??"":e.name??"",
-
-                                                  style: const TextStyle(
-                                                      height: 1,
-                                                      fontFamily: fontFamilyName,
-                                                      color: kBlueColor,
-                                                      fontWeight: FontWeight.w700,
-                                                      fontSize: 15),),
-                                                const SizedBox(height: 5,),
-                                                CustomText(
-                                                  hospInfo.tr,
-
-                                                  style: const TextStyle(
-                                                      height: 1,
-                                                      fontFamily: fontFamilyName,
-                                                      color: kBlueColor,
-                                                      fontWeight: FontWeight.w600,
-                                                      fontSize: 15),),
-                                              ],
-                                            ),
-                                            CustomText(moreInfoHosp.tr,
-
-                                              style: const TextStyle(
-                                                  height: 1,
-                                                  fontFamily: fontFamilyName,
-                                                  color: kBlueColor,
-                                                  fontWeight: FontWeight.w600,
-                                                  fontSize: 15),),
-                                          ],
-                                        ),
-                                      ),
-                                      const SizedBox(height: 10,),
-                                      e.image?.length==0?Container(
-                                  width: Get.width*0.9,
-                                  height: Get.height*0.2,
-                                  margin: const EdgeInsets.symmetric(horizontal: 5.0),
-                                  decoration: const BoxDecoration(
-                                  image: DecorationImage(
-                                  image: AssetImage("assets/images/no_data_slideShow.png"),
-                                  fit: BoxFit.fill,
-                                  ),
-                                  borderRadius:
-                                  BorderRadius.all(Radius.circular(15))
-
-                                  )
-                                  ):
-                                      CarouselSlider(
-                                        options:  CarouselOptions(
-                                            height: Get.height*0.19,
-                                            aspectRatio: 2.0,
-                                            enlargeCenterPage: false,
-                                            viewportFraction: 1,
-                                            autoPlay: true),
-
-                                        items: e.image?.map((i) {
-                                          return Builder(
-                                            builder: (BuildContext context) {
-                                              return  CachedNetworkImage(
-                                                fit: BoxFit.fitHeight,
-                                                imageUrl: "${Services.baseUrl}$i",
-                                                imageBuilder: ((context, image){
-                                                  return  Container(
-                                                      width: MediaQuery.of(context).size.width,
-                                                      margin: const EdgeInsets.symmetric(horizontal: 5.0),
-                                                      decoration: BoxDecoration(
-                                                          image: DecorationImage(
-                                                            image: image,
-                                                            fit: BoxFit.fitHeight,
-                                                          ),
-                                                          borderRadius:
-                                                          const BorderRadius.all(Radius.circular(15))
-
-                                                      )
-                                                  );
-                                                }),
-                                                placeholder: (context, image){
-                                                  return  Padding(
-                                                    padding:  const EdgeInsets.all(5),
-                                                    child: Container(
-                                                        decoration: const BoxDecoration(
-                                                            borderRadius:
-                                                            BorderRadius.all(Radius.circular(15))
-                                                        ),
-                                                        child: Loader(width: MediaQuery.of(context).size.width,height: 150.0)),
-                                                  );
-                                                },
-                                                errorWidget: (context, url, error){
-                                                  return Container(
-                                                      width: MediaQuery.of(context).size.width,
-
-                                                      height: Get.height*0.2,
-                                                      margin: const EdgeInsets.symmetric(horizontal: 5.0),
-                                                      decoration: const BoxDecoration(
-                                                          image: DecorationImage(
-                                                            image: AssetImage("assets/images/no_data_slideShow.png"),
-                                                            fit: BoxFit.fill,
-                                                          ),
-                                                          borderRadius:
-                                                          BorderRadius.all(Radius.circular(15))
-
-                                                      )
-                                                  );
-                                                },
-                                              );
-                                            },
-                                          );
-                                        }).toList(),
-                                      ),
-                                      const SizedBox(height: 15,),
-                                      const Divider(
-                                        color: kGreenColor,
-                                        height: 1,
-                                        thickness: 1,
-                                        endIndent: 20,
-                                        indent: 20,
-                                      ),
-                                    ],
-                                  ),
-                                ),
-                              );
+                              return  HospitalsBannersWidget(hospitalBanner: e,);
                             }).toList()
                           ),
                         ),

@@ -12,6 +12,11 @@ class NotificationHistoryController extends GetxController{
     super.onInit();
     getData();
   }
+  @override
+  void dispose(){
+    super.dispose();
+    Get.delete<NotificationHistoryController>();
+  }
   getData() async {
     notificationsData = await NotificationHistoryServices.getHospitalList(Get
         .find<StorageService>()

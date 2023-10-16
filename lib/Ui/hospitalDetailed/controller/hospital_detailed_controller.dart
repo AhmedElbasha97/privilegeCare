@@ -43,6 +43,11 @@ void onInit() {
   // TODO: implement onInit
   super.onInit();
 }
+@override
+void dispose(){
+  super.dispose();
+  Get.delete<HospitalDetailedController>();
+}
 getData() async {
   doctorsData =  await HospitalServices.getDoctorsInThisHospital(hospitalId);
   hospitalData = await HospitalServices.getHospitalProfile(hospitalId);

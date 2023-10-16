@@ -47,7 +47,11 @@ class EditProfileController extends GetxController{
     phoneController =TextEditingController();
     getData();
   }
-
+  @override
+  void dispose(){
+    super.dispose();
+    Get.delete<EditProfileController>();
+  }
   @override
   void onClose() {
     emailController.dispose();

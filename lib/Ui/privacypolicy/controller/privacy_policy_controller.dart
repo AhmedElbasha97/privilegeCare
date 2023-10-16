@@ -17,7 +17,11 @@ class PrivacyPolicyController extends GetxController{
     super.onInit();
     getData();
   }
-
+  @override
+  void dispose(){
+    super.dispose();
+    Get.delete<PrivacyPolicyController>();
+  }
   getData() async {
     privacyData = await AppInfoServices().getPrivacyPolicy();
     loading = false;

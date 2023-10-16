@@ -39,10 +39,14 @@ class DoctorListController extends GetxController {
     getData();
     super.onInit();
   }
-
+  @override
+  void dispose(){
+    super.dispose();
+    Get.delete<DoctorListController>();
+  }
   @override
   void onClose() {
-    searchController.dispose();
+
     super.onClose();
   }
 
@@ -99,8 +103,7 @@ goToScreen(){
 
         );
         ScaffoldMessenger.of(context).showSnackBar(snackBar);
-        Future.delayed(const Duration(milliseconds: 7000), () {
-          update();});
+
       } else {
         var data;
         CoolAlert.show(
@@ -123,8 +126,7 @@ goToScreen(){
 
         );
         ScaffoldMessenger.of(context).showSnackBar(snackBar);
-        Future.delayed(const Duration(milliseconds: 7000), () {
-        update();});
+
       } else {
         var data;
         CoolAlert.show(

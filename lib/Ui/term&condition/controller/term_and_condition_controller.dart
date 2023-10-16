@@ -18,7 +18,11 @@ class TermsAndConditionController extends GetxController{
     super.onInit();
     getData();
   }
-
+  @override
+  void dispose(){
+    super.dispose();
+    Get.delete<TermsAndConditionController>();
+  }
   getData() async {
     termsData = await AppInfoServices().getTermsAndCondition();
     loading = false;

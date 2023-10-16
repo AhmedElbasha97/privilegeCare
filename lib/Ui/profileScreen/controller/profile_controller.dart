@@ -1,4 +1,6 @@
 
+import 'dart:io';
+
 import 'package:cool_alert/cool_alert.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -6,6 +8,7 @@ import 'package:image_picker/image_picker.dart';
 import 'package:in_app_review/in_app_review.dart';
 import 'package:privilegecare/Models/profile_model.dart';
 import 'package:privilegecare/Models/response_model.dart';
+import 'package:privilegecare/Models/whats_app_model.dart';
 import 'package:privilegecare/Services/app_info_services.dart';
 import 'package:privilegecare/Services/auth_services.dart';
 import 'package:privilegecare/Services/biomatrics_auth_services.dart';
@@ -29,6 +32,7 @@ import 'package:url_launcher/url_launcher.dart';
 class ProfileController extends GetxController{
   String? chatLink = "https://tawk.to/chat/6524f1e0eb150b3fb99fe35e/1hcc51loq";
 
+ late WhatsAppModel? whatsAppNumber;
   bool isLoading = true;
   late ProfileModel? data;
   int indexDeleteAccount = 2;
@@ -39,6 +43,7 @@ class ProfileController extends GetxController{
   List<String> icons = [
     "updateProfileIcon",
     "medicalInsuranceIcon",
+    "helpIcon",
     "helpIcon",
     "historyIcon",
     "changePasswordIcon",
@@ -59,6 +64,11 @@ class ProfileController extends GetxController{
     super.onInit();
     checkUserSignedOrNet();
   }
+  @override
+  void dispose(){
+    super.dispose();
+    Get.delete<ProfileController>();
+  }
   decideWhichScreenToOpen(int index,context) async {
     switch(index) {
       case 0:{
@@ -74,38 +84,42 @@ class ProfileController extends GetxController{
       }
       break;
       case 3:{
-       Get.to(()=>const HistoryScreen());
+        whatsapp(whatsAppNumber?.link??"");
       }
       break;
       case 4:{
-        goToChangePass();
+       Get.to(()=>const HistoryScreen());
       }
       break;
       case 5:{
-        Get.to(()=>const FavoriteScreen());
+        goToChangePass();
       }
       break;
       case 6:{
+        Get.to(()=>const FavoriteScreen());
+      }
+      break;
+      case 7:{
         showDialog(context: context,
           builder: (context) =>
               const LanguageDialog(),
         );
       }
       break;
-      case 7:{
+      case 8:{
         Get.to(()=>const PrivacyPolicyScreen());
       }
       break;
-      case 8:{
+      case 9:{
         Get.to(()=>const TermsScreen());
       }
       break;
 
-      case 9:{
+      case 10:{
         rateMyApp();
       }
       break;
-      case 10:{
+      case 11:{
         signingOut(context);
       }
       break;
@@ -128,6 +142,19 @@ class ProfileController extends GetxController{
       Get.to(() => const ChangePasswordScreen());
     }
   }
+  whatsapp(String contact) async{
+    try{
+      if(Platform.isIOS){
+        var iosUrl = "https://wa.me/$contact";
+        await launchUrl(Uri.parse(iosUrl));
+      }
+      else{
+        var androidUrl = "whatsapp://send?phone=$contact";
+        await launchUrl(Uri.parse(androidUrl));
+      }
+    } on Exception{
+    }
+  }
   checkUserSignedOrNet(){
     if(Get.find<StorageService>().getId == "0"){
       userIsSigned = false;
@@ -146,6 +173,7 @@ class ProfileController extends GetxController{
       profileTag1.tr,
       profileTag2.tr,
       profileTag3.tr,
+      profileTag12.tr,
       profileTag4.tr,
       profileTag5.tr,
       profileTag6.tr,
@@ -154,7 +182,9 @@ class ProfileController extends GetxController{
       profileTag9.tr,
       profileTag10.tr,
       profileTag11.tr,
+
     ];
+    whatsAppNumber = await AppInfoServices().getWhatsAppNumber();
    data = await AuthServices.getUserData( Get.find<StorageService>().getId);
 
    isLoading = false;

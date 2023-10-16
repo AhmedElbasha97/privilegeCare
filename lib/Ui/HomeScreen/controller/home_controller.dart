@@ -26,7 +26,11 @@ class HomeController extends GetxController{
     getHospitalSliderData();
     super.onInit();
   }
-
+  @override
+  void dispose(){
+    super.dispose();
+    Get.delete<HomeController>();
+  }
   getData() async {
     doctorData = await DoctorServices.getHomeDoctors();
     isLoading = false;

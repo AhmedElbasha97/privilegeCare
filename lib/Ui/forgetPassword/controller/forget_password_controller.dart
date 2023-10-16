@@ -37,7 +37,11 @@ class ForgetPasswordController extends GetxController {
     emailController.dispose();
     super.onClose();
   }
-
+  @override
+  void dispose(){
+    super.dispose();
+    Get.delete<ForgetPasswordController>();
+  }
   void clear() {
     emailController.clear();
   }

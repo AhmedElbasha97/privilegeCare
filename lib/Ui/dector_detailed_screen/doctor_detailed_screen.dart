@@ -8,6 +8,7 @@ import 'package:privilegecare/Ui/dector_detailed_screen/controller/doctor_detail
 import 'package:privilegecare/Ui/dector_detailed_screen/widget/comment_widget.dart';
 import 'package:privilegecare/Ui/dector_detailed_screen/widget/schedules_widget.dart';
 import 'package:privilegecare/Ui/dector_detailed_screen/widget/video_player_widget.dart';
+import 'package:privilegecare/Ui/reservationScreen/controller/reservation_controller.dart';
 import 'package:privilegecare/Ui/reservationScreen/reservation_screen.dart';
 import 'package:privilegecare/Utils/colors.dart';
 import 'package:privilegecare/Utils/constant.dart';
@@ -428,12 +429,16 @@ class DoctorDetailedScreen extends StatelessWidget {
                                         onTap: (){
                                           controller.showDoctorLocation();
                                         },
-                                        child:  CustomText(showOnGoogleMap.tr,
-                                          style: const TextStyle(
-                                              fontFamily: fontFamilyName,
-                                              color: kBlueColor,
-                                              fontWeight: FontWeight.w700,
-                                              fontSize: 15),),
+                                        child:  Container(
+                                          width: Get.width*0.75,
+                                          child: CustomText(showOnGoogleMap.tr,
+                                            textAlign: TextAlign.center,
+                                            style: const TextStyle(
+                                                fontFamily: fontFamilyName,
+                                                color: kBlueColor,
+                                                fontWeight: FontWeight.w700,
+                                                fontSize: 15),),
+                                        ),
                                       ),
 
                                     ],
@@ -578,6 +583,10 @@ class DoctorDetailedScreen extends StatelessWidget {
                             onTap: (){
                               if(controller.doctorData?.video != "0") {
                                 controller.videoPlayerController.pause();
+                              }
+                              bool test = Get.isRegistered<ReservationController>();
+                              if(test){
+                                Get.delete<ReservationController>();
                               }
                               Get.to(  ReservationScreen(doctorId: "${controller.doctorData?.id??0}",));
 

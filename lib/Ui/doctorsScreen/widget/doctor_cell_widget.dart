@@ -6,6 +6,7 @@ import 'package:get/get.dart';
 import 'package:privilegecare/Models/doctort_list_model.dart';
 import 'package:privilegecare/Services/favoutite_services.dart';
 import 'package:privilegecare/Ui/dector_detailed_screen/doctor_detailed_screen.dart';
+import 'package:privilegecare/Ui/doctorsScreen/controller/doctor_list_controller.dart';
 import 'package:privilegecare/Ui/reservationScreen/reservation_screen.dart';
 import 'package:privilegecare/Utils/colors.dart';
 import 'package:privilegecare/Utils/constant.dart';
@@ -38,13 +39,15 @@ class _DoctorCellWidgetState extends State<DoctorCellWidget> {
      if(status == 1){
        addedToFavoriteOrNot =  true;
        setState(() {
-
+         final exploreController = Get.put(DoctorListController("","",""));
+         exploreController.update();
        });
 
      }else{
        addedToFavoriteOrNot =   false;
        setState(() {
-
+         final exploreController = Get.put(DoctorListController("","",""));
+         exploreController.update();
        });
 
      }
@@ -411,9 +414,9 @@ class _DoctorCellWidgetState extends State<DoctorCellWidget> {
                         ),
                       ),
                       InkWell(
-                        onTap: ()  {
+                        onTap: ()  async {
                           widget.addingToFavorite();
-                           checkDoctorAddedOrNot("${widget.doctorData?.id??0}");
+                          await checkDoctorAddedOrNot("${widget.doctorData?.id??0}");
 
                         },
                         child: Padding(

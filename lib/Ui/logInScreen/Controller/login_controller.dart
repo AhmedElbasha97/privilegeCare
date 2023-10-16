@@ -56,7 +56,11 @@ class LoginController extends GetxController {
     passwordController.dispose();
     super.onClose();
   }
-
+  @override
+  void dispose(){
+    super.dispose();
+    Get.delete<LoginController>();
+  }
   void clear() {
     passwordController.clear();
     emailController.clear();

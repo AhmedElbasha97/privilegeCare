@@ -1,5 +1,6 @@
 import 'package:privilegecare/Models/chat_link_model.dart';
 import 'package:privilegecare/Models/privacy_policy_model.dart';
+import 'package:privilegecare/Models/whats_app_model.dart';
 import 'package:privilegecare/Utils/api_service.dart';
 import 'package:privilegecare/Utils/services.dart';
 
@@ -9,6 +10,14 @@ class AppInfoServices{
     var data = await api.request(Services.getPrivacyPolicyEndPoint, "POST");
     if (data != null) {
       return PrivacyPolicy.fromJson(data[0]);
+    }
+    return null;
+  }
+
+  Future<WhatsAppModel?> getWhatsAppNumber() async {
+    var data = await api.request(Services.getWhatsAppNumberEndPoint, "POST");
+    if (data != null) {
+      return WhatsAppModel.fromJson(data[0]);
     }
     return null;
   }

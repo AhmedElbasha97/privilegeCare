@@ -37,6 +37,7 @@ class Services {
   static String getHospitalProfileEndPoint = "hospital_view";//post
   static String getTermsAndConditionEndPoint = "terms";//post
   static String getPrivacyPolicyEndPoint = "policy";//post
+   static String getWhatsAppNumberEndPoint = "whatsapp";//post
   static String getChatLinkEndPoint = "chat_link";//post
   static String editAccountDataEndPoint = "member/edit";//post
   static String getUserDataEndPoint = "member";//post

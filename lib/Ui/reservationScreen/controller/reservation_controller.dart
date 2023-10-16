@@ -64,6 +64,11 @@ class ReservationController extends GetxController{
     phoneWidgetController = TextEditingController();
     getData();
   }
+  @override
+  void dispose(){
+    super.dispose();
+    Get.delete<ReservationController>();
+  }
   Future<void> _getAddressFromLatLng(double lat,double long) async {
     await placemarkFromCoordinates(lat,long)
         .then((List<Placemark> placemarks) {

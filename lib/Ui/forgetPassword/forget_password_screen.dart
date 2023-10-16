@@ -41,84 +41,87 @@ class ForgettingPasswordScreen extends StatelessWidget {
           ),
 
         ),
-        body: SingleChildScrollView(
-          child: Container(
-            height: Get.height*0.9,
-            width: Get.width,
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              mainAxisAlignment: MainAxisAlignment.spaceAround,
-              children: [
-                 Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 10.0),
-                  child: CustomText(signUpTitleEmail.tr,
-                    style: const TextStyle(
-                        fontFamily: fontFamilyName,
-                        color: kGreenColor,
-                        fontWeight: FontWeight.w700,
-                        fontSize: 20),),
-                ),
-                Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 10.0),
-                  child: SizedBox(
-                    height: Get.height*0.09,
-                    width: Get.width*0.95,
-                    child: CustomInputField(
-                      hasIntialValue: true,
-                      labelText: signUpTextEmail.tr,
-
-                      textInputAction: TextInputAction.next,
-                      keyboardType: TextInputType.emailAddress,
-
-                      controller:controller.emailController,
-                      onchange: controller.onEmailUpdate,
-                      validator: controller.validateEmail,
-                      icon: (controller.emailValidated)
-                          ? (controller.emailState)
-                          ? const Icon(Icons.check_rounded,
-                          color: kBlueColor)
-                          : const Icon(
-                        Icons.close_outlined,
-                        color: kErrorColor,
-                      )
-                          : null,
-                      hasGreenBorder: false,
-                    ),
+        body: Form(
+          key: controller.formKey,
+          child: SingleChildScrollView(
+            child: Container(
+              height: Get.height*0.9,
+              width: Get.width,
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                children: [
+                   Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 10.0),
+                    child: CustomText(signUpTitleEmail.tr,
+                      style: const TextStyle(
+                          fontFamily: fontFamilyName,
+                          color: kGreenColor,
+                          fontWeight: FontWeight.w700,
+                          fontSize: 20),),
                   ),
-                ),
-                InkWell(
-                  onTap: (){
-                    if(
-                    controller.forgettingPassword){
-                      CoolAlert.show(
-                        context: context,
-                        type: CoolAlertType.loading,
-                      );
-                    }else{
-                      controller.sendPressed(context);
-                    }
-                  },
-                  child: Center(
-                    child: Container(
-                      height: 60,
-                      width: Get.width*0.6,
-                      decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(20),
-                          color:controller.forgettingPassword?kGrayColor:kBlueColor
-                      ),
-                      child:  Center(
-                        child:  CustomText(forgetPassTitle.tr,
-                          textAlign: TextAlign.center,
-                          style: const TextStyle(
-                              fontFamily: fontFamilyName,
-                              color: kWhiteColor,
-                              fontWeight: FontWeight.w600,
-                              fontSize: 18),),
+                  Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 10.0),
+                    child: SizedBox(
+                      height: Get.height*0.09,
+                      width: Get.width*0.95,
+                      child: CustomInputField(
+                        hasIntialValue: true,
+                        labelText: signUpTextEmail.tr,
+
+                        textInputAction: TextInputAction.next,
+                        keyboardType: TextInputType.emailAddress,
+
+                        controller:controller.emailController,
+                        onchange: controller.onEmailUpdate,
+                        validator: controller.validateEmail,
+                        icon: (controller.emailValidated)
+                            ? (controller.emailState)
+                            ? const Icon(Icons.check_rounded,
+                            color: kBlueColor)
+                            : const Icon(
+                          Icons.close_outlined,
+                          color: kErrorColor,
+                        )
+                            : null,
+                        hasGreenBorder: false,
                       ),
                     ),
                   ),
-                ),
-              ],
+                  InkWell(
+                    onTap: (){
+                      if(
+                      controller.forgettingPassword){
+                        CoolAlert.show(
+                          context: context,
+                          type: CoolAlertType.loading,
+                        );
+                      }else{
+                        controller.sendPressed(context);
+                      }
+                    },
+                    child: Center(
+                      child: Container(
+                        height: 60,
+                        width: Get.width*0.6,
+                        decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(20),
+                            color:controller.forgettingPassword?kGrayColor:kBlueColor
+                        ),
+                        child:  Center(
+                          child:  CustomText(forgetPassTitle.tr,
+                            textAlign: TextAlign.center,
+                            style: const TextStyle(
+                                fontFamily: fontFamilyName,
+                                color: kWhiteColor,
+                                fontWeight: FontWeight.w600,
+                                fontSize: 18),),
+                        ),
+                      ),
+                    ),
+                  ),
+                ],
+              ),
             ),
           ),
         ),

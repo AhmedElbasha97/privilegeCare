@@ -26,8 +26,7 @@ class NotificationHistory extends StatelessWidget {
           },),
           centerTitle: true,
           title: CustomText(
-            Localizations.localeOf(context).languageCode == "en"
-                ?"Notification list":"قيمة الاشعرات",
+            Get.find<StorageService>().activeLocale == SupportedLocales.english?"Notification list":"قيمة الاشعرات",
             style: const TextStyle(
                 fontFamily: fontFamilyName,
                 color: kWhiteColor,

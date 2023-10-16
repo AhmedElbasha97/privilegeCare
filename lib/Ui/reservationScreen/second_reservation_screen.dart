@@ -297,11 +297,18 @@ class _SecondReservationScreenState extends State<SecondReservationScreen> {
                             child: Container(
                               width: Get.width*0.7,
                               padding: const EdgeInsets.symmetric(horizontal: 10),
-                              decoration: const BoxDecoration(
-                                border: Border(
+                              decoration:  BoxDecoration(
+                                border: Get.find<StorageService>().activeLocale == SupportedLocales.english?
+                                Border(
+                                  left: BorderSide(
+                                      color: kBlueColor,
+                                      width: 2
+                                  ),
+                                ):
+                                Border(
                                   right: BorderSide(
-                                    color: kBlueColor,
-                                    width: 2
+                                      color: kBlueColor,
+                                      width: 2
                                   ),
                                 ),
                               ),
@@ -408,11 +415,18 @@ class _SecondReservationScreenState extends State<SecondReservationScreen> {
                           Container(
                             width: Get.width*0.7,
                             padding: const EdgeInsets.symmetric(horizontal: 10),
-                            decoration: const BoxDecoration(
-                              border: Border(
+                            decoration:  BoxDecoration(
+                              border: Get.find<StorageService>().activeLocale == SupportedLocales.english?
+                              Border(
+                                left: BorderSide(
+                                    color: kBlueColor,
+                                    width: 2
+                                ),
+                              ):
+                              Border(
                                 right: BorderSide(
-                                  color: kBlueColor,
-                                  width: 2
+                                    color: kBlueColor,
+                                    width: 2
                                 ),
                               ),
                             ),
@@ -460,11 +474,18 @@ class _SecondReservationScreenState extends State<SecondReservationScreen> {
                           Container(
                             width: Get.width*0.7,
                             padding: const EdgeInsets.symmetric(horizontal: 10),
-                            decoration: const BoxDecoration(
-                              border: Border(
-                                right: BorderSide(
+                            decoration:  BoxDecoration(
+                              border: Get.find<StorageService>().activeLocale == SupportedLocales.english?
+                              Border(
+                                left: BorderSide(
                                   color: kBlueColor,
                                   width: 2
+                                ),
+                              ):
+                              Border(
+                                right: BorderSide(
+                                    color: kBlueColor,
+                                    width: 2
                                 ),
                               ),
                             ),
@@ -529,8 +550,15 @@ class _SecondReservationScreenState extends State<SecondReservationScreen> {
                           width: Get.width*0.7,
                           height: Get.height*0.08,
                           padding: const EdgeInsets.symmetric(horizontal: 10),
-                          decoration: const BoxDecoration(
-                            border: Border(
+                          decoration:  BoxDecoration(
+                            border: Get.find<StorageService>().activeLocale == SupportedLocales.english?
+                            Border(
+                              left: BorderSide(
+                                  color: kBlueColor,
+                                  width: 2
+                              ),
+                            ):
+                            Border(
                               right: BorderSide(
                                   color: kBlueColor,
                                   width: 2
@@ -591,6 +619,7 @@ class _SecondReservationScreenState extends State<SecondReservationScreen> {
                     child:  Center(
                       child:  CustomText(
                         secondReservationBTN.tr,
+                        textAlign: TextAlign.center,
                         style: const TextStyle(
                             fontFamily: fontFamilyName,
                             color: Colors.white,

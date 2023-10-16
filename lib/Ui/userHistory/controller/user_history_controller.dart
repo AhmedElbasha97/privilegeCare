@@ -24,7 +24,11 @@ class UserHistoryController extends GetxController{
     getData();
     super.onInit();
   }
-
+  @override
+  void dispose(){
+    super.dispose();
+    Get.delete<UserHistoryController>();
+  }
   getData() async {
     hasNoData = false;
     historyData = await HistoryServices.getHistoryData(Get
