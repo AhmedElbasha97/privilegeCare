@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:privilegecare/Services/app_info_services.dart';
 
 import 'package:privilegecare/Utils/memory.dart';
 
@@ -28,6 +29,8 @@ class LocalizationService extends GetxService {
     Get.find<StorageService>().activeLocale == SupportedLocales.arabic
         ? SupportedLocales.english
         : SupportedLocales.arabic;
+    Get.find<StorageService>().activeLocale == SupportedLocales.arabic
+        ?AppInfoServices().sendActiveLang( Get.find<StorageService>().getId, "en"):AppInfoServices().sendActiveLang( Get.find<StorageService>().getId, "ar");
     //in storage
     Get.find<StorageService>().activeLocale = newLocale;
 

@@ -111,7 +111,7 @@ class NotificationDetailsScreen extends StatelessWidget {
                                 .animate() // this wraps the previous Animate in another Animate
                                 .fadeIn(duration: 1200.ms, curve: Curves.easeOutQuad)
                                 .slide(),
-                          ):CustomText(controller.notificationsData?.title??"",
+                          ):CustomText( Get.find<StorageService>().activeLocale == SupportedLocales.english?controller.notificationsData?.titleEn??"":controller.notificationsData?.title??"",
                             style: const TextStyle(
                                 fontFamily: fontFamilyName,
                                 color: kBlueColor,
@@ -228,7 +228,7 @@ class NotificationDetailsScreen extends StatelessWidget {
                         .shimmer(duration: 1200.ms, color:  kLightGrayColor.withAlpha(10))
                         .animate() // this wraps the previous Animate in another Animate
                         .fadeIn(duration: 1200.ms, curve: Curves.easeOutQuad)
-                        .slide():CustomText(controller.notificationsData?.desc??"",
+                        .slide():CustomText(Get.find<StorageService>().activeLocale == SupportedLocales.english?controller.notificationsData?.descEn??"":controller.notificationsData?.desc??"",
                       style: const TextStyle(
                           fontFamily: fontFamilyName,
                           color: kBlueColor,

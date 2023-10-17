@@ -138,9 +138,8 @@ class ProfileController extends GetxController{
 
    }
   goToChangePass() async {
-    if(await BiomatricsAuthService.authenticateUser(changePassScreenTitle.tr)) {
-      Get.to(() => const ChangePasswordScreen());
-    }
+    Get.to(() => const ChangePasswordScreen());
+
   }
   whatsapp(String contact) async{
     try{

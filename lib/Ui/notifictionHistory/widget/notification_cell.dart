@@ -5,6 +5,8 @@ import 'package:privilegecare/Models/notification_model.dart';
 import 'package:privilegecare/Ui/notification_details/notification_details_screen.dart';
 import 'package:privilegecare/Utils/colors.dart';
 import 'package:privilegecare/Utils/constant.dart';
+import 'package:privilegecare/Utils/localization_services.dart';
+import 'package:privilegecare/Utils/memory.dart';
 import 'package:privilegecare/widgets/custom_text_widget.dart';
 
 class NotificationCell extends StatelessWidget {
@@ -70,7 +72,7 @@ class NotificationCell extends StatelessWidget {
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           CustomText(
-                            notificationData?.title??"",
+                            Get.find<StorageService>().activeLocale == SupportedLocales.english?notificationData?.titleEn??"":notificationData?.title??"",
                             style: const TextStyle(
                                 fontFamily: fontFamilyName,
                                 color: kBlueColor,

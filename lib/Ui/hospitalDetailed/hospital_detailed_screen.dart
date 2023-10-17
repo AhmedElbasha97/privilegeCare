@@ -672,7 +672,7 @@ class HospitalDetailedScreen extends StatelessWidget {
                                     color: Colors.transparent,
                                     image: DecorationImage(
                                         image: image,
-                                        fit: BoxFit.fill),
+                                        fit: BoxFit.fitHeight),
                                     borderRadius: const BorderRadius.all(Radius.circular(10)),
                                     boxShadow: const [
                                       BoxShadow(
@@ -794,7 +794,7 @@ class HospitalDetailedScreen extends StatelessWidget {
                     width: Get.width,
                     child:   Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 10.0),
-                      child: CustomText(controller.hospitalData?.details??"",
+                      child: CustomText(Get.find<StorageService>().activeLocale == SupportedLocales.english?controller.hospitalData?.detailsEn??"":controller.hospitalData?.details??"",
 
                         style: const TextStyle(
                             fontFamily: fontFamilyName,

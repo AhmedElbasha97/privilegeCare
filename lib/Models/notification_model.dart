@@ -12,12 +12,16 @@ class NotificationModel {
   int? id;
   String? title;
   String? desc;
+  String? titleEn;
+  String? descEn;
   String? date;
 
   NotificationModel({
     this.id,
     this.title,
     this.desc,
+    this.titleEn,
+    this.descEn,
     this.date,
   });
 
@@ -25,6 +29,8 @@ class NotificationModel {
     id: json["id"],
     title: json["title"],
     desc: json["desc"],
+    titleEn: json["title_en"],
+    descEn: json["desc_en"],
     date: json["date"] ,
   );
 
@@ -32,6 +38,10 @@ class NotificationModel {
     "id": id,
     "title": title,
     "desc": desc,
+    "title_en": titleEn,
+    "desc_en": descEn,
     "date": date,
   };
 }
+
+

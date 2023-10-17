@@ -1,5 +1,6 @@
 import 'package:privilegecare/Models/chat_link_model.dart';
 import 'package:privilegecare/Models/privacy_policy_model.dart';
+import 'package:privilegecare/Models/response_model.dart';
 import 'package:privilegecare/Models/whats_app_model.dart';
 import 'package:privilegecare/Utils/api_service.dart';
 import 'package:privilegecare/Utils/services.dart';
@@ -18,6 +19,16 @@ class AppInfoServices{
     var data = await api.request(Services.getWhatsAppNumberEndPoint, "POST");
     if (data != null) {
       return WhatsAppModel.fromJson(data[0]);
+    }
+    return null;
+  }
+  Future<ResponseModel?> sendActiveLang( String memberId,String activeLang) async {
+    var data = await api.request(Services.sendActiveLangEndPoint, "POST",queryParamters: {
+      "member_id":memberId,
+      "lang":activeLang
+    });
+    if (data != null) {
+      return ResponseModel.fromJson(data);
     }
     return null;
   }
