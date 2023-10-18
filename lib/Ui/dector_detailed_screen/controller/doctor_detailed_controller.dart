@@ -1,4 +1,4 @@
-// ignore_for_file: prefer_is_empty, prefer_typing_uninitialized_variables
+// ignore_for_file: prefer_is_empty, prefer_typing_uninitialized_variables, avoid_print
 
 import 'dart:io';
 

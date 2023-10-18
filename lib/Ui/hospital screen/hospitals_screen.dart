@@ -1,5 +1,7 @@
 // ignore_for_file: sized_box_for_whitespace, unnecessary_string_interpolations
 
+import 'dart:io';
+
 import 'package:cool_alert/cool_alert.dart';
 import 'package:double_back_to_close_app/double_back_to_close_app.dart';
 import 'package:flutter/material.dart';
@@ -87,10 +89,10 @@ class _HospitalScreensState extends State<HospitalScreens> {
 
                         const SizedBox(height: 10,),
                         controller.isLoading?Loader(width: Get.width*0.9,
-                          height: Get.height*0.65,):controller.hasNoDataSpecialty?NoDataWidget(width: Get.width*0.9,
-                            height: Get.height*0.65,refreshedFunc: (){}, text: noHospDataInSpec.tr, imgPath: "assets/images/No data-rafiki.png", hasRefreshButtonOrNot: false):Container(
+                          height: Platform.isAndroid?Get.height*0.65:Get.height*0.6,):controller.hasNoDataSpecialty?NoDataWidget(width: Get.width*0.9,
+                            height: Platform.isAndroid?Get.height*0.65:Get.height*0.6,refreshedFunc: (){}, text: noHospDataInSpec.tr, imgPath: "assets/images/No data-rafiki.png", hasRefreshButtonOrNot: false):Container(
                           width: Get.width*0.9,
-                          height: Get.height*0.65,
+                          height: Platform.isAndroid?Get.height*0.65:Get.height*0.6,
                           child: RawScrollbar(
                             controller: controller.sController,
                             thumbColor: kBlueColor,

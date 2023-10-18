@@ -1,3 +1,5 @@
+// ignore_for_file: avoid_print
+
 import 'package:easy_localization/easy_localization.dart';
 import 'package:get/get.dart';
 import 'package:privilegecare/Models/notification_model.dart';

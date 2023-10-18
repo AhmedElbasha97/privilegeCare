@@ -1,4 +1,4 @@
-// ignore_for_file: avoid_print
+// ignore_for_file: avoid_print, unused_import
 
 import 'package:dio/dio.dart';
 import 'package:flutter/cupertino.dart';

@@ -6,7 +6,6 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:privilegecare/Ui/dector_detailed_screen/widget/full_screen_widget.dart';
 import 'package:privilegecare/Utils/colors.dart';
-import 'package:privilegecare/widgets/loader.dart';
 import 'package:video_player/video_player.dart';
 
 class VideoPlayerWidget extends StatefulWidget {

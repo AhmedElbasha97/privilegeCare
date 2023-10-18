@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:cool_alert/cool_alert.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -44,12 +46,12 @@ class AdvancedSearchScreen extends StatelessWidget {
                 const SizedBox(height: 10,),
 
 
-                controller.isLoading?Loader(height: Get.height*0.65,width: Get.width,):
+                controller.isLoading?Loader(height: Platform.isAndroid?Get.height*0.7:Get.height*0.65,width: Get.width,):
                 controller.hasNoData?NoDataWidget(refreshedFunc: (){
-                }, text: controller.choosenSearchType=="D"?noSearchDocData.tr:noSearchHospData.tr, imgPath: "assets/images/No data-rafiki.png", hasRefreshButtonOrNot: false,height: Get.height*0.7,):
+                }, text: controller.choosenSearchType=="D"?noSearchDocData.tr:noSearchHospData.tr, imgPath: "assets/images/No data-rafiki.png", hasRefreshButtonOrNot: false,height: Platform.isAndroid?Get.height*0.7:Get.height*0.65,):
                 Container(
                   width: Get.width,
-                  height: Get.height*0.7,
+                  height: Platform.isAndroid?Get.height*0.7:Get.height*0.65,
                   color: kLightGrayColor,
                   child: RawScrollbar(
                     controller: controller.sController,

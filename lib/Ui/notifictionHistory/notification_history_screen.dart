@@ -1,3 +1,5 @@
+// ignore_for_file: prefer_is_empty
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:privilegecare/Ui/notifictionHistory/controller/notification_history_controller.dart';
@@ -47,10 +49,10 @@ class NotificationHistory extends StatelessWidget {
                 padding: const EdgeInsets.all(20.0),
                 child: Image.asset("assets/icon/img.png"),
               ),
-              SizedBox(height: 20,),
+              const SizedBox(height: 20,),
               Text(Localizations.localeOf(context).languageCode == "en"
                   ?"no Notification available":"لا يوجد اشعرات متوفره لان",
-                style: TextStyle(
+                style: const TextStyle(
                     fontWeight: FontWeight.bold,
                     fontSize: 20
 

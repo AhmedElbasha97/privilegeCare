@@ -1,4 +1,4 @@
-// ignore_for_file: no_leading_underscores_for_local_identifiers, avoid_print
+// ignore_for_file: no_leading_underscores_for_local_identifiers, avoid_print, prefer_const_constructors
 
 import 'dart:io';
 

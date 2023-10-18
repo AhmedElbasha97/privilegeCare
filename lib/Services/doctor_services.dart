@@ -1,3 +1,5 @@
+// ignore_for_file: avoid_print, prefer_interpolation_to_compose_strings
+
 import 'package:get/get.dart';
 import 'package:privilegecare/Models/doctor_home_model.dart';
 import 'package:privilegecare/Models/doctor_model.dart';
@@ -130,7 +132,7 @@ class DoctorServices {
   }
   static Future<List<DoctorListModel>?> advancedSearchForDoctorsWithArea(String searchType,String? specialtyId,String? areaId,String? levelId,String? startPrice,String? endPrice,String homeVisit) async {
     List<DoctorListModel>? doctorsList = [];
-    print(Services.advancedSearchEndPoint+   "type:${searchType},spec:${specialtyId},area:${areaId},level:${levelId},price_from:${startPrice},price_to:${endPrice},home_visit:${homeVisit},");
+    print(Services.advancedSearchEndPoint+   "type:$searchType,spec:$specialtyId,area:$areaId,level:$levelId,price_from:$startPrice,price_to:$endPrice,home_visit:$homeVisit,");
     var data = await api.request(Services.advancedSearchEndPoint, "POST",queryParamters: {
       "type":searchType,
       "spec":specialtyId,

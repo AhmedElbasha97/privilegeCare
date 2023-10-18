@@ -1,3 +1,5 @@
+// ignore_for_file: avoid_print
+
 import 'package:privilegecare/Models/notification_model.dart';
 import 'package:privilegecare/Utils/api_service.dart';
 import 'package:privilegecare/Utils/services.dart';

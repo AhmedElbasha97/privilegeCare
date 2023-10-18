@@ -1,3 +1,5 @@
+// ignore_for_file: avoid_print, prefer_interpolation_to_compose_strings, unnecessary_brace_in_string_interps
+
 import 'package:privilegecare/Models/hospital_detailed_model.dart';
 import 'package:privilegecare/Models/hospital_doctor_model.dart';
 import 'package:privilegecare/Models/hospital_list_model.dart';

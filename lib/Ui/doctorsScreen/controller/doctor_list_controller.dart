@@ -1,4 +1,4 @@
-// ignore_for_file: prefer_is_empty, prefer_typing_uninitialized_variables
+// ignore_for_file: prefer_is_empty, prefer_typing_uninitialized_variables, unnecessary_overrides
 
 import 'package:cool_alert/cool_alert.dart';
 import 'package:flutter/material.dart';
