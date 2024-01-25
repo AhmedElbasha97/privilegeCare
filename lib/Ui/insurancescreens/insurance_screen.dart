@@ -170,6 +170,7 @@ class InsuranceScreen extends StatelessWidget {
                 ),
                 InkWell(
                   onTap: (){
+                    print(Get.currentRoute);
                     Get.to(()=>EditInsuranceDataScreen(addingNewCard: controller.hasNoData,));
                   },
                   child: Center(

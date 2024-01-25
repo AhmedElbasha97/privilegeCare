@@ -1019,7 +1019,7 @@ class FilterScreen extends StatelessWidget {
 
                           child: Center(
                             child: Container(
-                              width: Get.width*0.9,
+                             width:Get.width*0.94,
                               height: Get.height*0.07,
                               decoration: BoxDecoration(
                                   color: Colors.white,
@@ -1058,12 +1058,14 @@ class FilterScreen extends StatelessWidget {
                                           fontSize: 15),
                                     ),
                                     const SizedBox(width: 10),
-                                    SizedBox(
-                                      width: Get.width*0.5,
+                                    Container(
+
+                                      width: Get.width*0.58,
                                       child: Column(
                                         mainAxisAlignment: MainAxisAlignment.center,
                                         children: [
                                           Row(
+                                            mainAxisAlignment: MainAxisAlignment.center,
                                             children: [
                                               CustomText(
                                                 controller.ratingName,

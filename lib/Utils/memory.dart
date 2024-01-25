@@ -7,6 +7,7 @@ abstract class StorageKeys {
   StorageKeys();
   static const String activeLocale = "ACTIVE_LOCAL";
   static const String userId = "User_Id";
+  static const String notificationCount = "Notification_Count";
 
 }
 
@@ -24,9 +25,15 @@ class StorageService extends GetxService {
   //to save id of the account
   Future<void> saveAccountId(String userId) async =>
       _prefs.setString(StorageKeys.userId, userId);
+  Future<void> saveNotificationCounter(int counter) async =>
+      _prefs.setInt(StorageKeys.notificationCount, counter);
 
   String get getId {
     return _prefs.getString(StorageKeys.userId)?? "0";
+  }
+
+  int get getNotificationCounter {
+    return _prefs.getInt(StorageKeys.notificationCount)?? 0;
   }
   loggingOut(){
     _prefs.remove(StorageKeys.userId);

@@ -4,6 +4,8 @@ import 'package:get/get.dart';
 import 'package:privilegecare/Ui/insurancescreens/controller/insurance_controller.dart';
 import 'package:privilegecare/Utils/colors.dart';
 import 'package:privilegecare/Utils/constant.dart';
+import 'package:privilegecare/Utils/localization_services.dart';
+import 'package:privilegecare/Utils/memory.dart';
 import 'package:privilegecare/Utils/translation_key.dart';
 import 'package:privilegecare/widgets/custom_text_widget.dart';
 import 'package:privilegecare/widgets/text_field_widget.dart';
@@ -18,7 +20,7 @@ class  EditInsuranceDataScreen extends StatelessWidget {
       appBar: AppBar(
       backgroundColor: kGreenColor,
       leadingWidth: 60,
-      leading: IconButton(icon: const Icon(Icons.arrow_circle_right_outlined,color: kWhiteColor,size: 40,),onPressed: (){
+        leading: IconButton(icon: Get.find<StorageService>().activeLocale == SupportedLocales.english?const Icon(Icons.arrow_circle_left_outlined,color: kWhiteColor,size: 40,):const Icon(Icons.arrow_circle_right_outlined,color: kWhiteColor,size: 40,),onPressed: (){
         Get.back();
       },),
       centerTitle: true,

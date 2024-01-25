@@ -167,7 +167,7 @@ class DoctorDetailedScreen extends StatelessWidget {
                         ],
                       ),
                       child: Padding(
-                        padding: const EdgeInsets.all(15.0),
+                        padding: const EdgeInsets.symmetric(horizontal: 5.0,vertical: 15),
                         child: Column(
                           children: [
                             Row(
@@ -536,7 +536,8 @@ class DoctorDetailedScreen extends StatelessWidget {
                     ],
                     ),
                     ),
-                    )))): VideoPlayerWidget(videoPlayer: '${Services.baseUrl}/${controller.doctorData?.video??""}', videoPlayerController: controller.videoPlayerController,),
+                    )))):
+                VideoPlayerWidget(videoPlayer: '${Services.baseUrl}/${controller.doctorData?.video??""}', videoPlayerController: controller.videoPlayerController,),
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 8.0,vertical: 7.0),
                   child: SizedBox(
@@ -593,11 +594,11 @@ class DoctorDetailedScreen extends StatelessWidget {
                             },
                             child: Row(
                               mainAxisAlignment: MainAxisAlignment.center,
-                              children: [ IconButton(icon: const Icon(Icons.arrow_circle_right_outlined,color: kBlueColor,size: 40,),onPressed: (){
+                              children: [ IconButton(icon: Get.find<StorageService>().activeLocale == SupportedLocales.english?const Icon(Icons.arrow_circle_left_outlined,color: kBlueColor,size: 40,):const Icon(Icons.arrow_circle_right_outlined,color: kBlueColor,size: 40,),onPressed: (){
                               },),
                                 Container(
                                   height: 130,
-                                  width: Get.width*0.68,
+                                  width: Get.width*0.64,
                                 child: ListView.builder(
                                   scrollDirection: Axis.horizontal,
                                   itemCount: controller.doctorData?.schedule?.length??0,
@@ -607,7 +608,7 @@ class DoctorDetailedScreen extends StatelessWidget {
                                 ),
                                 ),
 
-                                IconButton(icon: const Icon(Icons.arrow_circle_left_outlined,color: kBlueColor,size: 40,),onPressed: (){
+                                IconButton(icon:Get.find<StorageService>().activeLocale == SupportedLocales.english?const Icon(Icons.arrow_circle_right_outlined,color: kBlueColor,size: 40,):const Icon(Icons.arrow_circle_left_outlined,color: kBlueColor,size: 40,),onPressed: (){
                                 },),
                               ],
                             ),
@@ -707,7 +708,7 @@ class DoctorDetailedScreen extends StatelessWidget {
                         ],
                       ),
                       child: Padding(
-                        padding: const EdgeInsets.all(15.0),
+                        padding: const EdgeInsets.symmetric(horizontal: 8.0,vertical: 15),
                         child: Column(
                           children: [
                             Row(

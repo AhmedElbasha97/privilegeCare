@@ -4,8 +4,10 @@ import 'package:privilegecare/Ui/favorite/widget/favorite_doctor_taps.dart';
 import 'package:privilegecare/Ui/favorite/widget/favourite_hospital_taps.dart';
 import 'package:privilegecare/Utils/colors.dart';
 import 'package:privilegecare/Utils/constant.dart';
+import 'package:privilegecare/Utils/localization_services.dart';
 import 'package:privilegecare/widgets/custom_text_widget.dart';
 
+import '../../Utils/memory.dart';
 import '../../Utils/translation_key.dart';
 
 class FavoriteScreen extends StatelessWidget {
@@ -21,14 +23,16 @@ class FavoriteScreen extends StatelessWidget {
             headerSliverBuilder: (BuildContext context, bool innerBoxIsScrolled) {
               return <Widget>[
                   SliverAppBar(
-
+                    leading: IconButton(icon: Get.find<StorageService>().activeLocale == SupportedLocales.english?const Icon(Icons.arrow_circle_left_outlined,color: kWhiteColor,size: 40,):const Icon(Icons.arrow_circle_right_outlined,color: kWhiteColor,size: 40,),onPressed: (){
+                      Get.back();
+                    },),
                   backgroundColor: kGreenColor,
                   title: CustomText(favTitle.tr, style: const TextStyle(
                       fontFamily: fontFamilyName,
                       color: kWhiteColor,
                       fontWeight: FontWeight.w800,
                       fontSize: 18),),
-                  centerTitle: true,
+                  centerTitle: false,
                   pinned: true,
                   floating: true,
                   bottom: TabBar(

@@ -263,7 +263,7 @@ class _SecondReservationScreenState extends State<SecondReservationScreen> {
                 const SizedBox(height: 10,),
                 Container(
                   width: Get.width*0.9,
-                  height: Get.height*0.4,
+                  height: Get.height*0.42,
 
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(15),

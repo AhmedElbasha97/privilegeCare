@@ -4,14 +4,16 @@ import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:get/get.dart';
 import 'package:privilegecare/Ui/notifictionHistory/notification_history_screen.dart';
+import 'package:privilegecare/Utils/memory.dart';
 
 class PushNotificationService {
-
+  int counter = Get.find<StorageService>().getNotificationCounter;
   Future<void> setupInteractedMessage() async {
     await Firebase.initializeApp();
     FirebaseMessaging.instance.requestPermission();
 
     FirebaseMessaging.onMessageOpenedApp.listen((RemoteMessage message) {
+      Get.find<StorageService>().saveNotificationCounter(0);
       Get.to(()=>const NotificationHistory());
 
     });
@@ -40,10 +42,13 @@ class PushNotificationService {
         );
 
     FirebaseMessaging.onMessage.listen((RemoteMessage? message) {
+      Get.find<StorageService>().saveNotificationCounter(counter + 1);
       RemoteNotification? notification = message!.notification;
       AndroidNotification? android = message.notification?.android;
 
       if (notification != null && android != null) {
+        print("hiiiiiii");
+
         flutterLocalNotificationsPlugin.show(
           notification.hashCode,
           notification.title,

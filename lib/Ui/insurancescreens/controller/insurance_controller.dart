@@ -4,6 +4,7 @@ import 'package:get/get.dart';
 import 'package:privilegecare/Models/health_insurance_model.dart';
 import 'package:privilegecare/Models/response_model.dart';
 import 'package:privilegecare/Services/health_insirance_services.dart';
+import 'package:privilegecare/Ui/insurancescreens/edit_insuranece_data_screen.dart';
 import 'package:privilegecare/Ui/insurancescreens/insurance_screen.dart';
 import 'package:privilegecare/Utils/memory.dart';
 import 'package:privilegecare/Utils/translation_key.dart';
@@ -90,8 +91,13 @@ class InsuranceController extends GetxController{
     );
     ResponseModel? data = await HealthInsuranceServices.setHealthInsurance(Get.find<StorageService>().getId, healthInsuranceNumberController.text, companyNameController.text);
     if(data?.msg == "succeeded"){
-
-  Get.to(()=>const InsuranceScreen());
+      await getData();
+      hasNoData = false;
+      print(Get.currentRoute);
+      editingInsuranceCard = false;
+      companyNameController.clear();
+      healthInsuranceNumberController.clear();
+      Get.until((route) => Get.currentRoute == "/InsuranceScreen");
     }else{
       CoolAlert.show(
           context: context,

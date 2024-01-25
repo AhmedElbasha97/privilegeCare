@@ -221,8 +221,8 @@ choosingDate(String scheduleId,String date) async {
   }
   addReservation(context) async {
     if(Get.find<StorageService>().checkUserIsSignedIn || reservationFroAnotherPatient == 1){
-     if(nameController.text == ""){
-       if(phoneController.text == ""){
+     if(nameController.text != ""){
+       if(phoneController.text != ""){
          reservationIsRunning = true;
          update();
          ResponseModel? data = await ReservationServices.saveAppointment(scheduleId, Get.find<StorageService>().getId, phoneController.text, selectedTime, nameController.text, " ", "$reservationFroAnotherPatient");

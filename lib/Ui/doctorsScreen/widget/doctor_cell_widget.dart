@@ -5,8 +5,10 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:privilegecare/Models/doctort_list_model.dart';
 import 'package:privilegecare/Services/favoutite_services.dart';
+import 'package:privilegecare/Ui/dector_detailed_screen/controller/doctor_detailed_controller.dart';
 import 'package:privilegecare/Ui/dector_detailed_screen/doctor_detailed_screen.dart';
 import 'package:privilegecare/Ui/doctorsScreen/controller/doctor_list_controller.dart';
+import 'package:privilegecare/Ui/reservationScreen/controller/reservation_controller.dart';
 import 'package:privilegecare/Ui/reservationScreen/reservation_screen.dart';
 import 'package:privilegecare/Utils/colors.dart';
 import 'package:privilegecare/Utils/constant.dart';
@@ -36,19 +38,20 @@ class _DoctorCellWidgetState extends State<DoctorCellWidget> {
   }
     checkDoctorAddedOrNot(String doctorId) async {
      var status = await FavouriteServices.getAddedOrNotToFavoritesDoctor(doctorId, Get.find<StorageService>().getId);
+     print("$status from cell");
      if(status == 1){
        addedToFavoriteOrNot =  true;
-       setState(() {
+
          final exploreController = Get.put(DoctorListController("","",""));
          exploreController.update();
-       });
+         setState(() { });
 
      }else{
        addedToFavoriteOrNot =   false;
-       setState(() {
+
          final exploreController = Get.put(DoctorListController("","",""));
          exploreController.update();
-       });
+         setState(() {  });
 
      }
    }
@@ -59,6 +62,10 @@ class _DoctorCellWidgetState extends State<DoctorCellWidget> {
       padding: const EdgeInsets.all(15.0),
       child: InkWell(
         onTap: (){
+          bool test1 = Get.isRegistered<DoctorDetailedController>();
+          if(test1){
+            Get.delete<DoctorDetailedController>();
+          }
           Get.to( DoctorDetailedScreen(doctorId: "${widget.doctorData?.id??0}",));
         },
         child: SizedBox(
@@ -76,7 +83,7 @@ class _DoctorCellWidgetState extends State<DoctorCellWidget> {
               ],
             ),
             child: Padding(
-              padding: const EdgeInsets.fromLTRB(10,15.0,10,15.0),
+              padding: const EdgeInsets.fromLTRB(8,15.0,8,15.0),
               child: Column(
                 children: [
                   Row(
@@ -414,9 +421,13 @@ class _DoctorCellWidgetState extends State<DoctorCellWidget> {
                         ),
                       ),
                       InkWell(
-                        onTap: ()  async {
-                          widget.addingToFavorite();
-                          await checkDoctorAddedOrNot("${widget.doctorData?.id??0}");
+                        onTap: ()   async {
+                           widget.addingToFavorite();
+                           Future.delayed(Duration(milliseconds: 500), () {
+                              checkDoctorAddedOrNot("${widget.doctorData?.id??0}");
+
+                           });
+
 
                         },
                         child: Padding(
@@ -450,6 +461,10 @@ class _DoctorCellWidgetState extends State<DoctorCellWidget> {
                         padding: const EdgeInsets.all(5.0),
                         child: InkWell(
                           onTap: (){
+                            bool test = Get.isRegistered<ReservationController>();
+                            if(test){
+                              Get.delete<ReservationController>();
+                            }
                             Get.to(()=>  ReservationScreen(doctorId: "${widget.doctorData?.id??0}",));
                           },
                           child: Container(
@@ -510,7 +525,10 @@ class _DoctorCellWidgetState extends State<DoctorCellWidget> {
                       InkWell(
                         onTap: () async {
                           widget.addingToFavorite();
-                         await checkDoctorAddedOrNot("${widget.doctorData?.id??0}");
+                          Future.delayed(Duration(milliseconds: 500), () {
+                            checkDoctorAddedOrNot("${widget.doctorData?.id??0}");
+
+                          });
 
                         },
                         child: Padding(

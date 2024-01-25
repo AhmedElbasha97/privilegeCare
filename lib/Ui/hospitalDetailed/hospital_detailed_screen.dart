@@ -7,6 +7,7 @@ import 'package:cool_alert/cool_alert.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_html/flutter_html.dart';
 import 'package:get/get.dart';
+import 'package:privilegecare/Ui/dector_detailed_screen/controller/doctor_detailed_controller.dart';
 import 'package:privilegecare/Ui/dector_detailed_screen/doctor_detailed_screen.dart';
 import 'package:privilegecare/Ui/hospitalDetailed/controller/hospital_detailed_controller.dart';
 
@@ -356,10 +357,10 @@ class HospitalDetailedScreen extends StatelessWidget {
                         children: [
                           SizedBox(
                             height: 35,
-                            width: 27,
+                            width: 23,
                             child: Image.asset("assets/icons/specialty_icon.png",fit: BoxFit.fitHeight,),
                           ),
-                          const SizedBox(width: 5,),
+                          const SizedBox(width: 1,),
                           Column(
                             children: [
                               CustomText(hospCategoryTitle2.tr,
@@ -1022,6 +1023,10 @@ class HospitalDetailedScreen extends StatelessWidget {
                       itemBuilder: (_,index){
                         return   InkWell(
                             onTap: (){
+                              bool test1 = Get.isRegistered<DoctorDetailedController>();
+                              if(test1){
+                                Get.delete<DoctorDetailedController>();
+                              }
                               Get.to( DoctorDetailedScreen(doctorId: "${controller.doctorsData?[index].id??0}",));
                             },
                           child: Padding(

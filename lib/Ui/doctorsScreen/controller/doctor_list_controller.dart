@@ -15,6 +15,7 @@ import 'package:privilegecare/Utils/translation_key.dart';
 import 'package:privilegecare/widgets/custom_text_widget.dart';
 
 class DoctorListController extends GetxController {
+
   bool isLoading = true;
   bool hasNoData = false;
   bool searchHasNoResult = false;
@@ -103,7 +104,7 @@ goToScreen(){
 
         );
         ScaffoldMessenger.of(context).showSnackBar(snackBar);
-
+       update();
       } else {
         var data;
         CoolAlert.show(
@@ -126,6 +127,7 @@ goToScreen(){
 
         );
         ScaffoldMessenger.of(context).showSnackBar(snackBar);
+        update();
 
       } else {
         var data;

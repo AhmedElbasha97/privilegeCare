@@ -4,6 +4,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:privilegecare/Models/doctor_home_model.dart';
+import 'package:privilegecare/Ui/dector_detailed_screen/controller/doctor_detailed_controller.dart';
 import 'package:privilegecare/Ui/dector_detailed_screen/doctor_detailed_screen.dart';
 import 'package:privilegecare/Utils/colors.dart';
 import 'package:privilegecare/Utils/constant.dart';
@@ -21,6 +22,10 @@ class DoctorHomeWidget extends StatelessWidget {
     return Center(
       child:  InkWell(
         onTap: (){
+          bool test1 = Get.isRegistered<DoctorDetailedController>();
+          if(test1){
+            Get.delete<DoctorDetailedController>();
+          }
           Get.to(DoctorDetailedScreen(doctorId: "${doctorData?.id??0}"));
         },
         child: Container(

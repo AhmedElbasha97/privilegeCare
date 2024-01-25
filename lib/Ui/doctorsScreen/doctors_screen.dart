@@ -175,9 +175,10 @@ class DoctorScreen extends StatelessWidget {
                       thickness: 5,
                       child: ListView.builder(
                         itemCount: controller.doctorsData?.length,
+
                         controller: controller.sController,
                         itemBuilder: (_,index){
-                          return DoctorCellWidget(doctorData: controller.doctorsData?[index], addingToFavorite: (){
+                          return DoctorCellWidget(doctorData: controller.doctorsData?[index], addingToFavorite: () async {
                             controller.screenIndex = 3;
                             if(Get.find<StorageService>().getId == "0") {
                               CoolAlert.show(
@@ -215,11 +216,11 @@ class DoctorScreen extends StatelessWidget {
                                 controller.goToScreen();
                               });
                             }else{
-                              controller.addingOrRemovingFromFavorite(
+                              await controller.addingOrRemovingFromFavorite(
                                   "${controller.doctorsData?[index].id}",
                                   context,Get.find<StorageService>().activeLocale == SupportedLocales.english?"${controller.doctorsData?[index].nameEn ?? ""}":controller.doctorsData?[index].name ?? ""
                                   );
-
+                              controller.update();
                             }},);
                         },
                       ),

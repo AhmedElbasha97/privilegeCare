@@ -199,7 +199,12 @@ class _HospitalCellWidgetState extends State<HospitalCellWidget> {
             InkWell(
               onTap: (){
                 widget.addOrRemoveFromFavorite();
-                checkHospitalAddedOrNot("${widget.hospitalData?.id??""}");
+                Future.delayed(Duration(seconds: 1), () {
+                  checkHospitalAddedOrNot("${widget.hospitalData?.id??""}");
+
+                });
+
+
               },
               child: Container(
                 width: Get.width*0.5,

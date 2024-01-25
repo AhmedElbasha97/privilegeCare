@@ -196,10 +196,10 @@ class ReservationScreen extends StatelessWidget {
                           ],
                         ),
                       ),
-                      const SizedBox(height: 10,),
+                      const SizedBox(height: 5,),
                      controller.enableChooseTime?Container(
-                        width: Get.width*0.6,
-                        height: Get.height*0.05,
+                        width: Get.width*0.62,
+                        height: Get.height*0.06,
                         child:  Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
@@ -231,15 +231,15 @@ class ReservationScreen extends StatelessWidget {
                                }).toList(),
 
                               child: Container(
-                                width: Get.width*0.4,
-                                height: Get.height*0.05,
+                                width: Get.width*0.41,
+                                height: Get.height*0.06,
                                 child:  Column(
                                   children: [
                                     Row(
                                       mainAxisAlignment: MainAxisAlignment.center,
                                       children: [
                                         controller.appointments?.length == 0?Container(
-                                          width:Get.width*0.3,
+                                          width:Get.width*0.35,
                                           child: CustomText(
                                             controller.timeText,
                                             textAlign: TextAlign.center ,

@@ -23,6 +23,7 @@ import 'package:privilegecare/Utils/translation_key.dart';
 import 'package:privilegecare/widgets/bottom_navigation_bar.dart';
 import 'package:privilegecare/widgets/custom_text_widget.dart';
 import 'package:privilegecare/widgets/loader.dart';
+import 'package:privilegecare/widgets/notification_icon.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({Key? key}) : super(key: key);
@@ -77,9 +78,7 @@ class _HomeScreenState extends State<HomeScreen> {
                       Get.to(()=>const DoctorScreen(specialistId: "0"));
 
                   },),
-                  IconButton(icon: const Icon(Icons.notifications_none,color: kBlueColor,size: 35,),onPressed: (){
-                    Get.to(()=>const NotificationHistory());
-                  },),
+                  NotificationIcon(),
                   ],
                 backgroundColor: Colors.white,
                 toolbarHeight: Get.height*0.1,

@@ -303,7 +303,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                       crossAxisAlignment: CrossAxisAlignment.center,
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        Image.asset("assets/images/Sign in-pana.png",height: Get.width*0.65,),
+                        Image.asset("assets/images/Sign in-pana.png",height: Get.height*0.27,),
                         CustomText(notRegisterUserProfile.tr,style: const TextStyle(color: kGreenColor,fontWeight: FontWeight.bold,fontSize: 30),textAlign: TextAlign.center,),
                         const SizedBox(height: 30,),
                         Column(

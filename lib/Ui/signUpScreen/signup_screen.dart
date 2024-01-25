@@ -200,96 +200,16 @@ class SignUpScreen extends StatelessWidget {
                   ),
                 ),
                 const SizedBox(height: 5,),
-                 Padding(
+                Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 10.0),
-                  child:  Get.find<StorageService>().activeLocale == SupportedLocales.english?SizedBox(
-                    height: Get.height*0.09,
-                    width: Get.width*0.95,
-                    child: CustomInputField(
-                      hasIntialValue: true,
-                      labelText: signUpTextPhone.tr,
-                      textInputAction: TextInputAction.next,
-                      keyboardType: TextInputType.number,
-                      textAligning: Get.find<StorageService>().activeLocale == SupportedLocales.english?TextAlign.left:TextAlign.right,
-                      controller:controller.phoneController,
-                      onchange: controller.onPhoneNumberUpdate,
-                      validator: controller.validatePhoneNumber,
-                      prefixText:  CustomText("   ${signUpTextPhoneKey.tr}    ", style: const TextStyle(
-                        fontSize: 15.0,
+                  child: CustomText(signUpTitlePhone.tr,
+                    style: const TextStyle(
                         fontFamily: fontFamilyName,
-                        color: kGrayColor,
-                      ),),
-                      icon: (controller.phoneValidated)
-                          ? (controller.phoneState)
-                          ? const Icon(Icons.check_rounded,
-                          color: kBlueColor)
-                          : const Icon(
-                        Icons.close_outlined,
-                        color: kErrorColor,
-                      )
-                          :  null,
-                      hasGreenBorder: false,
-                    ),
-                  ):
-                  SizedBox(
-                    height: Get.height*0.09,
-                    width: Get.width*0.95,
-                    child: CustomInputField(
-                      hasIntialValue: true,
-                      labelText: signUpTextPhone.tr,
-                      textInputAction: TextInputAction.next,
-                      keyboardType: TextInputType.number,
-                      textAligning: Get.find<StorageService>().activeLocale == SupportedLocales.english?TextAlign.left:TextAlign.right,
-                      controller:controller.phoneController,
-                      onchange: controller.onPhoneNumberUpdate,
-                      validator: controller.validatePhoneNumber,
-
-                      icon: (controller.phoneValidated)
-                          ? (controller.phoneState)
-                          ?  Row(
-                        mainAxisSize: MainAxisSize.min,
-                        children: [
-
-                          CustomText("   ${signUpTextPhoneKey.tr}    ", style: const TextStyle(
-                            fontSize: 15.0,
-                            fontFamily: fontFamilyName,
-                            color: kGrayColor,
-                          ),),
-                          const Icon(Icons.check_rounded,
-                              color: kBlueColor),
-                          const SizedBox(width: 5,),
-                        ],
-                      )
-                          :  Row(
-                        mainAxisSize: MainAxisSize.min,
-                        children: [
-
-                          CustomText("   ${signUpTextPhoneKey.tr}    ", style: const TextStyle(
-                            fontSize: 15.0,
-                            fontFamily: fontFamilyName,
-                            color: kGrayColor,
-                          ),),
-                          const Icon(
-                            Icons.close_outlined,
-                            color: kErrorColor,
-                          ),const SizedBox(width: 5,),
-                        ],
-                      )
-                          :  Row(
-                        mainAxisSize: MainAxisSize.min,
-                        children: [
-
-                          CustomText("   ${signUpTextPhoneKey.tr}    ", style: const TextStyle(
-                            fontSize: 15.0,
-                            fontFamily: fontFamilyName,
-                            color: kGrayColor,
-                          ),),
-                        ],
-                      ),
-                      hasGreenBorder: false,
-                    ),
+                        color: kGreenColor,
+                        fontWeight: FontWeight.w700,
+                        fontSize: 20),
                   ),
-                 ),
+                ),
 
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 10.0),
