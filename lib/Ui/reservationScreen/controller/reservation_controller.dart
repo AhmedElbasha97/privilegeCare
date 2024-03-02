@@ -220,65 +220,114 @@ choosingDate(String scheduleId,String date) async {
     }
   }
   addReservation(context) async {
-    if(Get.find<StorageService>().checkUserIsSignedIn || reservationFroAnotherPatient == 1){
-     if(nameController.text != ""){
-       if(phoneController.text != ""){
-         reservationIsRunning = true;
-         update();
-         ResponseModel? data = await ReservationServices.saveAppointment(scheduleId, Get.find<StorageService>().getId, phoneController.text, selectedTime, nameController.text, " ", "$reservationFroAnotherPatient");
-         if(data?.msg == "succeeded"){
-           showDialog(context: context,
-             builder: (context) =>
-                 ReservationSuccessWidget(doctorName: Get.find<StorageService>().activeLocale == SupportedLocales.english?doctorData?.name??"":doctorData?.nameEn??"",),
-           ).then((value){
-             Get.off(SpecialtyScreen());
-           });
-
-         }else {
-           CoolAlert.show(
-               context: context,
-               type: CoolAlertType.error,
-               title: errorKey.tr,
-               text: Get.find<StorageService>().activeLocale == SupportedLocales.english?data?.msg:data?.msgAr
-           );
-         }
-       }else{
-         CoolAlert.show(
-           context: context,
-           type: CoolAlertType.warning,
-           title: warningKey.tr,
-           titleTextStyle: const TextStyle(
-               fontFamily: fontFamilyName,
-               color: kBlueColor,
-               fontWeight: FontWeight.w800,
-               fontSize: 15),
-           text: patientPhoneWarning.tr,
-           textTextStyle: const TextStyle(
-               fontFamily: fontFamilyName,
-               color: kBlueColor,
-               fontWeight: FontWeight.w800,
-               fontSize: 15),
-         );
-       }
-     }else{
-       CoolAlert.show(
-           context: context,
-           type: CoolAlertType.warning,
-           title: warningKey.tr,
-           titleTextStyle: const TextStyle(
-           fontFamily: fontFamilyName,
-           color: kBlueColor,
-           fontWeight: FontWeight.w800,
-           fontSize: 15),
-           text: patientNameWarning.tr,
-           textTextStyle: const TextStyle(
-           fontFamily: fontFamilyName,
-           color: kBlueColor,
-           fontWeight: FontWeight.w800,
-           fontSize: 15),
-       );
-     }
-
+    if(Get.find<StorageService>().checkUserIsSignedIn ){
+      if(reservationFroAnotherPatient == 1) {
+        if (nameController.text != "") {
+          if (phoneController.text != "") {
+            reservationIsRunning = true;
+            update();
+            ResponseModel? data = await ReservationServices.saveAppointment(
+                scheduleId,
+                Get
+                    .find<StorageService>()
+                    .getId,
+                phoneController.text,
+                selectedTime,
+                nameController.text,
+                " ",
+                "$reservationFroAnotherPatient");
+            if (data?.msg == "succeeded") {
+              showDialog(context: context,
+                builder: (context) =>
+                    ReservationSuccessWidget(doctorName: Get
+                        .find<StorageService>()
+                        .activeLocale == SupportedLocales.english ? doctorData
+                        ?.name ?? "" : doctorData?.nameEn ?? "",),
+              ).then((value) {
+                Get.off(SpecialtyScreen());
+              });
+            } else {
+              CoolAlert.show(
+                  context: context,
+                  type: CoolAlertType.error,
+                  title: errorKey.tr,
+                  text: Get
+                      .find<StorageService>()
+                      .activeLocale == SupportedLocales.english
+                      ? data?.msg
+                      : data?.msgAr
+              );
+            }
+          } else {
+            CoolAlert.show(
+              context: context,
+              type: CoolAlertType.warning,
+              title: warningKey.tr,
+              titleTextStyle: const TextStyle(
+                  fontFamily: fontFamilyName,
+                  color: kBlueColor,
+                  fontWeight: FontWeight.w800,
+                  fontSize: 15),
+              text: patientPhoneWarning.tr,
+              textTextStyle: const TextStyle(
+                  fontFamily: fontFamilyName,
+                  color: kBlueColor,
+                  fontWeight: FontWeight.w800,
+                  fontSize: 15),
+            );
+          }
+        } else {
+          CoolAlert.show(
+            context: context,
+            type: CoolAlertType.warning,
+            title: warningKey.tr,
+            titleTextStyle: const TextStyle(
+                fontFamily: fontFamilyName,
+                color: kBlueColor,
+                fontWeight: FontWeight.w800,
+                fontSize: 15),
+            text: patientNameWarning.tr,
+            textTextStyle: const TextStyle(
+                fontFamily: fontFamilyName,
+                color: kBlueColor,
+                fontWeight: FontWeight.w800,
+                fontSize: 15),
+          );
+        }
+      }else{
+        ResponseModel? data = await ReservationServices.saveAppointment(
+            scheduleId,
+            Get
+                .find<StorageService>()
+                .getId,
+            "",
+            selectedTime,
+            "",
+            " ",
+            "$reservationFroAnotherPatient");
+        if (data?.msg == "succeeded") {
+          showDialog(context: context,
+            builder: (context) =>
+                ReservationSuccessWidget(doctorName: Get
+                    .find<StorageService>()
+                    .activeLocale == SupportedLocales.english ? doctorData
+                    ?.name ?? "" : doctorData?.nameEn ?? "",),
+          ).then((value) {
+            Get.off(SpecialtyScreen());
+          });
+        } else {
+          CoolAlert.show(
+              context: context,
+              type: CoolAlertType.error,
+              title: errorKey.tr,
+              text: Get
+                  .find<StorageService>()
+                  .activeLocale == SupportedLocales.english
+                  ? data?.msg
+                  : data?.msgAr
+          );
+        }
+      }
     }else{
       decideToSignIn = false;
       continueWithoutAccount = false;

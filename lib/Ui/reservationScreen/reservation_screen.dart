@@ -356,7 +356,7 @@ class ReservationScreen extends StatelessWidget {
                                         border: const UnderlineInputBorder(
                                         )
                                     ),
-                                    keyboardType: TextInputType.phone,
+                                    keyboardType: TextInputType.numberWithOptions(signed: true, decimal: true),
                                     obscureText: false,
                                   ),
                                 ),
@@ -398,7 +398,7 @@ class ReservationScreen extends StatelessWidget {
                                                 child: Icon(Icons.check,size: 20,color: controller.choosenGender == 1?kBlueColor:Colors.white,),
                                               ),
                                             ),
-                                            const SizedBox(width: 10,),
+                                            const SizedBox(width: 5,),
                                             CustomText(
                                                extraDataGenderMale.tr,
                                               style: const TextStyle(
@@ -427,7 +427,7 @@ class ReservationScreen extends StatelessWidget {
                                                 child: Icon(Icons.check,size: 20,color: controller.choosenGender == 2?kBlueColor:Colors.white,),
                                               ),
                                             ),
-                                            const SizedBox(width: 10,),
+                                            const SizedBox(width: 5,),
                                             CustomText(
                                                extraDataGenderFemale.tr,
                                               style: const TextStyle(

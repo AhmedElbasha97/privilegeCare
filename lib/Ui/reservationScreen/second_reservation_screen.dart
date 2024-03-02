@@ -391,7 +391,7 @@ class _SecondReservationScreenState extends State<SecondReservationScreen> {
                                               border: const UnderlineInputBorder(
                                               )
                                           ),
-                                          keyboardType: TextInputType.phone,
+                                          keyboardType: TextInputType.numberWithOptions(signed: true, decimal: true),
                                           obscureText: false,
                                         ),
                                       ),
